@@ -1,0 +1,13 @@
+{
+  "name": "@ir-msob-framework/core-restful",
+  "version": "0.1.0",
+  "peerDependencies": {
+    "@angular/common": "^17.0.0",
+    "@angular/core": "^17.0.0",
+    "@ir-msob-framework/core-commons": "^0.1.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
