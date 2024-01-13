@@ -1,0 +1,107 @@
+= Jima Core
+:toc: macro
+:toc-title:
+:doctype: book
+
+toc::[]
+
+== Introduction
+
+Jima Core is a comprehensive project that includes several modules and uses a variety of technologies. It is built with Java, Maven, TypeScript, JavaScript, npm, Angular, and Spring Boot. this project contains an all the basic modules that are needed for Jima framework.
+
+== Getting Started
+
+To get started with this project, do the following:
+
+1. Clone the repository.
+2. Install all the software and tools listed in the Prerequisites section.
+3. Install the npm dependencies.
+4. Install the project with mvn command.
+
+And also you can use the following dependency in your pom.xml of your project:
+[source,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>ir.msob.jima.core</groupId>
+        <artifactId>core-*</artifactId>
+        <version>1.1.01</version>
+    </dependency>
+</dependencies>
+----
+
+=== Prerequisites
+
+To run this project, you need to have the following software and tools installed:
+
+* Java
+* Maven
+* npm
+* Angular
+
+=== Installation
+
+Use the mvn install command to install the project.
+
+== Modules
+
+The project is divided into several modules:
+
+* commons
+* test
+* beans
+* api
+* ral
+* web
+
+The `ral` module is further divided into:
+
+* kafka
+* minio
+* mongo
+* oracle
+* quartz
+* redis
+* redisson
+
+The `kafka` module includes:
+
+* commons
+* test
+
+The `minio` module includes:
+
+* commons
+* test
+
+The `mongo` module includes:
+
+* commons
+* test
+* sequence
+
+The `oracle` module includes:
+
+* test
+
+The `quartz` module includes:
+
+* commons
+
+The `redis` module includes:
+
+* commons
+* test
+
+The `redisson` module includes:
+
+* commons
+
+
+== Contributing
+
+Contributions to Jima are welcome! Please fork the repository, make your changes, and submit a pull request.
+
+== License
+
+Jima is licensed under the Apache License 2.0. Please see the `LICENSE` file for more details.

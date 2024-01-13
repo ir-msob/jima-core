@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ir.msob.jima.core</groupId>
+        <artifactId>core-ral-oracle</artifactId>
+        <version>1.1.01</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>core-ral-oracle-test</artifactId>
+    <name>test</name>
+    <description>test</description>
+    <packaging>jar</packaging>
+    <dependencies>
+        <!-- MSob -->
+        <dependency>
+            <groupId>ir.msob.jima.core</groupId>
+            <artifactId>core-test</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <!-- Test -->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>oracle-xe</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+        </dependency>
+    </dependencies>
+</project>

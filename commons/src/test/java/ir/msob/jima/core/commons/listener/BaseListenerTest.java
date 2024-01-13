@@ -1,0 +1,53 @@
+package ir.msob.jima.core.commons.listener;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.msob.jima.core.commons.client.BaseAsyncClient;
+import ir.msob.jima.core.commons.model.channel.ChannelMessage;
+import ir.msob.jima.core.commons.model.dto.ModelType;
+import ir.msob.jima.core.commons.security.BaseUser;
+import ir.msob.jima.core.commons.security.BaseUserService;
+import org.junit.jupiter.api.Test;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+class BaseListenerTest {
+
+    @Test
+    void testPrepareChannelMessage() {
+        // Arrange
+        BaseListener<String, BaseUser<String>> baseKafkaParentListener = new BaseListener<>() {
+            @Override
+            public ObjectMapper getObjectMapper() {
+                return null;
+            }
+
+            @Override
+            public BaseUserService getUserService() {
+                return null;
+            }
+
+            @Override
+            public BaseAsyncClient getAsyncClient() {
+                return null;
+            }
+        };
+
+        ChannelMessage<String, BaseUser<String>, ModelType> channelMessageReq = new ChannelMessage<>();
+        ModelType data = new ModelType();
+        Integer status = 200;
+        Optional<BaseUser<String>> user = Optional.of(new BaseUser<>());
+
+        // Act
+        ChannelMessage<String, BaseUser<String>, ModelType> preparedChannelMessage = baseKafkaParentListener.prepareChannelMessage(channelMessageReq, data, status, user);
+
+        // Assert
+        assertEquals(data, preparedChannelMessage.getData());
+        assertNull(preparedChannelMessage.getCallback());
+        assertEquals(channelMessageReq.getMetadata(), preparedChannelMessage.getMetadata());
+        assertEquals(status, preparedChannelMessage.getStatus());
+    }
+}
+
