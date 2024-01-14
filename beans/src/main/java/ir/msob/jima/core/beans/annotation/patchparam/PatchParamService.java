@@ -19,10 +19,12 @@ import java.util.*;
 
 /**
  * This service class provides the functionality to apply JSON patches to objects using SpEL expressions.
+ * It is marked as a Spring service to be detected during classpath scanning.
  */
 @Service
 @RequiredArgsConstructor
 public class PatchParamService {
+    // Dependencies for this service
     private final SpelRepository spelRepository;
     private final BeanFactory beanFactory;
     private final ObjectMapper objectMapper;
@@ -42,16 +44,21 @@ public class PatchParamService {
      */
     public Object patch(PatchParam patchParam, String paramName, Object paramValue, Class<?> paramValueClass)
             throws JsonPointerException, JsonPatchException, JsonProcessingException {
+        // Prepare the context for SpEL evaluation
         StandardEvaluationContext context = StandardEvaluationContextUtil.prepareStandardEvaluationContext(beanFactory);
         context.setVariable(paramName, paramValue);
 
+        // Prepare the map for SpEL evaluation
         Map<String, Object> map = new HashMap<>();
         map.put(paramName, paramValue);
 
+        // Evaluate the SpEL expression and get the result
         Object result = spelRepository.execute(patchParam.value(), context, map);
 
+        // Prepare the JSON patch
         JsonPatch jsonPatch = patchUtil.prepareAddJsonPatch(patchParam.path(), result);
 
+        // Apply the JSON patch and return the result
         return applyJsonPatch(jsonPatch, paramValue, paramValueClass);
     }
 
@@ -69,6 +76,7 @@ public class PatchParamService {
      */
     public Object patch(Collection<PatchParam> patchParams, String paramName, Object paramValue, Class<?> paramValueClass)
             throws JsonPatchException, JsonPointerException, JsonProcessingException {
+        // Apply each patch in the collection
         for (PatchParam patchParam : patchParams) {
             paramValue = patch(patchParam, paramName, paramValue, paramValueClass);
         }
@@ -89,16 +97,30 @@ public class PatchParamService {
      */
     public Object patchMany(Collection<PatchParam> patchParams, String paramName, Collection<Object> paramValues, Class<?> paramValueClass)
             throws JsonPatchException, JsonPointerException, JsonProcessingException {
+        // Prepare the result collection
         List<Object> result = new ArrayList<>();
+        // Apply the patches to each object in the collection
         for (Object paramValue : paramValues) {
             result.add(patch(patchParams, paramName, paramValue, paramValueClass));
         }
         return result;
     }
 
+    /**
+     * Apply a JSON patch to an object and return the result.
+     *
+     * @param jsonPatch The JSON patch to apply.
+     * @param o         The original object to be patched.
+     * @param clazz     The class of the original object.
+     * @return The patched object.
+     * @throws JsonPatchException      If there is an issue with applying the JSON patch.
+     * @throws JsonProcessingException If there is an issue with JSON processing.
+     */
     private Object applyJsonPatch(JsonPatch jsonPatch, Object o, Class<?> clazz)
             throws JsonPatchException, JsonProcessingException {
+        // Apply the JSON patch
         JsonNode patched = jsonPatch.apply(objectMapper.convertValue(o, JsonNode.class));
+        // Convert the patched JSON node back to the original object's class and return the result
         return objectMapper.treeToValue(patched, clazz);
     }
 }

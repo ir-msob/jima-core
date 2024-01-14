@@ -208,14 +208,12 @@ public class CoreTestData {
         characteristic.setKey(DEFAULT_STRING);
         characteristic.setValue(DEFAULT_STRING);
         characteristic.setDataType(DEFAULT_DATA_TYPE);
-        characteristic.setArray(false);
         return characteristic;
     }
 
     public static void UPDATED_MANDATORY_CHARACTERISTIC(Characteristic characteristic) {
         characteristic.setKey(UPDATED_STRING);
         characteristic.setDataType(UPDATED_DATA_TYPE);
-        characteristic.setArray(false);
     }
 
     public static void UPDATED_MANDATORY_CHARACTERISTICS(SortedSet<Characteristic> characteristics) {
@@ -225,7 +223,6 @@ public class CoreTestData {
     public static Characteristic initDefaultCharacteristic() {
         Characteristic characteristic = initDefaultRequiredCharacteristic();
         characteristic.setValue(DEFAULT_STRING);
-        characteristic.setArray(false);
         return characteristic;
     }
 

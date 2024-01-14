@@ -16,8 +16,10 @@ public class BaseN {
     // A URL-safe character set for encoding
     public static final String CHARACTERS_URL_SAFE = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 
+    /**
+     * Private constructor to prevent instantiation of this utility class.
+     */
     private BaseN() {
-        // Private constructor to prevent instantiation
     }
 
     /**
@@ -46,6 +48,13 @@ public class BaseN {
         return prepareEncoded(chars, list);
     }
 
+    /**
+     * Helper method to prepare the encoded string.
+     *
+     * @param chars The character set to use for encoding.
+     * @param list  The list of numbers to encode.
+     * @return The encoded string.
+     */
     private static String prepareEncoded(char[] chars, List<Long> list) {
         StringBuilder result = new StringBuilder();
         for (Long l : list) {
@@ -80,6 +89,13 @@ public class BaseN {
         return prepareNumber(base, list);
     }
 
+    /**
+     * Helper method to prepare the indexes for decoding.
+     *
+     * @param str   The encoded string to decode.
+     * @param chars The character set used for encoding.
+     * @param list  The list to store the indexes.
+     */
     private static void prepareIndexes(String str, char[] chars, List<Long> list) {
         Map<Character, Long> charIndexMap = new HashMap<>();
         for (int i = 0; i < chars.length; i++) {
@@ -94,6 +110,13 @@ public class BaseN {
         }
     }
 
+    /**
+     * Helper method to prepare the number from the list of indexes.
+     *
+     * @param base The base of the number system.
+     * @param list The list of indexes.
+     * @return The decoded number.
+     */
     private static Long prepareNumber(Long base, List<Long> list) {
         for (int j = list.size() - 1; j >= 0; j--) {
             if (j > 0) {
@@ -103,6 +126,13 @@ public class BaseN {
         return list.get(0);
     }
 
+    /**
+     * Helper method to divide the number by the base and store the remainder in the list.
+     *
+     * @param number The number to divide.
+     * @param base   The base of the number system.
+     * @param list   The list to store the remainder.
+     */
     private static void divide(Long number, Long base, List<Long> list) {
         if (number > base) {
             list.add(number % base);

@@ -18,7 +18,11 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * A utility class for working with JSON patches.
+ * This class provides utility methods for working with JSON patches.
+ * It provides methods to apply a collection of JSON patch operations to a JSON object, apply a JSON patch to a JSON object,
+ * prepare a JSON patch for adding a new value at a specified path in a JSON object, prepare a JSON patch for replacing a value at a specified path in a JSON object,
+ * and set a value at a specified path within a JSON object.
+ * It uses the ObjectMapper class for converting values to JSON nodes and the JsonPatch class for applying patches to JSON objects.
  */
 @Component
 @RequiredArgsConstructor
@@ -28,7 +32,8 @@ public class PatchUtil {
     private final ObjectMapper objectMapper;
 
     /**
-     * Apply a collection of JSON patch operations to a JSON object.
+     * This method applies a collection of JSON patch operations to a JSON object.
+     * It creates a new JsonPatch object from the collection of patch operations and applies it to the JSON object.
      *
      * @param patchOperations The collection of patch operations to apply.
      * @param o               The JSON object to which the patch operations should be applied.
@@ -54,7 +59,8 @@ public class PatchUtil {
     }
 
     /**
-     * Apply a JSON patch to a JSON object.
+     * This method applies a JSON patch to a JSON object.
+     * It converts the JSON object to a JsonNode, applies the patch, and then converts the patched JsonNode back to an Object.
      *
      * @param jsonPatch The JSON patch to apply.
      * @param o         The JSON object to which the patch should be applied.
@@ -68,7 +74,8 @@ public class PatchUtil {
     }
 
     /**
-     * Prepare a JSON patch for adding a new value at the specified path in a JSON object.
+     * This method prepares a JSON patch for adding a new value at the specified path in a JSON object.
+     * It creates a new AddOperation with the specified path and data, and then creates a new JsonPatch with this operation.
      *
      * @param path The path at which the new value should be added.
      * @param data The data to be added at the specified path.
@@ -85,7 +92,8 @@ public class PatchUtil {
     }
 
     /**
-     * Prepare a JSON patch for replacing a value at the specified path in a JSON object.
+     * This method prepares a JSON patch for replacing a value at the specified path in a JSON object.
+     * It creates a new ReplaceOperation with the specified path and data, and then creates a new JsonPatch with this operation.
      *
      * @param path The path at which the value should be replaced.
      * @param data The data to replace the existing value at the specified path.
@@ -102,7 +110,9 @@ public class PatchUtil {
     }
 
     /**
-     * Set a value at a specified path within a JSON object.
+     * This method sets a value at a specified path within a JSON object.
+     * It first checks if the path exists in the JSON object, and if not, it adds a placeholder value at the path.
+     * Then it prepares a JSON patch for replacing the value at the path and applies it to the JSON object.
      *
      * @param o     The JSON object in which to set the value.
      * @param path  The path at which to set the value.

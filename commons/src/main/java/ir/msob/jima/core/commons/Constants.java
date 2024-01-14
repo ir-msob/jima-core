@@ -5,7 +5,7 @@ public class Constants {
     public static final Integer PAGE = 0;
     public static final Integer SIZE = 10;
     public static final String CORE_FRAMEWORK_PACKAGE_PREFIX = "ir.msob.jima.core";
-    public static final String FRAMEWORK_PACKAGE_PREFIX = "ir.msob.framework";
+    public static final String FRAMEWORK_PACKAGE_PREFIX = "ir.msob.jima";
     public static final String TYPE_PROPERTY_NAME = "classType";
     public static final String ARRAY_INDEX_REGEX = "\\[[0-9]{1,}\\]";
     public static final String ARRAY_IN_JSON = "[*]";

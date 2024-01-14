@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.profile;
 
 /**
- * @author Yaqub Abdi
+ *
  */
 public class ProfileConstants {
     public static final String TEST = "test";

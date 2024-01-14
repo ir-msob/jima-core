@@ -18,6 +18,7 @@ public interface BaseRepository<ID extends Comparable<ID> & Serializable, USER e
 
     /**
      * Get the class type for the identifier (usually the primary key) used in domain entities.
+     * This method uses 'GenericTypeUtil' to resolve the actual type argument for the identifier.
      *
      * @return The class type for the identifier.
      */
@@ -27,6 +28,7 @@ public interface BaseRepository<ID extends Comparable<ID> & Serializable, USER e
 
     /**
      * Get the class type representing a user, typically derived from 'BaseUser'.
+     * This method uses 'GenericTypeUtil' to resolve the actual type argument for the user.
      *
      * @return The class type for the user.
      */
@@ -36,6 +38,7 @@ public interface BaseRepository<ID extends Comparable<ID> & Serializable, USER e
 
     /**
      * Get the class type representing a domain entity, typically derived from 'BaseDomain'.
+     * This method uses 'GenericTypeUtil' to resolve the actual type argument for the domain entity.
      *
      * @return The class type for the domain entity.
      */

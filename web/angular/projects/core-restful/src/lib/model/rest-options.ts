@@ -1,25 +1,52 @@
 import {HttpHeaders, HttpParams} from "@angular/common/http";
 import {NullableString} from "@ir-msob-framework/core-commons/lib/constants";
 
+/**
+ * RestOptions class.
+ * It provides a set of options for RESTful operations.
+ * @class
+ */
 export class RestOptions {
   /**
-   * Token
+   * Indicates whether a token is needed for the operation.
+   * @type {boolean}
    */
   needToken?: boolean = true;
-  tokenKey?: NullableString;
+
   /**
-   * Params
+   * The key of the token.
+   * @type {NullableString}
+   */
+  tokenKey?: NullableString;
+
+  /**
+   * The parameters for the operation.
+   * @type {HttpParams}
    */
   params?: HttpParams;
+
   /**
-   * Headers
+   * The headers for the operation.
+   * @type {HttpHeaders}
    */
   headers?: HttpHeaders;
+
+  /**
+   * The operation to perform on the headers.
+   * @type {HeaderOperation}
+   */
   headerOperation?: HeaderOperation;
 
+  /**
+   * Constructor for the RestOptions class.
+   */
   constructor() {
   }
 
+  /**
+   * Static method to create a new instance of RestOptions.
+   * @returns {RestOptions} A new instance of RestOptions.
+   */
   public static newInstance(): RestOptions {
     const ro = new RestOptions();
     ro.needToken = true;
@@ -31,6 +58,10 @@ export class RestOptions {
   }
 }
 
+/**
+ * Enum for header operations.
+ * @enum
+ */
 export enum HeaderOperation {
   REPLACE,
   APPEND

@@ -21,7 +21,7 @@ import java.util.ArrayList;
  *
  * @param <USER> The type of the user.
  * @param <D>    The type of the domain.
- * @author Yaqub Abdi
+ *
  */
 public interface BaseMongoRepository<USER extends BaseUser<ObjectId>, D extends BaseDomain<ObjectId>> extends
         BaseRepository<ObjectId, USER, D> {

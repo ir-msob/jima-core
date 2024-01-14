@@ -4,18 +4,17 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 /**
- * Spring profile service for checking active profiles.
- * <p>
- * This service provides a method to check if a specific profile is active in the Spring application context.
- *
- * @author Yaqub Abdi
+ * This service class provides functionality to check if a specific profile is active in the Spring application context.
+ * It is marked as a Spring service to be detected during classpath scanning.
+ * The active profiles are retrieved from the Spring Environment.
  */
 @Service
 public class ProfileService {
+    // The Spring Environment to be used for profile checking
     private final Environment environment;
 
     /**
-     * Constructs a ProfileService with the provided Spring Environment.
+     * Constructs a new ProfileService with the provided Spring Environment.
      *
      * @param environment The Spring Environment to be used for profile checking.
      */
@@ -31,11 +30,14 @@ public class ProfileService {
      * @return `true` if the profile is active, `false` otherwise.
      */
     public Boolean isActiveProfile(String profile) {
+        // Iterate over the active profiles
         for (String activeProfile : environment.getActiveProfiles()) {
+            // If the active profile matches the provided profile, return true
             if (activeProfile.equals(profile)) {
                 return true;
             }
         }
+        // If no match is found, return false
         return false;
     }
 }

@@ -8,7 +8,7 @@ import reactor.core.publisher.Mono;
  * Utility class for working with MongoDB Query results.
  * This class provides methods to handle query results and return boolean values.
  *
- * @author Yaqub Abdi
+ *
  */
 public class QueryUtil {
 

@@ -17,7 +17,6 @@ import java.util.List;
  * A Query Generator for creating MongoDB queries based on filtering criteria.
  *
  * @param <C> The type of the criteria.
- * @author Yasqub Abdi
  */
 public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
 
