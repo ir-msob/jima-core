@@ -4,6 +4,7 @@ import {isEmpty, isNotEmpty} from "@ir-msob-framework/core-commons";
 
 /**
  * A utility class for generating HTTP parameters based on search criteria and pagination options.
+ * @class
  */
 export class RestUtil {
   /**
@@ -11,6 +12,7 @@ export class RestUtil {
    * @param criteria Optional search criteria for filtering.
    * @param pagination Optional pagination options.
    * @returns An instance of HttpParams or undefined if no criteria or pagination are provided.
+   * @static
    */
   public static generateParams(criteria?: any, pagination?: Pagination): HttpParams {
     let result: HttpParams = new HttpParams();
@@ -29,6 +31,7 @@ export class RestUtil {
    * Removes an underscore prefix if present.
    * @param field The field name to prepare.
    * @returns The prepared field name.
+   * @static
    */
   public static prepareFieldName(field: string): string {
     if (field.startsWith('_')) {
@@ -42,6 +45,8 @@ export class RestUtil {
    * @param criteria The search criteria.
    * @param result The HttpParams object to add the criteria parameters to.
    * @returns An HttpParams object with the criteria parameters included.
+   * @private
+   * @static
    */
   private static prepareCriteria(criteria: any, result: HttpParams): HttpParams {
     if (isEmpty(criteria)) return result;
@@ -66,6 +71,8 @@ export class RestUtil {
    * @param criteria The "includes" criteria.
    * @param result The HttpParams object to add the "includes" parameters to.
    * @returns An HttpParams object with the "includes" parameters included.
+   * @private
+   * @static
    */
   private static prepareIncludes(criteria: any, result: HttpParams): HttpParams {
     for (const include of criteria.includes) {
@@ -80,6 +87,8 @@ export class RestUtil {
    * @param field The field name.
    * @param result The HttpParams object to add the criteria parameters to.
    * @returns An HttpParams object with the criteria parameters included.
+   * @private
+   * @static
    */
   private static prepareFilters(criteria: any, field: string, result: HttpParams): HttpParams {
     const filter: any = criteria[field];
@@ -129,6 +138,8 @@ export class RestUtil {
    * @param result The HttpParams object to add the "or" filter parameters to.
    * @param field The field name.
    * @returns An HttpParams object with the "or" filter parameters included.
+   * @private
+   * @static
    */
   private static prepareOrFilter(filter: any, result: HttpParams, field: string): HttpParams {
     const orFilter: any = filter['or'];
@@ -149,6 +160,8 @@ export class RestUtil {
    * @param pagination The pagination options.
    * @param result The HttpParams object to add the pagination parameters to.
    * @returns An HttpParams object with the pagination parameters included.
+   * @private
+   * @static
    */
   private static preparePagination(pagination: Pagination | undefined, result: HttpParams): HttpParams {
     if (!isNotEmpty(pagination)) return result;

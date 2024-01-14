@@ -7,20 +7,31 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
- * This class is used for interacting with CRUD operations on a given domain class.
+ * The 'ConditionalOnOperationUtil' class provides utility methods for working with 'ConditionalOnOperation' annotations.
+ * The class includes a 'hasOperation' method that checks whether a specific operation is allowed for a given class.
+ * The class also includes a private constructor to prevent instantiation.
+ *
+ *
  */
 public class ConditionalOnOperationUtil {
 
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private ConditionalOnOperationUtil() {
         // The initial class cannot be instantiated by other classes.
     }
 
     /**
-     * This method checks whether a specific CRUD operation is allowed for a given class.
+     * Checks whether a specific operation is allowed for a given class.
+     * The method retrieves the 'ConditionalOnOperation' annotation from the class.
+     * If the annotation is not present, the method returns true, indicating that the operation is allowed.
+     * If the annotation is present, the method checks whether the operation is included in the operations specified in the annotation.
+     * The method treats the 'READ' operation as equivalent to the 'READS' operation, and the 'WRITE' operation as equivalent to the 'WRITES' operation.
      *
-     * @param operation The desired CRUD operation.
-     * @param clazz     The target class.
-     * @return true if the specified class allows the CRUD operation, false otherwise.
+     * @param operation The operation to check.
+     * @param clazz     The class to check.
+     * @return True if the operation is allowed for the class, false otherwise.
      */
     public static boolean hasOperation(String operation, Class<?> clazz) {
         ConditionalOnOperation conditionalOnOperation = ConditionalOnOperation.info.getAnnotation(clazz);

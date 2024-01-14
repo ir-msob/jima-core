@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * It implements the ApplicationContextAware interface to set the application context when the Spring container starts.
  * You can use the static `getBean` method to retrieve beans by their class type.
  *
- * @author Yaqub Abdi
+ *
  */
 @Component
 public class BeanUtil implements ApplicationContextAware {

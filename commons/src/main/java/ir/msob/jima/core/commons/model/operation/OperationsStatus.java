@@ -1,5 +1,11 @@
 package ir.msob.jima.core.commons.model.operation;
 
+/**
+ * The 'Operations' class defines constants for various operations that can be performed on a resource.
+ * The class includes constants for read operations, write operations, delete operations, save operations, and update operations.
+ * The class also includes lists of operations that are considered read operations, write operations, delete operations, save operations, and update operations.
+ * The class includes a private constructor to prevent instantiation.
+ */
 public class OperationsStatus {
     /* READ */
     public static final Integer COUNT = 200;

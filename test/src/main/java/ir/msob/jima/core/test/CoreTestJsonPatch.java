@@ -41,7 +41,6 @@ public class CoreTestJsonPatch {
         operations.add(new ReplaceOperation(new JsonPointer(String.format(CHARACTERISTICS_PATH, Characteristic.FN.key)), TextNode.valueOf(UPDATED_STRING)));
         operations.add(new ReplaceOperation(new JsonPointer(String.format(CHARACTERISTICS_PATH, Characteristic.FN.value)), IntNode.valueOf(UPDATED_INTEGER)));
         operations.add(new ReplaceOperation(new JsonPointer(String.format(CHARACTERISTICS_PATH, Characteristic.FN.dataType)), TextNode.valueOf(UPDATED_DATA_TYPE.name())));
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(CHARACTERISTICS_PATH, Characteristic.FN.array)), BooleanNode.FALSE));
         return operations;
     }
 

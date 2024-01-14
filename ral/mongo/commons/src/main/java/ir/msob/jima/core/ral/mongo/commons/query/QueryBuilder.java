@@ -11,7 +11,7 @@ import java.util.List;
  * A query builder for constructing complex MongoDB queries.
  * This class provides methods to build MongoDB queries with regular expression criteria.
  *
- * @author Yaqub Abdi
+ *
  */
 public class QueryBuilder extends MongoQuery<QueryBuilder> {
 

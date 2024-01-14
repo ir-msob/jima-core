@@ -15,7 +15,8 @@ import java.util.TreeSet;
 import static ir.msob.jima.core.commons.Constants.CORE_FRAMEWORK_PACKAGE_PREFIX;
 
 /**
- * Provides runtime hints for native image generation.
+ * This class provides runtime hints for native image generation.
+ * It implements the `RuntimeHintsRegistrar` interface to register hints for the Spring AOT (Ahead-of-Time) compiler.
  */
 public class CoreCommonsRuntimeHints implements RuntimeHintsRegistrar {
     @Override

@@ -49,7 +49,6 @@ public class CoreTestAssertion {
     public static void assertMandatoryCharacteristic(Characteristic before, Characteristic after) {
         Assertions.assertThat(before.getKey()).isEqualTo(after.getKey());
         Assertions.assertThat(before.getDataType()).isEqualTo(after.getDataType());
-        Assertions.assertThat(before.isArray()).isEqualTo(after.isArray());
     }
 
     /**

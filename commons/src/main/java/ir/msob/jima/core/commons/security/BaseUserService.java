@@ -12,7 +12,7 @@ import java.util.Optional;
  * <p>
  * This interface provides methods to retrieve user information based on different criteria.
  *
- * @author Yaqub Abdi
+ *
  */
 public interface BaseUserService {
 

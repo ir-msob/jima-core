@@ -6,16 +6,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 /**
- * Configuration for creating a standard SpEL evaluation context.
- * <p>
- * This configuration class defines a Spring Bean that provides a standard SpEL (Spring Expression Language)
- * evaluation context, which is used for evaluating SpEL expressions in the application.
+ * This configuration class is responsible for setting up the Spring Expression Language (SpEL) evaluation context.
+ * It is marked with the `@Configuration` annotation to indicate that it is a source of bean definitions.
+ * The `@Bean` annotation is used to declare a bean to be managed by the Spring container.
  */
 @Configuration
 public class SpelConfiguration {
 
     /**
-     * Creates a standard SpEL evaluation context bean.
+     * This method creates a StandardEvaluationContext bean for evaluating SpEL expressions.
+     * The context is prepared using a provided BeanFactory.
      *
      * @param beanFactory The Spring BeanFactory used to prepare the evaluation context.
      * @return A StandardEvaluationContext bean for SpEL expressions.

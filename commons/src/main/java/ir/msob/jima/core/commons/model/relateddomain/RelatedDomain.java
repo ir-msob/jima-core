@@ -7,6 +7,12 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * This class represents a related domain with a type, an ID, a role, and a referred type.
+ * It implements Comparable interface to provide a natural ordering of its instances.
+ *
+ * @param <ID> the type of the related domain ID, which must be comparable and serializable
+ */
 @Getter
 @Setter
 @ToString
@@ -14,13 +20,36 @@ import java.util.Objects;
 @AllArgsConstructor
 @Builder
 public class RelatedDomain<ID extends Comparable<ID> & Serializable> implements Comparable<RelatedDomain<ID>>, Serializable {
+
+    /**
+     * The type of the related domain.
+     */
     @NotBlank
     private String relatedDomainType;
+
+    /**
+     * The ID of the related domain.
+     */
     @NotNull
     private ID relatedDomainId;
+
+    /**
+     * The role of the related domain.
+     */
     private String role;
+
+    /**
+     * The type of the entity that referred to this related domain.
+     */
     private String referredType;
 
+    /**
+     * Compares this related domain with the specified related domain for order.
+     * Returns a negative integer, zero, or a positive integer as this related domain is less than, equal to, or greater than the specified related domain.
+     *
+     * @param o the related domain to be compared
+     * @return a negative integer, zero, or a positive integer as this related domain is less than, equal to, or greater than the specified related domain
+     */
     @Override
     public int compareTo(RelatedDomain<ID> o) {
         if (this == o) {
@@ -45,6 +74,12 @@ public class RelatedDomain<ID extends Comparable<ID> & Serializable> implements 
         return Objects.compare(this.getReferredType(), o.getReferredType(), String::compareTo);
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param o the reference object with which to compare
+     * @return true if this object is the same as the obj argument; false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -63,11 +98,19 @@ public class RelatedDomain<ID extends Comparable<ID> & Serializable> implements 
         return false;
     }
 
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return a hash code value for this object
+     */
     @Override
     public int hashCode() {
         return Objects.hash(relatedDomainType, relatedDomainId, role, referredType);
     }
 
+    /**
+     * Enum representing the field names of the RelatedDomain class.
+     */
     public enum FN {
         relatedDomainType, relatedDomainId, role, referredType
     }

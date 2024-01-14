@@ -13,8 +13,9 @@ import java.io.Serializable;
 import java.util.Optional;
 
 /**
- * This interface defines methods for creating and managing Kafka message listener containers.
- * Implementing classes should provide concrete implementations for these methods.
+ * The 'BaseListener' interface defines methods for creating and managing Kafka message listener containers.
+ * It includes methods for getting the class type for the identifier and user, getting the ObjectMapper, UserService, and AsyncClient instances, retrieving a user based on the provided authentication token, and preparing a ChannelMessage by copying and modifying properties of another ChannelMessage.
+ * Classes that implement this interface should provide concrete implementations for these methods.
  *
  * @param <ID>   The type of ID.
  * @param <USER> The type of BaseUser.

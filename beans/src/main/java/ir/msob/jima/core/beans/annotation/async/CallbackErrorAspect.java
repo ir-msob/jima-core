@@ -2,8 +2,8 @@ package ir.msob.jima.core.beans.annotation.async;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.msob.jima.core.beans.annotation.methodstats.MethodStatsLogger;
 import ir.msob.jima.core.commons.annotation.async.CallbackError;
-import ir.msob.jima.core.commons.annotation.methodstats.MethodStatsLogger;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
 import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
@@ -26,7 +26,10 @@ import java.lang.reflect.Parameter;
 import java.util.Optional;
 
 /**
- * An aspect for handling errors and executing callbacks using annotations.
+ * The 'CallbackErrorAspect' class is an aspect that handles errors and executes callbacks for methods annotated with @CallbackError.
+ * It is annotated with '@Aspect' and '@Component', indicating that it is a Spring-managed aspect bean.
+ * It uses the '@RequiredArgsConstructor' annotation from Lombok to automatically generate a constructor with required arguments.
+ * The class provides methods to handle errors and execute callbacks for methods annotated with @CallbackError.
  */
 @Aspect
 @Component
@@ -37,7 +40,8 @@ public class CallbackErrorAspect {
     private final ObjectMapper objectMapper;
 
     /**
-     * Handle errors and execute callbacks for methods annotated with @CallbackError.
+     * This method is executed after a method annotated with @CallbackError throws an exception.
+     * It handles the error and executes the callback.
      *
      * @param point    The join point of the method
      * @param throwing The thrown exception
@@ -50,7 +54,7 @@ public class CallbackErrorAspect {
     }
 
     /**
-     * Execute callbacks and handle errors based on the @CallbackError annotation.
+     * This method executes callbacks and handles errors based on the @CallbackError annotation.
      *
      * @param point The join point of the method
      * @param e     The thrown exception
@@ -68,7 +72,7 @@ public class CallbackErrorAspect {
     }
 
     /**
-     * Prepare a ChannelMessage object from the method parameters.
+     * This method prepares a ChannelMessage object from the method parameters.
      *
      * @param point The join point of the method
      * @return A ChannelMessage object
@@ -96,7 +100,7 @@ public class CallbackErrorAspect {
     }
 
     /**
-     * Prepare an error ChannelMessage based on an exception.
+     * This method prepares an error ChannelMessage based on an exception.
      *
      * @param channelMessageReq The original ChannelMessage
      * @param throwable         The thrown exception
@@ -120,4 +124,3 @@ public class CallbackErrorAspect {
         return channelMessage;
     }
 }
-
