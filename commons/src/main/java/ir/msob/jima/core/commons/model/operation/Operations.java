@@ -13,6 +13,7 @@ public class Operations {
     public static final String READ = "read";
     public static final String COUNT = "count";
     public static final String COUNT_ALL = "count-all";
+    public static final String GET_BY_ID = "get-by-id";
     public static final String GET_ONE = "get-one";
     public static final String GET_MANY = "get-many";
     public static final String GET_STREAM = "get-stream";
@@ -21,10 +22,13 @@ public class Operations {
     public static final String WRITE = "write";
     public static final String SAVE = "save";
     public static final String SAVE_MANY = "save-many";
+    public static final String UPDATE_BY_ID = "update-by-id";
     public static final String UPDATE = "update";
     public static final String UPDATE_MANY = "update-many";
+    public static final String EDIT_BY_ID = "edit-by-id";
     public static final String EDIT = "edit";
     public static final String EDIT_MANY = "edit-many";
+    public static final String DELETE_BY_ID = "delete-by-id";
     public static final String DELETE = "delete";
     public static final String DELETE_MANY = "delete-many";
     public static final String DELETE_ALL = "delete-all";
@@ -32,11 +36,11 @@ public class Operations {
     public static final String SUSPEND = "suspend";
     public static final String COMPLETE = "complete";
     public static final String START = "start";
-    public static final List<String> READS = List.of(COUNT, COUNT_ALL, GET_ONE, GET_MANY, GET_STREAM, GET_PAGE);
-    public static final List<String> WRITES = List.of(SAVE, SAVE_MANY, UPDATE, UPDATE_MANY, EDIT, EDIT_MANY, DELETE, DELETE_MANY, DELETE_ALL, RESUME, SUSPEND, COMPLETE, START);
-    public static final List<String> DELETES = List.of(DELETE, DELETE_MANY, DELETE_ALL);
+    public static final List<String> READS = List.of(COUNT, COUNT_ALL, GET_BY_ID, GET_ONE, GET_MANY, GET_STREAM, GET_PAGE);
+    public static final List<String> WRITES = List.of(SAVE, SAVE_MANY, UPDATE_BY_ID, UPDATE, UPDATE_MANY, EDIT_BY_ID, EDIT, EDIT_MANY, DELETE_BY_ID, DELETE, DELETE_MANY, DELETE_ALL, RESUME, SUSPEND, COMPLETE, START);
+    public static final List<String> DELETES = List.of(DELETE_BY_ID, DELETE, DELETE_MANY, DELETE_ALL);
     public static final List<String> SAVES = List.of(SAVE, SAVE_MANY);
-    public static final List<String> UPDATES = List.of(UPDATE, UPDATE_MANY, EDIT, EDIT_MANY, RESUME, SUSPEND, COMPLETE, START);
+    public static final List<String> UPDATES = List.of(UPDATE_BY_ID, UPDATE, UPDATE_MANY, EDIT_BY_ID, EDIT, EDIT_MANY, RESUME, SUSPEND, COMPLETE, START);
 
     private Operations() {
     }

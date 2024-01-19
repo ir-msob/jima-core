@@ -65,4 +65,18 @@ public interface BaseChannelTypeReference<
      * @return The type reference for 'DtosMessage'.
      */
     TypeReference<ChannelMessage<ID, USER, DtosMessage<ID, DTO>>> getDtosReferenceType();
+
+    /**
+     * Gets the type reference for 'IdMessage'.
+     *
+     * @return The type reference for 'IdMessage'.
+     */
+    TypeReference<ChannelMessage<ID, USER, IdMessage<ID>>> getIdReferenceType();
+
+    /**
+     * Gets the type reference for 'IdJsonPatchMessage'.
+     *
+     * @return The type reference for 'IdJsonPatchMessage'.
+     */
+    TypeReference<ChannelMessage<ID, USER, IdJsonPatchMessage<ID>>> getIdJsonPatchReferenceType();
 }
