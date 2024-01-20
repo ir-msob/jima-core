@@ -1,6 +1,5 @@
-package ir.msob.jima.core.commons.util;
+package ir.msob.jima.core.commons.exception;
 
-import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
 import ir.msob.jima.core.commons.exception.badrequest.BadRequestException;
 import ir.msob.jima.core.commons.exception.badrequest.BadRequestResponse;
 import ir.msob.jima.core.commons.exception.conflict.ConflictException;
@@ -19,20 +18,29 @@ import ir.msob.jima.core.commons.exception.validation.ValidationException;
 import ir.msob.jima.core.commons.exception.validation.ValidationResponse;
 
 /**
- * Utility class for casting exceptions to their corresponding response objects.
+ * The `BaseExceptionMapper` interface provides methods for mapping exceptions to their corresponding response objects.
+ * It defines a method `cast` that should be implemented by classes that want to provide their own mapping logic.
+ * It also provides a default implementation for getting the exception response.
  */
-public class ExceptionUtil {
-    private ExceptionUtil() {
-    }
+public interface BaseExceptionMapper {
 
     /**
-     * Casts a Throwable exception to its corresponding AbstractExceptionResponse.
+     * This method should be implemented by classes that want to provide their own logic for mapping exceptions to their corresponding response objects.
      *
-     * @param ex   The exception to cast.
-     * @param <ER> The type of AbstractExceptionResponse.
-     * @return The corresponding exception response object.
+     * @param ex The exception to be mapped.
+     * @param <ER> The type of the exception response.
+     * @return The mapped exception response.
      */
-    public static <ER extends AbstractExceptionResponse> ER cast(Throwable ex) {
+    <ER extends AbstractExceptionResponse> ER cast(Throwable ex);
+
+    /**
+     * This method provides a default implementation for mapping exceptions to their corresponding response objects.
+     *
+     * @param ex The exception to be mapped.
+     * @param <ER> The type of the exception response.
+     * @return The mapped exception response.
+     */
+    private <ER extends AbstractExceptionResponse> ER castException(Throwable ex) {
         if (ex != null) {
             if (ex instanceof BadRequestException exception) {
                 return (ER) new BadRequestResponse(exception.getMessage(), exception.getFieldName(), exception.getValue());
@@ -53,5 +61,21 @@ public class ExceptionUtil {
             }
         }
         return null;
+    }
+
+    /**
+     * This method provides a default implementation for getting the exception response.
+     * It first tries to cast the exception using the `castException` method.
+     * If that fails, it tries to cast the exception using the `cast` method.
+     *
+     * @param ex The exception to be mapped.
+     * @param <ER> The type of the exception response.
+     * @return The mapped exception response.
+     */
+    default <ER extends AbstractExceptionResponse> ER getExceptionResponse(Throwable ex) {
+        ER er = castException(ex);
+        if (er == null)
+            return cast(ex);
+        return er;
     }
 }
