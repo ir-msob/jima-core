@@ -6,13 +6,13 @@ import ir.msob.jima.core.beans.annotation.methodstats.MethodStatsLogger;
 import ir.msob.jima.core.commons.annotation.async.CallbackError;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
 import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
+import ir.msob.jima.core.commons.exception.BaseExceptionMapper;
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
 import ir.msob.jima.core.commons.logger.Logger;
 import ir.msob.jima.core.commons.logger.LoggerFactory;
 import ir.msob.jima.core.commons.model.channel.ChannelMessage;
 import ir.msob.jima.core.commons.model.dto.ModelType;
 import ir.msob.jima.core.commons.security.BaseUser;
-import ir.msob.jima.core.commons.util.ExceptionUtil;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.util.Strings;
 import org.aspectj.lang.JoinPoint;
@@ -38,7 +38,7 @@ public class CallbackErrorAspect {
     private static final Logger log = LoggerFactory.getLog(MethodStatsLogger.class);
     private final BaseAsyncClient asyncClient;
     private final ObjectMapper objectMapper;
-
+    private final BaseExceptionMapper exceptionMapper;
     /**
      * This method is executed after a method annotated with @CallbackError throws an exception.
      * It handles the error and executes the callback.
@@ -105,16 +105,15 @@ public class CallbackErrorAspect {
      * @param channelMessageReq The original ChannelMessage
      * @param throwable         The thrown exception
      * @return An error ChannelMessage
-     * @throws Throwable If there's an issue with error handling
      */
     private <ID extends Comparable<ID> & Serializable
             , USER extends BaseUser<ID>
             , DATA_REQ extends ModelType
             , DATA extends ModelType
-            , ER extends AbstractExceptionResponse> ChannelMessage<ID, USER, DATA> prepareErrorChannelMessage(ChannelMessage<ID, USER, DATA_REQ> channelMessageReq, Throwable throwable) throws Throwable {
-        ER er = ExceptionUtil.cast(throwable);
+            , ER extends AbstractExceptionResponse> ChannelMessage<ID, USER, DATA> prepareErrorChannelMessage(ChannelMessage<ID, USER, DATA_REQ> channelMessageReq, Throwable throwable) {
+        ER er = exceptionMapper.getExceptionResponse(throwable);
         if (er == null)
-            throw throwable;
+            throw new CommonRuntimeException("Can not cast exception to AbstractExceptionResponse, exception message is {}", throwable.getMessage());
 
         ChannelMessage<ID, USER, DATA> channelMessage = new ChannelMessage<>();
         channelMessage.setData((DATA) er);
