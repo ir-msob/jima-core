@@ -13,7 +13,6 @@ public class Constants {
 
     public static final String USER_INFO_HEADER_NAME = "U-I";
 
-    public static final String DEFAULT_CLIENT_REGISTRATION_ID = "service-client";
 
     private Constants() {
     }

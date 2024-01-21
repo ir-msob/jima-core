@@ -25,7 +25,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * Author: Yaqub Abdi
  */
 @Profile("swagger")
-@Configuration("SwaggerConfiguration")
+@Configuration
 @EnableSwagger2  // FIXME: conflict with GraphQL
 @RequiredArgsConstructor
 public class SwaggerConfiguration implements WebFluxConfigurer {
@@ -40,7 +40,6 @@ public class SwaggerConfiguration implements WebFluxConfigurer {
      * @return A Docket bean for Swagger API documentation.
      */
     @Bean("docket")
-    @Qualifier("docket")
     public Docket docket() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .forCodeGeneration(true)
