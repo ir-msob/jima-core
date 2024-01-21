@@ -1,5 +1,7 @@
 package ir.msob.jima.core.api.restful.beans.webclient;
 
+import ir.msob.jima.core.beans.configuration.JimaConfigProperties;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +13,6 @@ import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import static ir.msob.jima.core.commons.Constants.DEFAULT_CLIENT_REGISTRATION_ID;
 
 /**
  * This configuration class, WebClientConfiguration, is responsible for configuring and customizing the behavior of WebClient instances.
@@ -21,7 +22,10 @@ import static ir.msob.jima.core.commons.Constants.DEFAULT_CLIENT_REGISTRATION_ID
  */
 @CommonsLog
 @Configuration
+@RequiredArgsConstructor
 public class WebClientConfiguration {
+
+    private final JimaConfigProperties jimConfigProperties;
 
     /**
      * Create an ExchangeFilterFunction for logging HTTP requests.
@@ -60,7 +64,7 @@ public class WebClientConfiguration {
         // Create a ServerOAuth2AuthorizedClientExchangeFilterFunction to handle OAuth2 integration.
         ServerOAuth2AuthorizedClientExchangeFilterFunction oauth = new ServerOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager);
         oauth.setDefaultOAuth2AuthorizedClient(true);
-        oauth.setDefaultClientRegistrationId(DEFAULT_CLIENT_REGISTRATION_ID);
+        oauth.setDefaultClientRegistrationId(jimConfigProperties.getSecurity().getDefaultClientRegistrationId());
 
         return WebClient.builder()
                 .filter(oauth)  // Apply OAuth2 client integration.
