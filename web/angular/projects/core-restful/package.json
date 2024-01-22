@@ -1,10 +1,10 @@
 {
   "name": "@ir-msob-jima/core-restful",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "peerDependencies": {
     "@angular/common": "^17.0.0",
     "@angular/core": "^17.0.0",
-    "@ir-msob-jima/core-commons": "^1.1.4"
+    "@ir-msob-jima/core-commons": "^1.1.5"
   },
   "dependencies": {
     "tslib": "^2.3.0"
