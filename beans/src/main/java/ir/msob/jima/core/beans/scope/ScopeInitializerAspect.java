@@ -1,7 +1,7 @@
 package ir.msob.jima.core.beans.scope;
 
 import ir.msob.jima.core.commons.model.operation.ConditionalOnOperationUtil;
-import ir.msob.jima.core.commons.model.scope.Scope;
+import ir.msob.jima.core.commons.model.scope.ScopeInitializer;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -27,6 +27,7 @@ public class ScopeInitializerAspect {
      * If the operation is present, it allows the method to proceed.
      *
      * @param joinPoint The JoinPoint in AOP, it represents a point in the application where the action took place.
+     * @throws Throwable if any error occurs during the execution of the method.
      */
     @Around("@annotation(ir.msob.jima.core.commons.model.scope.ScopeInitializer)")
     public void aroundScopeInitializer(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -38,12 +39,12 @@ public class ScopeInitializerAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
 
-        // Get the @Scope annotation from the method
-        Scope scope = method.getAnnotation(Scope.class);
+        // Get the @ScopeInitializer annotation from the method
+        ScopeInitializer scopeInitializer = method.getAnnotation(ScopeInitializer.class);
 
         // Check if the operation specified in the @Scope annotation is present for the resource class
         // If the operation is present, allow the method to proceed
-        if (ConditionalOnOperationUtil.hasOperation(scope.value(), resourceClass))
+        if (ConditionalOnOperationUtil.hasOperation(scopeInitializer.value(), resourceClass))
             joinPoint.proceed();
     }
 }
