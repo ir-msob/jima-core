@@ -1,10 +1,10 @@
 package ir.msob.jima.core.commons.util;
 
 import ir.msob.jima.core.commons.exception.validation.ValidationException;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
 import java.util.Collection;
 
 /**

@@ -1,8 +1,7 @@
-package ir.msob.jima.core.beans.annotation.async;
+package ir.msob.jima.core.api.kafka.beans;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.msob.jima.core.beans.annotation.methodstats.MethodStatsLogger;
 import ir.msob.jima.core.commons.annotation.async.CallbackError;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
 import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
@@ -35,7 +34,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class CallbackErrorAspect {
-    private static final Logger log = LoggerFactory.getLog(MethodStatsLogger.class);
+    private static final Logger log = LoggerFactory.getLog(CallbackErrorAspect.class);
     private final BaseAsyncClient asyncClient;
     private final ObjectMapper objectMapper;
     private final BaseExceptionMapper exceptionMapper;

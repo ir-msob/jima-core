@@ -1,11 +1,11 @@
 package ir.msob.jima.core.commons.model.relatedparty;
 
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.SortedSet;
 import java.util.TreeSet;

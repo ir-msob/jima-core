@@ -5,7 +5,7 @@
     <parent>
         <groupId>ir.msob.jima.core</groupId>
         <artifactId>core-api-restful</artifactId>
-        <version>1.1.5</version>
+        <version>1.1.6</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>core-api-restful-beans</artifactId>
@@ -30,10 +30,10 @@
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
         <!-- Security -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-client</artifactId>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.security</groupId>-->
+        <!--            <artifactId>spring-security-oauth2-client</artifactId>-->
+        <!--        </dependency>-->
         <!-- Swagger -->
         <dependency>
             <groupId>io.springfox</groupId>
