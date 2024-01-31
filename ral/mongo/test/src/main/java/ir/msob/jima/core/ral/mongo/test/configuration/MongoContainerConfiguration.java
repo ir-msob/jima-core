@@ -1,4 +1,4 @@
-package ir.msob.jima.core.ral.mongo.test;
+package ir.msob.jima.core.ral.mongo.test.configuration;
 
 import ir.msob.jima.core.test.testcontainer.BaseContainerConfiguration;
 import ir.msob.jima.core.test.testcontainer.ContainerImageConstant;

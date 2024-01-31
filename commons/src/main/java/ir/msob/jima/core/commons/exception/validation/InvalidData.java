@@ -1,9 +1,9 @@
 package ir.msob.jima.core.commons.exception.validation;
 
 import ir.msob.jima.core.commons.model.BaseModel;
+import jakarta.validation.Path;
 import lombok.*;
 
-import javax.validation.Path;
 import java.io.Serializable;
 
 /**
