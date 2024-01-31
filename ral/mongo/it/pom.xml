@@ -13,19 +13,12 @@
     <description>it</description>
     <packaging>jar</packaging>
     <dependencies>
-        <!-- MSob -->
+        <!-- MSob-->
         <dependency>
             <groupId>ir.msob.jima.core</groupId>
-            <artifactId>core-ral-mongo-test</artifactId>
+            <artifactId>core-commons</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-        <dependency>
-            <groupId>ir.msob.jima.core</groupId>
-            <artifactId>core-beans</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <!-- Test -->
-
         <!-- MongoDB -->
         <dependency>
             <groupId>org.springframework.data</groupId>

@@ -1,5 +1,6 @@
 package ir.msob.jima.core.ral.mongo.it.security;
 
+import com.google.common.collect.Sets;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.security.BaseUserService;
 import ir.msob.jima.core.commons.security.ClaimKey;
@@ -19,7 +20,7 @@ public interface BaseMongoProjectUserService extends BaseUserService {
             .id(new ObjectId("000000000000000000000000"))
             .sessionId(new ObjectId())
             .username("system")
-            .roles(new TreeSet(Collections.singleton(Roles.ADMIN)))
+            .roles(Sets.newTreeSet(Collections.singleton(Roles.ADMIN)))
             .audience(ClaimKeyValue.AUDIENCE_WEB)
             .build();
 

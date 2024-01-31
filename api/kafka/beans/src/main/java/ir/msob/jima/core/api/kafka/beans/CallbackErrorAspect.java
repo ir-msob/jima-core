@@ -57,11 +57,10 @@ public class CallbackErrorAspect {
      *
      * @param point The join point of the method
      * @param e     The thrown exception
-     * @throws Throwable If an error occurs during handling
      */
     private <ID extends Comparable<ID> & Serializable
             , USER extends BaseUser<ID>
-            , DATA extends ModelType> void callback(JoinPoint point, Throwable e) throws Throwable {
+            , DATA extends ModelType> void callback(JoinPoint point, Throwable e) throws JsonProcessingException {
         ChannelMessage<ID, USER, DATA> message = prepareChannelMessage(point);
         Optional<USER> user = Optional.ofNullable(message.getUser());
 
