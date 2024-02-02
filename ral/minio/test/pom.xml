@@ -5,7 +5,7 @@
     <parent>
         <groupId>ir.msob.jima.core</groupId>
         <artifactId>core-ral-minio</artifactId>
-        <version>1.1.6</version>
+        <version>1.1.7</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>core-ral-minio-test</artifactId>
@@ -17,6 +17,11 @@
         <dependency>
             <groupId>ir.msob.jima.core</groupId>
             <artifactId>core-test</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ir.msob.jima.core</groupId>
+            <artifactId>core-beans</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <!-- Test -->
@@ -31,6 +36,16 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-testcontainers</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

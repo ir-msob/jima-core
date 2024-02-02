@@ -1,7 +1,7 @@
 package ir.msob.jima.core.api.restful.beans.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import ir.msob.jima.core.commons.util.JsonParser;
+import ir.msob.jima.core.beans.util.JsonParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

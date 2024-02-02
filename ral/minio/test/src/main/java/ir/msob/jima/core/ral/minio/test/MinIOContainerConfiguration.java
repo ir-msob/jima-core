@@ -1,46 +1,38 @@
 package ir.msob.jima.core.ral.minio.test;
 
-import ir.msob.jima.core.test.testcontainer.BaseContainerConfiguration;
-import ir.msob.jima.core.test.testcontainer.ContainerImageConstant;
+import ir.msob.jima.core.beans.properties.JimaProperties;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.MinIOContainer;
-import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.utility.DockerImageName;
 
 /**
- * Test configuration class for setting up a MinIOContainer for integration tests.
+ * This class provides the configuration for setting up a MinIO container for testing purposes.
+ * It is annotated with @TestConfiguration to indicate that it is a source of bean definitions.
+ * The proxyBeanMethods attribute is set to false to optimize runtime bean creation.
  */
-@TestConfiguration
-public class MinIOContainerConfiguration extends BaseContainerConfiguration {
-
-    // Create a MinIOContainer with the specified Docker image and credentials
-    @Container
-    public static final MinIOContainer minIOContainer = new MinIOContainer(DockerImageName.parse(ContainerImageConstant.MIN_IO_IMAGE))
-            .withUserName("username")
-            .withPassword("password");
+@TestConfiguration(proxyBeanMethods = false)
+public class MinIOContainerConfiguration {
 
     /**
-     * Configure dynamic properties based on the MinIOContainer for use in tests.
+     * This method creates a MinIOContainer bean for testing purposes.
+     * It uses the DynamicPropertyRegistry to dynamically register properties for the MinIO container.
+     * The properties include the URL, access key, and secret key for the MinIO container.
+     * The JimaProperties object is used to get the Docker image name, access key, and secret key for the MinIO container.
      *
-     * @param registry The DynamicPropertyRegistry for registering dynamic properties.
+     * @param registry The DynamicPropertyRegistry used to dynamically register properties for the MinIO container.
+     * @param jimaProperties The JimaProperties object used to get the Docker image name, access key, and secret key for the MinIO container.
+     * @return The created MinIOContainer bean.
      */
-    @DynamicPropertySource
-    public static void registry(DynamicPropertyRegistry registry) {
-        registry.add("spring.minio.url", minIOContainer::getS3URL);
-        registry.add("spring.minio.access-key", minIOContainer::getUserName);
-        registry.add("spring.minio.secret-key", minIOContainer::getPassword);
-    }
-
-    /**
-     * Get the configured MinIOContainer instance.
-     *
-     * @return The MinIOContainer instance configured for tests.
-     */
-    @Override
-    protected GenericContainer<?> getContainer() {
-        return minIOContainer;
+    @Bean
+    public MinIOContainer minIOContainer(DynamicPropertyRegistry registry, JimaProperties jimaProperties) {
+        MinIOContainer container = new MinIOContainer(DockerImageName.parse(jimaProperties.getTestContainer().getMinio().getImage()))
+                .withUserName(jimaProperties.getTestContainer().getMinio().getAccessKey())
+                .withPassword(jimaProperties.getTestContainer().getMinio().getSecretKey());
+        registry.add("spring.minio.url", container::getS3URL);
+        registry.add("spring.minio.access-key", container::getUserName);
+        registry.add("spring.minio.secret-key", container::getPassword);
+        return container;
     }
 }

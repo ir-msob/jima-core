@@ -1,7 +1,7 @@
 package ir.msob.jima.core.api.restful.beans.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import ir.msob.jima.core.commons.util.JsonParser;
+import ir.msob.jima.core.beans.util.JsonParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;

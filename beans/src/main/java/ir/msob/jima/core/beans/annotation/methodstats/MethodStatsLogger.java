@@ -1,6 +1,6 @@
 package ir.msob.jima.core.beans.annotation.methodstats;
 
-import ir.msob.jima.core.beans.configuration.JimaConfigProperties;
+import ir.msob.jima.core.beans.properties.JimaProperties;
 import ir.msob.jima.core.commons.logger.Logger;
 import ir.msob.jima.core.commons.logger.LoggerFactory;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class MethodStatsLogger {
     private static final Logger log = LoggerFactory.getLog(MethodStatsLogger.class);
 
     // Core configuration properties instance
-    private final JimaConfigProperties properties;
+    private final JimaProperties properties;
 
     /**
      * This method intercepts methods annotated with `@MethodStats` and logs their execution time.

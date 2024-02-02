@@ -5,7 +5,7 @@
     <parent>
         <groupId>ir.msob.jima.core</groupId>
         <artifactId>core-ral-redis</artifactId>
-        <version>1.1.6</version>
+        <version>1.1.7</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>core-ral-redis-test</artifactId>
@@ -19,6 +19,12 @@
             <artifactId>core-test</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ir.msob.jima.core</groupId>
+            <artifactId>core-beans</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>com.redis.testcontainers</groupId>
@@ -31,6 +37,21 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-testcontainers</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
