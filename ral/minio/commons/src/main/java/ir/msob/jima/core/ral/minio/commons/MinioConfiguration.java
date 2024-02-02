@@ -1,7 +1,7 @@
 package ir.msob.jima.core.ral.minio.commons;
 
 import io.minio.MinioClient;
-import ir.msob.jima.core.commons.properties.MinioProperties;
+import ir.msob.jima.core.beans.properties.MinioProperties;
 import okhttp3.OkHttpClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
