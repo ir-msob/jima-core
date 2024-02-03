@@ -32,6 +32,7 @@ public class OperationsStatus {
     public static final Integer SUSPEND = 200;
     public static final Integer COMPLETE = 200;
     public static final Integer START = 200;
+    public static final Integer REPORT = 200;
 
     private OperationsStatus() {
     }

@@ -36,7 +36,8 @@ public class Operations {
     public static final String SUSPEND = "suspend";
     public static final String COMPLETE = "complete";
     public static final String START = "start";
-    public static final List<String> READS = List.of(COUNT, COUNT_ALL, GET_BY_ID, GET_ONE, GET_MANY, GET_STREAM, GET_PAGE);
+    public static final String REPORT = "report";
+    public static final List<String> READS = List.of(COUNT, COUNT_ALL, GET_BY_ID, GET_ONE, GET_MANY, GET_STREAM, GET_PAGE, REPORT);
     public static final List<String> WRITES = List.of(SAVE, SAVE_MANY, UPDATE_BY_ID, UPDATE, UPDATE_MANY, EDIT_BY_ID, EDIT, EDIT_MANY, DELETE_BY_ID, DELETE, DELETE_MANY, DELETE_ALL, RESUME, SUSPEND, COMPLETE, START);
     public static final List<String> DELETES = List.of(DELETE_BY_ID, DELETE, DELETE_MANY, DELETE_ALL);
     public static final List<String> SAVES = List.of(SAVE, SAVE_MANY);
