@@ -1,9 +1,6 @@
 package ir.msob.jima.core.beans.properties;
 
-import ir.msob.jima.core.commons.properties.ClientProperties;
-import ir.msob.jima.core.commons.properties.MethodStatsProperties;
-import ir.msob.jima.core.commons.properties.SecurityProperties;
-import ir.msob.jima.core.commons.properties.TestContainerProperties;
+import ir.msob.jima.core.commons.properties.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,4 +43,10 @@ public class JimaProperties {
      * It holds test container-related properties.
      */
     private TestContainerProperties testContainer = new TestContainerProperties();
+
+    /**
+     * An instance of LockProperties class.
+     * It holds properties related to locking.
+     */
+    private LockProperties lock = new LockProperties();
 }

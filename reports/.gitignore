@@ -1,19 +1,6 @@
 # Log
 log/
 
-# Asciidoctor
-.asciidoctor
-*.png
-*.pdf
-*.html
-*.docx
-*.svg
-document/.asciidoctor
-document/**/*.png
-document/**/*.pdf
-document/**/*.html
-document/**/*.docx
-document/**/*.svg
 
 HELP.md
 target/

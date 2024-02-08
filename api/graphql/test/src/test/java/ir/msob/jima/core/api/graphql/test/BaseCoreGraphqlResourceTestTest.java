@@ -9,19 +9,18 @@ import ir.msob.jima.core.commons.security.BaseUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
 import java.util.Optional;
 
-import org.mockito.Mockito;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * This class is an integration test for the BaseCoreGraphqlResourceTest class.
- * It tests the behavior of the methods in the BaseCoreGraphqlResourceTest class.
+ * This class is an integration test for the BaseCoreGraphqlResourceTestTest class.
+ * It tests the behavior of the methods in the BaseCoreGraphqlResourceTestTest class.
  */
-class BaseCoreGraphqlResourceTestIntegrationTest {
+class BaseCoreGraphqlResourceTestTest {
 
     // Instance of the class under test
     private BaseCoreGraphqlResourceTest<String, BaseUser<String>, SampleDomain<String>, SampleDto<String>, SampleCriteria<String>> graphqlResourceTest;

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ContextConfiguration
 @Testcontainers
 @CommonsLog
-public class RedisContainerConfigurationTest {
+public class RedisContainerConfigurationIT {
 
     @Autowired
     RedisContainer container;

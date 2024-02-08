@@ -1,6 +1,5 @@
-package ir.msob.jima.core.ral.mongo.test;
+package ir.msob.jima.core.ral.kafka.test;
 
-import ir.msob.jima.core.ral.mongo.test.configuration.MongoContainerConfiguration;
 import lombok.extern.apachecommons.CommonsLog;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,24 +7,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-import org.testcontainers.containers.MongoDBContainer;
+import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(classes = {TestMicroserviceApplication.class, MongoContainerConfiguration.class})
+@SpringBootTest(classes = {TestMicroserviceApplication.class, KafkaContainerConfiguration.class})
 @ContextConfiguration
 @Testcontainers
 @CommonsLog
-public class MongoContainerConfigurationTest {
-
-    @Value("${spring.data.mongodb.uri}")
-    private String configUrl;
+public class KafkaContainerConfigurationIT {
 
     @Autowired
-    MongoDBContainer container;
-
+    KafkaContainer container;
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String bootstrapServers;
+    @Value("${spring.kafka.consumer.bootstrap-servers}")
+    private String consumerServers;
+    @Value("${spring.kafka.producer.bootstrap-servers}")
+    private String producerServers;
 
     @Test
     @DisplayName("Container is running after initialization")
@@ -37,8 +38,10 @@ public class MongoContainerConfigurationTest {
     @Test
     @DisplayName("Properties are set correctly")
     public void testContainerProperties() {
-        String containerUrl = container.getReplicaSetUrl();
-        assertEquals(containerUrl, configUrl);
+        String containerBootstrapServers = container.getBootstrapServers();
+        assertEquals(containerBootstrapServers, bootstrapServers);
+        assertEquals(containerBootstrapServers, consumerServers);
+        assertEquals(containerBootstrapServers, producerServers);
     }
 
 }
