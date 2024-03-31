@@ -49,4 +49,9 @@ public class JimaProperties {
      * It holds properties related to locking.
      */
     private LockProperties lock = new LockProperties();
+
+
+    private SearchProperties search = new SearchProperties();
+
+    private HrefProperties href = new HrefProperties();
 }

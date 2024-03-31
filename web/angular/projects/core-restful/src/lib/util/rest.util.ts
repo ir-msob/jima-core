@@ -1,6 +1,6 @@
 import {HttpParams} from "@angular/common/http";
 import {Pagination} from "../model/pagination";
-import {isEmpty, isNotEmpty} from "@ir-msob-jima/core-commons";
+import {isEmpty, isNotEmpty} from "@ir-msob/jima-core-commons";
 
 /**
  * A utility class for generating HTTP parameters based on search criteria and pagination options.

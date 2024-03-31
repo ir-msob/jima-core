@@ -1,6 +1,6 @@
 package ir.msob.jima.core.beans.scope;
 
-import ir.msob.jima.core.commons.model.operation.ConditionalOnOperationUtil;
+import ir.msob.jima.core.commons.operation.ConditionalOnOperationUtil;
 import ir.msob.jima.core.commons.model.scope.ScopeInitializer;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;

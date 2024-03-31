@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.model.operation;
+package ir.msob.jima.core.commons.operation;
 
 import org.apache.commons.lang3.ArrayUtils;
 

@@ -7,7 +7,7 @@ import {
   DEFAULT_STRINGS,
   Filter,
   SampleCriteria
-} from "@ir-msob-jima/core-commons";
+} from "@ir-msob/jima-core-commons";
 import {Pagination} from "../model/pagination";
 import {HttpParams} from "@angular/common/http";
 

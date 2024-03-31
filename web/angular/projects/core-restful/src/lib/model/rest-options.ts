@@ -1,5 +1,5 @@
 import {HttpHeaders, HttpParams} from "@angular/common/http";
-import {NullableString} from "@ir-msob-jima/core-commons/lib/constants";
+import {NullableString} from "@ir-msob/jima-core-commons/lib/constants";
 
 /**
  * RestOptions class.

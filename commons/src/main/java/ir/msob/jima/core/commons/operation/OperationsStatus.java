@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.model.operation;
+package ir.msob.jima.core.commons.operation;
 
 /**
  * The 'Operations' class defines constants for various operations that can be performed on a resource.

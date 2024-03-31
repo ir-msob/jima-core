@@ -1,7 +1,7 @@
 import {BaseRestfulService} from "./base-restful.service";
 import {RestOptions} from "../model/rest-options";
 import {BehaviorSubject, Observable} from "rxjs";
-import {NullableString} from "@ir-msob-jima/core-commons/lib/constants";
+import {NullableString} from "@ir-msob/jima-core-commons/lib/constants";
 
 /**
  * A base error handler service that extends the BaseRestfulService class. This class provides methods for making various RESTful requests with built-in error handling.

@@ -2,8 +2,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {HeaderOperation, RestOptions} from "../model/rest-options";
 import {Observable} from "rxjs";
 import {DEFAULT_HTTP_HEADERS, TOKEN_CACHE_KEY, TOKEN_HEADER_NAME, TOKEN_PREFIX} from "../constants";
-import {NullableString} from "@ir-msob-jima/core-commons/lib/constants";
-import {isNotEmpty} from "@ir-msob-jima/core-commons";
+import {NullableString} from "@ir-msob/jima-core-commons/lib/constants";
+import {isNotEmpty} from "@ir-msob/jima-core-commons";
 
 export abstract class BaseRestfulService {
 

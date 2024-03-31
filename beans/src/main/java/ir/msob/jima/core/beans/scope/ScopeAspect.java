@@ -1,7 +1,7 @@
 package ir.msob.jima.core.beans.scope;
 
 import ir.msob.jima.core.commons.exception.resourcenotfound.ResourceNotFoundException;
-import ir.msob.jima.core.commons.model.operation.ConditionalOnOperationUtil;
+import ir.msob.jima.core.commons.operation.ConditionalOnOperationUtil;
 import ir.msob.jima.core.commons.model.scope.Scope;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;

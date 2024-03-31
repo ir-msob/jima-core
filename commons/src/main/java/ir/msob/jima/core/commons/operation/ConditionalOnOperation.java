@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.model.operation;
+package ir.msob.jima.core.commons.operation;
 
 import ir.msob.jima.core.commons.annotation.ClassAnnotationInfo;
 import org.springframework.core.annotation.AliasFor;

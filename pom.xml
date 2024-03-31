@@ -5,11 +5,11 @@
     <parent>
         <groupId>ir.msob.jima.parent</groupId>
         <artifactId>jima-parent</artifactId>
-        <version>1.1.4</version>
+        <version>1.1.6</version>
     </parent>
     <groupId>ir.msob.jima.core</groupId>
     <artifactId>jima-core</artifactId>
-    <version>1.1.8</version>
+    <version>1.1.9</version>
     <name>jima-core</name>
     <description>jima-core</description>
     <packaging>pom</packaging>
