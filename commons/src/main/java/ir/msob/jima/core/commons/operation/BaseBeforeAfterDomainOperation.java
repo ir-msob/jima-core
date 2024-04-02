@@ -14,10 +14,10 @@ import java.util.Optional;
  * This interface provides a set of methods that are called before and after each CRUD operation.
  * It is designed to be implemented by domain services that need to perform additional processing or validation.
  *
- * @param <ID>   the type of the ID of the DTO, which extends Comparable and Serializable
- * @param <USER> the type of the user, which extends BaseUser<ID>
- * @param <DTO>  the type of the DTO, which extends BaseDto<ID>
- * @param <C>    the type of the criteria, which extends BaseCriteria<ID>
+ * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
+ * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+ * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
+ * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
  */
 public interface BaseBeforeAfterDomainOperation<
         ID extends Comparable<ID> & Serializable,

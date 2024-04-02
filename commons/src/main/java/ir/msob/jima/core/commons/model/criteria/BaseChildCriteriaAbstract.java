@@ -12,14 +12,17 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * The 'BaseChildCriteriaAbstract' class is an abstract implementation of the 'BaseChildCriteria' interface.
- * It extends the 'BaseCriteriaAbstract' class with a generic type 'BaseChildCriteriaAbstract<ID>'.
- * This means that the child criteria models can be compared based on their IDs.
- * The class is a generic class, with the generic type 'ID' extending 'Comparable' and 'Serializable'.
- * This means that the ID of the child criteria model can be of any type that is comparable and serializable.
+ * The {@code BaseChildCriteriaAbstract} class is an abstract implementation of the {@code BaseChildCriteria} interface.
+ * It extends the {@code BaseCriteriaAbstract} class with a generic type {@code BaseChildCriteriaAbstract<ID>},
+ * enabling child criteria models to be compared based on their IDs.
+ * <p>
+ * This class is generic, with the generic type {@code ID} extending {@code Comparable} and {@code Serializable}.
+ * It means that the ID of the child criteria model can be of any type that is comparable and serializable.
+ * <p>
  * The class includes getter and setter methods for the parent criteria ID.
- * It also includes a static final long 'serialVersionUID' which represents the version control for the class.
- * The class is annotated with 'JsonInclude' to control the serialization of null values.
+ * Additionally, it includes a static final long {@code serialVersionUID} which represents the version control for the class.
+ * <p>
+ * The class is annotated with {@code JsonInclude} to control the serialization of null values.
  *
  * @param <ID> the type of the identifier for the criteria model. It must be comparable and serializable.
  */

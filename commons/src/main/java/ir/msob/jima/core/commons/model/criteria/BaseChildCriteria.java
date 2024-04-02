@@ -5,15 +5,18 @@ import ir.msob.jima.core.commons.model.criteria.filter.Filter;
 import java.io.Serializable;
 
 /**
- * The 'BaseChildCriteria' interface represents the basic class for child criteria models.
- * It extends the 'BaseCriteria' interface with a generic type 'BaseChildCriteria<ID>'.
- * This means that the child criteria models can be compared based on their IDs.
- * The interface is a generic interface, with the generic type 'ID' extending 'Comparable' and 'Serializable'.
- * This means that the ID of the child criteria model can be of any type that is comparable and serializable.
+ * The {@code BaseChildCriteria} interface represents the basic class for child criteria models.
+ * It extends the {@code BaseCriteria} interface with a generic type {@code BaseChildCriteria<ID>},
+ * allowing child criteria models to be compared based on their IDs.
+ * <p>
+ * This interface is generic, with the generic type {@code ID} extending {@code Comparable} and {@code Serializable}.
+ * It means that the ID of the child criteria model can be of any type that is comparable and serializable.
+ * <p>
  * The interface includes getter and setter methods for the parent criteria ID.
  *
  * @param <ID> the type of the identifier for the criteria model. It must be comparable and serializable.
  */
+
 public interface BaseChildCriteria<ID extends Comparable<ID> & Serializable> extends BaseCriteria<ID> {
 
     /**

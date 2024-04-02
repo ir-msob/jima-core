@@ -10,11 +10,11 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * The 'BaseAuditDomainAbstract' class is an abstract class that implements the 'BaseAuditDomain' interface.
+ * The {@code BaseAuditDomainAbstract} class is an abstract class that implements the {@code BaseAuditDomain} interface.
  * It includes a field for a sorted set of audit domains and getter and setter methods for this field.
- * The class uses the 'TreeSet' class to provide a sorted set implementation.
- * It also includes a no-argument constructor and a 'toString' method that calls the superclass's 'toString' method.
- * The class is parameterized with a type 'ID' that extends 'Comparable' and 'Serializable'.
+ * The class uses the {@code TreeSet} class to provide a sorted set implementation.
+ * Additionally, it provides a no-argument constructor and a {@code toString} method that calls the superclass's {@code toString} method.
+ * The class is parameterized with a type {@code ID} that extends {@code Comparable} and {@code Serializable}.
  *
  * @param <ID> The type of ID.
  */

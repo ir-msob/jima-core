@@ -12,11 +12,11 @@ import java.io.Serializable;
 import java.time.Instant;
 
 /**
- * The 'AuditDomainFilters' class represents a set of filters for querying audit domains.
+ * The {@code AuditDomainFilters} class represents a set of filters for querying audit domains.
  * It includes filters for the related party ID, action date, and action type.
- * The class implements the 'BaseFilters' interface and includes getter and setter methods for each filter.
- * It also includes a no-argument constructor and a 'toString' method that calls the superclass's 'toString' method.
- * The class uses the 'JsonInclude' annotation to specify that null fields should not be included in the JSON representation of an instance.
+ * This class implements the {@code BaseFilters} interface and includes getter and setter methods for each filter.
+ * Additionally, it provides a no-argument constructor and a {@code toString} method that calls the superclass's {@code toString} method.
+ * The class utilizes the {@code JsonInclude} annotation to specify that null fields should not be included in the JSON representation of an instance.
  *
  * @param <ID> The type of ID.
  */

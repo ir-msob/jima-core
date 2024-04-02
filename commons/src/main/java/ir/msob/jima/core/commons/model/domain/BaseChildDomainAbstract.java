@@ -8,16 +8,19 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- * The 'BaseChildDomainAbstract' class is an abstract implementation of the 'BaseChildDomain' interface.
- * It extends the 'BaseDomainAbstract' class with a generic type 'BaseChildDomainAbstract<ID>'.
- * This means that the child domain models can be compared based on their IDs.
- * The class is a generic class, with the generic type 'ID' extending 'Comparable' and 'Serializable'.
- * This means that the ID of the child domain model can be of any type that is comparable and serializable.
+ * The {@code BaseChildDomainAbstract} class is an abstract implementation of the {@code BaseChildDomain} interface.
+ * It extends the {@code BaseDomainAbstract} class with a generic type {@code BaseChildDomainAbstract<ID>},
+ * enabling child domain models to be compared based on their IDs.
+ * <p>
+ * This class is generic, with the generic type {@code ID} extending {@code Comparable} and {@code Serializable}.
+ * It means that the ID of the child domain model can be of any type that is comparable and serializable.
+ * <p>
  * The class includes getter and setter methods for the parent domain ID.
- * It also includes a nested enum 'FN' which represents the field names of the class.
+ * Additionally, it contains a nested enum {@code FN} which represents the field names of the class.
  *
  * @param <ID> the type of the identifier for the domain model. It must be comparable and serializable.
  */
+
 @Getter
 @Setter
 @ToString(callSuper = true)

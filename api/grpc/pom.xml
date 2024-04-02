@@ -14,7 +14,5 @@
     <packaging>pom</packaging>
     <modules>
         <module>interfaceservice</module>
-        <module>commons</module>
-        <module>test</module>
     </modules>
 </project>

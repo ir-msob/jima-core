@@ -28,7 +28,6 @@ public class ScopeAspect {
      * If the operation is not present, it throws a ResourceNotFoundException.
      *
      * @param joinPoint The JoinPoint in AOP, it represents a point in the application where the action took place.
-     * @Before This advice runs before the method execution.
      */
     @Before("@annotation(ir.msob.jima.core.commons.model.scope.Scope)")
     public void beforeScope(JoinPoint joinPoint) {

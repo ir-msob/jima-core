@@ -9,15 +9,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * The 'ConditionalOnOperation' annotation is used to conditionally include or exclude a component based on the presence of certain operations.
- * The annotation is retained at runtime.
- * The annotation can be applied to types.
- * The annotation includes an 'operations' attribute and a 'value' attribute, both of which are arrays of strings.
- * The 'operations' attribute and the 'value' attribute are aliases for each other, which means that they can be used interchangeably.
- * The 'operations' attribute and the 'value' attribute default to an empty array of strings.
- * The annotation also includes an 'info' attribute of type 'ClassAnnotationInfo<ConditionalOnOperation>'.
- * The 'info' attribute is used to retrieve information about the 'ConditionalOnOperation' annotation.
+ * The {@code ConditionalOnOperation} annotation is used to conditionally include or exclude a component based on the presence of certain operations.
+ * The annotation is retained at runtime and can be applied to types.
+ * <p>
+ * It includes two attributes: {@code operations} and {@code value}, both of which are arrays of strings.
+ * These attributes are aliases for each other, meaning they can be used interchangeably.
+ * They default to an empty array of strings.
+ * <p>
+ * Additionally, the annotation includes an {@code info} attribute of type {@code ClassAnnotationInfo<ConditionalOnOperation>},
+ * which is used to retrieve information about the {@code ConditionalOnOperation} annotation.
  */
+
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface ConditionalOnOperation {

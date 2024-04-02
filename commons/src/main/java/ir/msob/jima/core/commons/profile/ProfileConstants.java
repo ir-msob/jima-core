@@ -1,8 +1,5 @@
 package ir.msob.jima.core.commons.profile;
 
-/**
- *
- */
 public class ProfileConstants {
     public static final String TEST = "test";
     public static final String DEV = "dev";
