@@ -23,6 +23,9 @@ public interface BaseBeforeAfterOperation {
      * @param user     the current user
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
+     * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
+     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser<ID>,
@@ -36,6 +39,9 @@ public interface BaseBeforeAfterOperation {
      * @param user     the current user
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
+     * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
+     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser<ID>,
@@ -49,6 +55,9 @@ public interface BaseBeforeAfterOperation {
      * @param user     the current user
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
+     * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
+     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser<ID>,
@@ -64,6 +73,10 @@ public interface BaseBeforeAfterOperation {
      * @param user     the current user
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
+     * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
+     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
+     * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser<ID>,
@@ -79,6 +92,9 @@ public interface BaseBeforeAfterOperation {
      * @param user the current user
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
+     * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
+     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser<ID>,
@@ -93,6 +109,9 @@ public interface BaseBeforeAfterOperation {
      * @param user     the current user
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
+     * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
+     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser<ID>,
@@ -108,6 +127,9 @@ public interface BaseBeforeAfterOperation {
      * @param user        the current user
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
+     * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
+     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser<ID>,
@@ -122,6 +144,9 @@ public interface BaseBeforeAfterOperation {
      * @param user        the current user
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
+     * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
+     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser<ID>,
@@ -136,6 +161,9 @@ public interface BaseBeforeAfterOperation {
      * @param user     the current user
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
+     * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
+     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser<ID>,
@@ -151,6 +179,10 @@ public interface BaseBeforeAfterOperation {
      * @param user     the current user
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
+     * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
+     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
+     * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser<ID>,

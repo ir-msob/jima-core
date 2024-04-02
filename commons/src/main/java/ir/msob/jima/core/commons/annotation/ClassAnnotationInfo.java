@@ -5,10 +5,12 @@ import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
 import java.lang.annotation.Annotation;
 
 /**
- * The 'ClassAnnotationInfo' class is a utility class for checking the presence or absence of a specific type of annotation on a class.
- * It allows you to find annotations that exist on a class (including its parent classes and ancestors).
- * The class is parameterized with the type of annotation to check for.
+ * The {@code ClassAnnotationInfo} class is a utility class for checking the presence or absence of a specific type of annotation on a class.
+ * It provides functionality to search for annotations existing on a class, including its parent classes and ancestors.
+ * <p>
+ * This class is parameterized with the type of annotation to be checked.
  */
+
 public class ClassAnnotationInfo<A extends Annotation> {
     // The type of annotation to check for
     private final Class<A> annotationClass;

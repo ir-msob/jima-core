@@ -3,11 +3,13 @@ package ir.msob.jima.core.commons.model.domain;
 import java.io.Serializable;
 
 /**
- * The 'BaseChildDomain' interface represents the basic class for child domain models.
- * It extends the 'BaseDomain' interface with a generic type 'BaseChildDomain<ID>'.
- * This means that the child domain models can be compared based on their IDs.
- * The interface is a generic interface, with the generic type 'ID' extending 'Comparable' and 'Serializable'.
- * This means that the ID of the child domain model can be of any type that is comparable and serializable.
+ * The {@code BaseChildDomain} interface represents the basic class for child domain models.
+ * It extends the {@code BaseDomain} interface with a generic type {@code BaseChildDomain<ID>},
+ * indicating that child domain models can be compared based on their IDs.
+ * <p>
+ * This interface is generic, with the generic type {@code ID} extending {@code Comparable<ID>} and {@code Serializable}.
+ * This allows the ID of the child domain model to be of any type that is comparable and serializable.
+ * <p>
  * The interface includes getter and setter methods for the parent domain ID.
  *
  * @param <ID> the type of the identifier for the domain model. It must be comparable and serializable.
