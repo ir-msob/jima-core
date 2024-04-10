@@ -1,15 +1,28 @@
+## Root
 npm install
-for project in $(ls projects/); do
-  cd projects/$project
-  npm install
-  ng build
-  cd ../..
-  cd dist/$project
-  npm link
-  cd ../..
-  ng test --project=$project --watch=false --browsers=ChromeHeadless
-  cd projects/$project
-  npm publish --access public
-  cd ../..
-done
+
+## Core Commons
+cd projects/core-commons
+npm install
+cd ../..
+
+ng build core-commons
+
+cd dist/core-commons
+npm link
+npm publish --access public
+cd ../..
+
+## Core Restful
+cd projects/core-restful
+npm link @ir-msob/jima-core-commons@1.1.17
+npm install
+cd ../..
+
+ng build core-restful
+
+cd dist/core-restful
+npm link
+npm publish --access public
+cd../..
 
