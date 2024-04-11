@@ -1,28 +1,41 @@
-## Root
+#!/bin/bash
+
+# Install root dependencies
+echo "Installing root dependencies..."
 npm install
 
-## Core Commons
-cd projects/core-commons
-npm install
-cd ../..
+# Function to install dependencies, build, and publish a project
+build_and_publish_project() {
+  local project_name=$1
+  local dependencies=${2:-""}
 
-ng build core-commons
+  echo "Building and publishing $project_name..."
 
-cd dist/core-commons
-npm link
-npm publish --access public
-cd ../..
+  cd "projects/$project_name" || exit
+  if [ -n "$dependencies" ]; then
+    npm link $dependencies
+  fi
+  npm install
 
-## Core Restful
-cd projects/core-restful
-npm link @ir-msob/jima-core-commons@1.1.17
-npm install
-cd ../..
+  # Build the project
+  echo "Building $project_name..."
+  ng build $project_name
 
-ng build core-restful
+  # Navigate to dist directory and create npm link
+  cd "../../dist/$project_name" || exit
+  npm link
 
-cd dist/core-restful
-npm link
-npm publish --access public
-cd ../..
+  # Publish the package
+  echo "Publishing $project_name..."
+  npm publish --access public
 
+  cd ../..
+}
+
+# Build and publish Core Commons
+build_and_publish_project "core-commons"
+
+# Build and publish Core Restful
+build_and_publish_project "core-restful" "@ir-msob/jima-core-commons@1.1.17"
+
+echo "All projects built and published successfully."
