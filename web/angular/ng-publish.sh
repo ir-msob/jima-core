@@ -17,6 +17,10 @@ build_and_publish_project() {
   fi
   npm install
 
+  # Run tests
+  echo "Running tests for $project_name..."
+  ng test --project="$project_name" --watch=false --browsers=ChromeHeadless
+
   # Build the project
   echo "Building $project_name..."
   ng build $project_name
