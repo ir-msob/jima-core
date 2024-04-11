@@ -24,5 +24,5 @@ ng build core-restful
 cd dist/core-restful
 npm link
 npm publish --access public
-cd../..
+cd ../..
 
