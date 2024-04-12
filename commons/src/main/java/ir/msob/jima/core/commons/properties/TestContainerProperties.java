@@ -4,10 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
-import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 
 /**
  * This class represents the properties of a test container.
@@ -28,6 +24,7 @@ public class TestContainerProperties {
     private Kafka kafka = new Kafka();
     private Oracle oracle = new Oracle();
     private Redis redis = new Redis();
+    private Keycloak keycloak = new Keycloak();
 
     /**
      * This nested static class represents the properties of a Kafka test container.
@@ -37,9 +34,10 @@ public class TestContainerProperties {
     @Getter
     @NoArgsConstructor
     @ToString
-    public static class Kafka  {
+    public static class Kafka {
         private String image;
         private String clusterId;
+        private boolean reuse = false;
     }
 
     /**
@@ -50,10 +48,11 @@ public class TestContainerProperties {
     @Getter
     @NoArgsConstructor
     @ToString
-    public static class Minio  {
+    public static class Minio {
         private String image;
         private String accessKey;
         private String secretKey;
+        private boolean reuse = false;
     }
 
     /**
@@ -64,8 +63,9 @@ public class TestContainerProperties {
     @Getter
     @NoArgsConstructor
     @ToString
-    public static class Mongo  {
+    public static class Mongo {
         private String image;
+        private boolean reuse = false;
     }
 
     /**
@@ -76,10 +76,11 @@ public class TestContainerProperties {
     @Getter
     @NoArgsConstructor
     @ToString
-    public static class Oracle  {
+    public static class Oracle {
         private String image;
         private String username;
         private String password;
+        private boolean reuse = false;
     }
 
     /**
@@ -90,7 +91,23 @@ public class TestContainerProperties {
     @Getter
     @NoArgsConstructor
     @ToString
-    public static class Redis  {
+    public static class Redis {
         private String image;
+        private boolean reuse = false;
+    }
+
+    /**
+     * This nested static class represents the properties of a Keycloak test container.
+     * It includes the Docker image name.
+     */
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    @ToString
+    public static class Keycloak {
+        private String image;
+        private String realm = "master";
+        private String realmJsonFile = "keycloak/realm.json";
+        private boolean reuse = false;
     }
 }

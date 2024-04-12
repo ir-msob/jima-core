@@ -38,6 +38,8 @@ public class OracleContainerConfiguration {
         if (Strings.isNotBlank(jimaProperties.getTestContainer().getOracle().getPassword()))
             container.withPassword(jimaProperties.getTestContainer().getOracle().getPassword());
 
+        container.withReuse(jimaProperties.getTestContainer().getOracle().isReuse());
+
         registry.add("spring.datasource.driverClassName", container::getDriverClassName);
         registry.add("spring.datasource.url", container::getJdbcUrl);
         registry.add("spring.datasource.username", container::getUsername);

@@ -30,6 +30,7 @@ public class MinIOContainerConfiguration {
         MinIOContainer container = new MinIOContainer(DockerImageName.parse(jimaProperties.getTestContainer().getMinio().getImage()))
                 .withUserName(jimaProperties.getTestContainer().getMinio().getAccessKey())
                 .withPassword(jimaProperties.getTestContainer().getMinio().getSecretKey());
+        container.withReuse(jimaProperties.getTestContainer().getMinio().isReuse());
         registry.add("spring.minio.url", container::getS3URL);
         registry.add("spring.minio.access-key", container::getUserName);
         registry.add("spring.minio.secret-key", container::getPassword);

@@ -25,7 +25,7 @@ And also you can use the following dependency in your pom.xml of your project:
     <dependency>
         <groupId>ir.msob.jima.core</groupId>
         <artifactId>core-*</artifactId>
-        <version>1.1.17</version>
+        <version>1.1.18</version>
     </dependency>
 </dependencies>
 ----

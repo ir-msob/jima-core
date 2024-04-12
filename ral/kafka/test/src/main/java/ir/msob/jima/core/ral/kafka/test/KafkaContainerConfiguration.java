@@ -36,6 +36,7 @@ public class KafkaContainerConfiguration {
         if (Strings.isNotBlank(jimaProperties.getTestContainer().getKafka().getClusterId())) {
             container.withClusterId(jimaProperties.getTestContainer().getKafka().getClusterId());
         }
+        container.withReuse(jimaProperties.getTestContainer().getKafka().isReuse());
         registry.add("spring.kafka.bootstrap-servers", container::getBootstrapServers);
         registry.add("spring.kafka.consumer.bootstrap-servers", container::getBootstrapServers);
         registry.add("spring.kafka.producer.bootstrap-servers", container::getBootstrapServers);

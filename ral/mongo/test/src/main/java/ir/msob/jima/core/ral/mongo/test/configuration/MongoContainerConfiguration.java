@@ -30,6 +30,7 @@ public class MongoContainerConfiguration {
     @ServiceConnection
     public MongoDBContainer mongoDBContainer(DynamicPropertyRegistry registry, JimaProperties jimaProperties) {
         MongoDBContainer container = new MongoDBContainer(DockerImageName.parse(jimaProperties.getTestContainer().getMongo().getImage()));
+        container.withReuse(jimaProperties.getTestContainer().getMongo().isReuse());
         registry.add("spring.data.mongodb.uri", container::getReplicaSetUrl);
         return container;
     }

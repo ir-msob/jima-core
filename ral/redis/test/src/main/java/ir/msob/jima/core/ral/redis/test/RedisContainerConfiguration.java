@@ -29,6 +29,7 @@ public class RedisContainerConfiguration {
     @Bean
     public RedisContainer redisContainer(DynamicPropertyRegistry registry, JimaProperties jimaProperties) {
         RedisContainer container = new RedisContainer(DockerImageName.parse(jimaProperties.getTestContainer().getRedis().getImage()));
+        container.withReuse(jimaProperties.getTestContainer().getRedis().isReuse());
         registry.add("spring.data.redis.host", container::getHost);
         registry.add("spring.data.redis.port", container.getExposedPorts().stream().findFirst()::get);
         registry.add("spring.data.redis.url", container::getRedisURI);
