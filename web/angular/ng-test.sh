@@ -35,6 +35,6 @@ build_project() {
 build_project "core-commons"
 
 # Build Core Restful
-build_project "core-restful" "@ir-msob/jima-core-commons@1.1.18"
+build_project "core-restful" "@ir-msob/jima-core-commons@1.1.19"
 
 echo "All projects tested successfully."

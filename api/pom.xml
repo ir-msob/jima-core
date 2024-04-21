@@ -5,7 +5,7 @@
     <parent>
         <groupId>ir.msob.jima.core</groupId>
         <artifactId>jima-core</artifactId>
-        <version>1.1.18</version>
+        <version>1.1.19</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>core-api</artifactId>

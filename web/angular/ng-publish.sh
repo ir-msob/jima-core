@@ -40,6 +40,6 @@ build_and_publish_project() {
 build_and_publish_project "core-commons"
 
 # Build and publish Core Restful
-build_and_publish_project "core-restful" "@ir-msob/jima-core-commons@1.1.18"
+build_and_publish_project "core-restful" "@ir-msob/jima-core-commons@1.1.19"
 
 echo "All projects built and published successfully."
