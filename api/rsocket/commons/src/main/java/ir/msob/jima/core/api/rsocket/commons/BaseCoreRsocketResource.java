@@ -18,7 +18,7 @@ import java.util.Optional;
  * @see BaseUserService
  * @see java.security.Principal
  */
-public interface BaseCoreRsocketResource<ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> extends BaseResource<ID, USER> {
+public interface BaseCoreRsocketResource<ID extends Comparable<ID> & Serializable, USER extends BaseUser> extends BaseResource<ID, USER> {
 
     /**
      * Get the user service associated with this RSocket resource. The user service can be used to

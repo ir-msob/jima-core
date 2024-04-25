@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.io.Serializable;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -15,18 +14,17 @@ import java.util.TreeSet;
  * It provides methods to get and set the related parties.
  * It implements the BaseRelatedParty interface.
  *
- * @param <ID> the type of the related party ID, which must be comparable and serializable
  */
 @Getter
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseRelatedPartyAbstract<ID extends Comparable<ID> & Serializable> implements BaseRelatedParty<ID> {
+public abstract class BaseRelatedPartyAbstract implements BaseRelatedParty {
 
     /**
      * A sorted set of related parties.
      */
     @Valid
-    private SortedSet<RelatedParty<ID>> relatedParties = new TreeSet<>();
+    private SortedSet<RelatedParty> relatedParties = new TreeSet<>();
 
 }

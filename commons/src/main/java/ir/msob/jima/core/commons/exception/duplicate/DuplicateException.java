@@ -1,5 +1,6 @@
 package ir.msob.jima.core.commons.exception.duplicate;
 
+import ir.msob.jima.core.commons.exception.BaseRuntimeException;
 import ir.msob.jima.core.commons.util.MessageUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * The 'DuplicateException' class extends the 'RuntimeException' class and represents a specific type of exception that is thrown when a duplicate value is encountered.
+ * The 'DuplicateException' class extends the 'BaseRuntimeException' class and represents a specific type of exception that is thrown when a duplicate value is encountered.
  * It includes additional fields for the key associated with the duplicate value and the duplicate value itself.
  * The class also provides several constructors for creating an instance of the exception with different sets of parameters.
  * Additionally, it provides static methods for initializing and creating instances of the exception.
@@ -17,7 +18,7 @@ import java.io.Serializable;
  */
 @Setter
 @Getter
-public class DuplicateException extends RuntimeException {
+public class DuplicateException extends BaseRuntimeException {
     /**
      * The serial version UID for the serializable class.
      */

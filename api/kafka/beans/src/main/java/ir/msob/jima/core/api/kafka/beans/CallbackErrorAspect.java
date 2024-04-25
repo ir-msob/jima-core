@@ -6,7 +6,9 @@ import ir.msob.jima.core.commons.annotation.async.CallbackError;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
 import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
 import ir.msob.jima.core.commons.exception.BaseExceptionMapper;
+import ir.msob.jima.core.commons.exception.BaseRuntimeException;
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
+import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeResponse;
 import ir.msob.jima.core.commons.logger.Logger;
 import ir.msob.jima.core.commons.logger.LoggerFactory;
 import ir.msob.jima.core.commons.model.channel.ChannelMessage;
@@ -20,7 +22,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
 import java.lang.reflect.Parameter;
 import java.util.Optional;
 
@@ -47,7 +48,7 @@ public class CallbackErrorAspect {
      * @throws Throwable If an error occurs during handling
      */
     @AfterThrowing(value = "@annotation(ir.msob.jima.core.commons.annotation.async.CallbackError)", throwing = "throwing")
-    public void afterThrowing(JoinPoint point, Throwable throwing) throws Throwable {
+    public void afterThrowing(JoinPoint point, Throwable throwing) throws JsonProcessingException {
         callback(point, throwing);
         log.error(throwing);
     }
@@ -58,13 +59,13 @@ public class CallbackErrorAspect {
      * @param point The join point of the method
      * @param e     The thrown exception
      */
-    private <ID extends Comparable<ID> & Serializable
-            , USER extends BaseUser<ID>
+    private <
+            USER extends BaseUser
             , DATA extends ModelType> void callback(JoinPoint point, Throwable e) throws JsonProcessingException {
-        ChannelMessage<ID, USER, DATA> message = prepareChannelMessage(point);
+        ChannelMessage<USER, DATA> message = prepareChannelMessage(point);
         Optional<USER> user = Optional.ofNullable(message.getUser());
 
-        ChannelMessage<ID, USER, DATA> errorChannelMessage = prepareErrorChannelMessage(message, e);
+        ChannelMessage<USER, DATA> errorChannelMessage = prepareErrorChannelMessage(message, e);
         if (Strings.isNotBlank(message.getErrorCallback()))
             asyncClient.send(errorChannelMessage, message.getErrorCallback(), user);
     }
@@ -76,7 +77,7 @@ public class CallbackErrorAspect {
      * @return A ChannelMessage object
      * @throws JsonProcessingException If there's an issue with JSON processing
      */
-    private <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>, DATA extends ModelType> ChannelMessage<ID, USER, DATA> prepareChannelMessage(JoinPoint point) throws JsonProcessingException {
+    private <USER extends BaseUser, DATA extends ModelType> ChannelMessage<USER, DATA> prepareChannelMessage(JoinPoint point) throws JsonProcessingException {
         MethodSignature methodSignature = (MethodSignature) point.getSignature();
         Parameter[] parameters = methodSignature.getMethod().getParameters();
         CallbackError callbackError = methodSignature.getMethod().getAnnotation(CallbackError.class);
@@ -104,16 +105,18 @@ public class CallbackErrorAspect {
      * @param throwable         The thrown exception
      * @return An error ChannelMessage
      */
-    private <ID extends Comparable<ID> & Serializable
-            , USER extends BaseUser<ID>
+    private <
+            USER extends BaseUser
             , DATA_REQ extends ModelType
             , DATA extends ModelType
-            , ER extends AbstractExceptionResponse> ChannelMessage<ID, USER, DATA> prepareErrorChannelMessage(ChannelMessage<ID, USER, DATA_REQ> channelMessageReq, Throwable throwable) {
-        ER er = exceptionMapper.getExceptionResponse(throwable);
-        if (er == null)
-            throw new CommonRuntimeException("Can not cast exception to AbstractExceptionResponse, exception message is {}", throwable.getMessage());
+            , ER extends AbstractExceptionResponse> ChannelMessage<USER, DATA> prepareErrorChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, Throwable throwable) {
+        ER er;
+        if (throwable instanceof BaseRuntimeException e)
+            er = exceptionMapper.getExceptionResponse(e);
+        else
+            er = (ER) new CommonRuntimeResponse(throwable.getMessage());
 
-        ChannelMessage<ID, USER, DATA> channelMessage = new ChannelMessage<>();
+        ChannelMessage<USER, DATA> channelMessage = new ChannelMessage<>();
         channelMessage.setData((DATA) er);
         channelMessage.setCallback(null);
         channelMessage.setMetadata(channelMessageReq.getMetadata());

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.util.Strings;
 
-import java.io.Serializable;
 import java.util.Base64;
 import java.util.Optional;
 
@@ -23,12 +22,11 @@ public class UserInfoUtil {
      *
      * @param objectMapper An instance of ObjectMapper for JSON serialization.
      * @param user         An Optional containing the user object to encode.
-     * @param <ID>         The type of user ID.
      * @param <USER>       The type of user object.
      * @return The Base64-encoded user information as a string, or an empty string if the user is not present.
      * @throws JsonProcessingException if there is an issue with JSON serialization.
      */
-    public static <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> String encodeUser(ObjectMapper objectMapper, Optional<USER> user) throws JsonProcessingException {
+    public static <USER extends BaseUser> String encodeUser(ObjectMapper objectMapper, Optional<USER> user) throws JsonProcessingException {
         if (user.isPresent()) {
             String userInfo = objectMapper.writeValueAsString(user.get());
             return Base64.getEncoder().encodeToString(userInfo.getBytes());
@@ -42,12 +40,11 @@ public class UserInfoUtil {
      * @param objectMapper An instance of ObjectMapper for JSON deserialization.
      * @param userInfo     The Base64-encoded user information as a string.
      * @param userClass    The class of the user object to deserialize.
-     * @param <ID>         The type of user ID.
      * @param <USER>       The type of user object.
      * @return An Optional containing the deserialized user object if userInfo is not empty; otherwise, it's empty.
      * @throws JsonProcessingException if there is an issue with JSON deserialization.
      */
-    public static <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> decodeUser(ObjectMapper objectMapper, String userInfo, Class<USER> userClass) throws JsonProcessingException {
+    public static <USER extends BaseUser> Optional<USER> decodeUser(ObjectMapper objectMapper, String userInfo, Class<USER> userClass) throws JsonProcessingException {
         if (Strings.isNotBlank(userInfo)) {
             String userJson = new String(Base64.getDecoder().decode(userInfo));
             return Optional.of(objectMapper.readValue(userJson, userClass));

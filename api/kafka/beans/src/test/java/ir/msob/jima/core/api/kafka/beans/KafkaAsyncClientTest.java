@@ -34,9 +34,9 @@ class KafkaAsyncClientTest {
     @Test
     void testSendChannelMessage() throws Exception {
         // Prepare test data
-        ChannelMessage<Long, BaseUser<Long>, ModelType> channelMessage = new ChannelMessage<>();
+        ChannelMessage<BaseUser, ModelType> channelMessage = new ChannelMessage<>();
         String channel = "testChannel";
-        Optional<BaseUser<Long>> user = Optional.of(new BaseUser<>());
+        Optional<BaseUser> user = Optional.of(new BaseUser());
 
         // Mock behavior
         Mockito.when(objectMapper.writeValueAsString(Mockito.any())).thenReturn("serializedMessage");
@@ -55,7 +55,7 @@ class KafkaAsyncClientTest {
         channelMessage.put("key", "value");
 
         String channel = "testChannel";
-        Optional<BaseUser<Long>> user = Optional.of(new BaseUser<>());
+        Optional<BaseUser> user = Optional.of(new BaseUser());
 
         // Mock behavior
         Mockito.when(objectMapper.writeValueAsString(Mockito.any())).thenReturn("serializedMessage");

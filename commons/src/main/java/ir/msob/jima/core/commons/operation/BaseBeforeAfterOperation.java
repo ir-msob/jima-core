@@ -24,11 +24,11 @@ public interface BaseBeforeAfterOperation {
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
-     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <USER> the type of the user, which extends {@code BaseUser}
      * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
-            USER extends BaseUser<ID>,
+            USER extends BaseUser,
             C extends BaseCriteria<ID>> void beforeCount(C criteria, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
     }
 
@@ -40,11 +40,11 @@ public interface BaseBeforeAfterOperation {
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
-     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <USER> the type of the user, which extends {@code BaseUser}
      * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
-            USER extends BaseUser<ID>,
+            USER extends BaseUser,
             C extends BaseCriteria<ID>> void afterCount(C criteria, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
     }
 
@@ -56,11 +56,11 @@ public interface BaseBeforeAfterOperation {
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
-     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <USER> the type of the user, which extends {@code BaseUser}
      * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
-            USER extends BaseUser<ID>,
+            USER extends BaseUser,
             C extends BaseCriteria<ID>> void beforeGet(C criteria, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
     }
 
@@ -74,12 +74,12 @@ public interface BaseBeforeAfterOperation {
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
-     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <USER> the type of the user, which extends {@code BaseUser}
      * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
      * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
-            USER extends BaseUser<ID>,
+            USER extends BaseUser,
             DTO extends BaseDto<ID>,
             C extends BaseCriteria<ID>> void afterGet(Collection<ID> ids, Collection<DTO> dtos, C criteria, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
     }
@@ -93,11 +93,11 @@ public interface BaseBeforeAfterOperation {
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
-     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <USER> the type of the user, which extends {@code BaseUser}
      * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
-            USER extends BaseUser<ID>,
+            USER extends BaseUser,
             DTO extends BaseDto<ID>> void beforeSave(DTO dto, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
     }
 
@@ -110,11 +110,11 @@ public interface BaseBeforeAfterOperation {
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
-     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <USER> the type of the user, which extends {@code BaseUser}
      * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
-            USER extends BaseUser<ID>,
+            USER extends BaseUser,
             DTO extends BaseDto<ID>> void afterSave(DTO dto, DTO savedDto, Optional<USER> user)
             throws DomainNotFoundException, BadRequestException {
     }
@@ -128,11 +128,11 @@ public interface BaseBeforeAfterOperation {
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
-     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <USER> the type of the user, which extends {@code BaseUser}
      * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
-            USER extends BaseUser<ID>,
+            USER extends BaseUser,
             DTO extends BaseDto<ID>> void beforeUpdate(DTO previousDto, DTO dto, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
     }
 
@@ -145,11 +145,11 @@ public interface BaseBeforeAfterOperation {
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
-     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <USER> the type of the user, which extends {@code BaseUser}
      * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
-            USER extends BaseUser<ID>,
+            USER extends BaseUser,
             DTO extends BaseDto<ID>> void afterUpdate(DTO previousDto, DTO updatedDto, Optional<USER> user)
             throws DomainNotFoundException, BadRequestException {
     }
@@ -162,11 +162,11 @@ public interface BaseBeforeAfterOperation {
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
-     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <USER> the type of the user, which extends {@code BaseUser}
      * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
-            USER extends BaseUser<ID>,
+            USER extends BaseUser,
             C extends BaseCriteria<ID>> void beforeDelete(C criteria, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
     }
 
@@ -180,12 +180,12 @@ public interface BaseBeforeAfterOperation {
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
-     * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+     * @param <USER> the type of the user, which extends {@code BaseUser}
      * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
      * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
      */
     default <ID extends Comparable<ID> & Serializable,
-            USER extends BaseUser<ID>,
+            USER extends BaseUser,
             DTO extends BaseDto<ID>,
             C extends BaseCriteria<ID>> void afterDelete(DTO dto, C criteria, Class<DTO> dtoClass, Optional<USER> user)
             throws DomainNotFoundException, BadRequestException {

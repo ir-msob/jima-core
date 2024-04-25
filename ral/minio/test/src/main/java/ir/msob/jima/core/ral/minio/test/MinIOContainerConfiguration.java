@@ -1,6 +1,7 @@
 package ir.msob.jima.core.ral.minio.test;
 
 import ir.msob.jima.core.beans.properties.JimaProperties;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -27,9 +28,13 @@ public class MinIOContainerConfiguration {
      */
     @Bean
     public MinIOContainer minIOContainer(DynamicPropertyRegistry registry, JimaProperties jimaProperties) {
-        MinIOContainer container = new MinIOContainer(DockerImageName.parse(jimaProperties.getTestContainer().getMinio().getImage()))
-                .withUserName(jimaProperties.getTestContainer().getMinio().getAccessKey())
-                .withPassword(jimaProperties.getTestContainer().getMinio().getSecretKey());
+        MinIOContainer container = new MinIOContainer(DockerImageName.parse(jimaProperties.getTestContainer().getMinio().getImage()));
+        if (Strings.isNotBlank(jimaProperties.getTestContainer().getMinio().getAccessKey()))
+            container.withUserName(jimaProperties.getTestContainer().getMinio().getAccessKey());
+
+        if (Strings.isNotBlank(jimaProperties.getTestContainer().getMinio().getSecretKey()))
+            container.withPassword(jimaProperties.getTestContainer().getMinio().getSecretKey());
+
         container.withReuse(jimaProperties.getTestContainer().getMinio().isReuse());
         registry.add("spring.minio.url", container::getS3URL);
         registry.add("spring.minio.access-key", container::getUserName);

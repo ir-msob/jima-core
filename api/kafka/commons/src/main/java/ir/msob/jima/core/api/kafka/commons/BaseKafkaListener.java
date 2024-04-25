@@ -15,7 +15,7 @@ import java.io.Serializable;
  * @param <ID>   The type of ID.
  * @param <USER> The type of BaseUser.
  */
-public interface BaseKafkaListener<ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>>
+public interface BaseKafkaListener<ID extends Comparable<ID> & Serializable, USER extends BaseUser>
         extends BaseListener<ID, USER> {
 
     /**

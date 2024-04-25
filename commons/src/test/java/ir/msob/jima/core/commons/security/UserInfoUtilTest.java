@@ -23,7 +23,7 @@ class UserInfoUtilTest {
     public void setUp() {
         objectMapper = new ObjectMapper();
         objectMapper.registerSubtypes(ConcreteBaseUser.class);
-        testUser = new ConcreteBaseUser("ID", "SESSION_ID", "USERNAME", new TreeSet<>(List.of("ROLE")), "WEB");
+        testUser = new ConcreteBaseUser("ID", "SESSION_ID", "NAME", "USERNAME", new TreeSet<>(List.of("ROLE")), "WEB");
     }
 
     @Disabled // TODO

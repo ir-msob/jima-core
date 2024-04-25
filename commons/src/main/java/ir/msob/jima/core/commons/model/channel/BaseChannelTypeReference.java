@@ -21,7 +21,7 @@ import java.io.Serializable;
  */
 public interface BaseChannelTypeReference<
         ID extends Comparable<ID> & Serializable,
-        USER extends BaseUser<ID>,
+        USER extends BaseUser,
         DTO extends BaseDto<ID>,
         C extends BaseCriteria<ID>> {
     /**
@@ -29,54 +29,54 @@ public interface BaseChannelTypeReference<
      *
      * @return The type reference for 'ModelType'.
      */
-    TypeReference<ChannelMessage<ID, USER, ModelType>> getModelTypeReferenceType();
+    TypeReference<ChannelMessage<USER, ModelType>> getModelTypeReferenceType();
 
     /**
      * Gets the type reference for 'CriteriaMessage'.
      *
      * @return The type reference for 'CriteriaMessage'.
      */
-    TypeReference<ChannelMessage<ID, USER, CriteriaMessage<ID, C>>> getCriteriaReferenceType();
+    TypeReference<ChannelMessage<USER, CriteriaMessage<ID, C>>> getCriteriaReferenceType();
 
     /**
      * Gets the type reference for 'PageableMessage'.
      *
      * @return The type reference for 'PageableMessage'.
      */
-    TypeReference<ChannelMessage<ID, USER, PageableMessage<ID, C>>> getCriteriaPageReferenceType();
+    TypeReference<ChannelMessage<USER, PageableMessage<ID, C>>> getCriteriaPageReferenceType();
 
     /**
      * Gets the type reference for 'JsonPatchMessage'.
      *
      * @return The type reference for 'JsonPatchMessage'.
      */
-    TypeReference<ChannelMessage<ID, USER, JsonPatchMessage<ID, C>>> getEditReferenceType();
+    TypeReference<ChannelMessage<USER, JsonPatchMessage<ID, C>>> getEditReferenceType();
 
     /**
      * Gets the type reference for 'DtoMessage'.
      *
      * @return The type reference for 'DtoMessage'.
      */
-    TypeReference<ChannelMessage<ID, USER, DtoMessage<ID, DTO>>> getDtoReferenceType();
+    TypeReference<ChannelMessage<USER, DtoMessage<ID, DTO>>> getDtoReferenceType();
 
     /**
      * Gets the type reference for 'DtosMessage'.
      *
      * @return The type reference for 'DtosMessage'.
      */
-    TypeReference<ChannelMessage<ID, USER, DtosMessage<ID, DTO>>> getDtosReferenceType();
+    TypeReference<ChannelMessage<USER, DtosMessage<ID, DTO>>> getDtosReferenceType();
 
     /**
      * Gets the type reference for 'IdMessage'.
      *
      * @return The type reference for 'IdMessage'.
      */
-    TypeReference<ChannelMessage<ID, USER, IdMessage<ID>>> getIdReferenceType();
+    TypeReference<ChannelMessage<USER, IdMessage<ID>>> getIdReferenceType();
 
     /**
      * Gets the type reference for 'IdJsonPatchMessage'.
      *
      * @return The type reference for 'IdJsonPatchMessage'.
      */
-    TypeReference<ChannelMessage<ID, USER, IdJsonPatchMessage<ID>>> getIdJsonPatchReferenceType();
+    TypeReference<ChannelMessage<USER, IdJsonPatchMessage<ID>>> getIdJsonPatchReferenceType();
 }

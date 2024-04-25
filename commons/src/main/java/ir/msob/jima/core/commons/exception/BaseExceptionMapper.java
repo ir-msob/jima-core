@@ -40,7 +40,7 @@ public interface BaseExceptionMapper {
      * @param <ER> The type of the exception response.
      * @return The mapped exception response.
      */
-    private <ER extends AbstractExceptionResponse> ER castException(Throwable ex) {
+    private <ER extends AbstractExceptionResponse, E extends BaseRuntimeException> ER castException(E ex) {
         if (ex != null) {
             if (ex instanceof BadRequestException exception) {
                 return (ER) new BadRequestResponse(exception.getMessage(), exception.getFieldName(), exception.getValue());
@@ -72,10 +72,7 @@ public interface BaseExceptionMapper {
      * @param <ER> The type of the exception response.
      * @return The mapped exception response.
      */
-    default <ER extends AbstractExceptionResponse> ER getExceptionResponse(Throwable ex) {
-        ER er = castException(ex);
-        if (er == null)
-            return cast(ex);
-        return er;
+    default <ER extends AbstractExceptionResponse, E extends BaseRuntimeException> ER getExceptionResponse(E ex) {
+        return castException(ex);
     }
 }

@@ -1,5 +1,6 @@
 package ir.msob.jima.core.commons.exception.validation;
 
+import ir.msob.jima.core.commons.exception.BaseRuntimeException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +17,7 @@ import java.util.Collection;
  */
 @Setter
 @Getter
-public class ValidationException extends RuntimeException {
+public class ValidationException extends BaseRuntimeException {
     /**
      * The serial version UID for the serializable class.
      */

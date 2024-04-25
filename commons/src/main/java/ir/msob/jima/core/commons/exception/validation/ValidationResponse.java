@@ -65,7 +65,7 @@ public class ValidationResponse extends AbstractExceptionResponse {
      * @return The status code for a validation error.
      */
     @Override
-    public Integer getStatus() {
+    public int getStatus() {
         return 400;
     }
 }

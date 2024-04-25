@@ -1,5 +1,6 @@
 package ir.msob.jima.core.commons.exception.badrequest;
 
+import ir.msob.jima.core.commons.exception.BaseRuntimeException;
 import ir.msob.jima.core.commons.util.MessageUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * The 'BadRequestException' class extends the 'RuntimeException' class and represents a specific type of exception that is thrown when a bad request is made.
+ * The 'BadRequestException' class extends the 'BaseRuntimeException' class and represents a specific type of exception that is thrown when a bad request is made.
  * It includes additional fields for the name of the field that has an invalid value and the invalid value itself.
  * The class also provides several constructors for creating an instance of the exception with different sets of parameters.
  * Additionally, it provides static methods for initializing and creating an instance of the exception with a formatted message.
@@ -17,7 +18,7 @@ import java.io.Serializable;
  */
 @Setter
 @Getter
-public class BadRequestException extends RuntimeException {
+public class BadRequestException extends BaseRuntimeException {
     /**
      * The serial version UID for the serializable class.
      */

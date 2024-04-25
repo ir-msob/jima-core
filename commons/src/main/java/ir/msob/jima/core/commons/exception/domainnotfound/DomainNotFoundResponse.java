@@ -74,7 +74,7 @@ public class DomainNotFoundResponse extends AbstractExceptionResponse {
      * @return The status code for a domain not found error.
      */
     @Override
-    public Integer getStatus() {
+    public int getStatus() {
         return 404;
     }
 }

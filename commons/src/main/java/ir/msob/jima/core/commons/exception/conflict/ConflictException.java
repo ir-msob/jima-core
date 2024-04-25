@@ -1,12 +1,13 @@
 package ir.msob.jima.core.commons.exception.conflict;
 
+import ir.msob.jima.core.commons.exception.BaseRuntimeException;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serial;
 
 /**
- * The 'ConflictException' class extends the 'RuntimeException' class and represents a specific type of exception that is thrown when a conflict occurs.
+ * The 'ConflictException' class extends the 'BaseRuntimeException' class and represents a specific type of exception that is thrown when a conflict occurs.
  * It includes a field for the serial version UID which is used for serialization and deserialization.
  * The class also provides a constructor for creating an instance of the exception with a message.
  *
@@ -14,7 +15,7 @@ import java.io.Serial;
  */
 @Setter
 @Getter
-public class ConflictException extends RuntimeException {
+public class ConflictException extends BaseRuntimeException {
 
     /**
      * The serial version UID for the serializable class.

@@ -64,31 +64,33 @@ public class CoreTestData {
     public static final Collection<KeyValue<String, Integer>> UPDATED_INTEGER_KEY_VALUES = Collections.singleton(UPDATED_INTEGER_KEY_VALUE);
     public static Object DEFAULT_ID;
     public static Object UPDATED_ID;
+    public static final String DEFAULT_PARTY_ID = DEFAULT_STRING;
+    public static final String UPDATED_PARTY_ID = UPDATED_STRING;
     public static RelatedDomain<?> DEFAULT_RELATED_DOMAIN;
     public static RelatedDomain<?> DEFAULT_REQUIRED_RELATED_DOMAIN;
-    public static RelatedParty<?> DEFAULT_RELATED_PARTY;
-    public static RelatedParty<?> DEFAULT_REQUIRED_RELATED_PARTY;
     public static TimePeriod DEFAULT_TIME_PERIOD = initDefaultTimePeriod();
     public static TimePeriod UPDATED_TIME_PERIOD = initUpdatedTimePeriod();
     public static Collection<TimePeriod> DEFAULT_TIME_PERIODS = Collections.singleton(DEFAULT_TIME_PERIOD);
     public static Collection<TimePeriod> UPDATED_TIME_PERIODS = Collections.singleton(UPDATED_TIME_PERIOD);
+    public static RelatedParty DEFAULT_RELATED_PARTY;
+    public static RelatedParty DEFAULT_REQUIRED_RELATED_PARTY;
 
     private CoreTestData() {
     }
 
-    public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedParty<ID>> DEFAULT_REQUIRED_RELATED_PARTIES() {
-        return Sets.newTreeSet(Collections.singleton((RelatedParty<ID>) DEFAULT_REQUIRED_RELATED_PARTY));
+    public static SortedSet<RelatedParty> DEFAULT_REQUIRED_RELATED_PARTIES() {
+        return Sets.newTreeSet(Collections.singleton((RelatedParty) DEFAULT_REQUIRED_RELATED_PARTY));
     }
 
-    public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_PARTIES(SortedSet<RelatedParty<ID>> relatedParties) {
+    public static void UPDATED_REQUIRED_RELATED_PARTIES(SortedSet<RelatedParty> relatedParties) {
         relatedParties.forEach(CoreTestData::UPDATED_REQUIRED_RELATED_PARTY);
     }
 
-    public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedParty<ID>> DEFAULT_RELATED_PARTIES() {
-        return Sets.newTreeSet(Collections.singleton((RelatedParty<ID>) DEFAULT_RELATED_PARTY));
+    public static SortedSet<RelatedParty> DEFAULT_RELATED_PARTIES() {
+        return Sets.newTreeSet(Collections.singleton((RelatedParty) DEFAULT_RELATED_PARTY));
     }
 
-    public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_PARTIES(SortedSet<RelatedParty<ID>> relatedParties) {
+    public static void UPDATED_RELATED_PARTIES(SortedSet<RelatedParty> relatedParties) {
         relatedParties.forEach(CoreTestData::UPDATED_RELATED_PARTY);
     }
 
@@ -147,32 +149,32 @@ public class CoreTestData {
         return timePeriod;
     }
 
-    public static <ID extends Comparable<ID> & Serializable> void initDefaultRelatedParty() {
-        RelatedParty<ID> relatedParty = new RelatedParty<>();
+    public static void initDefaultRelatedParty() {
+        RelatedParty relatedParty = new RelatedParty();
         relatedParty.setRelatedPartyType(DEFAULT_STRING);
-        relatedParty.setRelatedPartyId((ID) DEFAULT_ID);
+        relatedParty.setRelatedPartyId(DEFAULT_PARTY_ID);
         relatedParty.setRole(DEFAULT_STRING);
         relatedParty.setReferredType(DEFAULT_STRING);
         DEFAULT_RELATED_PARTY = relatedParty;
     }
 
-    public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_PARTY(RelatedParty<ID> relatedParty) {
+    public static void UPDATED_RELATED_PARTY(RelatedParty relatedParty) {
         relatedParty.setRelatedPartyType(UPDATED_STRING);
-        relatedParty.setRelatedPartyId((ID) UPDATED_ID);
+        relatedParty.setRelatedPartyId(UPDATED_PARTY_ID);
         relatedParty.setRole(UPDATED_STRING);
         relatedParty.setReferredType(UPDATED_STRING);
     }
 
-    public static <ID extends Comparable<ID> & Serializable> void initDefaultRequiredRelatedParty() {
-        RelatedParty<ID> relatedParty = new RelatedParty<>();
+    public static void initDefaultRequiredRelatedParty() {
+        RelatedParty relatedParty = new RelatedParty();
         relatedParty.setRelatedPartyType(DEFAULT_STRING);
-        relatedParty.setRelatedPartyId((ID) DEFAULT_ID);
+        relatedParty.setRelatedPartyId(DEFAULT_PARTY_ID);
         DEFAULT_REQUIRED_RELATED_PARTY = relatedParty;
     }
 
-    public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_PARTY(RelatedParty<ID> relatedParty) {
+    public static void UPDATED_REQUIRED_RELATED_PARTY(RelatedParty relatedParty) {
         relatedParty.setRelatedPartyType(UPDATED_STRING);
-        relatedParty.setRelatedPartyId((ID) UPDATED_ID);
+        relatedParty.setRelatedPartyId(UPDATED_PARTY_ID);
     }
 
     public static <ID extends Comparable<ID> & Serializable> void initDefaultRelatedDomain() {

@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BaseExceptionMapperTest {
 
@@ -90,12 +90,5 @@ class BaseExceptionMapperTest {
     void shouldMapResourceNotFoundException() {
         ResourceNotFoundException exception = new ResourceNotFoundException("message", "resource");
         assertTrue(baseExceptionMapper.getExceptionResponse(exception) instanceof ResourceNotFoundResponse);
-    }
-
-    @Test
-    @DisplayName("Should return null when exception is not mappable")
-    void shouldReturnNullWhenExceptionIsNotMappable() {
-        Exception exception = new Exception("message");
-        assertNull(baseExceptionMapper.getExceptionResponse(exception));
     }
 }

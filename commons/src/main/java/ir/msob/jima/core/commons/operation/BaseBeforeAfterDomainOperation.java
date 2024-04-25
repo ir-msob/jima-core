@@ -15,13 +15,13 @@ import java.util.Optional;
  * It is designed to be implemented by domain services that need to perform additional processing or validation.
  *
  * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
- * @param <USER> the type of the user, which extends {@code BaseUser<ID>}
+ * @param <USER> the type of the user, which extends {@code BaseUser}
  * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
  * @param <C>    the type of the criteria, which extends {@code BaseCriteria<ID>}
  */
 public interface BaseBeforeAfterDomainOperation<
         ID extends Comparable<ID> & Serializable,
-        USER extends BaseUser<ID>,
+        USER extends BaseUser,
         DTO extends BaseDto<ID>,
         C extends BaseCriteria<ID>> {
 

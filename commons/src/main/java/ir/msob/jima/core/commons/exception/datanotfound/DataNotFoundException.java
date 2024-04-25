@@ -1,12 +1,13 @@
 package ir.msob.jima.core.commons.exception.datanotfound;
 
+import ir.msob.jima.core.commons.exception.BaseRuntimeException;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serial;
 
 /**
- * The 'DataNotFoundException' class extends the 'RuntimeException' class and represents a specific type of exception that is thrown when a requested data is not found.
+ * The 'DataNotFoundException' class extends the 'BaseRuntimeException' class and represents a specific type of exception that is thrown when a requested data is not found.
  * It includes additional fields for the name of the entity that was not found, the ID of the entity, and the class of the entity.
  * The class also provides several constructors for creating an instance of the exception with different sets of parameters.
  *
@@ -14,7 +15,7 @@ import java.io.Serial;
  */
 @Setter
 @Getter
-public class DataNotFoundException extends RuntimeException {
+public class DataNotFoundException extends BaseRuntimeException {
     /**
      * The serial version UID for the serializable class.
      */

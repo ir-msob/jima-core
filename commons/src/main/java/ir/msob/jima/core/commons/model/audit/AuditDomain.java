@@ -14,7 +14,6 @@ import java.util.Objects;
  * Additionally, it overrides the {@code compareTo}, {@code equals}, and {@code hashCode} methods from the {@code Object} class to provide custom comparison and hashing behavior.
  * The {@code FN} enum is used to represent the field names of the {@code AuditDomain} class.
  *
- * @param <ID> The type of ID.
  */
 @Getter
 @Setter
@@ -22,12 +21,12 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AuditDomain<ID extends Comparable<ID> & Serializable> implements Comparable<AuditDomain<ID>>, Serializable {
+public class AuditDomain implements Comparable<AuditDomain>, Serializable {
     /**
      * The ID of the related party.
      */
     @NotNull
-    private ID relatedPartyId;
+    private String relatedPartyId;
     /**
      * The date of the action.
      */
@@ -50,7 +49,7 @@ public class AuditDomain<ID extends Comparable<ID> & Serializable> implements Co
      * @return A negative integer, zero, or a positive integer as this audit domain is less than, equal to, or greater than the specified audit domain.
      */
     @Override
-    public int compareTo(AuditDomain<ID> o) {
+    public int compareTo(AuditDomain o) {
         if (this == o) {
             return 0;
         }
@@ -64,7 +63,7 @@ public class AuditDomain<ID extends Comparable<ID> & Serializable> implements Co
             return compare;
         }
 
-        compare = Objects.compare(this.getRelatedPartyId(), o.getRelatedPartyId(), ID::compareTo);
+        compare = Objects.compare(this.getRelatedPartyId(), o.getRelatedPartyId(), String::compareTo);
         if (compare != 0) {
             return compare;
         }
@@ -86,8 +85,7 @@ public class AuditDomain<ID extends Comparable<ID> & Serializable> implements Co
         if (o == null)
             return false;
 
-        if (o instanceof AuditDomain<?> auditDomain) {
-            AuditDomain<ID> that = (AuditDomain<ID>) auditDomain;
+        if (o instanceof AuditDomain that) {
             return Objects.equals(this.getRelatedPartyId(), that.getRelatedPartyId())
                     && Objects.equals(this.getActionDate(), that.getActionDate())
                     && Objects.equals(this.getActionType(), that.getActionType())

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ContextConfiguration
 @Testcontainers
 @CommonsLog
-public class KafkaContainerConfigurationIT {
+class KafkaContainerConfigurationIT {
 
     @Autowired
     KafkaContainer container;
@@ -30,14 +30,14 @@ public class KafkaContainerConfigurationIT {
 
     @Test
     @DisplayName("Container is running after initialization")
-    public void containerIsRunningAfterInitialization() {
+    void containerIsRunningAfterInitialization() {
         assertTrue(container.isRunning(), "Container should be running after initialization");
     }
 
 
     @Test
     @DisplayName("Properties are set correctly")
-    public void testContainerProperties() {
+    void testContainerProperties() {
         String containerBootstrapServers = container.getBootstrapServers();
         assertEquals(containerBootstrapServers, bootstrapServers);
         assertEquals(containerBootstrapServers, consumerServers);

@@ -3,6 +3,7 @@ package ir.msob.jima.core.api.restful.test;
 import ir.msob.jima.core.commons.model.criteria.BaseCriteria;
 import ir.msob.jima.core.commons.model.domain.BaseDomain;
 import ir.msob.jima.core.commons.model.dto.BaseDto;
+import ir.msob.jima.core.commons.security.BaseTokenService;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.security.UserInfoUtil;
 import ir.msob.jima.core.test.BaseCoreResourceTest;
@@ -25,7 +26,7 @@ import java.io.Serializable;
  * @param <C>    The type representing criteria for queries, often associated with user and entity filtering.
  */
 public interface BaseCoreRestResourceTest<ID extends Comparable<ID> & Serializable,
-        USER extends BaseUser<ID>,
+        USER extends BaseUser,
         D extends BaseDomain<ID>,
         DTO extends BaseDto<ID>,
         C extends BaseCriteria<ID>> extends BaseCoreResourceTest<ID, USER, D, DTO, C> {
@@ -38,6 +39,13 @@ public interface BaseCoreRestResourceTest<ID extends Comparable<ID> & Serializab
     WebTestClient getWebTestClient();
 
     /**
+     * Get a BaseTokenService instance for testing RESTful resources.
+     *
+     * @return A BaseTokenService instance for making token for test requests to RESTful resources.
+     */
+    BaseTokenService getTokenService();
+
+    /**
      * Prepare HTTP headers for a test request, including content and user information headers.
      *
      * @param httpHeaders The HttpHeaders object to prepare for the test request.
@@ -45,6 +53,7 @@ public interface BaseCoreRestResourceTest<ID extends Comparable<ID> & Serializab
     default void prepareHeader(org.springframework.http.HttpHeaders httpHeaders) {
         prepareContentHeader(httpHeaders);
         prepareUserInfoHeader(httpHeaders);
+        prepareTokenHeader(httpHeaders);
     }
 
     /**
@@ -64,6 +73,16 @@ public interface BaseCoreRestResourceTest<ID extends Comparable<ID> & Serializab
     @SneakyThrows
     default void prepareUserInfoHeader(org.springframework.http.HttpHeaders httpHeaders) {
         httpHeaders.add(ir.msob.jima.core.commons.Constants.USER_INFO_HEADER_NAME, UserInfoUtil.encodeUser(getObjectMapper(), this.<ID, USER>getSampleUser()));
+    }
+
+    /**
+     * Prepare the toke header for a test request.
+     *
+     * @param httpHeaders The HttpHeaders object to prepare for the test request.
+     */
+    @SneakyThrows
+    default void prepareTokenHeader(org.springframework.http.HttpHeaders httpHeaders) {
+        httpHeaders.add(HttpHeaders.AUTHORIZATION, "Bearer " + getTokenService().getToken());
     }
 }
 

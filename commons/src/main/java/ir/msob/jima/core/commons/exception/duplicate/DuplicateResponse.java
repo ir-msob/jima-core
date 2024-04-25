@@ -76,7 +76,7 @@ public class DuplicateResponse extends AbstractExceptionResponse {
      * @return The status code for a duplicate value error.
      */
     @Override
-    public Integer getStatus() {
+    public int getStatus() {
         return 409;
     }
 }

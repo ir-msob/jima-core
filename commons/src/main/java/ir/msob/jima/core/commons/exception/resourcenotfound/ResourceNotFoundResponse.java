@@ -53,7 +53,7 @@ public class ResourceNotFoundResponse extends AbstractExceptionResponse {
      * @return The status code for a resource not found error.
      */
     @Override
-    public Integer getStatus() {
+    public int getStatus() {
         return 404;
     }
 }

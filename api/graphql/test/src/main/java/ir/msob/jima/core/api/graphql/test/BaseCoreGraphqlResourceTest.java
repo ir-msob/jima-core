@@ -20,7 +20,7 @@ import java.io.Serializable;
  * @param <C>    The type representing criteria for queries, often associated with user and entity filtering.
  */
 public interface BaseCoreGraphqlResourceTest<ID extends Comparable<ID> & Serializable,
-        USER extends BaseUser<ID>,
+        USER extends BaseUser,
         D extends BaseDomain<ID>,
         DTO extends BaseDto<ID>,
         C extends BaseCriteria<ID>> extends BaseCoreResourceTest<ID, USER, D, DTO, C> {

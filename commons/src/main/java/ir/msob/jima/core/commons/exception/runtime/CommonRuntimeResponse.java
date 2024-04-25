@@ -45,7 +45,7 @@ public class CommonRuntimeResponse extends AbstractExceptionResponse {
      * @return The status code for a common runtime error.
      */
     @Override
-    public Integer getStatus() {
+    public int getStatus() {
         return 500;
     }
 }

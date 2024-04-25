@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @param <ID>   The type of the identifier, which should be both comparable and serializable (e.g., entity primary key).
  * @param <USER> The type representing a user, typically derived from 'BaseUser'.
  */
-public interface BaseResource<ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> {
+public interface BaseResource<ID extends Comparable<ID> & Serializable, USER extends BaseUser> {
 
     /**
      * Get the class type for the identifier (e.g., entity primary key).

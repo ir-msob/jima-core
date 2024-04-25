@@ -5,7 +5,6 @@ import ir.msob.jima.core.commons.model.channel.ChannelMessage;
 import ir.msob.jima.core.commons.model.dto.ModelType;
 import ir.msob.jima.core.commons.security.BaseUser;
 
-import java.io.Serializable;
 import java.util.Map;
 import java.util.Optional;
 
@@ -20,7 +19,6 @@ public interface BaseAsyncClient {
      * This method sends a generic channel message.
      * It is annotated with '@MethodStats', which means that statistics will be collected for this method.
      *
-     * @param <ID>           The ID type
      * @param <USER>         The user type
      * @param <DATA>         The data type
      * @param channelMessage The channel message
@@ -28,19 +26,18 @@ public interface BaseAsyncClient {
      * @param user           Optional: the destination user
      */
     @MethodStats
-    <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>, DATA extends ModelType> void send(ChannelMessage<ID, USER, DATA> channelMessage, String channel, Optional<USER> user);
+    <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel, Optional<USER> user);
 
     /**
      * This method sends a channel message of type Map.
      * It is annotated with '@MethodStats', which means that statistics will be collected for this method.
      *
-     * @param <ID>           The ID type
      * @param <USER>         The user type
      * @param channelMessage The channel message as a Map
      * @param channel        The channel name
      * @param user           Optional: the destination user
      */
     @MethodStats
-    <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> void send(Map<String, Object> channelMessage, String channel, Optional<USER> user);
+    <USER extends BaseUser> void send(Map<String, Object> channelMessage, String channel, Optional<USER> user);
 
 }

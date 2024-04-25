@@ -1,12 +1,13 @@
 package ir.msob.jima.core.commons.exception.domainnotfound;
 
+import ir.msob.jima.core.commons.exception.BaseRuntimeException;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serial;
 
 /**
- * The 'DomainNotFoundException' class extends the 'RuntimeException' class and represents a specific type of exception that is thrown when a requested domain is not found.
+ * The 'DomainNotFoundException' class extends the 'BaseRuntimeException' class and represents a specific type of exception that is thrown when a requested domain is not found.
  * It includes additional fields for the ID of the domain that was not found and the class of the domain.
  * The class also provides several constructors for creating an instance of the exception with different sets of parameters.
  *
@@ -14,7 +15,7 @@ import java.io.Serial;
  */
 @Setter
 @Getter
-public class DomainNotFoundException extends RuntimeException {
+public class DomainNotFoundException extends BaseRuntimeException {
     /**
      * The serial version UID for the serializable class.
      */

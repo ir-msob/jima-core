@@ -1,24 +1,33 @@
 import {ModelType} from "../dto/model-type";
 
-export class BaseUser<ID> extends ModelType {
-  private _id: ID | undefined;
+export class BaseUser extends ModelType {
+  private _id: string | undefined;
 
-  get id(): ID | undefined {
+  get id(): string | undefined {
     return this._id;
   }
 
-  set id(id: ID | undefined) {
+  set id(id: string | undefined) {
     this._id = id;
   }
 
-  private _sessionId: ID | undefined;
+  private _sessionId: string | undefined;
 
-  get sessionId(): ID | undefined {
+  get sessionId(): string | undefined {
     return this._sessionId;
   }
 
-  set sessionId(sessionId: ID | undefined) {
+  set sessionId(sessionId: string | undefined) {
     this._sessionId = sessionId;
+  }
+  private _name: string | undefined;
+
+  get name(): string | undefined {
+    return this._name;
+  }
+
+  set name(value: string | undefined) {
+    this._name = value;
   }
 
   private _username: string | undefined;

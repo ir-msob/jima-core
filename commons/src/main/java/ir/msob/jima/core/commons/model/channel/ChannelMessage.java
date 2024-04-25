@@ -8,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
-
 /**
  * The 'ChannelMessage' class represents a message that is sent through a channel.
  * It extends the 'ChannelInfoAbstract' class and implements the 'BaseType' interface.
@@ -19,7 +17,6 @@ import java.io.Serializable;
  * The class is parameterized with three types 'ID' that extends 'Comparable' and 'Serializable', 'USER' that extends 'BaseUser', and 'DATA' that extends 'ModelType'.
  * The 'FN' enum represents the field names of the class.
  *
- * @param <ID>   The type of ID.
  * @param <USER> The type of user.
  * @param <DATA> The type of data.
  */
@@ -27,7 +24,7 @@ import java.io.Serializable;
 @Getter
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ChannelMessage<ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>, DATA extends ModelType> extends ChannelInfoAbstract<ID, USER> implements BaseType {
+public class ChannelMessage<USER extends BaseUser, DATA extends ModelType> extends ChannelInfoAbstract<USER> implements BaseType {
     /**
      * The data of the channel message.
      */

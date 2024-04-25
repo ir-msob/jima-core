@@ -12,7 +12,6 @@ import lombok.SneakyThrows;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.Map;
 import java.util.Optional;
 
@@ -35,7 +34,7 @@ public class KafkaAsyncClient implements BaseAsyncClient {
     @MethodStats
     @SneakyThrows
     @Override
-    public <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>, DATA extends ModelType> void send(ChannelMessage<ID, USER, DATA> channelMessage, String channel, Optional<USER> user) {
+    public <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel, Optional<USER> user) {
         // Set the user information in the ChannelMessage.
         if (channelMessage.getUser() == null)
             channelMessage.setUser(user.orElse(null));
@@ -55,7 +54,7 @@ public class KafkaAsyncClient implements BaseAsyncClient {
     @MethodStats
     @SneakyThrows
     @Override
-    public <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> void send(Map<String, Object> channelMessage, String channel, Optional<USER> user) {
+    public <USER extends BaseUser> void send(Map<String, Object> channelMessage, String channel, Optional<USER> user) {
         // Set the user information in the ChannelMessage.
         if (channelMessage.get(ChannelInfoAbstract.FN.user.name()) == null)
             user.ifPresent(u -> channelMessage.put(ChannelInfoAbstract.FN.user.name(), u));

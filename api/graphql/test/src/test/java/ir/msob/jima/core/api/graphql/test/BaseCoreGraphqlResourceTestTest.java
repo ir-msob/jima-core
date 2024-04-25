@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BaseCoreGraphqlResourceTestTest {
 
     // Instance of the class under test
-    private BaseCoreGraphqlResourceTest<String, BaseUser<String>, SampleDomain<String>, SampleDto<String>, SampleCriteria<String>> graphqlResourceTest;
+    private BaseCoreGraphqlResourceTest<String, BaseUser, SampleDomain<String>, SampleDto<String>, SampleCriteria<String>> graphqlResourceTest;
     // Mocked instance of GraphQlTester
     private GraphQlTester mockGraphQlTester;
 
@@ -51,7 +51,7 @@ class BaseCoreGraphqlResourceTestTest {
         // Initialize the class under test
         graphqlResourceTest = new BaseCoreGraphqlResourceTest<>() {
             @Override
-            public Class<? extends BaseResource<String, BaseUser<String>>> getResourceClass() {
+            public Class<? extends BaseResource<String, BaseUser>> getResourceClass() {
                 return null;
             }
 
@@ -61,7 +61,7 @@ class BaseCoreGraphqlResourceTestTest {
             }
 
             @Override
-            public Optional<BaseUser<String>> getSampleUser() {
+            public Optional<BaseUser> getSampleUser() {
                 return Optional.empty();
             }
 
@@ -86,7 +86,7 @@ class BaseCoreGraphqlResourceTestTest {
      */
     @Test
     void getResourceClassReturnsNull() {
-        Class<? extends BaseResource<String, BaseUser<String>>> resourceClass = graphqlResourceTest.getResourceClass();
+        Class<? extends BaseResource<String, BaseUser>> resourceClass = graphqlResourceTest.getResourceClass();
         assertNull(resourceClass);
     }
 
@@ -104,7 +104,7 @@ class BaseCoreGraphqlResourceTestTest {
      */
     @Test
     void getSampleUserReturnsEmptyOptional() {
-        Optional<BaseUser<String>> sampleUser = graphqlResourceTest.getSampleUser();
+        Optional<BaseUser> sampleUser = graphqlResourceTest.getSampleUser();
         assertNotNull(sampleUser);
         assertFalse(sampleUser.isPresent());
     }

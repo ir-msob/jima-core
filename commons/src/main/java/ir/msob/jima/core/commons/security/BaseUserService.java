@@ -2,7 +2,6 @@ package ir.msob.jima.core.commons.security;
 
 import org.springframework.security.core.Authentication;
 
-import java.io.Serializable;
 import java.security.Principal;
 import java.util.Map;
 import java.util.Optional;
@@ -22,7 +21,7 @@ public interface BaseUserService {
      * @param authentication An authentication.
      * @return An optional containing the user if found, otherwise empty.
      */
-    <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>, A extends Authentication> Optional<USER> getUser(A authentication);
+    <USER extends BaseUser, A extends Authentication> Optional<USER> getUser(A authentication);
 
     /**
      * Retrieves a user based on the provided authentication token.
@@ -30,7 +29,7 @@ public interface BaseUserService {
      * @param token An optional authentication token.
      * @return An optional containing the user if found, otherwise empty.
      */
-    <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> getUser(Optional<String> token);
+    <USER extends BaseUser> Optional<USER> getUser(Optional<String> token);
 
     /**
      * Retrieves a user based on the user information and user class.
@@ -39,7 +38,7 @@ public interface BaseUserService {
      * @param userClass The class of the user.
      * @return An optional containing the user if found, otherwise empty.
      */
-    <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> getUser(String userInfo, Class<USER> userClass);
+    <USER extends BaseUser> Optional<USER> getUser(String userInfo, Class<USER> userClass);
 
     /**
      * Retrieves a user based on the provided principal.
@@ -47,7 +46,7 @@ public interface BaseUserService {
      * @param principal The principal representing the user.
      * @return An optional containing the user if found, otherwise empty.
      */
-    <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>, P extends Principal> Optional<USER> getUser(P principal);
+    <USER extends BaseUser, P extends Principal> Optional<USER> getUser(P principal);
 
     /**
      * Retrieves a user based on the provided claims.
@@ -55,7 +54,7 @@ public interface BaseUserService {
      * @param claims A map of claims representing user information.
      * @return An optional containing the user if found, otherwise empty.
      */
-    <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> getUser(Map<String, Object> claims);
+    <USER extends BaseUser> Optional<USER> getUser(Map<String, Object> claims);
 
     /**
      * Retrieves a user based on the user information and the provided claims.
@@ -65,7 +64,7 @@ public interface BaseUserService {
      * @param userClass The class of the user.
      * @return An optional containing the user if found, otherwise empty.
      */
-    <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> getUser(String userInfo, Map<String, Object> claims, Class<USER> userClass);
+    <USER extends BaseUser> Optional<USER> getUser(String userInfo, Map<String, Object> claims, Class<USER> userClass);
 
     /**
      * Retrieves a user based on the user information, principal, and user class.
@@ -75,7 +74,7 @@ public interface BaseUserService {
      * @param userClass The class of the user.
      * @return An optional containing the user if found, otherwise empty.
      */
-    <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>, P extends Principal> Optional<USER> getUser(String userInfo, P principal, Class<USER> userClass);
+    <USER extends BaseUser, P extends Principal> Optional<USER> getUser(String userInfo, P principal, Class<USER> userClass);
 
     /**
      * Retrieves a user based on the user information, principal, and user class.
@@ -84,12 +83,12 @@ public interface BaseUserService {
      * @param claims A map of claims representing user information.
      * @return An optional containing the user if found, otherwise empty.
      */
-    <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> getUser(USER user, Map<String, Object> claims);
+    <USER extends BaseUser> Optional<USER> getUser(USER user, Map<String, Object> claims);
 
     /**
      * Retrieves the system user, if applicable.
      *
      * @return An optional containing the system user if applicable, otherwise empty.
      */
-    <ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> Optional<USER> getSystemUser();
+    <USER extends BaseUser> Optional<USER> getSystemUser();
 }

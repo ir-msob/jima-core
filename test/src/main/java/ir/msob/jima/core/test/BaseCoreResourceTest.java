@@ -21,7 +21,7 @@ import java.util.Optional;
  * @param <C>    The type of the criteria used for resource testing.
  */
 public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
-        USER extends BaseUser<ID>,
+        USER extends BaseUser,
         D extends BaseDomain<ID>,
         DTO extends BaseDto<ID>,
         C extends BaseCriteria<ID>> {

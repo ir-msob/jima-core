@@ -93,9 +93,8 @@ public class CoreTestAssertion {
      *
      * @param before The RelatedParty before an operation.
      * @param after  The RelatedParty after an operation.
-     * @param <ID>   The type of the identifier.
      */
-    public static <ID extends Comparable<ID> & Serializable> void assertOptionalRelatedParty(RelatedParty<ID> before, RelatedParty<ID> after) {
+    public static void assertOptionalRelatedParty(RelatedParty before, RelatedParty after) {
         Assertions.assertThat(before.getRole()).isEqualTo(after.getRole());
         Assertions.assertThat(before.getReferredType()).isEqualTo(after.getReferredType());
     }
@@ -105,9 +104,8 @@ public class CoreTestAssertion {
      *
      * @param before The RelatedParty before an operation.
      * @param after  The RelatedParty after an operation.
-     * @param <ID>   The type of the identifier.
      */
-    public static <ID extends Comparable<ID> & Serializable> void assertMandatoryRelatedParty(RelatedParty<ID> before, RelatedParty<ID> after) {
+    public static void assertMandatoryRelatedParty(RelatedParty before, RelatedParty after) {
         Assertions.assertThat(before.getRelatedPartyType()).isEqualTo(after.getRelatedPartyType());
         Assertions.assertThat(before.getRelatedPartyId()).isEqualTo(after.getRelatedPartyId());
     }
@@ -117,9 +115,8 @@ public class CoreTestAssertion {
      *
      * @param before The AuditDomain before an operation.
      * @param after  The AuditDomain after an operation.
-     * @param <ID>   The type of the identifier.
      */
-    public static <ID extends Comparable<ID> & Serializable> void assertMandatoryAuditDomain(AuditDomain<ID> before, AuditDomain<ID> after) {
+    public static void assertMandatoryAuditDomain(AuditDomain before, AuditDomain after) {
         Assertions.assertThat(before.getRelatedPartyId()).isEqualTo(after.getRelatedPartyId());
         Assertions.assertThat(before.getActionDate()).isEqualTo(after.getActionDate());
         Assertions.assertThat(before.getActionType()).isEqualTo(after.getActionType());

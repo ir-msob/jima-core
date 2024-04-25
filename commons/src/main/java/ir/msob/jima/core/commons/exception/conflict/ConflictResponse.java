@@ -48,7 +48,7 @@ public class ConflictResponse extends AbstractExceptionResponse {
      * @return The status code for a conflict.
      */
     @Override
-    public Integer getStatus() {
+    public int getStatus() {
         return 409;
     }
 }

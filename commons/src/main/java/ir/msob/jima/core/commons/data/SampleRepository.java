@@ -14,5 +14,5 @@ import java.io.Serializable;
  * @param <USER> The type representing a user, typically derived from 'BaseUser'.
  * @param <D>    The type representing a domain entity, typically derived from 'BaseDomain'.
  */
-public class SampleRepository<ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>, D extends BaseDomain<ID>> implements BaseRepository<ID, USER, D> {
+public class SampleRepository<ID extends Comparable<ID> & Serializable, USER extends BaseUser, D extends BaseDomain<ID>> implements BaseRepository<ID, USER, D> {
 }

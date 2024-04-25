@@ -20,7 +20,7 @@ import java.util.Optional;
  * @param <ID>   The type of ID.
  * @param <USER> The type of BaseUser.
  */
-public interface BaseListener<ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> {
+public interface BaseListener<ID extends Comparable<ID> & Serializable, USER extends BaseUser> {
     /**
      * Get the class type for the identifier (e.g., entity primary key).
      *
@@ -81,8 +81,8 @@ public interface BaseListener<ID extends Comparable<ID> & Serializable, USER ext
      * @param <DATA>            The type of data in the resulting ChannelMessage.
      * @return A new ChannelMessage with modified properties.
      */
-    default <DATA_REQ extends ModelType, DATA extends ModelType> ChannelMessage<ID, USER, DATA> prepareChannelMessage(ChannelMessage<ID, USER, DATA_REQ> channelMessageReq, DATA data, Integer status, Optional<USER> user) {
-        ChannelMessage<ID, USER, DATA> channelMessage = new ChannelMessage<>();
+    default <DATA_REQ extends ModelType, DATA extends ModelType> ChannelMessage<USER, DATA> prepareChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, DATA data, Integer status, Optional<USER> user) {
+        ChannelMessage<USER, DATA> channelMessage = new ChannelMessage<>();
         channelMessage.setData(data);
         channelMessage.setCallback(null);
         channelMessage.setMetadata(channelMessageReq.getMetadata());

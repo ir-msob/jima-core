@@ -18,7 +18,7 @@ import static ir.msob.jima.core.commons.Constants.USER_INFO_HEADER_NAME;
  * @param <ID>   The type representing unique identifiers for entities, typically extending Comparable and Serializable.
  * @param <USER> The type representing a user entity that is often used in RESTful interactions.
  */
-public interface BaseRestResource<ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> extends BaseResource<ID, USER> {
+public interface BaseRestResource<ID extends Comparable<ID> & Serializable, USER extends BaseUser> extends BaseResource<ID, USER> {
 
     /**
      * Retrieve the user associated with the given Principal object.

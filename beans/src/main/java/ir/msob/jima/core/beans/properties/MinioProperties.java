@@ -37,15 +37,15 @@ public class MinioProperties {
     /**
      * The connection timeout in milliseconds for Minio client.
      */
-    private Long connectTimeout;
+    private Long connectTimeout = 30000L;
 
     /**
      * The write timeout in milliseconds for Minio client.
      */
-    private Long writeTimeout;
+    private Long writeTimeout = 30000L;
 
     /**
      * The read timeout in milliseconds for Minio client.
      */
-    private Long readTimeout;
+    private Long readTimeout = 30000L;
 }

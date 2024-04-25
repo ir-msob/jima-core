@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ContextConfiguration
 @Testcontainers
 @CommonsLog
-public class MinioContainerConfigurationIT {
+class MinioContainerConfigurationIT {
 
     @Autowired
     MinIOContainer container;
@@ -30,13 +30,13 @@ public class MinioContainerConfigurationIT {
 
     @Test
     @DisplayName("Container is running after initialization")
-    public void containerIsRunningAfterInitialization() {
+    void containerIsRunningAfterInitialization() {
         assertTrue(container.isRunning(), "Container should be running after initialization");
     }
 
     @Test
     @DisplayName("Properties are set correctly")
-    public void testContainerProperties() {
+    void testContainerProperties() {
         String containerUrl = container.getS3URL();
         String accessKey = container.getUserName();
         String secretKey = container.getPassword();

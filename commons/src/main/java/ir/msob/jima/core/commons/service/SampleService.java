@@ -19,5 +19,5 @@ import java.io.Serializable;
  * @param <D>    the type of the domain, which must extend BaseDomain
  * @param <R>    the type of the repository, which must extend BaseRepository
  */
-public class SampleService<ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>, D extends BaseDomain<ID>, R extends BaseRepository<ID, USER, D>> implements BaseService<ID, USER, D, R> {
+public class SampleService<ID extends Comparable<ID> & Serializable, USER extends BaseUser, D extends BaseDomain<ID>, R extends BaseRepository<ID, USER, D>> implements BaseService<ID, USER, D, R> {
 }

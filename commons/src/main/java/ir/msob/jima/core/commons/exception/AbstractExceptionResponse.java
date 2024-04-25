@@ -15,5 +15,5 @@ public abstract class AbstractExceptionResponse extends ModelType {
      *
      * @return The status code associated with the exception response.
      */
-    public abstract Integer getStatus();
+    public abstract int getStatus();
 }

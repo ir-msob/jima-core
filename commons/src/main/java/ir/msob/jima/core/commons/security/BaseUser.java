@@ -4,7 +4,6 @@ import ir.msob.jima.core.commons.model.dto.ModelType;
 import lombok.*;
 
 import java.io.Serial;
-import java.io.Serializable;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -13,14 +12,13 @@ import java.util.TreeSet;
  * It extends the ModelType class and implements Serializable interface for the object to be converted into a byte stream.
  * It provides methods to get and set the ID, session ID, username, roles, and audience.
  *
- * @param <ID> the type of the user ID and session ID, which must be comparable and serializable
  */
 @Setter
 @Getter
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class BaseUser<ID extends Comparable<ID> & Serializable> extends ModelType {
+public class BaseUser extends ModelType {
     /**
      * The serial version UID for the serialization.
      */
@@ -30,12 +28,17 @@ public class BaseUser<ID extends Comparable<ID> & Serializable> extends ModelTyp
     /**
      * The ID of the user.
      */
-    private ID id;
+    private String id;
 
     /**
      * The session ID of the user.
      */
-    private ID sessionId;
+    private String sessionId;
+
+    /**
+     * The username of the user.
+     */
+    private String name;
 
     /**
      * The username of the user.

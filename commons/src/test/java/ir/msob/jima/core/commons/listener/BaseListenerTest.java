@@ -18,7 +18,7 @@ class BaseListenerTest {
     @Test
     void testPrepareChannelMessage() {
         // Arrange
-        BaseListener<String, BaseUser<String>> baseKafkaParentListener = new BaseListener<>() {
+        BaseListener<String, BaseUser> baseKafkaParentListener = new BaseListener<>() {
             @Override
             public ObjectMapper getObjectMapper() {
                 return null;
@@ -35,13 +35,13 @@ class BaseListenerTest {
             }
         };
 
-        ChannelMessage<String, BaseUser<String>, ModelType> channelMessageReq = new ChannelMessage<>();
+        ChannelMessage<BaseUser, ModelType> channelMessageReq = new ChannelMessage<>();
         ModelType data = new ModelType();
         Integer status = 200;
-        Optional<BaseUser<String>> user = Optional.of(new BaseUser<>());
+        Optional<BaseUser> user = Optional.of(new BaseUser());
 
         // Act
-        ChannelMessage<String, BaseUser<String>, ModelType> preparedChannelMessage = baseKafkaParentListener.prepareChannelMessage(channelMessageReq, data, status, user);
+        ChannelMessage<BaseUser, ModelType> preparedChannelMessage = baseKafkaParentListener.prepareChannelMessage(channelMessageReq, data, status, user);
 
         // Assert
         assertEquals(data, preparedChannelMessage.getData());

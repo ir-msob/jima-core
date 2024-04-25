@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ContextConfiguration
 @Testcontainers
 @CommonsLog
-public class RedisContainerConfigurationIT {
+class RedisContainerConfigurationIT {
 
     @Autowired
     RedisContainer container;
@@ -31,14 +31,14 @@ public class RedisContainerConfigurationIT {
 
     @Test
     @DisplayName("Container is running after initialization")
-    public void containerIsRunningAfterInitialization() {
+    void containerIsRunningAfterInitialization() {
         Assertions.assertTrue(container.isRunning(), "Container should be running after initialization");
     }
 
 
     @Test
     @DisplayName("Properties are set correctly")
-    public void testContainerProperties() {
+    void testContainerProperties() {
         String url = container.getRedisURI();
         String host = container.getHost();
         Integer port = container.getExposedPorts().stream().findFirst().get();

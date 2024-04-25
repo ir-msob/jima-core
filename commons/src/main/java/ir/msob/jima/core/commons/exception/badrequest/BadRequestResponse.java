@@ -68,7 +68,7 @@ public class BadRequestResponse extends AbstractExceptionResponse {
      * @return The status code for a bad request.
      */
     @Override
-    public Integer getStatus() {
+    public int getStatus() {
         return 400;
     }
 }

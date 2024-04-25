@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ContextConfiguration
 @Testcontainers
 @CommonsLog
-public class MongoContainerConfigurationIT {
+class MongoContainerConfigurationIT {
 
     @Value("${spring.data.mongodb.uri}")
     private String configUrl;
@@ -29,14 +29,14 @@ public class MongoContainerConfigurationIT {
 
     @Test
     @DisplayName("Container is running after initialization")
-    public void containerIsRunningAfterInitialization() {
+    void containerIsRunningAfterInitialization() {
         assertTrue(container.isRunning(), "Container should be running after initialization");
     }
 
 
     @Test
     @DisplayName("Properties are set correctly")
-    public void testContainerProperties() {
+    void testContainerProperties() {
         String containerUrl = container.getReplicaSetUrl();
         assertEquals(containerUrl, configUrl);
     }

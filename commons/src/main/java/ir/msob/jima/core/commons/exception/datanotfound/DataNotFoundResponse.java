@@ -61,7 +61,7 @@ public class DataNotFoundResponse extends AbstractExceptionResponse {
      * @return The status code for a data not found error.
      */
     @Override
-    public Integer getStatus() {
+    public int getStatus() {
         return 404;
     }
 }

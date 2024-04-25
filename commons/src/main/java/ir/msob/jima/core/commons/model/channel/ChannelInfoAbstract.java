@@ -22,7 +22,6 @@ import java.util.Map;
  * The 'getErrorCallback' method returns the errorCallback if it is not blank, otherwise it returns the callback.
  * The 'FN' enum represents the field names of the class.
  *
- * @param <ID>   The type of ID.
  * @param <USER> The type of user.
  */
 @Setter
@@ -30,7 +29,7 @@ import java.util.Map;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class ChannelInfoAbstract<ID extends Comparable<ID> & Serializable, USER extends BaseUser<ID>> implements BaseModel {
+public abstract class ChannelInfoAbstract<USER extends BaseUser> implements BaseModel {
     /**
      * The metadata of the channel information.
      */

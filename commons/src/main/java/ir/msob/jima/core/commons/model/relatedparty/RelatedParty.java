@@ -11,7 +11,6 @@ import java.util.Objects;
  * This class represents a related party with a type, an ID, a role, and a referred type.
  * It implements Comparable interface to provide a natural ordering of its instances.
  *
- * @param <ID> the type of the related party ID, which must be comparable and serializable
  */
 @Getter
 @Setter
@@ -19,7 +18,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RelatedParty<ID extends Comparable<ID> & Serializable> implements Comparable<RelatedParty<ID>>, Serializable {
+public class RelatedParty implements Comparable<RelatedParty>, Serializable {
 
     /**
      * The type of the related party.
@@ -31,7 +30,7 @@ public class RelatedParty<ID extends Comparable<ID> & Serializable> implements C
      * The ID of the related party.
      */
     @NotNull
-    private ID relatedPartyId;
+    private String relatedPartyId;
 
     /**
      * The role of the related party.
@@ -51,7 +50,7 @@ public class RelatedParty<ID extends Comparable<ID> & Serializable> implements C
      * @return a negative integer, zero, or a positive integer as this related party is less than, equal to, or greater than the specified related party
      */
     @Override
-    public int compareTo(RelatedParty<ID> o) {
+    public int compareTo(RelatedParty o) {
         if (this == o) {
             return 0;
         }
@@ -88,8 +87,7 @@ public class RelatedParty<ID extends Comparable<ID> & Serializable> implements C
         if (o == null)
             return false;
 
-        if (o instanceof RelatedParty<?> relatedParty) {
-            RelatedParty<ID> that = (RelatedParty<ID>) relatedParty;
+        if (o instanceof RelatedParty that) {
             return Objects.equals(this.getRelatedPartyId(), that.getRelatedPartyId())
                     && Objects.equals(this.getRelatedPartyType(), that.getRelatedPartyType())
                     && Objects.equals(this.getRole(), that.getRole())

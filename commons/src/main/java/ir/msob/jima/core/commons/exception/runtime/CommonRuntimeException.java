@@ -1,6 +1,7 @@
 package ir.msob.jima.core.commons.exception.runtime;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.exception.BaseRuntimeException;
 import ir.msob.jima.core.commons.util.MessageUtil;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import lombok.Setter;
 import java.io.Serial;
 
 /**
- * The 'CommonRuntimeException' class extends the 'RuntimeException' class and represents a common type of runtime exception.
+ * The 'CommonRuntimeException' class extends the 'BaseRuntimeException' class and represents a common type of runtime exception.
  * It includes a method for preparing a message with variables and several constructors for creating an instance of the exception with different sets of parameters.
  * The class also includes a serial version UID for the serializable class.
  *
@@ -17,7 +18,7 @@ import java.io.Serial;
 @Setter
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CommonRuntimeException extends RuntimeException {
+public class CommonRuntimeException extends BaseRuntimeException {
     /**
      * The serial version UID for the serializable class.
      */
