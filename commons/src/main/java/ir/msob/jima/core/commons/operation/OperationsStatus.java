@@ -15,6 +15,7 @@ public class OperationsStatus {
     public static final Integer GET_MANY = 200;
     public static final Integer GET_STREAM = 200;
     public static final Integer GET_PAGE = 200;
+    public static final Integer REDIRECT = 200;
     /* WRITE */
     public static final Integer SAVE = 201;
     public static final Integer SAVE_MANY = 201;
