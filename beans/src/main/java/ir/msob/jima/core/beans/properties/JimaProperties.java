@@ -50,8 +50,21 @@ public class JimaProperties {
      */
     private LockProperties lock = new LockProperties();
 
-
+    /**
+     * An instance of SearchProperties class.
+     * It holds properties related to search.
+     */
     private SearchProperties search = new SearchProperties();
 
+    /**
+     * An instance of HrefProperties class.
+     * It holds properties related to href.
+     */
     private HrefProperties href = new HrefProperties();
+
+    /**
+     * An instance of SignatureProperties class.
+     * It holds properties related to signature.
+     */
+    private SignatureProperties signature = new SignatureProperties();
 }
