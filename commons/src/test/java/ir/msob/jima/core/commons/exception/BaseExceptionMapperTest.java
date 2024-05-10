@@ -20,7 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 class BaseExceptionMapperTest {
 
@@ -40,55 +40,55 @@ class BaseExceptionMapperTest {
     @DisplayName("Should map BadRequestException to BadRequestResponse")
     void shouldMapBadRequestException() {
         BadRequestException exception = new BadRequestException("message", "field", "value");
-        assertTrue(baseExceptionMapper.getExceptionResponse(exception) instanceof BadRequestResponse);
+        assertInstanceOf(BadRequestResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
     @Test
     @DisplayName("Should map ConflictException to ConflictResponse")
     void shouldMapConflictException() {
         ConflictException exception = new ConflictException("message");
-        assertTrue(baseExceptionMapper.getExceptionResponse(exception) instanceof ConflictResponse);
+        assertInstanceOf(ConflictResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
     @Test
     @DisplayName("Should map DataNotFoundException to DataNotFoundResponse")
     void shouldMapDataNotFoundException() {
         DataNotFoundException exception = new DataNotFoundException("entity", "id", "class");
-        assertTrue(baseExceptionMapper.getExceptionResponse(exception) instanceof DataNotFoundResponse);
+        assertInstanceOf(DataNotFoundResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
     @Test
     @DisplayName("Should map DomainNotFoundException to DomainNotFoundResponse")
     void shouldMapDomainNotFoundException() {
         DomainNotFoundException exception = new DomainNotFoundException("id", null);
-        assertTrue(baseExceptionMapper.getExceptionResponse(exception) instanceof DomainNotFoundResponse);
+        assertInstanceOf(DomainNotFoundResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
     @Test
     @DisplayName("Should map CommonRuntimeException to CommonRuntimeResponse")
     void shouldMapCommonRuntimeException() {
         CommonRuntimeException exception = new CommonRuntimeException("message");
-        assertTrue(baseExceptionMapper.getExceptionResponse(exception) instanceof CommonRuntimeResponse);
+        assertInstanceOf(CommonRuntimeResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
     @Test
     @DisplayName("Should map ValidationException to ValidationResponse")
     void shouldMapValidationException() {
         ValidationException exception = new ValidationException("message", null);
-        assertTrue(baseExceptionMapper.getExceptionResponse(exception) instanceof ValidationResponse);
+        assertInstanceOf(ValidationResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
     @Test
     @DisplayName("Should map DuplicateException to DuplicateResponse")
     void shouldMapDuplicateException() {
         DuplicateException exception = new DuplicateException("key", "value", "message");
-        assertTrue(baseExceptionMapper.getExceptionResponse(exception) instanceof DuplicateResponse);
+        assertInstanceOf(DuplicateResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
     @Test
     @DisplayName("Should map ResourceNotFoundException to ResourceNotFoundResponse")
     void shouldMapResourceNotFoundException() {
         ResourceNotFoundException exception = new ResourceNotFoundException("message", "resource");
-        assertTrue(baseExceptionMapper.getExceptionResponse(exception) instanceof ResourceNotFoundResponse);
+        assertInstanceOf(ResourceNotFoundResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 }

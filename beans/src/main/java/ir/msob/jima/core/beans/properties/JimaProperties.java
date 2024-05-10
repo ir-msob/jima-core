@@ -67,4 +67,10 @@ public class JimaProperties {
      * It holds properties related to signature.
      */
     private SignatureProperties signature = new SignatureProperties();
+
+    /**
+     * An instance of MessageProperties class.
+     * It holds properties related to messages.
+     */
+    private MessageProperties message = new MessageProperties();
 }

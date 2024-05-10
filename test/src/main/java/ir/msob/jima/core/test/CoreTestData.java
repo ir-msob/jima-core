@@ -79,7 +79,7 @@ public class CoreTestData {
     }
 
     public static SortedSet<RelatedParty> DEFAULT_REQUIRED_RELATED_PARTIES() {
-        return Sets.newTreeSet(Collections.singleton((RelatedParty) DEFAULT_REQUIRED_RELATED_PARTY));
+        return Sets.newTreeSet(Collections.singleton(DEFAULT_REQUIRED_RELATED_PARTY));
     }
 
     public static void UPDATED_REQUIRED_RELATED_PARTIES(SortedSet<RelatedParty> relatedParties) {
@@ -87,7 +87,7 @@ public class CoreTestData {
     }
 
     public static SortedSet<RelatedParty> DEFAULT_RELATED_PARTIES() {
-        return Sets.newTreeSet(Collections.singleton((RelatedParty) DEFAULT_RELATED_PARTY));
+        return Sets.newTreeSet(Collections.singleton(DEFAULT_RELATED_PARTY));
     }
 
     public static void UPDATED_RELATED_PARTIES(SortedSet<RelatedParty> relatedParties) {

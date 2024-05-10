@@ -72,7 +72,7 @@ public interface BaseCoreRestResourceTest<ID extends Comparable<ID> & Serializab
      */
     @SneakyThrows
     default void prepareUserInfoHeader(org.springframework.http.HttpHeaders httpHeaders) {
-        httpHeaders.add(ir.msob.jima.core.commons.Constants.USER_INFO_HEADER_NAME, UserInfoUtil.encodeUser(getObjectMapper(), this.<ID, USER>getSampleUser()));
+        httpHeaders.add(ir.msob.jima.core.commons.Constants.USER_INFO_HEADER_NAME, UserInfoUtil.encodeUser(getObjectMapper(), this.getSampleUser()));
     }
 
     /**

@@ -1,11 +1,13 @@
 package ir.msob.jima.core.commons.model.channel;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.commons.model.channel.message.*;
 import ir.msob.jima.core.commons.model.criteria.BaseCriteria;
 import ir.msob.jima.core.commons.model.dto.BaseDto;
 import ir.msob.jima.core.commons.model.dto.ModelType;
 import ir.msob.jima.core.commons.security.BaseUser;
+import lombok.SneakyThrows;
 
 import java.io.Serializable;
 
@@ -24,6 +26,13 @@ public interface BaseChannelTypeReference<
         USER extends BaseUser,
         DTO extends BaseDto<ID>,
         C extends BaseCriteria<ID>> {
+    /**
+     * Get the object mapper for JSON serialization and deserialization.
+     *
+     * @return The ObjectMapper instance.
+     */
+    ObjectMapper getObjectMapper();
+
     /**
      * Gets the type reference for 'ModelType'.
      *
@@ -44,6 +53,13 @@ public interface BaseChannelTypeReference<
      * @return The type reference for 'PageableMessage'.
      */
     TypeReference<ChannelMessage<USER, PageableMessage<ID, C>>> getCriteriaPageReferenceType();
+
+    /**
+     * Gets the type reference for 'PageMessage'.
+     *
+     * @return The type reference for 'PageMessage'.
+     */
+    TypeReference<ChannelMessage<USER, PageMessage<ID, DTO>>> getPageReferenceType();
 
     /**
      * Gets the type reference for 'JsonPatchMessage'.
@@ -74,9 +90,29 @@ public interface BaseChannelTypeReference<
     TypeReference<ChannelMessage<USER, IdMessage<ID>>> getIdReferenceType();
 
     /**
+     * Gets the type reference for 'IdsMessage'.
+     *
+     * @return The type reference for 'IdsMessage'.
+     */
+    TypeReference<ChannelMessage<USER, IdsMessage<ID>>> getIdsReferenceType();
+
+    /**
      * Gets the type reference for 'IdJsonPatchMessage'.
      *
      * @return The type reference for 'IdJsonPatchMessage'.
      */
     TypeReference<ChannelMessage<USER, IdJsonPatchMessage<ID>>> getIdJsonPatchReferenceType();
+
+    /**
+     * Gets the type reference for 'LongMessage'.
+     *
+     * @return The type reference for 'LongMessage'.
+     */
+    TypeReference<ChannelMessage<USER, LongMessage>> getLongReferenceType();
+
+
+    @SneakyThrows
+    default <T> T cast(String s, TypeReference<T> typeReference) {
+        return getObjectMapper().readValue(s, typeReference);
+    }
 }

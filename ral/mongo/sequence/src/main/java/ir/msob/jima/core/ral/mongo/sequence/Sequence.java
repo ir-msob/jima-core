@@ -20,7 +20,7 @@ public class Sequence implements BaseDomain<String> {
     public static final String DOMAIN_NAME = "Sequence";
     private String id;
     @Field
-    private long value = 1l;
+    private long value = 1L;
 
     @Override
     public String getDomainId() {

@@ -15,5 +15,6 @@
     <modules>
         <module>commons</module>
         <module>beans</module>
+        <module>test</module>
     </modules>
 </project>

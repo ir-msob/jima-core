@@ -4,35 +4,24 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ir.msob.jima.core</groupId>
-        <artifactId>core-api-kafka</artifactId>
+        <artifactId>core-ral-kafka</artifactId>
         <version>1.1.20</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>core-api-kafka-commons</artifactId>
+    <artifactId>core-ral-kafka-it</artifactId>
     <name>commons</name>
     <description>commons</description>
     <packaging>jar</packaging>
     <dependencies>
-        <!-- MSob -->
-        <dependency>
-            <groupId>ir.msob.jima.core</groupId>
-            <artifactId>core-commons</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
+        <!-- Kafka -->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
-        <!-- Test -->
+
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>test</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
     </dependencies>
 </project>

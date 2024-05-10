@@ -6,8 +6,6 @@ import ir.msob.jima.core.commons.model.channel.ChannelMessage;
 import ir.msob.jima.core.commons.model.dto.ModelType;
 import ir.msob.jima.core.commons.resource.BaseResource;
 import ir.msob.jima.core.commons.security.BaseUser;
-import ir.msob.jima.core.commons.security.BaseUserService;
-import ir.msob.jima.core.commons.util.GenericTypeUtil;
 
 import java.io.Serializable;
 import java.util.Optional;
@@ -20,38 +18,14 @@ import java.util.Optional;
  * @param <ID>   The type of ID.
  * @param <USER> The type of BaseUser.
  */
-public interface BaseListener<ID extends Comparable<ID> & Serializable, USER extends BaseUser> {
-    /**
-     * Get the class type for the identifier (e.g., entity primary key).
-     *
-     * @return The class type for the identifier.
-     */
-    default Class<ID> getIdClass() {
-        return (Class<ID>) GenericTypeUtil.resolveTypeArguments(this.getClass(), BaseResource.class, 0);
-    }
-
-    /**
-     * Get the class type representing a user, typically derived from 'BaseUser'.
-     *
-     * @return The class type for the user.
-     */
-    default Class<USER> getUserClass() {
-        return (Class<USER>) GenericTypeUtil.resolveTypeArguments(this.getClass(), BaseResource.class, 1);
-    }
-
+public interface BaseListener<ID extends Comparable<ID> & Serializable, USER extends BaseUser>
+        extends BaseResource<ID, USER> {
     /**
      * Gets the ObjectMapper for serializing and deserializing messages.
      *
      * @return The ObjectMapper instance.
      */
     ObjectMapper getObjectMapper();
-
-    /**
-     * Gets the UserService for retrieving user information.
-     *
-     * @return The UserService instance.
-     */
-    BaseUserService getUserService();
 
     /**
      * Gets the AsyncClient for sending asynchronous messages.

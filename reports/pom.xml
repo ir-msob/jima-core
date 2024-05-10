@@ -36,7 +36,7 @@
                 </dependency>
                 <dependency>
                     <groupId>ir.msob.jima.core</groupId>
-                    <artifactId>core-ral-kafka-commons</artifactId>
+                    <artifactId>core-ral-kafka-it</artifactId>
                     <version>${project.parent.version}</version>
                 </dependency>
                 <dependency>

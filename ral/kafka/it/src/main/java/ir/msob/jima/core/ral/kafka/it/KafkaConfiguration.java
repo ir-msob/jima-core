@@ -1,4 +1,4 @@
-package ir.msob.jima.core.ral.kafka.commons;
+package ir.msob.jima.core.ral.kafka.it;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
