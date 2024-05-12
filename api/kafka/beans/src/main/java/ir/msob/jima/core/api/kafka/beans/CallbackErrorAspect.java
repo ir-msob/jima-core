@@ -45,7 +45,6 @@ public class CallbackErrorAspect {
      *
      * @param point    The join point of the method
      * @param throwing The thrown exception
-     * @throws Throwable If an error occurs during handling
      */
     @AfterThrowing(value = "@annotation(ir.msob.jima.core.commons.annotation.async.CallbackError)", throwing = "throwing")
     public void afterThrowing(JoinPoint point, Throwable throwing) throws JsonProcessingException {
