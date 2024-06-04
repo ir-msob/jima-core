@@ -49,19 +49,24 @@ public class SignatureProperties {
         private String id;
 
         /**
-         * The full name or description of the signature algorithm.
+         * The hash algorithm used for digital signature operations.
          */
-        private String algorithm;
+        private String hashAlgorithm;
+
+        /**
+         * The encryption algorithm used for encryption and decryption operations.
+         */
+        private String encryptionAlgorithm;
 
         /**
          * The private key associated with this signature algorithm.
          */
-        private PrivateKey privateKey;
+        private String privateKey;
 
         /**
          * The public key associated with this signature algorithm.
          */
-        private PublicKey publicKey;
+        private String publicKey;
 
         /**
          * A flag indicating if this signature algorithm is currently enabled for use.

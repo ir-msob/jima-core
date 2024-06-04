@@ -1,13 +1,15 @@
 {
   "name": "@ir-msob/jima-core",
-  "version": "1.1.20",
+  "version": "$jima-commons.version",
   "scripts": {
+    "update-version": "node update-version.js",
+    "restore-backup": "node restore-backup.js",
     "ng": "ng",
     "start": "ng serve",
-    "build": "./ng-build.sh",
-    "publish": "./ng-publish.sh",
+    "build": "npm run update-version && ./ng-build.sh && npm run restore-backup",
+    "publish": "npm run update-version && ./ng-publish.sh && npm run restore-backup",
     "watch": "ng build --watch --configuration development",
-    "test": "./ng-test.sh"
+    "test": "npm run update-version && ./ng-test.sh && npm run restore-backup"
   },
   "private": false,
   "dependencies": {
@@ -28,6 +30,7 @@
     "@angular/cli": "~17.3.2",
     "@angular/compiler-cli": "^17.0.0",
     "@types/jasmine": "~5.1.0",
+    "cross-env": "^7.0.3",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
