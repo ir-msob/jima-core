@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>ir.msob.jima.parent</groupId>
+    <artifactId>jima-parent</artifactId>
+    <version>1.2.0</version>
+  </parent>
+  <groupId>ir.msob.jima.core</groupId>
+  <artifactId>jima-core</artifactId>
+  <version>${jima-commons.version}</version>
+  <packaging>pom</packaging>
+  <name>jima-core</name>
+  <description>Jima Core Project</description>
+  <modules>
+    <module>commons</module>
+    <module>test</module>
+    <module>beans</module>
+    <module>ral</module>
+    <module>api</module>
+    <module>web</module>
+    <module>reports</module>
+  </modules>
+  <scm>
+    <connection>scm:git:https://github.com/ir-msob/jima-core.git</connection>
+    <developerConnection>scm:git:https://github.com/ir-msob/jima-core.git</developerConnection>
+    <url>scm:git:https://github.com/ir-msob/jima-core.git</url>
+  </scm>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
         <groupId>ir.msob.jima.parent</groupId>
-        <artifactId>jima-parent</artifactId>
-        <version>1.2.0</version>
-    </parent>
-    <groupId>ir.msob.jima.core</groupId>
-    <artifactId>jima-core</artifactId>
-    <version>${jima-commons.version}</version>
-    <name>jima-core</name>
-    <description>Jima Core Project</description>
-    <packaging>pom</packaging>
-    <scm>
-        <url>scm:git:https://github.com/ir-msob/jima-core.git</url>
-        <connection>scm:git:https://github.com/ir-msob/jima-core.git</connection>
-        <developerConnection>scm:git:https://github.com/ir-msob/jima-core.git</developerConnection>
-    </scm>
-    <modules>
-        <module>commons</module>
-        <module>test</module>
-        <module>beans</module>
-        <module>ral</module>
-        <module>api</module>
-        <module>web</module>
-        <module>reports</module>
-    </modules>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>ir.msob.jima.parent</groupId>
-                <artifactId>jima-parent-bom</artifactId>
-                <version>${jima-commons.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+        <artifactId>jima-parent-bom</artifactId>
+        <version>${jima-commons.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
