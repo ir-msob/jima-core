@@ -7,6 +7,6 @@ spring:
 jima:
   test-container:
     minio:
-      image: "minio/minio:RELEASE.2023-10-07T15-07-38Z.fips"
+      image: "minio/minio:RELEASE.2024-07-10T18-41-49Z.fips"
       access-key: "minioadmin"
       secret-key: "minioadmin"

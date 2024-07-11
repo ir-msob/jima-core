@@ -5,4 +5,4 @@ spring:
 jima:
   test-container:
     mongo:
-      image: "mongo:7-jammy"
+      image: "mongo:8.0.0-rc11"

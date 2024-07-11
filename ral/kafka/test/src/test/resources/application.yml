@@ -8,4 +8,4 @@ spring:
 jima:
   test-container:
     kafka:
-      image: "confluentinc/cp-kafka:7.5.1"
+      image: "confluentinc/cp-kafka:7.5.5"
