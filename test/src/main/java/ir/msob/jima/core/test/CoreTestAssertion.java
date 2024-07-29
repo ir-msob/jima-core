@@ -84,8 +84,8 @@ public class CoreTestAssertion {
      * @param <ID>   The type of the identifier.
      */
     public static <ID extends Comparable<ID> & Serializable> void assertMandatoryRelatedDomain(RelatedDomain<ID> before, RelatedDomain<ID> after) {
-        Assertions.assertThat(before.getRelatedDomainType()).isEqualTo(after.getRelatedDomainType());
-        Assertions.assertThat(before.getRelatedDomainId()).isEqualTo(after.getRelatedDomainId());
+        Assertions.assertThat(before.getRelatedType()).isEqualTo(after.getRelatedType());
+        Assertions.assertThat(before.getRelatedId()).isEqualTo(after.getRelatedId());
     }
 
     /**
@@ -106,8 +106,8 @@ public class CoreTestAssertion {
      * @param after  The RelatedParty after an operation.
      */
     public static void assertMandatoryRelatedParty(RelatedParty before, RelatedParty after) {
-        Assertions.assertThat(before.getRelatedPartyType()).isEqualTo(after.getRelatedPartyType());
-        Assertions.assertThat(before.getRelatedPartyId()).isEqualTo(after.getRelatedPartyId());
+        Assertions.assertThat(before.getRelatedType()).isEqualTo(after.getRelatedType());
+        Assertions.assertThat(before.getRelatedId()).isEqualTo(after.getRelatedId());
     }
 
     /**

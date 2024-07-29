@@ -1,8 +1,7 @@
 package ir.msob.jima.core.commons.model.relatedparty;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.model.criteria.filter.BaseFilters;
-import ir.msob.jima.core.commons.model.criteria.filter.Filter;
+import ir.msob.jima.core.commons.model.relatedobject.RelatedObjectFilters;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,24 +17,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RelatedPartyFilters implements BaseFilters {
-    /**
-     * Filter for the type of the related party.
-     */
-    private Filter<String> relatedPartyType;
+public class RelatedPartyFilters extends RelatedObjectFilters<String> {
 
-    /**
-     * Filter for the ID of the related party.
-     */
-    private Filter<String> relatedPartyId;
-
-    /**
-     * Filter for the role of the related party.
-     */
-    private Filter<String> role;
-
-    /**
-     * Filter for the type of the entity that referred to this related party.
-     */
-    private Filter<String> referredType;
 }

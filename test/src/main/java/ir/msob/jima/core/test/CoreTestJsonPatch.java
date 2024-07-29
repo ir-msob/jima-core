@@ -53,8 +53,8 @@ public class CoreTestJsonPatch {
      */
     public static <ID extends Comparable<ID> & Serializable> List<JsonPatchOperation> RELATED_DOMAINS_JSON_PATCH_OPERATION(ID id) throws JsonPointerException {
         List<JsonPatchOperation> operations = new ArrayList<>();
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedDomain.FN.relatedDomainType)), TextNode.valueOf(UPDATED_STRING)));
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedDomain.FN.relatedDomainId)), TextNode.valueOf(id.toString())));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedDomain.FN.relatedType)), TextNode.valueOf(UPDATED_STRING)));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedDomain.FN.relatedId)), TextNode.valueOf(id.toString())));
         operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedDomain.FN.role)), TextNode.valueOf(UPDATED_STRING)));
         operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedDomain.FN.referredType)), TextNode.valueOf(UPDATED_STRING)));
         return operations;
@@ -70,8 +70,8 @@ public class CoreTestJsonPatch {
      */
     public static <ID extends Comparable<ID> & Serializable> List<JsonPatchOperation> RELATED_PARTIES_JSON_PATCH_OPERATION(ID id) throws JsonPointerException {
         List<JsonPatchOperation> operations = new ArrayList<>();
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedParty.FN.relatedPartyType)), TextNode.valueOf(UPDATED_STRING)));
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedParty.FN.relatedPartyId)), TextNode.valueOf(id.toString())));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedParty.FN.relatedType)), TextNode.valueOf(UPDATED_STRING)));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedParty.FN.relatedId)), TextNode.valueOf(id.toString())));
         operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedParty.FN.role)), TextNode.valueOf(UPDATED_STRING)));
         operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedParty.FN.referredType)), TextNode.valueOf(UPDATED_STRING)));
         return operations;

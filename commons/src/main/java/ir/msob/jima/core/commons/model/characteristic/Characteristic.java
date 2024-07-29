@@ -1,12 +1,12 @@
 package ir.msob.jima.core.commons.model.characteristic;
 
 import ir.msob.jima.core.commons.model.DataType;
+import ir.msob.jima.core.commons.model.keyvalue.KeyValue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.Comparator;
 import java.util.Objects;
 
 /**
@@ -26,18 +26,7 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Characteristic implements Comparable<Characteristic>, Serializable {
-    /**
-     * The key of the characteristic.
-     */
-    @NotBlank
-    private String key;
-
-    /**
-     * The value of the characteristic.
-     */
-    private Serializable value;
+public class Characteristic extends KeyValue<String, Serializable> {
 
     /**
      * The data type of the characteristic.
@@ -45,27 +34,9 @@ public class Characteristic implements Comparable<Characteristic>, Serializable 
     @NotNull
     private DataType dataType;
 
-    /**
-     * Compares this characteristic with another characteristic based on their keys.
-     * If the keys are equal, it returns 0. If the keys are not equal, it compares their identity hash codes.
-     *
-     * @param o The other characteristic.
-     * @return The comparison result.
-     */
     @Override
-    public int compareTo(Characteristic o) {
-        if (this == o) {
-            return 0;
-        }
-
-        if (o != null && (this.getKey() != null && o.getKey() != null)) {
-            return this.getKey().compareTo(o.getKey());
-
-        }
-
-        return Comparator
-                .comparing(System::identityHashCode)
-                .compare(this, o);
+    public void setKey(@NotBlank String key) {
+        super.setKey(key);
     }
 
     /**
@@ -95,7 +66,7 @@ public class Characteristic implements Comparable<Characteristic>, Serializable 
      */
     @Override
     public int hashCode() {
-        return Objects.hash(key, value, dataType);
+        return Objects.hash(getKey(), getValue(), dataType);
     }
 
     /**
