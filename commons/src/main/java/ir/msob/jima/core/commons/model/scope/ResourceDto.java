@@ -1,10 +1,13 @@
 package ir.msob.jima.core.commons.model.scope;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.model.ResourceType;
 import ir.msob.jima.core.commons.model.dto.BaseType;
 import lombok.*;
 
 import java.util.Comparator;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 @Setter
 @Getter
@@ -15,7 +18,8 @@ import java.util.Comparator;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResourceDto implements BaseType, Comparable<ResourceDto> {
     private String value;
-    private String type;
+    private ResourceType type;
+    private SortedSet<ScopeDto> scopes = new TreeSet<>();
 
     public static ResourceDto clone(Resource resource) {
         return ResourceDto.builder()
@@ -36,7 +40,8 @@ public class ResourceDto implements BaseType, Comparable<ResourceDto> {
             return valueComparison;
         }
 
-        return nullSafeComparator.compare(this.type, o.type);
+        Comparator<ResourceType> nullSafeComparatorResourceType = Comparator.nullsFirst(ResourceType::compareTo);
+        return nullSafeComparatorResourceType.compare(this.type, o.type);
     }
 
     @Override

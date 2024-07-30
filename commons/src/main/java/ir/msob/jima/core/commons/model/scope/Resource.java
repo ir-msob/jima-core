@@ -1,5 +1,7 @@
 package ir.msob.jima.core.commons.model.scope;
 
+import ir.msob.jima.core.commons.model.ResourceType;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -26,5 +28,5 @@ public @interface Resource {
      *
      * @return The type of the Resource.
      */
-    String type();
+    ResourceType type();
 }

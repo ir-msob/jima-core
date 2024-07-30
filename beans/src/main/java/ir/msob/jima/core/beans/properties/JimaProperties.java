@@ -73,4 +73,10 @@ public class JimaProperties {
      * It holds properties related to messages.
      */
     private MessageProperties message = new MessageProperties();
+
+    /**
+     * An instance of ScopeProperties class.
+     * It holds properties related to scope.
+     */
+    private ScopeProperties scope = new ScopeProperties();
 }
