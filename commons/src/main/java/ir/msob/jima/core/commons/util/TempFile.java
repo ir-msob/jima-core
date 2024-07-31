@@ -1,6 +1,8 @@
 package ir.msob.jima.core.commons.util;
 
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
+import ir.msob.jima.core.commons.logger.Logger;
+import ir.msob.jima.core.commons.logger.LoggerFactory;
 import lombok.Getter;
 import lombok.SneakyThrows;
 
@@ -17,6 +19,7 @@ import java.util.List;
  */
 @Getter
 public class TempFile {
+    private static final Logger log = LoggerFactory.getLog(TempFile.class);
 
     public static final String PATH_SEPRATOR = "/";
     // List to keep track of created temporary files.
@@ -49,7 +52,11 @@ public class TempFile {
      */
     public static void deleteFile(File file) {
         if (file != null && file.exists()) {
-            file.delete();
+            boolean isDeleted = file.delete();
+
+            if (!isDeleted) {
+                log.debug("Failed to delete the file: {}", file.getAbsolutePath());
+            }
         }
     }
 
