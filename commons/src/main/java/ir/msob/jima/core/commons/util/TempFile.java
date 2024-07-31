@@ -7,6 +7,8 @@ import lombok.SneakyThrows;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.attribute.FileAttribute;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +32,9 @@ public class TempFile {
      */
     public TempFile(String tempDirectoryName) {
         try {
-            // Create a temporary directory based on the provided name.
-            this.tempDirectory = Files.createTempDirectory(tempDirectoryName).toFile();
+            // Create a temporary directory with a unique name based on the provided name.
+            FileAttribute<?> attributes = PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------"));
+            this.tempDirectory = Files.createTempDirectory(tempDirectoryName + "_", attributes).toFile();
         } catch (IOException e) {
             // If an error occurs during directory creation, clean up and throw an exception.
             deleteFile(tempDirectory);

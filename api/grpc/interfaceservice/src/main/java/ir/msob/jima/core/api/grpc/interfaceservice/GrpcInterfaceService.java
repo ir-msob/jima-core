@@ -70,7 +70,11 @@ public class GrpcInterfaceService extends AbstractMojo {
             modifyGrpcServiceClass(compilationUnit, serviceInterfaceName);
 
             File outputFile = new File(outputDirectoryFile, grpcClassFileName);
-            inputFile.delete();
+            boolean isDeleted = inputFile.delete();
+
+            if (!isDeleted) {
+                throw new RuntimeException("Failed to delete the input file: " + inputFile.getAbsolutePath());
+            }
             writeContentToFile(outputFile, compilationUnit.toString());
 
             logInfo("Generated Java class: " + outputFile.getAbsolutePath());

@@ -10,13 +10,14 @@ import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.data.domain.Page;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Custom JSON deserializer for deserializing a JSON representation of a Spring Data {@link Page} object.
  * This class is annotated with {@link JsonComponent} to be automatically discovered by Spring Boot.
  */
 @JsonComponent
-public class PageDeserializer extends JsonDeserializer<Page<?>> {
+public class PageDeserializer<M extends Serializable> extends JsonDeserializer<Page<M>> {
 
     /**
      * Deserialize a JSON representation into a {@link Page} object.
@@ -27,14 +28,16 @@ public class PageDeserializer extends JsonDeserializer<Page<?>> {
      * @throws IOException If an error occurs during JSON parsing.
      */
     @Override
-    public Page<?> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+    public Page<M> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         // Get the ObjectCodec from the JsonParser
         ObjectCodec pageableObjectCodec = jsonParser.getCodec();
 
         // Read the JSON representation into a JsonNode
         JsonNode pageableJsonNode = pageableObjectCodec.readTree(jsonParser);
 
+        Class<M> dtoClass = (Class<M>) deserializationContext.getContextualType().getRawClass();
+
         // Use the PaginationUtil class to prepare a Page object from the JsonNode and JsonParser
-        return PaginationUtil.preparePage(pageableJsonNode, jsonParser);
+        return PaginationUtil.preparePage(pageableJsonNode, jsonParser,dtoClass);
     }
 }

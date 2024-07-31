@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Objects;
 
@@ -27,7 +28,7 @@ class PaginationUtilTest {
         JsonNode jsonNode = jsonParser.readValueAsTree();
 
         // Act
-        PageImpl<?> page = PaginationUtil.preparePage(jsonNode, jsonParser);
+        PageImpl<Serializable> page = PaginationUtil.preparePage(jsonNode, jsonParser, Serializable.class);
 
         // Assert
         assertNotNull(page);
@@ -77,7 +78,7 @@ class PaginationUtilTest {
         JsonNode jsonNode = jsonParser.readValueAsTree();
 
         // Act
-        var content = PaginationUtil.prepareContent(jsonNode, jsonParser);
+        var content = PaginationUtil.prepareContent(jsonNode, jsonParser, Serializable.class);
 
         // Assert
         assertNotNull(content);
