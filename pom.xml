@@ -13,6 +13,9 @@
   <packaging>pom</packaging>
   <name>jima-core</name>
   <description>Jima Core Project</description>
+  <properties>
+    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/reports/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+  </properties>
   <modules>
     <module>commons</module>
     <module>test</module>
