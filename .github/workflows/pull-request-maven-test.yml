@@ -15,6 +15,12 @@ jobs:
     - id: Checkout
       name: Checkout
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - id: Fetch_all_branches
+      name: Fetch all branches
+      run: git fetch --all
 
     - id: Setup_JDK_21
       name: Set up JDK 21
