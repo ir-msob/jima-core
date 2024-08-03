@@ -35,7 +35,7 @@ jobs:
 
     - id: Maven_Test
       name: Maven Test
-      run: mvn clean test -P test
+      run: mvn clean test -P test,report
     - id: SonarCloud_Scan
       name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v2.3.0
