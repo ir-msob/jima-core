@@ -36,3 +36,8 @@ jobs:
     - id: Maven_Test
       name: Maven Test
       run: mvn clean test -P test
+    - id: SonarCloud_Scan
+      name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@v2.3.0
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
