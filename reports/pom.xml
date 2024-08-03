@@ -11,10 +11,10 @@
     <artifactId>core-reports</artifactId>
     <name>reports</name>
     <description>reports</description>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <profiles>
         <profile>
-            <id>dev</id>
+            <id>report</id>
             <properties>
                 <spring.profiles.active>dev</spring.profiles.active>
             </properties>
