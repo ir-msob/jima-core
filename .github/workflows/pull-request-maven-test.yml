@@ -50,7 +50,7 @@ jobs:
       name: Maven Test
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn clean verify -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ir-msob -Dsonar.projectKey=ir-msob_jima-core -Dsonar.coverage.jacoco.xmlReportPaths=reports/target/site/jacoco-aggregate/jacoco.xml sonar:sonar -P test,report,coverage -s settings.xml 
+      run: mvn clean verify -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ir-msob -Dsonar.projectKey=ir-msob_jima-core sonar:sonar -P test,report,coverage -s settings.xml 
     - id: SonarCloud_Scan
       name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v2.3.0
