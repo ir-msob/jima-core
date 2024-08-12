@@ -41,6 +41,8 @@ jobs:
 
     - id: Maven_Test
       name: Maven Test
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn clean install -P test,report sonar:sonar
     - id: SonarCloud_Scan
       name: SonarCloud Scan
