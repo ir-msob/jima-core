@@ -12,9 +12,6 @@
     <name>reports</name>
     <description>reports</description>
     <packaging>jar</packaging>
-    <properties>
-        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-    </properties>
     <profiles>
         <profile>
             <id>report</id>
