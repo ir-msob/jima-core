@@ -13,9 +13,6 @@
   <packaging>pom</packaging>
   <name>jima-core</name>
   <description>Jima Core Project</description>
-  <properties>
-    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/reports/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-  </properties>
   <modules>
     <module>commons</module>
     <module>test</module>
@@ -41,13 +38,4 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.sonarsource.scanner.maven</groupId>
-        <artifactId>sonar-maven-plugin</artifactId>
-        <version>4.0.0.4121</version>
-      </plugin>
-    </plugins>
-  </build>
 </project>
