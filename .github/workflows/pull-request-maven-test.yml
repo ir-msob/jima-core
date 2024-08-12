@@ -39,6 +39,13 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
+    - name: Create settings.xml
+      run: |
+        echo '<settings>' > settings.xml
+        echo '  <pluginGroups>' >> settings.xml
+        echo '    <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>' >> settings.xml
+        echo '  </pluginGroups>' >> settings.xml
+        echo '</settings>' >> settings.xml
     - id: Maven_Test
       name: Maven Test
       env:
@@ -46,7 +53,8 @@ jobs:
       run: mvn clean install -P test,report sonar:sonar \
           -Dsonar.host.url='https://sonarcloud.io' \
           -Dsonar.organization=ir-msob \
-          -Dsonar.projectKey=ir-msob_jima-core
+          -Dsonar.projectKey=ir-msob_jima-core \
+          -s settings.xml
     - id: SonarCloud_Scan
       name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v2.3.0
