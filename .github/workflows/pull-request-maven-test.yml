@@ -15,6 +15,12 @@ jobs:
     - id: Checkout
       name: Checkout
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - id: Fetch_all_branches
+      name: Fetch all branches
+      run: git fetch --all
 
     - id: Setup_JDK_21
       name: Set up JDK 21
@@ -35,4 +41,9 @@ jobs:
 
     - id: Maven_Test
       name: Maven Test
-      run: mvn clean test -P test
+      run: mvn clean install -P test,report
+    - id: SonarCloud_Scan
+      name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@v2.3.0
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
