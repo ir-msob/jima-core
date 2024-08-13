@@ -14,9 +14,9 @@
     <packaging>pom</packaging>
     <name>jima-core</name>
     <description>Jima Core Project</description>
-    <properties>
-        <sonar.coverage.jacoco.xmlReportPaths>/home/runner/work/jima-core/jima-core/reports/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-    </properties>
+<!--    <properties>-->
+<!--        <sonar.coverage.jacoco.xmlReportPaths>/home/runner/work/jima-core/jima-core/reports/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>-->
+<!--    </properties>-->
     <modules>
         <module>commons</module>
         <module>test</module>
@@ -24,7 +24,7 @@
         <module>ral</module>
         <module>api</module>
         <module>web</module>
-        <module>reports</module>
+<!--        <module>reports</module>-->
     </modules>
     <scm>
         <connection>scm:git:https://github.com/ir-msob/jima-core.git</connection>
