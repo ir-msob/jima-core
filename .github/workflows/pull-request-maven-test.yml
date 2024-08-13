@@ -50,7 +50,9 @@ jobs:
       name: Maven Test
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn clean verify -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ir-msob -Dsonar.projectKey=ir-msob_jima-core sonar:sonar -Dsonar.coverage.jacoco.xmlReportPaths=/home/runner/work/jima-core/jima-core/reports/target/site/jacoco-aggregate/jacoco.xml -P test,report,coverage -s settings.xml 
+      run: mvn clean verify -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=ir-msob -Dsonar.projectKey=ir-msob_jima-core sonar:sonar -Dsonar.coverage.jacoco.xmlReportPaths=/home/runner/work/jima-core/jima-core/reports/target/site/jacoco-aggregate/jacoco.xml -P test,report,coverage -s settings.xml
+    - name: List files in target directory
+      run: ls -R /home/runner/work/jima-core/jima-core/reports/target/site/jacoco-aggregate/
     - id: SonarCloud_Scan
       name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@v2.3.0
