@@ -15,8 +15,7 @@
     <name>jima-core</name>
     <description>Jima Core Project</description>
     <properties>
-        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../reports/target/site/jacoco-aggregate/jacoco.xml
-        </sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.coverage.jacoco.xmlReportPaths>/home/runner/work/jima-core/jima-core/reports/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
     <modules>
         <module>commons</module>
