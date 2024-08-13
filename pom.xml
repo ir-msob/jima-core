@@ -24,7 +24,7 @@
         <module>ral</module>
         <module>api</module>
         <module>web</module>
-<!--        <module>reports</module>-->
+        <module>reports</module>
     </modules>
     <scm>
         <connection>scm:git:https://github.com/ir-msob/jima-core.git</connection>
