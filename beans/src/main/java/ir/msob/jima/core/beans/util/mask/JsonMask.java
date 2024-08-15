@@ -154,4 +154,41 @@ public class JsonMask {
 
         return patchUtil.setValueToPath(result, values[0], resultArray);
     }
+
+    private Object processArrayToArrays2(Mask entry, Object o, Object result) throws JsonProcessingException, JsonPointerException, JsonPatchException {
+        String[] keys = entry.getFrom().split(Constants.ARRAY_IN_JSON_REGX);
+        String[] values = entry.getTo().split(Constants.ARRAY_IN_JSON_REGX);
+
+        List<Object> sourceObjects = JsonPath.read(o, keys[0]);
+
+        List<Object> targetObjects;
+        try {
+            targetObjects = JsonPath.read(result, values[0]);
+        } catch (PathNotFoundException e) {
+            Object sampleObject = objectMapper.readValue("{}", Object.class);
+            targetObjects = new ArrayList<>();
+            for (int i = 0; i < sourceObjects.size(); i++) {
+                targetObjects.add(sampleObject);
+            }
+            result = patchUtil.setValueToPath(result, values[0], new ArrayList<>());
+        }
+
+        List<Object> resultArray = new ArrayList<>();
+        for (int i = 0; i < sourceObjects.size(); i++) {
+            Object sourceObjectItem = sourceObjects.get(i);
+            Object targetObjectItem = targetObjects.get(i);
+
+            Object filedData = getFieldData(sourceObjectItem, "$" + keys[1]);
+
+            try {
+                JsonPath.read(targetObjectItem, "$" + values[1]);
+            } catch (PathNotFoundException e) {
+                targetObjectItem = patchUtil.setValueToPath(targetObjectItem, "$" + values[1], objectMapper.readValue("{}", Object.class));
+            }
+            targetObjectItem = patchUtil.setValueToPath(targetObjectItem, "$" + values[1], filedData);
+            resultArray.add(targetObjectItem);
+        }
+
+        return patchUtil.setValueToPath(result, values[0], resultArray);
+    }
 }
