@@ -18,13 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * This class provides utility methods for masking JSON data based on specified masks.
- * It provides methods to get field data from a JSON object, mask a JSON object based on a collection of masks,
- * move data from one part of a JSON object to another, process non-array to non-array data movement,
- * and process array to array data movement.
- * It uses the ObjectMapper class for converting values to JSON nodes and the PatchUtil class for applying patches to JSON objects.
- */
+
 @Component
 @RequiredArgsConstructor
 public class JsonMask {
