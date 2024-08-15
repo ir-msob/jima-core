@@ -47,6 +47,14 @@ public class BaseN {
         divide(number, base, list);
         return prepareEncoded(chars, list);
     }
+    public static String encodew(Long number, String characters) {
+        char[] chars = characters.toCharArray();
+        Long base = (long) (characters.length() - 1);
+
+        List<Long> list = new ArrayList<>();
+        divide(number, base, list);
+        return prepareEncoded(chars, list);
+    }
 
     /**
      * Helper method to prepare the encoded string.
