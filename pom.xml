@@ -17,6 +17,10 @@
 <!--    <properties>-->
 <!--        <sonar.coverage.jacoco.xmlReportPaths>/home/runner/work/jima-core/jima-core/reports/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>-->
 <!--    </properties>-->
+    <properties>
+        <sonar.organization>ir-msob</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    </properties>
     <modules>
         <module>commons</module>
         <module>test</module>
