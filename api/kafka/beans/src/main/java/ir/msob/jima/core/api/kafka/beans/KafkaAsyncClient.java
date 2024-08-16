@@ -1,5 +1,6 @@
 package ir.msob.jima.core.api.kafka.beans;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.commons.annotation.methodstats.MethodStats;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
@@ -35,6 +36,16 @@ public class KafkaAsyncClient implements BaseAsyncClient {
     @SneakyThrows
     @Override
     public <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel, Optional<USER> user) {
+        // Set the user information in the ChannelMessage.
+        if (channelMessage.getUser() == null)
+            channelMessage.setUser(user.orElse(null));
+
+        // Serialize the ChannelMessage to JSON and send it to the Kafka channel.
+        String msg = objectMapper.writeValueAsString(channelMessage);
+        kafkaTemplate.executeInTransaction(ops -> ops.send(channel, msg));
+    }
+
+    public <USER extends BaseUser, DATA extends ModelType> void send2(ChannelMessage<USER, DATA> channelMessage, String channel, Optional<USER> user) throws JsonProcessingException {
         // Set the user information in the ChannelMessage.
         if (channelMessage.getUser() == null)
             channelMessage.setUser(user.orElse(null));
