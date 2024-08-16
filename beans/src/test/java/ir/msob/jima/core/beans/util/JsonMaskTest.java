@@ -85,4 +85,15 @@ public class JsonMaskTest {
         // Verify that the maskedMap contains the expected value.
         Assertions.assertEquals("value", maskedMap.get("to").get("path").get(0).get("subpath"));
     }
+
+
+    // Test moving data from an array to an array JSON structure.
+    @Test
+    void testProcessArrayToArrays2() throws JsonProcessingException, JsonPatchException, JsonPointerException {
+        // Define a mask to transform JSON paths.
+        JsonMask mask = new JsonMask(objectMapper, new PatchUtil(objectMapper));
+        Object o = mask.processArrayToArrays2(null, null, null);
+        // Verify that the maskedMap contains the expected value.
+        Assertions.assertNull(o);
+    }
 }

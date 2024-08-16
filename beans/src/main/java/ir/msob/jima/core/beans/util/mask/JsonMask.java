@@ -160,7 +160,7 @@ public class JsonMask {
 
         return patchUtil.setValueToPath(result, values[0], resultArray);
     }
-    private Object processArrayToArrays2(Mask entry, Object o, Object result) throws JsonProcessingException, JsonPointerException, JsonPatchException {
+    public Object processArrayToArrays2(Mask entry, Object o, Object result) throws JsonProcessingException, JsonPointerException, JsonPatchException {
         String[] keys = entry.getFrom().split(Constants.ARRAY_IN_JSON_REGX);
         String[] values = entry.getTo().split(Constants.ARRAY_IN_JSON_REGX);
 
