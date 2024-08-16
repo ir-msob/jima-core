@@ -50,4 +50,4 @@ jobs:
       name: Maven Test
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn install -P test,report,coverage
+      run: mvn install org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -P test,report,coverage
