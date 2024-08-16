@@ -17,10 +17,10 @@
     <!--    <properties>-->
     <!--        <sonar.coverage.jacoco.xmlReportPaths>/home/runner/work/jima-core/jima-core/reports/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>-->
     <!--    </properties>-->
-    <properties>
-        <sonar.organization>ir-msob</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    </properties>
+<!--    <properties>-->
+<!--        <sonar.organization>ir-msob</sonar.organization>-->
+<!--        <sonar.host.url>https://sonarcloud.io</sonar.host.url>-->
+<!--    </properties>-->
     <modules>
         <module>commons</module>
         <module>test</module>
@@ -46,40 +46,21 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <profiles>
-        <profile>
-            <id>report</id>
-            <properties>
-                <spring.profiles.active>dev</spring.profiles.active>
-            </properties>
-            <build>
-                <plugins>
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            <id>report</id>-->
+<!--            <properties>-->
+<!--                <spring.profiles.active>dev</spring.profiles.active>-->
+<!--            </properties>-->
+<!--            <build>-->
+<!--                <plugins>-->
 <!--                    <plugin>-->
-<!--                        <groupId>org.jacoco</groupId>-->
-<!--                        <artifactId>jacoco-maven-plugin</artifactId>-->
-<!--                        <version>${jacoco-maven-plugin.version}</version>-->
-<!--                        <executions>-->
-<!--                            <execution>-->
-<!--                                <goals>-->
-<!--                                    <goal>prepare-agent</goal>-->
-<!--                                </goals>-->
-<!--                            </execution>-->
-<!--                            <execution>-->
-<!--                                <id>report</id>-->
-<!--                                <phase>verify</phase>-->
-<!--                                <goals>-->
-<!--                                    <goal>report</goal>-->
-<!--                                </goals>-->
-<!--                            </execution>-->
-<!--                        </executions>-->
+<!--                        <groupId>org.sonarsource.scanner.maven</groupId>-->
+<!--                        <artifactId>sonar-maven-plugin</artifactId>-->
+<!--                        <version>4.0.0.4121</version>-->
 <!--                    </plugin>-->
-                    <plugin>
-                        <groupId>org.sonarsource.scanner.maven</groupId>
-                        <artifactId>sonar-maven-plugin</artifactId>
-                        <version>4.0.0.4121</version>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+<!--                </plugins>-->
+<!--            </build>-->
+<!--        </profile>-->
+<!--    </profiles>-->
 </project>
