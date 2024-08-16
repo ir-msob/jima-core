@@ -36,6 +36,21 @@ class PatchUtilTest {
     }
 
     @Test
+    void testApplyJsonPatch2() throws JsonPatchException, JsonProcessingException, JsonPointerException {
+        // Create a JSON patch and an initial JSON object
+        List<JsonPatchOperation> operations = new ArrayList<>();
+        operations.add(new AddOperation(new JsonPointer(PATH), objectMapper.convertValue(VALUE, JsonNode.class)));
+        JsonPatch jsonPatch = new JsonPatch(operations);
+        Map<String, String> initialObject = new HashMap<>();
+
+        // Apply the JSON patch
+        Map<String, String> result = (Map<String, String>) patchUtil.applyJsonPatch2(jsonPatch, initialObject);
+
+        // Assert the result
+        Assertions.assertEquals(VALUE, result.get(PATH_FIELD));
+    }
+
+    @Test
     void testApplyJsonPatch() throws JsonPatchException, JsonProcessingException, JsonPointerException {
         // Create a JSON patch and an initial JSON object
         List<JsonPatchOperation> operations = new ArrayList<>();

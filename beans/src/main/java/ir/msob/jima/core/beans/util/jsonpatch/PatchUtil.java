@@ -72,6 +72,10 @@ public class PatchUtil {
         JsonNode patched = jsonPatch.apply(objectMapper.convertValue(o, JsonNode.class));
         return objectMapper.treeToValue(patched, Object.class);
     }
+    public Object applyJsonPatch2(JsonPatch jsonPatch, Object o) throws JsonPatchException, JsonProcessingException {
+        JsonNode patched = jsonPatch.apply(objectMapper.convertValue(o, JsonNode.class));
+        return objectMapper.treeToValue(patched, Object.class);
+    }
 
     /**
      * This method prepares a JSON patch for adding a new value at the specified path in a JSON object.
