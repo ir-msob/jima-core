@@ -50,8 +50,7 @@ jobs:
         name: Maven Test
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn clean verify \
-          org.sonarsource.scanner.maven:sonar-maven-plugin:${{ vars.SONAR_MAVEN_PLUGIN_VERSION }}:sonar \
+        run: mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:${{ vars.SONAR_MAVEN_PLUGIN_VERSION }}:sonar \
           -Dsonar.host.url=${{ vars.SONAR_HOST_URL }} \
           -Dsonar.java.binaries=${{ vars.SONAR_JAVA_BINARIES }} \
           -Dsonar.java.libraries=${{ vars.SONAR_JAVA_LIBRARIES }} \
