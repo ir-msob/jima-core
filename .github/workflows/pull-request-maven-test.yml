@@ -46,19 +46,20 @@ jobs:
         key: ${{ runner.os }}-sonar
         restore-keys: ${{ runner.os }}-sonar
 
-    - name: Create settings.xml
-      run: |
-        echo '<settings>' > settings.xml
-        echo '  <pluginGroups>' >> settings.xml
-        echo '    <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>' >> settings.xml
-        echo '  </pluginGroups>' >> settings.xml
-        echo '</settings>' >> settings.xml
+#    - name: Create settings.xml
+#      run: |
+#        echo '<settings>' > settings.xml
+#        echo '  <pluginGroups>' >> settings.xml
+#        echo '    <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>' >> settings.xml
+#        echo '  </pluginGroups>' >> settings.xml
+#        echo '</settings>' >> settings.xml
     - id: Maven_Test
       name: Maven Test
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ir-msob_jima-core -P test,report,coverage -s settings.xml
+#      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ir-msob_jima-core -P test,report,coverage -s settings.xml
+      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ir-msob_jima-core -P test,report,coverage
 #    - id: SonarCloud_Scan
 #      name: SonarCloud Scan
 #      uses: SonarSource/sonarcloud-github-action@v2.3.0
