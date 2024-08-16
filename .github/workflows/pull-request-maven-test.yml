@@ -60,8 +60,8 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 #      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ir-msob_jima-core -P test,report,coverage -s settings.xml
       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ir-msob_jima-core -P test,report,coverage
-#    - id: SonarCloud_Scan
-#      name: SonarCloud Scan
-#      uses: SonarSource/sonarcloud-github-action@v2.3.0
-#      env:
-#        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    - id: SonarCloud_Scan
+      name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@v2.3.0
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
