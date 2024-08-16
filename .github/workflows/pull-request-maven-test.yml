@@ -50,11 +50,11 @@ jobs:
         name: Maven Test
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:${{ env.SONAR_MAVEN_PLUGIN_VERSION }}:sonar \
-          -Dsonar.host.url=${{ env.SONAR_HOST_URL }} \
-          -Dsonar.java.binaries=${{ env.SONAR_JAVA_BINARIES }} \
-          -Dsonar.java.libraries=${{ env.SONAR_JAVA_LIBRARIES }} \
-          -Dsonar.organization=${{ env.SONAR_ORGANIZATION }} \
-          -Dsonar.projectKey=${{ env.SONAR_PROJECT_KEY }} \
-          -Dsonar.coverage.jacoco.xmlReportPaths=${{ env.SONAR_COVERAGE_JACOCO_XML_REPORT_PATHS }} \
+        run: mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:${{ vars.SONAR_MAVEN_PLUGIN_VERSION }}:sonar \
+          -Dsonar.host.url=${{ vars.SONAR_HOST_URL }} \
+          -Dsonar.java.binaries=${{ vars.SONAR_JAVA_BINARIES }} \
+          -Dsonar.java.libraries=${{ vars.SONAR_JAVA_LIBRARIES }} \
+          -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }} \
+          -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }} \
+          -Dsonar.coverage.jacoco.xmlReportPaths=${{ vars.SONAR_COVERAGE_JACOCO_XML_REPORT_PATHS }} \
           -P test,report,coverage
