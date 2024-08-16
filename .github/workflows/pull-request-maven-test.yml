@@ -49,7 +49,6 @@ jobs:
     - id: Maven_Test
       name: Maven Test
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn install org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ir-msob_jima-core -P test,report,coverage
 
