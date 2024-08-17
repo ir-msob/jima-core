@@ -9,3 +9,7 @@ jobs:
       issues: write
       pull-requests: write
     uses: ir-msob/jima-workflow/.github/workflows/issue-opened.yml@main
+    with:
+      default_issue_assignee: ${{ vars.DEFAULT_ISSUE_ASSIGNEE }}
+    secrets:
+      github_token: ${{ secrets.GITHUB_TOKEN }}
