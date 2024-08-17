@@ -1,0 +1,19 @@
+name: Release - created
+on:
+  release:
+    types: [created]
+
+jobs:
+  invoke_release_created:
+    permissions:
+      contents: read
+      packages: write
+    uses: ir-msob/jima-workflow/.github/workflows/release-created.yml@main
+    with:
+      npm_repository_url: ${{ vars.NPM_REPOSITORY_URL }}
+    secrets:
+      npm_repository_token: ${{ secrets.NPM_REPOSITORY_TOKEN }}
+      gpg_secret_key: ${{ secrets.GPG_SECRET_KEY }}
+      maven_repository_username: ${{ secrets.MAVEN_REPOSITORY_USERNAME }}
+      maven_repository_token: ${{ secrets.MAVEN_REPOSITORY_TOKEN }}
+      gpg_secret_key_password: ${{ secrets.GPG_SECRET_KEY_PASSWORD }}

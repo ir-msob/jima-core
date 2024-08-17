@@ -1,0 +1,21 @@
+name: Push - main
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  invoke_push_main:
+    permissions:
+      contents: read
+      packages: write
+    uses: ir-msob/jima-workflow/.github/workflows/push-main.yml@main
+    with:
+      sonar_host_url: ${{ vars.SONAR_HOST_URL }}
+      sonar_java_binaries: ${{ vars.SONAR_JAVA_BINARIES }}
+      sonar_java_libraries: ${{ vars.SONAR_JAVA_LIBRARIES }}
+      sonar_organization: ${{ vars.SONAR_ORGANIZATION }}
+      sonar_project_key: ${{ vars.SONAR_PROJECT_KEY }}
+      sonar_coverage_jacoco_xml_report_paths: ${{ vars.SONAR_COVERAGE_JACOCO_XML_REPORT_PATHS }}
+      sonar_maven_plugin_version: ${{ vars.SONAR_MAVEN_PLUGIN_VERSION }}
+    secrets:
+      sonar_token: ${{ secrets.SONAR_TOKEN }}
