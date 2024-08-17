@@ -5,33 +5,18 @@ on:
 
 jobs:
   invoke_pull_request_main:
-    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
       issues: write
       pull-requests: write
-    steps:
-      - name: Set up environment variables
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
-          SONAR_JAVA_BINARIES: ${{ vars.SONAR_JAVA_BINARIES }}
-          SONAR_JAVA_LIBRARIES: ${{ vars.SONAR_JAVA_LIBRARIES }}
-          SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
-          SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
-          SONAR_COVERAGE_JACoco_XML_REPORT_PATHS: ${{ vars.SONAR_COVERAGE_JACOCO_XML_REPORT_PATHS }}
-          SONAR_MAVEN_PLUGIN_VERSION: ${{ vars.SONAR_MAVEN_PLUGIN_VERSION }}
-        run: echo "Environment variables set."
-
-      - name: Invoke Shared Workflow
-        uses: ir-msob/jima-workflow/.github/workflows/pull-request-main.yml@main
-        with:
-          sonar_token: ${{ env.SONAR_TOKEN }}
-          sonar_host_url: ${{ env.SONAR_HOST_URL }}
-          sonar_java_binaries: ${{ env.SONAR_JAVA_BINARIES }}
-          sonar_java_libraries: ${{ env.SONAR_JAVA_LIBRARIES }}
-          sonar_organization: ${{ env.SONAR_ORGANIZATION }}
-          sonar_project_key: ${{ env.SONAR_PROJECT_KEY }}
-          sonar_coverage_jacoco_xml_report_paths: ${{ env.SONAR_COVERAGE_JACOCO_XML_REPORT_PATHS }}
-          sonar_maven_plugin_version: ${{ env.SONAR_MAVEN_PLUGIN_VERSION }}
+    uses: ir-msob/jima-workflow/.github/workflows/pull-request-main.yml@main
+    with:
+      sonar_token: ${{ secrets.SONAR_TOKEN }}
+      sonar_host_url: ${{ vars.SONAR_HOST_URL }}
+      sonar_java_binaries: ${{ vars.SONAR_JAVA_BINARIES }}
+      sonar_java_libraries: ${{ vars.SONAR_JAVA_LIBRARIES }}
+      sonar_organization: ${{ vars.SONAR_ORGANIZATION }}
+      sonar_project_key: ${{ vars.SONAR_PROJECT_KEY }}
+      sonar_coverage_jacoco_xml_report_paths: ${{ vars.SONAR_COVERAGE_JACOCO_XML_REPORT_PATHS }}
+      sonar_maven_plugin_version: ${{ vars.SONAR_MAVEN_PLUGIN_VERSION }}
