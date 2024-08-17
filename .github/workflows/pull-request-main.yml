@@ -1,0 +1,13 @@
+name: Pull Request - main
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  invoke_auto_assign:
+    permissions:
+      contents: read
+      packages: write
+      issues: write
+      pull-requests: write
+    uses: ir-msob/jima-workflow/.github/workflows/pull-request-main.yml@main
