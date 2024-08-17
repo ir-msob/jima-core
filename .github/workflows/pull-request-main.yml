@@ -4,10 +4,19 @@ on:
     branches: [ "main" ]
 
 jobs:
-  invoke_auto_assign:
+  invoke_pull_request_main:
     permissions:
       contents: read
       packages: write
       issues: write
       pull-requests: write
     uses: ir-msob/jima-workflow/.github/workflows/pull-request-main.yml@main
+    with:
+      sonar_token: ${{ secrets.SONAR_TOKEN }}
+      sonar_host_url: ${{ vars.SONAR_HOST_URL }}
+      sonar_java_binaries: ${{ vars.SONAR_JAVA_BINARIES }}
+      sonar_java_libraries: ${{ vars.SONAR_JAVA_LIBRARIES }}
+      sonar_organization: ${{ vars.SONAR_ORGANIZATION }}
+      sonar_project_key: ${{ vars.SONAR_PROJECT_KEY }}
+      sonar_coverage_jacoco_xml_report_paths: ${{ vars.SONAR_COVERAGE_JACOCO_XML_REPORT_PATHS }}
+      sonar_maven_plugin_version: ${{ vars.SONAR_MAVEN_PLUGIN_VERSION }}
