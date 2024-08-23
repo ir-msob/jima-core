@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +29,8 @@ public class PaginationUtil {
      * @return A {@link PageImpl} instance.
      * @throws IOException If an error occurs during JSON parsing.
      */
-    public static <M extends Serializable> PageImpl<M> preparePage(JsonNode jsonNode, JsonParser jsonParser, Class<M> dtoClass) throws IOException {
-        List<M> content = prepareContent(jsonNode.get("content"), jsonParser, dtoClass);
+    public static PageImpl<?> preparePage(JsonNode jsonNode, JsonParser jsonParser) throws IOException {
+        List<?> content = prepareContent(jsonNode.get("content"), jsonParser);
         Pageable pageable = preparePageableFromPage(jsonNode);
         long totalElements = asLong(jsonNode.get("totalElements"));
         return new PageImpl<>(content, pageable, totalElements);
@@ -70,11 +69,11 @@ public class PaginationUtil {
      * @return A list of content objects.
      * @throws IOException If an error occurs during JSON parsing.
      */
-    public static <M extends Serializable> List<M> prepareContent(JsonNode jsonNode, JsonParser jsonParser, Class<M> dtoClass) throws IOException {
-        List<M> result = new ArrayList<>();
+    public static List<?> prepareContent(JsonNode jsonNode, JsonParser jsonParser) throws IOException {
+        List<Object> result = new ArrayList<>();
         if (jsonNode.isArray()) {
             for (JsonNode itemJsonNode : jsonNode) {
-                M item = jsonParser.getCodec().treeToValue(itemJsonNode, dtoClass);
+                Object item = jsonParser.getCodec().treeToValue(itemJsonNode, Object.class);
                 result.add(item);
             }
         }

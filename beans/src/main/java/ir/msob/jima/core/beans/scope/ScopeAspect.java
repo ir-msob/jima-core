@@ -33,7 +33,7 @@ public class ScopeAspect {
      * @param joinPoint The JoinPoint in AOP, it represents a point in the application where the action took place.
      */
     @Around("@annotation(ir.msob.jima.core.commons.model.scope.Scope)")
-    public void aroundScope(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object aroundScope(ProceedingJoinPoint joinPoint) throws Throwable {
         // Get the target object and its class
         Object targetObject = joinPoint.getTarget();
         Class<?> resourceClass = targetObject.getClass();
@@ -51,12 +51,14 @@ public class ScopeAspect {
             // If the operation is not present, throw a ResourceNotFoundException
             if (!ConditionalOnOperationUtil.hasOperation(scope.value(), resourceClass))
                 throw new ResourceNotFoundException("Unable to find resource", scope.value());
+            return joinPoint.proceed();
         } else if (isValidResourceType(resource.type(), ResourceType.KAFKA)) {
             // Check if the operation specified in the @Scope annotation is present for the resource class
             // If the operation is present, allow the method to proceed
             if (ConditionalOnOperationUtil.hasOperation(scope.value(), resourceClass))
-                joinPoint.proceed();
+               return joinPoint.proceed();
         }
+        return null;
     }
 
     private static boolean isValidResourceType(ResourceType resourceType, ResourceType... types) {

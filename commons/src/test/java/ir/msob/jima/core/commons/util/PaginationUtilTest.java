@@ -28,7 +28,7 @@ class PaginationUtilTest {
         JsonNode jsonNode = jsonParser.readValueAsTree();
 
         // Act
-        PageImpl<Serializable> page = PaginationUtil.preparePage(jsonNode, jsonParser, Serializable.class);
+        PageImpl<?> page = PaginationUtil.preparePage(jsonNode, jsonParser);
 
         // Assert
         assertNotNull(page);
@@ -78,7 +78,7 @@ class PaginationUtilTest {
         JsonNode jsonNode = jsonParser.readValueAsTree();
 
         // Act
-        var content = PaginationUtil.prepareContent(jsonNode, jsonParser, Serializable.class);
+        var content = PaginationUtil.prepareContent(jsonNode, jsonParser);
 
         // Assert
         assertNotNull(content);

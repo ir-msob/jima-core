@@ -17,7 +17,7 @@ import java.io.Serializable;
  * This class is annotated with {@link JsonComponent} to be automatically discovered by Spring Boot.
  */
 @JsonComponent
-public class PageDeserializer<M extends Serializable> extends JsonDeserializer<Page<M>> {
+public class PageDeserializer extends JsonDeserializer<Page<?>> {
 
     /**
      * Deserialize a JSON representation into a {@link Page} object.
@@ -28,16 +28,14 @@ public class PageDeserializer<M extends Serializable> extends JsonDeserializer<P
      * @throws IOException If an error occurs during JSON parsing.
      */
     @Override
-    public Page<M> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+    public Page<?> deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         // Get the ObjectCodec from the JsonParser
         ObjectCodec pageableObjectCodec = jsonParser.getCodec();
 
         // Read the JSON representation into a JsonNode
         JsonNode pageableJsonNode = pageableObjectCodec.readTree(jsonParser);
 
-        Class<M> dtoClass = (Class<M>) deserializationContext.getContextualType().getRawClass();
-
         // Use the PaginationUtil class to prepare a Page object from the JsonNode and JsonParser
-        return PaginationUtil.preparePage(pageableJsonNode, jsonParser,dtoClass);
+        return PaginationUtil.preparePage(pageableJsonNode, jsonParser);
     }
 }
