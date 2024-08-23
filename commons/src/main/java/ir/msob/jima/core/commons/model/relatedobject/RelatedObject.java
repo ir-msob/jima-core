@@ -8,10 +8,10 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Base class representing a related entity with a type, an ID, a role, and a referred type.
- * It implements Comparable interface to provide a natural ordering of its instances.
+ * Base class representing a related object with a type, an ID, a role, and a referring type.
+ * Implements Comparable interface to provide natural ordering of instances.
  *
- * @param <ID> the type of the related entity ID, which must be comparable and serializable
+ * @param <ID> the type of the related object ID, which must be comparable and serializable
  */
 @Getter
 @Setter
@@ -21,79 +21,79 @@ import java.util.Objects;
 public class RelatedObject<ID extends Comparable<ID> & Serializable> implements Comparable<RelatedObject<ID>>, Serializable {
 
     /**
-     * The type of the related entity.
+     * The type of the related object.
      */
     @NotBlank
-    private String relatedType;
+    private String objectType;
 
     /**
-     * The ID of the related entity.
+     * The ID of the related object.
      */
     @NotNull
-    private ID relatedId;
+    private ID objectId;
 
     /**
-     * The role of the related entity.
+     * The role of the related object.
      */
     private String role;
 
     /**
-     * The type of the entity that referred to this related entity.
+     * The type of the object that referred to this related object.
      */
-    private String referredType;
+    private String referringType;
 
     /**
-     * Compares this related entity with the specified related entity for order.
-     * Returns a negative integer, zero, or a positive integer as this related entity is less than, equal to, or greater than the specified related entity.
+     * The status of the related object.
+     */
+    private String status;
+
+    /**
+     * Compares this related object with the specified related object for order.
      *
-     * @param o the related entity to be compared
-     * @return a negative integer, zero, or a positive integer as this related entity is less than, equal to, or greater than the specified related entity
+     * @param other the related object to be compared
+     * @return a negative integer, zero, or a positive integer as this related object is less than, equal to, or greater than the specified related object
      */
     @Override
-    public int compareTo(RelatedObject<ID> o) {
-        if (this == o) {
+    public int compareTo(RelatedObject<ID> other) {
+        if (this == other) {
             return 0;
         }
 
-        int idCompare = Objects.compare(this.getRelatedId(), o.getRelatedId(), Comparable::compareTo);
-        if (idCompare != 0) {
-            return idCompare;
+        int idComparison = Objects.compare(this.getObjectId(), other.getObjectId(), Comparable::compareTo);
+        if (idComparison != 0) {
+            return idComparison;
         }
 
-        int typeCompare = Objects.compare(this.getRelatedType(), o.getRelatedType(), String::compareTo);
-        if (typeCompare != 0) {
-            return typeCompare;
+        int typeComparison = Objects.compare(this.getObjectType(), other.getObjectType(), String::compareTo);
+        if (typeComparison != 0) {
+            return typeComparison;
         }
 
-        int roleCompare = Objects.compare(this.getRole(), o.getRole(), String::compareTo);
-        if (roleCompare != 0) {
-            return roleCompare;
+        int roleComparison = Objects.compare(this.getRole(), other.getRole(), String::compareTo);
+        if (roleComparison != 0) {
+            return roleComparison;
         }
 
-        return Objects.compare(this.getReferredType(), o.getReferredType(), String::compareTo);
+        return Objects.compare(this.getReferringType(), other.getReferringType(), String::compareTo);
     }
 
     /**
      * Indicates whether some other object is "equal to" this one.
      *
-     * @param o the reference object with which to compare
+     * @param obj the reference object with which to compare
      * @return true if this object is the same as the obj argument; false otherwise
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
 
-        if (o == null)
-            return false;
-
-        if (o instanceof RelatedObject<?> that) {
-            return Objects.equals(this.getRelatedId(), that.getRelatedId())
-                    && Objects.equals(this.getRelatedType(), that.getRelatedType())
-                    && Objects.equals(this.getRole(), that.getRole())
-                    && Objects.equals(this.getReferredType(), that.getReferredType());
-        }
-        return false;
+        RelatedObject<?> that = (RelatedObject<?>) obj;
+        return Objects.equals(objectId, that.objectId) &&
+                Objects.equals(objectType, that.objectType) &&
+                Objects.equals(role, that.role) &&
+                Objects.equals(referringType, that.referringType) &&
+                Objects.equals(status, that.status);
     }
 
     /**
@@ -103,13 +103,13 @@ public class RelatedObject<ID extends Comparable<ID> & Serializable> implements 
      */
     @Override
     public int hashCode() {
-        return Objects.hash(relatedType, relatedId, role, referredType);
+        return Objects.hash(objectType, objectId, role, referringType, status);
     }
 
     /**
-     * Enum representing the field names of the RelatedEntity class.
+     * Enum representing the field names of the RelatedObject class.
      */
     public enum FN {
-        relatedType, relatedId, role, referredType
+        objectType, objectId, role, referringType, status
     }
 }

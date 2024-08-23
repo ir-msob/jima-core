@@ -73,7 +73,7 @@ public class CoreTestAssertion {
      */
     public static <ID extends Comparable<ID> & Serializable> void assertOptionalRelatedDomain(RelatedDomain<ID> before, RelatedDomain<ID> after) {
         Assertions.assertThat(before.getRole()).isEqualTo(after.getRole());
-        Assertions.assertThat(before.getReferredType()).isEqualTo(after.getReferredType());
+        Assertions.assertThat(before.getReferringType()).isEqualTo(after.getReferringType());
     }
 
     /**
@@ -84,8 +84,8 @@ public class CoreTestAssertion {
      * @param <ID>   The type of the identifier.
      */
     public static <ID extends Comparable<ID> & Serializable> void assertMandatoryRelatedDomain(RelatedDomain<ID> before, RelatedDomain<ID> after) {
-        Assertions.assertThat(before.getRelatedType()).isEqualTo(after.getRelatedType());
-        Assertions.assertThat(before.getRelatedId()).isEqualTo(after.getRelatedId());
+        Assertions.assertThat(before.getObjectType()).isEqualTo(after.getObjectType());
+        Assertions.assertThat(before.getObjectId()).isEqualTo(after.getObjectId());
     }
 
     /**
@@ -96,7 +96,7 @@ public class CoreTestAssertion {
      */
     public static void assertOptionalRelatedParty(RelatedParty before, RelatedParty after) {
         Assertions.assertThat(before.getRole()).isEqualTo(after.getRole());
-        Assertions.assertThat(before.getReferredType()).isEqualTo(after.getReferredType());
+        Assertions.assertThat(before.getReferringType()).isEqualTo(after.getReferringType());
     }
 
     /**
@@ -106,8 +106,8 @@ public class CoreTestAssertion {
      * @param after  The RelatedParty after an operation.
      */
     public static void assertMandatoryRelatedParty(RelatedParty before, RelatedParty after) {
-        Assertions.assertThat(before.getRelatedType()).isEqualTo(after.getRelatedType());
-        Assertions.assertThat(before.getRelatedId()).isEqualTo(after.getRelatedId());
+        Assertions.assertThat(before.getObjectType()).isEqualTo(after.getObjectType());
+        Assertions.assertThat(before.getObjectId()).isEqualTo(after.getObjectId());
     }
 
     /**

@@ -151,58 +151,58 @@ public class CoreTestData {
 
     public static void initDefaultRelatedParty() {
         RelatedParty relatedParty = new RelatedParty();
-        relatedParty.setRelatedType(DEFAULT_STRING);
-        relatedParty.setRelatedId(DEFAULT_PARTY_ID);
+        relatedParty.setObjectType(DEFAULT_STRING);
+        relatedParty.setObjectId(DEFAULT_PARTY_ID);
         relatedParty.setRole(DEFAULT_STRING);
-        relatedParty.setReferredType(DEFAULT_STRING);
+        relatedParty.setReferringType(DEFAULT_STRING);
         DEFAULT_RELATED_PARTY = relatedParty;
     }
 
     public static void UPDATED_RELATED_PARTY(RelatedParty relatedParty) {
-        relatedParty.setRelatedType(UPDATED_STRING);
-        relatedParty.setRelatedId(UPDATED_PARTY_ID);
+        relatedParty.setObjectType(UPDATED_STRING);
+        relatedParty.setObjectId(UPDATED_PARTY_ID);
         relatedParty.setRole(UPDATED_STRING);
-        relatedParty.setReferredType(UPDATED_STRING);
+        relatedParty.setReferringType(UPDATED_STRING);
     }
 
     public static void initDefaultRequiredRelatedParty() {
         RelatedParty relatedParty = new RelatedParty();
-        relatedParty.setRelatedType(DEFAULT_STRING);
-        relatedParty.setRelatedId(DEFAULT_PARTY_ID);
+        relatedParty.setObjectType(DEFAULT_STRING);
+        relatedParty.setObjectId(DEFAULT_PARTY_ID);
         DEFAULT_REQUIRED_RELATED_PARTY = relatedParty;
     }
 
     public static void UPDATED_REQUIRED_RELATED_PARTY(RelatedParty relatedParty) {
-        relatedParty.setRelatedType(UPDATED_STRING);
-        relatedParty.setRelatedId(UPDATED_PARTY_ID);
+        relatedParty.setObjectType(UPDATED_STRING);
+        relatedParty.setObjectId(UPDATED_PARTY_ID);
     }
 
     public static <ID extends Comparable<ID> & Serializable> void initDefaultRelatedDomain() {
         RelatedDomain<ID> relatedDomain = new RelatedDomain<>();
-        relatedDomain.setRelatedType(DEFAULT_STRING);
-        relatedDomain.setRelatedId((ID) DEFAULT_ID);
+        relatedDomain.setObjectType(DEFAULT_STRING);
+        relatedDomain.setObjectId((ID) DEFAULT_ID);
         relatedDomain.setRole(DEFAULT_STRING);
-        relatedDomain.setReferredType(DEFAULT_STRING);
+        relatedDomain.setReferringType(DEFAULT_STRING);
         DEFAULT_RELATED_DOMAIN = relatedDomain;
     }
 
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_DOMAIN(RelatedDomain<ID> relatedDomain) {
-        relatedDomain.setRelatedType(UPDATED_STRING);
-        relatedDomain.setRelatedId((ID) UPDATED_ID);
+        relatedDomain.setObjectType(UPDATED_STRING);
+        relatedDomain.setObjectId((ID) UPDATED_ID);
         relatedDomain.setRole(UPDATED_STRING);
-        relatedDomain.setReferredType(UPDATED_STRING);
+        relatedDomain.setReferringType(UPDATED_STRING);
     }
 
     public static <ID extends Comparable<ID> & Serializable> void initDefaultRequiredRelatedDomain() {
         RelatedDomain<ID> relatedDomain = new RelatedDomain<>();
-        relatedDomain.setRelatedType(DEFAULT_STRING);
-        relatedDomain.setRelatedId((ID) DEFAULT_ID);
+        relatedDomain.setObjectType(DEFAULT_STRING);
+        relatedDomain.setObjectId((ID) DEFAULT_ID);
         DEFAULT_REQUIRED_RELATED_DOMAIN = relatedDomain;
     }
 
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_DOMAIN(RelatedDomain<ID> relatedDomain) {
-        relatedDomain.setRelatedType(UPDATED_STRING);
-        relatedDomain.setRelatedId((ID) UPDATED_ID);
+        relatedDomain.setObjectType(UPDATED_STRING);
+        relatedDomain.setObjectId((ID) UPDATED_ID);
     }
 
     public static Characteristic initDefaultRequiredCharacteristic() {
