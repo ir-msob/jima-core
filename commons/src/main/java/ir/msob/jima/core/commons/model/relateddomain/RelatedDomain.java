@@ -2,6 +2,7 @@ package ir.msob.jima.core.commons.model.relateddomain;
 
 import ir.msob.jima.core.commons.model.relatedobject.RelatedObject;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 
@@ -14,7 +15,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
-@Builder
+@SuperBuilder
 public class RelatedDomain<ID extends Comparable<ID> & Serializable> extends RelatedObject<ID> {
 }

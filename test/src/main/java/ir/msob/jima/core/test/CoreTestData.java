@@ -150,7 +150,7 @@ public class CoreTestData {
     }
 
     public static void initDefaultRelatedParty() {
-        RelatedParty relatedParty = new RelatedParty();
+        RelatedParty relatedParty = RelatedParty.builder().build();
         relatedParty.setObjectType(DEFAULT_STRING);
         relatedParty.setObjectId(DEFAULT_PARTY_ID);
         relatedParty.setRole(DEFAULT_STRING);
@@ -166,7 +166,7 @@ public class CoreTestData {
     }
 
     public static void initDefaultRequiredRelatedParty() {
-        RelatedParty relatedParty = new RelatedParty();
+        RelatedParty relatedParty = RelatedParty.builder().build();
         relatedParty.setObjectType(DEFAULT_STRING);
         relatedParty.setObjectId(DEFAULT_PARTY_ID);
         DEFAULT_REQUIRED_RELATED_PARTY = relatedParty;
@@ -178,7 +178,7 @@ public class CoreTestData {
     }
 
     public static <ID extends Comparable<ID> & Serializable> void initDefaultRelatedDomain() {
-        RelatedDomain<ID> relatedDomain = new RelatedDomain<>();
+        RelatedDomain<ID> relatedDomain = RelatedDomain.<ID>builder().build();
         relatedDomain.setObjectType(DEFAULT_STRING);
         relatedDomain.setObjectId((ID) DEFAULT_ID);
         relatedDomain.setRole(DEFAULT_STRING);
@@ -194,7 +194,7 @@ public class CoreTestData {
     }
 
     public static <ID extends Comparable<ID> & Serializable> void initDefaultRequiredRelatedDomain() {
-        RelatedDomain<ID> relatedDomain = new RelatedDomain<>();
+        RelatedDomain<ID> relatedDomain = RelatedDomain.<ID>builder().build();
         relatedDomain.setObjectType(DEFAULT_STRING);
         relatedDomain.setObjectId((ID) DEFAULT_ID);
         DEFAULT_REQUIRED_RELATED_DOMAIN = relatedDomain;

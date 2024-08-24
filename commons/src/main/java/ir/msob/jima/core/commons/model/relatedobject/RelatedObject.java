@@ -3,6 +3,7 @@ package ir.msob.jima.core.commons.model.relatedobject;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -16,8 +17,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 public class RelatedObject<ID extends Comparable<ID> & Serializable> implements Comparable<RelatedObject<ID>>, Serializable {
 
     /**

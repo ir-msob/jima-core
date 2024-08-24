@@ -2,6 +2,7 @@ package ir.msob.jima.core.commons.model.relatedparty;
 
 import ir.msob.jima.core.commons.model.relatedobject.RelatedObject;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /**
  * This class represents a related party with a type, an ID, a role, and a referred type.
@@ -11,7 +12,6 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
-@Builder
+@SuperBuilder
 public class RelatedParty extends RelatedObject<String> {
 }
