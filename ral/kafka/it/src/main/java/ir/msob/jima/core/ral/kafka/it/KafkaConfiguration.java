@@ -118,7 +118,7 @@ public class KafkaConfiguration {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);
         factory.setReplyTemplate(kafkaTemplate);
-        factory.getContainerProperties().setTransactionManager(kafkaTransactionManager);
+        factory.getContainerProperties().setKafkaAwareTransactionManager(kafkaTransactionManager);
 
         // Error handler
         DeadLetterPublishingRecoverer deadLetterPublishingRecoverer = new DeadLetterPublishingRecoverer(kafkaTemplate, (r, e) -> new TopicPartition(r.topic() + dltSuffix, r.partition()));
