@@ -10,6 +10,11 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
 
+/**
+ * The ScopeSenderService class is responsible for sending scope-related messages
+ * using an asynchronous client. It prepares a channel message containing service
+ * details and sends it to a specified channel.
+ */
 @RequiredArgsConstructor
 public class ScopeSenderService {
     private static final Logger logger = LoggerFactory.getLog(ScopeSenderService.class);
@@ -19,7 +24,10 @@ public class ScopeSenderService {
     private final JimaProperties jimaProperties;
     private final String applicationName;
 
-
+    /**
+     * Initiates the sending process of the scope message. It logs the start and
+     * successful completion of the service.
+     */
     public void send() {
         logger.info("Starting ScopeSenderService...");
         ChannelMessage<?, ServiceDto> channelMessage = prepareChannelMessage();
@@ -27,6 +35,11 @@ public class ScopeSenderService {
         logger.info("ScopeSenderService started successfully.");
     }
 
+    /**
+     * Prepares a channel message containing the service details.
+     *
+     * @return a ChannelMessage object containing the service details.
+     */
     private ChannelMessage<?, ServiceDto> prepareChannelMessage() {
         ServiceDto serviceDto = ServiceDto.builder()
                 .serviceName(applicationName)
