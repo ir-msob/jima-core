@@ -15,6 +15,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Test class for {@link KafkaAsyncClient}.
+ * This class contains unit tests for testing the functionality of KafkaAsyncClient.
+ */
 class KafkaAsyncClientTest {
 
     @Mock
@@ -25,12 +29,21 @@ class KafkaAsyncClientTest {
 
     private KafkaAsyncClient kafkaAsyncClient;
 
+    /**
+     * Sets up the test environment before each test method.
+     * Initializes mocks and the KafkaAsyncClient instance.
+     */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         kafkaAsyncClient = new KafkaAsyncClient(kafkaTemplate, objectMapper);
     }
 
+    /**
+     * Tests the send method of KafkaAsyncClient with a ChannelMessage.
+     * 
+     * @throws Exception if an error occurs during the test execution.
+     */
     @Test
     void testSendChannelMessage() throws Exception {
         // Prepare test data
@@ -48,6 +61,11 @@ class KafkaAsyncClientTest {
         Mockito.verify(kafkaTemplate).executeInTransaction(Mockito.any());
     }
 
+    /**
+     * Tests the send method of KafkaAsyncClient with a Map message.
+     * 
+     * @throws Exception if an error occurs during the test execution.
+     */
     @Test
     void testSendMapMessage() throws Exception {
         // Prepare test data

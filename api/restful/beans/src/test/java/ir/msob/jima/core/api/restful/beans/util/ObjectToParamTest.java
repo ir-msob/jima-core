@@ -15,6 +15,10 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for the {@link ObjectToParam} class.
+ * This class tests the conversion of objects to parameters using the ObjectToParam utility.
+ */
 class ObjectToParamTest {
 
     @Mock
@@ -22,12 +26,22 @@ class ObjectToParamTest {
 
     private ObjectToParam objectToParam;
 
+    /**
+     * Sets up the test environment before each test method.
+     * Initializes mocks and the ObjectToParam instance.
+     */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         objectToParam = new ObjectToParam(jsonParser);
     }
 
+    /**
+     * Tests the conversion of objects to parameters.
+     * This test is currently disabled.
+     *
+     * @throws JsonProcessingException if an error occurs during JSON processing.
+     */
     @Disabled
     @Test
     void testConvertWithObjects() throws JsonProcessingException {
@@ -50,6 +64,10 @@ class ObjectToParamTest {
         assertEquals(expectedResult, result);
     }
 
+    /**
+     * Tests the shouldIncludeProperty method of ObjectToParam.
+     * Verifies that the method correctly identifies valid, null, and empty values.
+     */
     @Test
     void testShouldIncludeProperty() {
         // Prepare test data

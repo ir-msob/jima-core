@@ -10,12 +10,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * Global exception handler for handling exceptions across the application.
+ * This class provides centralized exception handling using Spring's {@link ControllerAdvice}.
+ */
 @ControllerAdvice
 @CommonsLog
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
     private final BaseExceptionMapper exceptionMapper;
 
+    /**
+     * Handles exceptions of type {@link BaseRuntimeException}.
+     * Maps the exception to a response entity with the appropriate HTTP status.
+     *
+     * @param <ER> the type of the exception response
+     * @param <E>  the type of the runtime exception
+     * @param ex   the exception to handle
+     * @return a {@link ResponseEntity} containing the exception response
+     */
     @ExceptionHandler(BaseRuntimeException.class)
     public <ER extends AbstractExceptionResponse, E extends BaseRuntimeException> ResponseEntity<ER> baseRuntimeExceptionHandler(E ex) {
         ER response = exceptionMapper.getExceptionResponse(ex);

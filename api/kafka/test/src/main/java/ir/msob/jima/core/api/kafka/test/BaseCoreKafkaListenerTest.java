@@ -15,6 +15,15 @@ import org.springframework.kafka.listener.MessageListener;
 import java.io.Serializable;
 import java.time.Duration;
 
+/**
+ * Base interface for Kafka listener tests.
+ * 
+ * @param <ID>   the type of the identifier
+ * @param <USER> the type of the user
+ * @param <D>    the type of the domain
+ * @param <DTO>  the type of the data transfer object
+ * @param <C>    the type of the criteria
+ */
 public interface BaseCoreKafkaListenerTest<ID extends Comparable<ID> & Serializable,
         USER extends BaseUser,
         D extends BaseDomain<ID>,
@@ -23,14 +32,40 @@ public interface BaseCoreKafkaListenerTest<ID extends Comparable<ID> & Serializa
         extends
         BaseCoreResourceTest<ID, USER, D, DTO, C> {
 
+    /**
+     * Gets the Kafka template for sending messages.
+     * 
+     * @return the Kafka template
+     */
     KafkaTemplate<String, String> getKafkaTemplate();
 
+    /**
+     * Gets the group ID for the Kafka consumer.
+     * 
+     * @return the group ID
+     */
     String getGroupId();
 
+    /**
+     * Gets the sleep duration for the listener.
+     * 
+     * @return the sleep duration
+     */
     Duration getSleepDuration();
 
+    /**
+     * Gets the consumer factory for creating Kafka consumers.
+     * 
+     * @return the consumer factory
+     */
     ConsumerFactory<String, String> getConsumerFactory();
 
+    /**
+     * Starts a Kafka message listener on the specified channel.
+     * 
+     * @param channel    the channel to listen to
+     * @param assertable the assertable to validate received messages
+     */
     default void startListener(String channel, Assertable<String> assertable) {
         ContainerProperties containerProperties = new ContainerProperties(channel);
         containerProperties.setGroupId(getGroupId());

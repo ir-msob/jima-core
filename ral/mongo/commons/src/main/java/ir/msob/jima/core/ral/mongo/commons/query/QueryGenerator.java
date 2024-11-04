@@ -16,16 +16,29 @@ import java.util.List;
 /**
  * A Query Generator for creating MongoDB queries based on filtering criteria.
  *
- * @param <C> The type of the criteria.
+ * @param <C> The type of the criteria, extending BaseCriteria with ObjectId.
  */
 public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
 
+    /**
+     * Prepares an OR operation in the query builder using the provided criteria.
+     *
+     * @param queryBuilder the QueryBuilder instance to modify.
+     * @param orOperatorList the list of Criteria to be combined with an OR operator.
+     */
     private static void prepareOrOperation(QueryBuilder queryBuilder, Collection<Criteria> orOperatorList) {
         if (orOperatorList != null && !orOperatorList.isEmpty()) {
             queryBuilder.orOperator(orOperatorList);
         }
     }
 
+    /**
+     * Sets OR conditions based on the provided field and filter.
+     *
+     * @param orOperatorList the list of Criteria to be combined with an OR operator.
+     * @param field the field to apply the filter on.
+     * @param fieldFilter the filter containing OR conditions.
+     */
     private static void setOrConditions(Collection<Criteria> orOperatorList, Field field, Filter<?> fieldFilter) {
         if (fieldFilter.getOr().getEq() != null) {
             orOperatorList.add(MongoCriteria.is(field.getName(), fieldFilter.getOr().getEq()));
@@ -38,7 +51,7 @@ public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
         } else if (fieldFilter.getOr().getLt() != null) {
             orOperatorList.add(MongoCriteria.lt(field.getName(), fieldFilter.getOr().getLt()));
         } else if (fieldFilter.getOr().getLte() != null) {
-            orOperatorList.add(MongoCriteria.lt(field.getName(), fieldFilter.getOr().getLte()));
+            orOperatorList.add(MongoCriteria.lte(field.getName(), fieldFilter.getOr().getLte()));
         } else if (fieldFilter.getOr().getNe() != null) {
             orOperatorList.add(MongoCriteria.ne(field.getName(), fieldFilter.getOr().getNe()));
         } else if (fieldFilter.getOr().getRegex() != null) {
@@ -68,13 +81,17 @@ public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
         return queryBuilder;
     }
 
+    /**
+     * Sets conditions for each field in the criteria.
+     *
+     * @param criteria The filtering criteria.
+     * @param queryBuilder The QueryBuilder instance to modify.
+     * @param orOperatorList The list of Criteria to be combined with an OR operator.
+     * @param fields The fields to apply the filters on.
+     */
     private void setFieldsCondition(C criteria, QueryBuilder queryBuilder, Collection<Criteria> orOperatorList, Collection<Field> fields) {
         for (Field field : fields) {
-            /**
-             * Ability to access private fields
-             */
             field.setAccessible(true);
-
             if (field.getType() == Filter.class) {
                 Filter<?> fieldFilter;
                 try {
@@ -89,6 +106,14 @@ public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
         }
     }
 
+    /**
+     * Sets conditions based on the provided field and filter.
+     *
+     * @param queryBuilder The QueryBuilder instance to modify.
+     * @param orOperatorList The list of Criteria to be combined with an OR operator.
+     * @param field The field to apply the filter on.
+     * @param fieldFilter The filter containing conditions.
+     */
     private void setConditions(QueryBuilder queryBuilder, Collection<Criteria> orOperatorList, Field field, Filter<?> fieldFilter) {
         if (fieldFilter.getEq() != null) {
             queryBuilder.is(field.getName(), fieldFilter.getEq());
@@ -110,15 +135,17 @@ public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
             queryBuilder.in(field.getName(), fieldFilter.getIn());
         } else if (fieldFilter.getNin() != null) {
             queryBuilder.nin(field.getName(), fieldFilter.getNin());
-        }
-        /**
-         * Or operator
-         */
-        else if (fieldFilter.getOr() != null) {
+        } else if (fieldFilter.getOr() != null) {
             setOrConditions(orOperatorList, field, fieldFilter);
         }
     }
 
+    /**
+     * Retrieves all fields from the criteria class and its superclasses up to BaseCriteria.
+     *
+     * @param criteria The filtering criteria.
+     * @return A collection of fields.
+     */
     private Collection<Field> getFields(C criteria) {
         List<Field> fields = new ArrayList<>();
         if (criteria != null) {
@@ -133,12 +160,24 @@ public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
         return fields;
     }
 
+    /**
+     * Prepares pagination settings in the query builder.
+     *
+     * @param pageable The pagination information.
+     * @param queryBuilder The QueryBuilder instance to modify.
+     */
     private void preparePagination(Pageable pageable, QueryBuilder queryBuilder) {
         if (pageable != null) {
             queryBuilder.add(pageable);
         }
     }
 
+    /**
+     * Prepares include fields in the query builder based on the criteria.
+     *
+     * @param criteria The filtering criteria.
+     * @param queryBuilder The QueryBuilder instance to modify.
+     */
     private void prepareIncludes(C criteria, QueryBuilder queryBuilder) {
         if (criteria == null)
             return;

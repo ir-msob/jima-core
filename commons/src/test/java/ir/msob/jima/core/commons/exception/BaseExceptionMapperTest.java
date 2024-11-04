@@ -22,10 +22,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
+/**
+ * Unit tests for the {@link BaseExceptionMapper} class.
+ * This class tests the mapping of various exceptions to their corresponding response types.
+ */
 class BaseExceptionMapperTest {
 
     private BaseExceptionMapper baseExceptionMapper;
 
+    /**
+     * Sets up the test environment before each test method.
+     * Initializes the BaseExceptionMapper instance with a mock implementation.
+     */
     @BeforeEach
     void setUp() {
         baseExceptionMapper = new BaseExceptionMapper() {
@@ -36,6 +44,9 @@ class BaseExceptionMapperTest {
         };
     }
 
+    /**
+     * Tests the mapping of {@link BadRequestException} to {@link BadRequestResponse}.
+     */
     @Test
     @DisplayName("Should map BadRequestException to BadRequestResponse")
     void shouldMapBadRequestException() {
@@ -43,6 +54,9 @@ class BaseExceptionMapperTest {
         assertInstanceOf(BadRequestResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
+    /**
+     * Tests the mapping of {@link ConflictException} to {@link ConflictResponse}.
+     */
     @Test
     @DisplayName("Should map ConflictException to ConflictResponse")
     void shouldMapConflictException() {
@@ -50,6 +64,9 @@ class BaseExceptionMapperTest {
         assertInstanceOf(ConflictResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
+    /**
+     * Tests the mapping of {@link DataNotFoundException} to {@link DataNotFoundResponse}.
+     */
     @Test
     @DisplayName("Should map DataNotFoundException to DataNotFoundResponse")
     void shouldMapDataNotFoundException() {
@@ -57,6 +74,9 @@ class BaseExceptionMapperTest {
         assertInstanceOf(DataNotFoundResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
+    /**
+     * Tests the mapping of {@link DomainNotFoundException} to {@link DomainNotFoundResponse}.
+     */
     @Test
     @DisplayName("Should map DomainNotFoundException to DomainNotFoundResponse")
     void shouldMapDomainNotFoundException() {
@@ -64,6 +84,9 @@ class BaseExceptionMapperTest {
         assertInstanceOf(DomainNotFoundResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
+    /**
+     * Tests the mapping of {@link CommonRuntimeException} to {@link CommonRuntimeResponse}.
+     */
     @Test
     @DisplayName("Should map CommonRuntimeException to CommonRuntimeResponse")
     void shouldMapCommonRuntimeException() {
@@ -71,6 +94,9 @@ class BaseExceptionMapperTest {
         assertInstanceOf(CommonRuntimeResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
+    /**
+     * Tests the mapping of {@link ValidationException} to {@link ValidationResponse}.
+     */
     @Test
     @DisplayName("Should map ValidationException to ValidationResponse")
     void shouldMapValidationException() {
@@ -78,6 +104,9 @@ class BaseExceptionMapperTest {
         assertInstanceOf(ValidationResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
+    /**
+     * Tests the mapping of {@link DuplicateException} to {@link DuplicateResponse}.
+     */
     @Test
     @DisplayName("Should map DuplicateException to DuplicateResponse")
     void shouldMapDuplicateException() {
@@ -85,6 +114,9 @@ class BaseExceptionMapperTest {
         assertInstanceOf(DuplicateResponse.class, baseExceptionMapper.getExceptionResponse(exception));
     }
 
+    /**
+     * Tests the mapping of {@link ResourceNotFoundException} to {@link ResourceNotFoundResponse}.
+     */
     @Test
     @DisplayName("Should map ResourceNotFoundException to ResourceNotFoundResponse")
     void shouldMapResourceNotFoundException() {

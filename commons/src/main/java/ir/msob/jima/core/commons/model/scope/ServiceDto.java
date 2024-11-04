@@ -7,6 +7,10 @@ import lombok.*;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * Data Transfer Object (DTO) for services.
+ * Represents a service with a name and a set of associated resources.
+ */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,6 +19,13 @@ import java.util.TreeSet;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ServiceDto extends ModelType {
+    /**
+     * The name of the service.
+     */
     private String serviceName;
+
+    /**
+     * A sorted set of resources associated with the service.
+     */
     private SortedSet<ResourceDto> resources = new TreeSet<>();
 }

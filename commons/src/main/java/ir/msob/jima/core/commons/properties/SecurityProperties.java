@@ -15,5 +15,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class SecurityProperties {
+
+    /**
+     * The default client registration ID for the security configuration.
+     * Default value is "service-client".
+     */
     private String defaultClientRegistrationId = "service-client";
 }
