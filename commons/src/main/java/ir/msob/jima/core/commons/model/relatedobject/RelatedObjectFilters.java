@@ -24,22 +24,27 @@ import java.io.Serializable;
 public class RelatedObjectFilters<ID extends Comparable<ID> & Serializable> implements BaseFilters {
 
     /**
-     * Filter for the type of the related entity.
+     * Filter for the type of the related object.
      */
-    private Filter<String> relatedType;
+    private Filter<String> objectType;
 
     /**
-     * Filter for the ID of the related entity.
+     * Filter for the ID of the related object.
      */
-    private Filter<ID> relatedId;
+    private Filter<ID> objectId;
 
     /**
-     * Filter for the role of the related entity.
+     * Filter for the role of the related object.
      */
     private Filter<String> role;
 
     /**
-     * Filter for the type of the entity that referred to this related entity.
+     * Filter for the type of the object that referred to this related object.
      */
-    private Filter<String> referredType;
+    private Filter<String> referringType;
+
+    /**
+     * Filter for the status of the related object.
+     */
+    private Filter<String> status;
 }
