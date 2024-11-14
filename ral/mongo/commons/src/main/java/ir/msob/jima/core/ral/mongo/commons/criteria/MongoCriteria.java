@@ -140,7 +140,7 @@ public class MongoCriteria {
      * @param values The collection of values to check for.
      * @return The Criteria object.
      */
-    public static Criteria nin(Object field, Collection<Object> values) {
+    public static Criteria nin(Object field, Collection<?> values) {
         return Criteria.where(field.toString()).nin(values);
     }
 }

@@ -57,9 +57,9 @@ public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
         } else if (fieldFilter.getOr().getRegex() != null) {
             orOperatorList.add(MongoCriteria.regex(field.getName(), fieldFilter.getOr().getRegex()));
         } else if (fieldFilter.getOr().getIn() != null) {
-            orOperatorList.add(MongoCriteria.in(field.getName(), (Collection<Object>) fieldFilter.getOr().getIn()));
+            orOperatorList.add(MongoCriteria.in(field.getName(), fieldFilter.getOr().getIn()));
         } else if (fieldFilter.getOr().getNin() != null) {
-            orOperatorList.add(MongoCriteria.nin(field.getName(), (Collection<Object>) fieldFilter.getOr().getNin()));
+            orOperatorList.add(MongoCriteria.nin(field.getName(), fieldFilter.getOr().getNin()));
         }
     }
 
