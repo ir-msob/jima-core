@@ -20,6 +20,7 @@ export class BaseUser extends ModelType {
   set sessionId(sessionId: string | undefined) {
     this._sessionId = sessionId;
   }
+
   private _name: string | undefined;
 
   get name(): string | undefined {

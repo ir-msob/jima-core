@@ -29,7 +29,7 @@ public class BaseRuntimeException extends RuntimeException {
      * Note that the detail message associated with {@code cause} is not automatically incorporated in this runtime exception's detail message.
      *
      * @param message the detail message (which is saved for later retrieval by the {@link #getMessage()} method).
-     * @param cause the cause (which is saved for later retrieval by the {@link #getCause()} method). A {@code null} value is permitted, and indicates that the cause is nonexistent or unknown.
+     * @param cause   the cause (which is saved for later retrieval by the {@link #getCause()} method). A {@code null} value is permitted, and indicates that the cause is nonexistent or unknown.
      */
     public BaseRuntimeException(String message, Throwable cause) {
         super(message, cause);
@@ -49,9 +49,9 @@ public class BaseRuntimeException extends RuntimeException {
     /**
      * Constructs a new runtime exception with the specified detail message, cause, suppression enabled or disabled, and writable stack trace enabled or disabled.
      *
-     * @param message the detail message.
-     * @param cause the cause. A {@code null} value is permitted, and indicates that the cause is nonexistent or unknown.
-     * @param enableSuppression whether or not suppression is enabled or disabled
+     * @param message            the detail message.
+     * @param cause              the cause. A {@code null} value is permitted, and indicates that the cause is nonexistent or unknown.
+     * @param enableSuppression  whether or not suppression is enabled or disabled
      * @param writableStackTrace whether or not the stack trace should be writable
      */
     public BaseRuntimeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {

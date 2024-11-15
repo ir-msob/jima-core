@@ -6,8 +6,6 @@ import org.apache.commons.logging.LogFactory;
  * The 'LoggerFactory' class is a factory class for obtaining instances of the 'Logger' class.
  * It includes methods for getting a logger for a given class and getting a logger by name.
  * The class also includes a private constructor to prevent instantiation of the factory class.
- *
- *
  */
 public class LoggerFactory {
 

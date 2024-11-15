@@ -12,7 +12,7 @@ public interface BaseRSocketRequesterLoadBalancer {
      * Returns a {@link RSocketRequester} for the specified application name.
      * This method may use load balancing strategies to select the appropriate requester.
      *
-     * @param applicationName the name of the application for which the requester is needed
+     * @param applicationName   the name of the application for which the requester is needed
      * @param candidateHandlers optional handlers that can be used during the requester selection process
      * @return a configured RSocketRequester for the specified application
      */

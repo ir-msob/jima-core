@@ -3,10 +3,11 @@ package ir.msob.jima.core.api.rsocket.commons;
 import ir.msob.jima.core.commons.resource.BaseResource;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.security.BaseUserService;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.security.oauth2.jwt.Jwt;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 /**
  * This interface represents a base resource for RSocket communication in a Java application.
@@ -34,10 +35,10 @@ public interface BaseCoreRsocketResource<ID extends Comparable<ID> & Serializabl
      * user information based on the claims.
      *
      * @param principal The JWT representing the authenticated user.
-     * @return An optional containing the user associated with the claims, if found.
+     * @return the user
      */
-    default Optional<USER> getUser(Jwt principal) {
-        return principal != null ? getUserService().getUser(principal.getClaims()) : Optional.empty();
+    default @NotNull USER getUser(@NotNull Jwt principal) {
+        return getUserService().getUser(principal.getClaims());
     }
 
     /**
@@ -47,9 +48,9 @@ public interface BaseCoreRsocketResource<ID extends Comparable<ID> & Serializabl
      *
      * @param userInfo  The user information.
      * @param principal The JWT representing the authenticated user.
-     * @return An optional containing the user associated with the claims, if found.
+     * @return the user
      */
-    default Optional<USER> getUser(String userInfo, Jwt principal) {
+    default @NotNull USER getUser(@NotBlank String userInfo, @NotNull Jwt principal) {
         return getUserService().getUser(userInfo, principal.getClaims(), getUserClass());
     }
 
@@ -60,9 +61,9 @@ public interface BaseCoreRsocketResource<ID extends Comparable<ID> & Serializabl
      *
      * @param user      The user.
      * @param principal The JWT representing the authenticated user.
-     * @return An optional containing the user associated with the claims, if found.
+     * @return the user
      */
-    default Optional<USER> getUser(USER user, Jwt principal) {
+    default @NotNull USER getUser(@NotNull USER user, @NotNull Jwt principal) {
         return getUserService().getUser(user, principal.getClaims());
     }
 }

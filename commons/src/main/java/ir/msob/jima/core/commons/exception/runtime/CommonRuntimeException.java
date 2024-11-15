@@ -12,8 +12,6 @@ import java.io.Serial;
  * The 'CommonRuntimeException' class extends the 'BaseRuntimeException' class and represents a common type of runtime exception.
  * It includes a method for preparing a message with variables and several constructors for creating an instance of the exception with different sets of parameters.
  * The class also includes a serial version UID for the serializable class.
- *
- *
  */
 @Setter
 @Getter

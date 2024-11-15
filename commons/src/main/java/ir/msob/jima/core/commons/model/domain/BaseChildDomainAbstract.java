@@ -25,7 +25,7 @@ import java.io.Serializable;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public class BaseChildDomainAbstract<ID extends Comparable<ID> & Serializable> extends BaseDomainAbstract<ID> implements BaseChildDomain<ID>{
+public class BaseChildDomainAbstract<ID extends Comparable<ID> & Serializable> extends BaseDomainAbstract<ID> implements BaseChildDomain<ID> {
 
     /**
      * The parent domain ID of the model.

@@ -29,10 +29,10 @@ public class SpelRepository {
     /**
      * Execute a SpEL expression and return the result of the specified type.
      *
-     * @param expression The SpEL expression to execute.
+     * @param expression        The SpEL expression to execute.
      * @param desiredResultType The desired result type.
+     * @param <T>               the type of the result.
      * @return The result of the SpEL expression execution.
-     * @param <T>   the type of the result.
      */
     public <T> T execute(String expression, Class<T> desiredResultType) {
         return parser.parseExpression(expression).getValue(standardEvaluationContext, desiredResultType);
@@ -51,11 +51,11 @@ public class SpelRepository {
     /**
      * Execute a SpEL expression with a root object and return the result of the specified type.
      *
-     * @param expression The SpEL expression to execute.
-     * @param rootObject The root object for the SpEL expression.
+     * @param expression        The SpEL expression to execute.
+     * @param rootObject        The root object for the SpEL expression.
      * @param desiredResultType The desired result type.
+     * @param <T>               the type of the result.
      * @return The result of the SpEL expression execution.
-     * @param <T>   the type of the result.
      */
     public <T> T execute(String expression, Object rootObject, Class<T> desiredResultType) {
         return parser.parseExpression(expression).getValue(standardEvaluationContext, rootObject, desiredResultType);
@@ -75,11 +75,11 @@ public class SpelRepository {
     /**
      * Execute a SpEL expression with provided variables and return the result of the specified type.
      *
-     * @param expression The SpEL expression to execute.
-     * @param variables The variables to be used in the SpEL expression.
+     * @param expression        The SpEL expression to execute.
+     * @param variables         The variables to be used in the SpEL expression.
      * @param desiredResultType The desired result type.
+     * @param <T>               the type of the result.
      * @return The result of the SpEL expression execution.
-     * @param <T>   the type of the result.
      */
     public <T> T execute(String expression, Map<String, Object> variables, Class<T> desiredResultType) {
         StandardEvaluationContext context = StandardEvaluationContextUtil.prepareStandardEvaluationContext(beanFactory);
@@ -91,7 +91,7 @@ public class SpelRepository {
      * Execute a SpEL expression with provided variables and return the result as an Object.
      *
      * @param expression The SpEL expression to execute.
-     * @param variables The variables to be used in the SpEL expression.
+     * @param variables  The variables to be used in the SpEL expression.
      * @return The result of the SpEL expression execution.
      */
     public Object execute(String expression, Map<String, Object> variables) {
@@ -103,11 +103,11 @@ public class SpelRepository {
     /**
      * Execute a SpEL expression with a custom evaluation context and return the result of the specified type.
      *
-     * @param expression The SpEL expression to execute.
-     * @param context The custom evaluation context for the SpEL expression.
+     * @param expression        The SpEL expression to execute.
+     * @param context           The custom evaluation context for the SpEL expression.
      * @param desiredResultType The desired result type.
+     * @param <T>               the type of the result.
      * @return The result of the SpEL expression execution.
-     * @param <T>   the type of the result.
      */
     public <T> T execute(String expression, EvaluationContext context, Class<T> desiredResultType) {
         return parser.parseExpression(expression).getValue(context, desiredResultType);
@@ -116,12 +116,12 @@ public class SpelRepository {
     /**
      * Execute a SpEL expression with a custom evaluation context and a root object.
      *
-     * @param expression The SpEL expression to execute.
-     * @param context The custom evaluation context for the SpEL expression.
-     * @param rootObject The root object for the SpEL expression.
+     * @param expression        The SpEL expression to execute.
+     * @param context           The custom evaluation context for the SpEL expression.
+     * @param rootObject        The root object for the SpEL expression.
      * @param desiredResultType The desired result type.
+     * @param <T>               the type of the result.
      * @return The result of the SpEL expression execution.
-     * @param <T>   the type of the result.
      */
     public <T> T execute(String expression, EvaluationContext context, Object rootObject, Class<T> desiredResultType) {
         return parser.parseExpression(expression).getValue(context, rootObject, desiredResultType);
@@ -131,7 +131,7 @@ public class SpelRepository {
      * Execute a SpEL expression with a custom evaluation context and return the result as an Object.
      *
      * @param expression The SpEL expression to execute.
-     * @param context The custom evaluation context for the SpEL expression.
+     * @param context    The custom evaluation context for the SpEL expression.
      * @param rootObject The root object for the SpEL expression.
      * @return The result of the SpEL expression execution.
      */
@@ -143,7 +143,7 @@ public class SpelRepository {
      * Execute a SpEL expression with a custom evaluation context and return the result as an Object.
      *
      * @param expression The SpEL expression to execute.
-     * @param context The custom evaluation context for the SpEL expression.
+     * @param context    The custom evaluation context for the SpEL expression.
      * @return The result of the SpEL expression execution.
      */
     public Object execute(String expression, EvaluationContext context) {

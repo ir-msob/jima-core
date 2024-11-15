@@ -11,8 +11,6 @@ import lombok.ToString;
  * It includes an additional field for the message associated with the conflict.
  * The class also provides several constructors for creating an instance of the response with different sets of parameters.
  * Additionally, it overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 409.
- *
- *
  */
 @Setter
 @Getter

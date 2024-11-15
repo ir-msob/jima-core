@@ -7,8 +7,6 @@ import org.apache.commons.logging.Log;
  * The 'Logger' class provides logging functionality and wraps an underlying Log implementation.
  * It includes methods for logging debug, error, fatal, info, trace, and warning messages, with optional parameters for formatting the message and an associated exception.
  * The class also includes a constructor for creating an instance of the logger with a specified Log implementation.
- *
- *
  */
 public class Logger {
     /**

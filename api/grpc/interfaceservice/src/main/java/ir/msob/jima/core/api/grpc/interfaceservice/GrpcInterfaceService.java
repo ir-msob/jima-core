@@ -22,7 +22,6 @@ import java.nio.charset.StandardCharsets;
  * <p>
  * This Mojo is annotated as a Maven Plugin and generates a gRPC interface service class during the 'generate-sources' phase.
  * It operates on Java files and modifies the structure of the gRPC interface service based on predefined criteria.
- *
  */
 @Mojo(name = "interface-service", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
 public class GrpcInterfaceService extends AbstractMojo {

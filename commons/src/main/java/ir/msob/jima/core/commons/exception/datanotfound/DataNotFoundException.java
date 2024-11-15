@@ -10,8 +10,6 @@ import java.io.Serial;
  * The 'DataNotFoundException' class extends the 'BaseRuntimeException' class and represents a specific type of exception that is thrown when a requested data is not found.
  * It includes additional fields for the name of the entity that was not found, the ID of the entity, and the class of the entity.
  * The class also provides several constructors for creating an instance of the exception with different sets of parameters.
- *
- *
  */
 @Setter
 @Getter

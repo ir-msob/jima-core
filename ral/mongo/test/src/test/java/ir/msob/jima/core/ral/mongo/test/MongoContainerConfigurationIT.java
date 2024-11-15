@@ -20,12 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @CommonsLog
 class MongoContainerConfigurationIT {
 
-    @Value("${spring.data.mongodb.uri}")
-    private String configUrl;
-
     @Autowired
     MongoDBContainer container;
-
+    @Value("${spring.data.mongodb.uri}")
+    private String configUrl;
 
     @Test
     @DisplayName("Container is running after initialization")

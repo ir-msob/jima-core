@@ -21,14 +21,14 @@ public class UserInfoUtil {
      * Encodes a user object to a Base64-encoded string.
      *
      * @param objectMapper An instance of ObjectMapper for JSON serialization.
-     * @param user         An Optional containing the user object to encode.
+     * @param user         A user object to encode.
      * @param <USER>       The type of user object.
      * @return The Base64-encoded user information as a string, or an empty string if the user is not present.
      * @throws JsonProcessingException if there is an issue with JSON serialization.
      */
-    public static <USER extends BaseUser> String encodeUser(ObjectMapper objectMapper, Optional<USER> user) throws JsonProcessingException {
-        if (user.isPresent()) {
-            String userInfo = objectMapper.writeValueAsString(user.get());
+    public static <USER extends BaseUser> String encodeUser(ObjectMapper objectMapper, USER user) throws JsonProcessingException {
+        if (user != null) {
+            String userInfo = objectMapper.writeValueAsString(user);
             return Base64.getEncoder().encodeToString(userInfo.getBytes());
         }
         return "";
@@ -44,11 +44,11 @@ public class UserInfoUtil {
      * @return An Optional containing the deserialized user object if userInfo is not empty; otherwise, it's empty.
      * @throws JsonProcessingException if there is an issue with JSON deserialization.
      */
-    public static <USER extends BaseUser> Optional<USER> decodeUser(ObjectMapper objectMapper, String userInfo, Class<USER> userClass) throws JsonProcessingException {
+    public static <USER extends BaseUser> USER decodeUser(ObjectMapper objectMapper, String userInfo, Class<USER> userClass) throws JsonProcessingException {
         if (Strings.isNotBlank(userInfo)) {
             String userJson = new String(Base64.getDecoder().decode(userInfo));
-            return Optional.of(objectMapper.readValue(userJson, userClass));
+            return objectMapper.readValue(userJson, userClass);
         }
-        return Optional.empty();
+        throw new IllegalArgumentException("Authentication cannot be null. Please provide a valid authentication object.");
     }
 }

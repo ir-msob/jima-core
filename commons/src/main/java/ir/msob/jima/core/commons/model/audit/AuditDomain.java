@@ -13,7 +13,6 @@ import java.util.Objects;
  * This class provides several constructors for creating an instance of the model with different sets of parameters.
  * Additionally, it overrides the {@code compareTo}, {@code equals}, and {@code hashCode} methods from the {@code Object} class to provide custom comparison and hashing behavior.
  * The {@code FN} enum is used to represent the field names of the {@code AuditDomain} class.
- *
  */
 @Getter
 @Setter

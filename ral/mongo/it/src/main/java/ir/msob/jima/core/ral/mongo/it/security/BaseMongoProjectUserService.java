@@ -7,7 +7,10 @@ import ir.msob.jima.core.commons.security.ClaimKey;
 import ir.msob.jima.core.commons.security.ClaimKeyValue;
 import org.bson.types.ObjectId;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
+import java.util.TreeSet;
 
 
 /**
@@ -16,8 +19,8 @@ import java.util.*;
 
 public interface BaseMongoProjectUserService extends BaseUserService {
     ProjectUser SYSTEM_USER = ProjectUser.builder()
-            .id(new ObjectId("000000000000000000000000"))
-            .sessionId(new ObjectId())
+            .id("000000000000000000000000")
+            .sessionId(new ObjectId().toString())
             .username("system")
             .roles(Sets.newTreeSet(Collections.singleton(Roles.ADMIN)))
             .audience(ClaimKeyValue.AUDIENCE_WEB)
@@ -25,19 +28,21 @@ public interface BaseMongoProjectUserService extends BaseUserService {
 
 
     @Override
-    default <USER extends BaseUser> Optional<USER> getUser(Map<String, Object> claims) {
-        return Optional.of((USER) ProjectUser.builder()
-                .id(new ObjectId(String.valueOf(claims.get(ClaimKey.ID))))
-                .sessionId(new ObjectId(String.valueOf(claims.get(ClaimKey.SESSION_ID))))
+    default <USER extends BaseUser> USER getUser(Map<String, Object> claims) {
+        return (USER) ProjectUser.builder()
+                .id(String.valueOf(claims.get(ClaimKey.ID)))
+                .sessionId(String.valueOf(claims.get(ClaimKey.SESSION_ID)))
                 .username(String.valueOf(claims.get(ClaimKey.SUBJECT)))
                 .audience(String.valueOf(claims.get(ClaimKey.AUDIENCE)))
                 .roles(new TreeSet<>((Collection<String>) claims.get(ClaimKey.ROLES)))
-                .build());
+                .build();
     }
 
 
     @Override
-    default <USER extends BaseUser> Optional<USER> getSystemUser() {
-        return (Optional<USER>) Optional.of(SYSTEM_USER);
+    default <USER extends BaseUser> USER getSystemUser() {
+        if (SYSTEM_USER != null)
+            return (USER) SYSTEM_USER;
+        return null;
     }
 }

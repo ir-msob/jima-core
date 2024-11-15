@@ -12,8 +12,6 @@ import java.io.Serializable;
  * It includes additional fields for the name of the field that has an invalid value, the invalid value itself, and a message.
  * The class also provides several constructors for creating an instance of the response with different sets of parameters.
  * Additionally, it overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 400.
- *
- *
  */
 @Setter
 @Getter

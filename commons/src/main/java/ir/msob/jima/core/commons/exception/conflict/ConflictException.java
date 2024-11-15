@@ -10,8 +10,6 @@ import java.io.Serial;
  * The 'ConflictException' class extends the 'BaseRuntimeException' class and represents a specific type of exception that is thrown when a conflict occurs.
  * It includes a field for the serial version UID which is used for serialization and deserialization.
  * The class also provides a constructor for creating an instance of the exception with a message.
- *
- *
  */
 @Setter
 @Getter

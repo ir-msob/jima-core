@@ -25,7 +25,7 @@ public class KafkaContainerConfiguration {
      * If the cluster ID is not blank, it is set to the Kafka container.
      * The @ServiceConnection annotation is used to indicate that this bean is used for establishing a connection to a service.
      *
-     * @param registry The DynamicPropertyRegistry used to dynamically register properties for the Kafka container.
+     * @param registry       The DynamicPropertyRegistry used to dynamically register properties for the Kafka container.
      * @param jimaProperties The JimaProperties object used to get the Docker image name and cluster ID for the Kafka container.
      * @return The created KafkaContainer bean.
      */

@@ -13,8 +13,6 @@ import java.io.Serializable;
  * It includes additional fields for the key associated with the duplicate value and the duplicate value itself.
  * The class also provides several constructors for creating an instance of the exception with different sets of parameters.
  * Additionally, it provides static methods for initializing and creating instances of the exception.
- *
- *
  */
 @Setter
 @Getter

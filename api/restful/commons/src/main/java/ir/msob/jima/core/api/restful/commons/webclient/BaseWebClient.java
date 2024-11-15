@@ -6,8 +6,6 @@ import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.security.UserInfoUtil;
 import org.springframework.http.HttpHeaders;
 
-import java.util.Optional;
-
 import static ir.msob.jima.core.commons.Constants.USER_INFO_HEADER_NAME;
 
 /**
@@ -31,7 +29,7 @@ public interface BaseWebClient {
      * @param user    An Optional containing user-related information.
      * @throws JsonProcessingException if there is an issue with JSON processing.
      */
-    default <USER extends BaseUser> void setUserInfo(HttpHeaders builder, Optional<USER> user) throws JsonProcessingException {
+    default <USER extends BaseUser> void setUserInfo(HttpHeaders builder, USER user) throws JsonProcessingException {
         String userInfo = UserInfoUtil.encodeUser(getObjectMapper(), user);
         builder.set(USER_INFO_HEADER_NAME, userInfo);
     }

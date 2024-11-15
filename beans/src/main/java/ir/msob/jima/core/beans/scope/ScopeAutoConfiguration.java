@@ -1,5 +1,6 @@
 package ir.msob.jima.core.beans.scope;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
 import ir.msob.jima.core.commons.logger.Logger;
@@ -29,16 +30,16 @@ public class ScopeAutoConfiguration {
      * bean's properties have been set.
      *
      * @param applicationContext the application context
-     * @param asyncClient the asynchronous client
-     * @param jimaProperties the Jima properties
+     * @param asyncClient        the asynchronous client
+     * @param jimaProperties     the Jima properties
      */
     @PostConstruct
     public void startup(ApplicationContext applicationContext
             , BaseAsyncClient asyncClient
-            , JimaProperties jimaProperties) {
+            , JimaProperties jimaProperties) throws JsonProcessingException {
         logger.info("Initializing ScopeSenderService with application name: {}", applicationName);
         ScopeScannerService scopeScannerService = new ScopeScannerService(applicationContext);
-        ScopeSenderService scopeSenderService= new ScopeSenderService(scopeScannerService, asyncClient, jimaProperties, applicationName);
+        ScopeSenderService scopeSenderService = new ScopeSenderService(scopeScannerService, asyncClient, jimaProperties, applicationName);
         scopeSenderService.send();
     }
 }

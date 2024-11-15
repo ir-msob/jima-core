@@ -10,7 +10,6 @@ import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.data.domain.Page;
 
 import java.io.IOException;
-import java.io.Serializable;
 
 /**
  * Custom JSON deserializer for deserializing a JSON representation of a Spring Data {@link Page} object.

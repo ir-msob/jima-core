@@ -11,8 +11,6 @@ import lombok.ToString;
  * It includes additional fields for the ID of the domain that was not found and the class of the domain.
  * The class also provides several constructors for creating an instance of the response with different sets of parameters.
  * Additionally, it overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 404.
- *
- *
  */
 @Setter
 @Getter

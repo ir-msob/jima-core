@@ -12,8 +12,6 @@ import java.util.Collection;
  * It includes an additional field for a collection of invalid data associated with the exception.
  * The class also provides several constructors for creating an instance of the exception with different sets of parameters.
  * Additionally, it includes a serial version UID for the serializable class.
- *
- *
  */
 @Setter
 @Getter

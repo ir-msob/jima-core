@@ -8,8 +8,6 @@ import java.util.SortedSet;
  * It includes methods for getting and setting a sorted set of audit domains, and a default method for getting the latest audit domain.
  * The 'getLatestAuditDomain' method uses the Java 8 Stream API to find the audit domain with the maximum version.
  * The interface is parameterized with a type 'ID' that extends 'Comparable' and 'Serializable'.
- *
- *
  */
 public interface BaseAuditDomain {
 

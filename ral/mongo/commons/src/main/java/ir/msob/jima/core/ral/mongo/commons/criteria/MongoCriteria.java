@@ -6,8 +6,6 @@ import java.util.Collection;
 
 /**
  * A utility class for building MongoDB Criteria objects used for querying in Spring Data MongoDB.
- *
- *
  */
 public class MongoCriteria {
 

@@ -27,7 +27,7 @@ public interface BaseExceptionMapper {
     /**
      * This method should be implemented by classes that want to provide their own logic for mapping exceptions to their corresponding response objects.
      *
-     * @param ex The exception to be mapped.
+     * @param ex   The exception to be mapped.
      * @param <ER> The type of the exception response.
      * @return The mapped exception response.
      */
@@ -36,7 +36,7 @@ public interface BaseExceptionMapper {
     /**
      * This method provides a default implementation for mapping exceptions to their corresponding response objects.
      *
-     * @param ex The exception to be mapped.
+     * @param ex   The exception to be mapped.
      * @param <ER> The type of the exception response.
      * @return The mapped exception response.
      */
@@ -68,7 +68,7 @@ public interface BaseExceptionMapper {
      * It first tries to cast the exception using the `castException` method.
      * If that fails, it tries to cast the exception using the `cast` method.
      *
-     * @param ex The exception to be mapped.
+     * @param ex   The exception to be mapped.
      * @param <ER> The type of the exception response.
      * @return The mapped exception response.
      */

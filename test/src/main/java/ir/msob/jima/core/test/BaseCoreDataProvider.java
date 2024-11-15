@@ -134,10 +134,10 @@ public interface BaseCoreDataProvider<ID extends Comparable<ID> & Serializable,
     S getService();
 
     /**
-     * Get an optional sample user for data operations.
+     * Get a sample user for data operations.
      *
      * @return An optional user instance.
      */
-    Optional<USER> getSampleUser();
+    USER getSampleUser();
 }
 

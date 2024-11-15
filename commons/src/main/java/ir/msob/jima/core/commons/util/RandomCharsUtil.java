@@ -7,8 +7,6 @@ import java.security.SecureRandom;
  * <p>
  * This class provides methods to generate random strings using various character sets,
  * such as uppercase letters, lowercase letters, numbers, and Persian/Farsi numbers.
- *
- *
  */
 public class RandomCharsUtil {
 

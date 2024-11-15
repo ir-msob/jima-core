@@ -9,7 +9,6 @@ import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.util.GenericTypeUtil;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 /**
  * A generic resource testing interface for working with resource tests in a standardized way.
@@ -86,9 +85,9 @@ public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
     ObjectMapper getObjectMapper();
 
     /**
-     * Get an optional sample user for resource testing.
+     * Get an sample user for resource testing.
      *
      * @return An optional user instance.
      */
-    Optional<USER> getSampleUser();
+    USER getSampleUser();
 }

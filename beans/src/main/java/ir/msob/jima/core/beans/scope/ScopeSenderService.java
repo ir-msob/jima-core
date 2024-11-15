@@ -1,5 +1,6 @@
 package ir.msob.jima.core.beans.scope;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
 import ir.msob.jima.core.commons.logger.Logger;
@@ -7,8 +8,6 @@ import ir.msob.jima.core.commons.logger.LoggerFactory;
 import ir.msob.jima.core.commons.model.channel.ChannelMessage;
 import ir.msob.jima.core.commons.model.scope.ServiceDto;
 import lombok.RequiredArgsConstructor;
-
-import java.util.Optional;
 
 /**
  * The ScopeSenderService class is responsible for sending scope-related messages
@@ -28,10 +27,10 @@ public class ScopeSenderService {
      * Initiates the sending process of the scope message. It logs the start and
      * successful completion of the service.
      */
-    public void send() {
+    public void send() throws JsonProcessingException {
         logger.info("Starting ScopeSenderService...");
         ChannelMessage<?, ServiceDto> channelMessage = prepareChannelMessage();
-        asyncClient.send(channelMessage, jimaProperties.getScope().getChannel(), Optional.empty());
+        asyncClient.send(channelMessage, jimaProperties.getScope().getChannel());
         logger.info("ScopeSenderService started successfully.");
     }
 

@@ -9,7 +9,6 @@ import java.io.Serializable;
  * The interface includes a 'newDomainId' method for generating new domain IDs.
  *
  * @param <ID> The type of the ID of the domain model.
- *
  */
 public interface BaseDomainId<ID extends Comparable<ID> & Serializable> {
 

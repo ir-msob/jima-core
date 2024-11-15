@@ -24,7 +24,6 @@ import java.util.Set;
  * The class also includes a constructor that takes all the filter criteria as parameters.
  *
  * @param <TYPE> The type of the filter criteria.
- *
  */
 @Setter
 @Getter

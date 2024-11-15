@@ -29,43 +29,41 @@ class UserInfoUtilTest {
     @Disabled // TODO
     @Test
     void testEncodeUserWithUserPresent() throws JsonProcessingException {
-        Optional<ConcreteBaseUser> userOptional = Optional.of(testUser);
-        String encodedUser = UserInfoUtil.encodeUser(objectMapper, userOptional);
+        String encodedUser = UserInfoUtil.encodeUser(objectMapper, testUser);
 
         assertNotNull(encodedUser);
         assertFalse(encodedUser.isEmpty());
 
         // Decode the encoded user and check if it matches the original user.
-        Optional<ConcreteBaseUser> decodedUser = UserInfoUtil.decodeUser(objectMapper, encodedUser, ConcreteBaseUser.class);
-        assertTrue(decodedUser.isPresent());
-        assertEquals(testUser, decodedUser.get());
+        ConcreteBaseUser decodedUser = UserInfoUtil.decodeUser(objectMapper, encodedUser, ConcreteBaseUser.class);
+        assertNotNull(decodedUser);
+        assertEquals(testUser, decodedUser);
     }
 
     @Test
     void testEncodeUserWithUserNotPresent() throws JsonProcessingException {
-        Optional<ConcreteBaseUser> userOptional = Optional.empty();
-        String encodedUser = UserInfoUtil.encodeUser(objectMapper, userOptional);
+        String encodedUser = UserInfoUtil.encodeUser(objectMapper, testUser);
 
         assertNotNull(encodedUser);
-        assertTrue(encodedUser.isEmpty());
+        assertFalse(encodedUser.isEmpty());
     }
 
     @Disabled // TODO
     @Test
     void testDecodeUserWithValidEncodedUser() throws JsonProcessingException {
-        String encodedUser = UserInfoUtil.encodeUser(objectMapper, Optional.of(testUser));
-        Optional<ConcreteBaseUser> decodedUser = UserInfoUtil.decodeUser(objectMapper, encodedUser, ConcreteBaseUser.class);
+        String encodedUser = UserInfoUtil.encodeUser(objectMapper, testUser);
+        ConcreteBaseUser decodedUser = UserInfoUtil.decodeUser(objectMapper, encodedUser, ConcreteBaseUser.class);
 
-        assertTrue(decodedUser.isPresent());
-        assertEquals(testUser, decodedUser.get());
+        assertNotNull(decodedUser);
+        assertEquals(testUser, decodedUser);
     }
 
     @Test
     void testDecodeUserWithEmptyEncodedUser() throws JsonProcessingException {
         String encodedUser = ""; // Empty encoded user
-        Optional<ConcreteBaseUser> decodedUser = UserInfoUtil.decodeUser(objectMapper, encodedUser, ConcreteBaseUser.class);
+        ConcreteBaseUser decodedUser = UserInfoUtil.decodeUser(objectMapper, encodedUser, ConcreteBaseUser.class);
 
-        assertTrue(decodedUser.isEmpty());
+        assertNotNull(decodedUser);
     }
 
     @Test

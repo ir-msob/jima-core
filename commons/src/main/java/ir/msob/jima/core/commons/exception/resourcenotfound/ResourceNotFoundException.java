@@ -10,8 +10,6 @@ import java.io.Serial;
  * The 'ResourceNotFoundException' class extends the 'BaseRuntimeException' class and represents a specific type of exception that is thrown when a requested resource is not found.
  * It includes additional fields for the message associated with the exception and the name of the resource that was not found.
  * The class also provides several constructors for creating an instance of the exception with different sets of parameters.
- *
- *
  */
 @Setter
 @Getter

@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
  * This class allows you to access beans from the application context in classes that are not managed by Spring.
  * It implements the ApplicationContextAware interface to set the application context when the Spring container starts.
  * You can use the static `getBean` method to retrieve beans by their class type.
- *
- *
  */
 @Component
 public class BeanUtil implements ApplicationContextAware {

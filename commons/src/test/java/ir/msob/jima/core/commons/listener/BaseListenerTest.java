@@ -8,8 +8,6 @@ import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.security.BaseUserService;
 import org.junit.jupiter.api.Test;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -38,10 +36,9 @@ class BaseListenerTest {
         ChannelMessage<BaseUser, ModelType> channelMessageReq = new ChannelMessage<>();
         ModelType data = new ModelType();
         Integer status = 200;
-        Optional<BaseUser> user = Optional.of(new BaseUser());
 
         // Act
-        ChannelMessage<BaseUser, ModelType> preparedChannelMessage = baseKafkaParentListener.prepareChannelMessage(channelMessageReq, data, status, user);
+        ChannelMessage<BaseUser, ModelType> preparedChannelMessage = baseKafkaParentListener.prepareChannelMessage(channelMessageReq, data, status, new BaseUser());
 
         // Assert
         assertEquals(data, preparedChannelMessage.getData());

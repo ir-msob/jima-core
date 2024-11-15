@@ -8,8 +8,6 @@ import java.util.SortedSet;
  * The characteristics are represented as a 'SortedSet' of 'Characteristic' objects.
  * The 'SortedSet' ensures that the characteristics are sorted in their natural order.
  * The 'getCharacteristics' method returns the characteristics, and the 'setCharacteristics' method sets the characteristics.
- *
- *
  */
 public interface BaseCharacteristic {
 

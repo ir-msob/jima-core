@@ -25,7 +25,7 @@ public class OracleContainerConfiguration {
      * If the username and password are not blank, they are set to the Oracle container.
      * The @ServiceConnection annotation is used to indicate that this bean is used for establishing a connection to a service.
      *
-     * @param registry The DynamicPropertyRegistry used to dynamically register properties for the Oracle container.
+     * @param registry       The DynamicPropertyRegistry used to dynamically register properties for the Oracle container.
      * @param jimaProperties The JimaProperties object used to get the Docker image name, username, and password for the Oracle container.
      * @return The created OracleContainer bean.
      */

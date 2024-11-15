@@ -7,7 +7,9 @@ toc::[]
 
 == Introduction
 
-Jima Core is a comprehensive project that includes several modules and uses a variety of technologies. It is built with Java, Maven, TypeScript, JavaScript, npm, Angular, and Spring Boot. This project contains all the basic modules needed for the Jima framework.
+Jima Core is a comprehensive project that includes several modules and uses a variety of technologies.
+It is built with Java, Maven, TypeScript, JavaScript, npm, Angular, and Spring Boot.
+This project contains all the basic modules needed for the Jima framework.
 
 == Getting Started
 
@@ -19,6 +21,7 @@ To get started with this project, do the following:
 4. Build the project with the `mvn install` command.
 
 You can also use the following dependency in your `pom.xml` of your project:
+
 [source,xml]
 ----
 <dependencies>
@@ -68,7 +71,8 @@ Each sub-module may have its own specific components, such as `commons` and `tes
 
 == Contributing
 
-Contributions to Jima are welcome! Please fork the repository, make your changes, and submit a pull request.
+Contributions to Jima are welcome!
+Please fork the repository, make your changes, and submit a pull request.
 
 == License
 

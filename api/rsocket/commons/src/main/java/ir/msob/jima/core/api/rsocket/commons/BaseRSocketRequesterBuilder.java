@@ -10,7 +10,7 @@ public interface BaseRSocketRequesterBuilder {
 
     /**
      * Returns a configured {@link RSocketRequester.Builder} instance.
-     * 
+     *
      * @param candidateHandlers optional handlers that can be used during the building process
      * @return a configured RSocketRequester.Builder
      */

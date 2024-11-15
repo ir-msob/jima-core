@@ -8,7 +8,6 @@ import com.github.fge.jsonpatch.JsonPatchOperation;
 import com.github.fge.jsonpatch.ReplaceOperation;
 import ir.msob.jima.core.commons.model.characteristic.Characteristic;
 import ir.msob.jima.core.commons.model.relateddomain.RelatedDomain;
-import ir.msob.jima.core.commons.model.relatedobject.RelatedObject;
 import ir.msob.jima.core.commons.model.relatedparty.RelatedParty;
 
 import java.io.Serializable;

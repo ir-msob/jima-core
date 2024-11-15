@@ -1,7 +1,9 @@
 package ir.msob.jima.core.commons.model.relateddomain;
 
 import ir.msob.jima.core.commons.model.relatedobject.RelatedObject;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;

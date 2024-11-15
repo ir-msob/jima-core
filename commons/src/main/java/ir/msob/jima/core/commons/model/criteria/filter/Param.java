@@ -16,7 +16,6 @@ import java.io.Serializable;
  * The class also includes a no-argument constructor.
  *
  * @param <TYPE> The type of the filter criteria.
- *
  */
 @Setter
 @Getter

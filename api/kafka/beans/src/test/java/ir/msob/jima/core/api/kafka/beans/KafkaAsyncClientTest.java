@@ -13,7 +13,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * Test class for {@link KafkaAsyncClient}.
@@ -41,7 +40,7 @@ class KafkaAsyncClientTest {
 
     /**
      * Tests the send method of KafkaAsyncClient with a ChannelMessage.
-     * 
+     *
      * @throws Exception if an error occurs during the test execution.
      */
     @Test
@@ -49,13 +48,12 @@ class KafkaAsyncClientTest {
         // Prepare test data
         ChannelMessage<BaseUser, ModelType> channelMessage = new ChannelMessage<>();
         String channel = "testChannel";
-        Optional<BaseUser> user = Optional.of(new BaseUser());
 
         // Mock behavior
         Mockito.when(objectMapper.writeValueAsString(Mockito.any())).thenReturn("serializedMessage");
 
         // Call the method under test
-        kafkaAsyncClient.send(channelMessage, channel, user);
+        kafkaAsyncClient.send(channelMessage, channel, new BaseUser());
 
         // Verify that the KafkaTemplate's send method is called with the expected arguments
         Mockito.verify(kafkaTemplate).executeInTransaction(Mockito.any());
@@ -63,7 +61,7 @@ class KafkaAsyncClientTest {
 
     /**
      * Tests the send method of KafkaAsyncClient with a Map message.
-     * 
+     *
      * @throws Exception if an error occurs during the test execution.
      */
     @Test
@@ -73,13 +71,12 @@ class KafkaAsyncClientTest {
         channelMessage.put("key", "value");
 
         String channel = "testChannel";
-        Optional<BaseUser> user = Optional.of(new BaseUser());
 
         // Mock behavior
         Mockito.when(objectMapper.writeValueAsString(Mockito.any())).thenReturn("serializedMessage");
 
         // Call the method under test
-        kafkaAsyncClient.send(channelMessage, channel, user);
+        kafkaAsyncClient.send(channelMessage, channel, new BaseUser());
 
         // Verify that the KafkaTemplate's send method is called with the expected arguments
         Mockito.verify(kafkaTemplate).executeInTransaction(Mockito.any());

@@ -10,8 +10,6 @@ import java.util.stream.Stream;
  * The 'ConditionalOnOperationUtil' class provides utility methods for working with 'ConditionalOnOperation' annotations.
  * The class includes a 'hasOperation' method that checks whether a specific operation is allowed for a given class.
  * The class also includes a private constructor to prevent instantiation.
- *
- *
  */
 public class ConditionalOnOperationUtil {
 

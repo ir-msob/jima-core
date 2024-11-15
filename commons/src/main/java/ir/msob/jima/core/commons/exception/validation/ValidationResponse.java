@@ -13,8 +13,6 @@ import java.util.Collection;
  * It includes additional fields for a collection of invalid data associated with the exception and the message associated with the exception.
  * The class also provides several constructors for creating an instance of the response with different sets of parameters.
  * Additionally, it overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 400.
- *
- *
  */
 @Setter
 @Getter

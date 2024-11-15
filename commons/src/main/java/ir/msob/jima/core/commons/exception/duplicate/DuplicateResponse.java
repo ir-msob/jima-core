@@ -13,8 +13,6 @@ import java.io.Serializable;
  * It includes additional fields for the key associated with the duplicate value, the duplicate value itself, and a message.
  * The class also provides several constructors for creating an instance of the response with different sets of parameters.
  * Additionally, it overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 409.
- *
- *
  */
 @Setter
 @Getter

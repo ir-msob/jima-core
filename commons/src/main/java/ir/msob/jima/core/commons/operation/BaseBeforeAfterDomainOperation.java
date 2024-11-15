@@ -8,7 +8,6 @@ import ir.msob.jima.core.commons.security.BaseUser;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Optional;
 
 /**
  * This interface provides a set of methods that are called before and after each CRUD operation.
@@ -33,7 +32,7 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void beforeCount(C criteria, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
+    default void beforeCount(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
     }
 
     /**
@@ -44,7 +43,7 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void afterCount(C criteria, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
+    default void afterCount(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
     }
 
     /**
@@ -55,7 +54,7 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void beforeGet(C criteria, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
+    default void beforeGet(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
     }
 
     /**
@@ -68,7 +67,7 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void afterGet(Collection<ID> ids, Collection<DTO> dtos, C criteria, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
+    default void afterGet(Collection<ID> ids, Collection<DTO> dtos, C criteria, USER user) throws DomainNotFoundException, BadRequestException {
     }
 
     /**
@@ -79,7 +78,7 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void beforeSave(DTO dto, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
+    default void beforeSave(DTO dto, USER user) throws DomainNotFoundException, BadRequestException {
     }
 
     /**
@@ -91,7 +90,7 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void afterSave(DTO dto, DTO savedDto, Optional<USER> user)
+    default void afterSave(DTO dto, DTO savedDto, USER user)
             throws DomainNotFoundException, BadRequestException {
     }
 
@@ -104,7 +103,7 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void beforeUpdate(DTO previousDto, DTO dto, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
+    default void beforeUpdate(DTO previousDto, DTO dto, USER user) throws DomainNotFoundException, BadRequestException {
     }
 
     /**
@@ -116,7 +115,7 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void afterUpdate(DTO previousDto, DTO updatedDto, Optional<USER> user)
+    default void afterUpdate(DTO previousDto, DTO updatedDto, USER user)
             throws DomainNotFoundException, BadRequestException {
     }
 
@@ -128,19 +127,19 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void beforeDelete(C criteria, Optional<USER> user) throws DomainNotFoundException, BadRequestException {
+    default void beforeDelete(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
     }
 
     /**
      * This method is called after the delete operation.
      *
-     * @param dto       the DTO of the DTO that was deleted
+     * @param dto      the DTO of the DTO that was deleted
      * @param criteria the criteria used for deleting
      * @param user     the current user
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void afterDelete(DTO dto, C criteria, Optional<USER> user)
+    default void afterDelete(DTO dto, C criteria, USER user)
             throws DomainNotFoundException, BadRequestException {
     }
 }

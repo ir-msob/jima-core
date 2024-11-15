@@ -8,7 +8,6 @@ import ir.msob.jima.core.commons.resource.BaseResource;
 import ir.msob.jima.core.commons.security.BaseUser;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 /**
  * The 'BaseListener' interface defines methods for creating and managing Kafka message listener containers.
@@ -38,10 +37,10 @@ public interface BaseListener<ID extends Comparable<ID> & Serializable, USER ext
      * Retrieves a user based on the provided authentication token.
      *
      * @param token The authentication token to identify the user.
-     * @return An optional containing the user if found, or an empty optional if not found.
+     * @return the user
      */
-    default Optional<USER> getUser(String token) {
-        return getUserService().getUser(Optional.ofNullable(token));
+    default USER getUser(String token) {
+        return getUserService().getUser(token);
     }
 
     /**
@@ -55,7 +54,7 @@ public interface BaseListener<ID extends Comparable<ID> & Serializable, USER ext
      * @param <DATA>            The type of data in the resulting ChannelMessage.
      * @return A new ChannelMessage with modified properties.
      */
-    default <DATA_REQ extends ModelType, DATA extends ModelType> ChannelMessage<USER, DATA> prepareChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, DATA data, Integer status, Optional<USER> user) {
+    default <DATA_REQ extends ModelType, DATA extends ModelType> ChannelMessage<USER, DATA> prepareChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, DATA data, Integer status, USER user) {
         ChannelMessage<USER, DATA> channelMessage = new ChannelMessage<>();
         channelMessage.setData(data);
         channelMessage.setCallback(null);

@@ -1,12 +1,12 @@
 package ir.msob.jima.core.commons.client;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import ir.msob.jima.core.commons.annotation.methodstats.MethodStats;
 import ir.msob.jima.core.commons.model.channel.ChannelMessage;
 import ir.msob.jima.core.commons.model.dto.ModelType;
 import ir.msob.jima.core.commons.security.BaseUser;
 
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * The 'BaseAsyncClient' interface provides a set of basic methods for sending messages to channels.
@@ -26,7 +26,19 @@ public interface BaseAsyncClient {
      * @param user           Optional: the destination user
      */
     @MethodStats
-    <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel, Optional<USER> user);
+    <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel, USER user);
+
+    /**
+     * This method sends a generic channel message.
+     * It is annotated with '@MethodStats', which means that statistics will be collected for this method.
+     *
+     * @param <USER>         The user type
+     * @param <DATA>         The data type
+     * @param channelMessage The channel message
+     * @param channel        The channel name
+     */
+    @MethodStats
+    <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel) throws JsonProcessingException;
 
     /**
      * This method sends a channel message of type Map.
@@ -38,6 +50,6 @@ public interface BaseAsyncClient {
      * @param user           Optional: the destination user
      */
     @MethodStats
-    <USER extends BaseUser> void send(Map<String, Object> channelMessage, String channel, Optional<USER> user);
+    <USER extends BaseUser> void send(Map<String, Object> channelMessage, String channel, USER user);
 
 }

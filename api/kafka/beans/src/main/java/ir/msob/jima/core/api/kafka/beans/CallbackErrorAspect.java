@@ -23,7 +23,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Parameter;
-import java.util.Optional;
 
 /**
  * The 'CallbackErrorAspect' class is an aspect that handles errors and executes callbacks for methods annotated with @CallbackError.
@@ -39,6 +38,7 @@ public class CallbackErrorAspect {
     private final BaseAsyncClient asyncClient;
     private final ObjectMapper objectMapper;
     private final BaseExceptionMapper exceptionMapper;
+
     /**
      * This method is executed after a method annotated with @CallbackError throws an exception.
      * It handles the error and executes the callback.
@@ -58,11 +58,9 @@ public class CallbackErrorAspect {
      * @param point The join point of the method
      * @param e     The thrown exception
      */
-    private <
-            USER extends BaseUser
-            , DATA extends ModelType> void callback(JoinPoint point, Throwable e) throws JsonProcessingException {
+    private <USER extends BaseUser, DATA extends ModelType> void callback(JoinPoint point, Throwable e) throws JsonProcessingException {
         ChannelMessage<USER, DATA> message = prepareChannelMessage(point);
-        Optional<USER> user = Optional.ofNullable(message.getUser());
+        USER user = message.getUser();
 
         ChannelMessage<USER, DATA> errorChannelMessage = prepareErrorChannelMessage(message, e);
         if (Strings.isNotBlank(message.getErrorCallback()))
@@ -104,8 +102,7 @@ public class CallbackErrorAspect {
      * @param throwable         The thrown exception
      * @return An error ChannelMessage
      */
-    private <
-            USER extends BaseUser
+    private <USER extends BaseUser
             , DATA_REQ extends ModelType
             , DATA extends ModelType
             , ER extends AbstractExceptionResponse> ChannelMessage<USER, DATA> prepareErrorChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, Throwable throwable) {

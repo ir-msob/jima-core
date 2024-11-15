@@ -23,7 +23,7 @@ public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
     /**
      * Prepares an OR operation in the query builder using the provided criteria.
      *
-     * @param queryBuilder the QueryBuilder instance to modify.
+     * @param queryBuilder   the QueryBuilder instance to modify.
      * @param orOperatorList the list of Criteria to be combined with an OR operator.
      */
     private static void prepareOrOperation(QueryBuilder queryBuilder, Collection<Criteria> orOperatorList) {
@@ -36,8 +36,8 @@ public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
      * Sets OR conditions based on the provided field and filter.
      *
      * @param orOperatorList the list of Criteria to be combined with an OR operator.
-     * @param field the field to apply the filter on.
-     * @param fieldFilter the filter containing OR conditions.
+     * @param field          the field to apply the filter on.
+     * @param fieldFilter    the filter containing OR conditions.
      */
     private static void setOrConditions(Collection<Criteria> orOperatorList, Field field, Filter<?> fieldFilter) {
         if (fieldFilter.getOr().getEq() != null) {
@@ -84,10 +84,10 @@ public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
     /**
      * Sets conditions for each field in the criteria.
      *
-     * @param criteria The filtering criteria.
-     * @param queryBuilder The QueryBuilder instance to modify.
+     * @param criteria       The filtering criteria.
+     * @param queryBuilder   The QueryBuilder instance to modify.
      * @param orOperatorList The list of Criteria to be combined with an OR operator.
-     * @param fields The fields to apply the filters on.
+     * @param fields         The fields to apply the filters on.
      */
     private void setFieldsCondition(C criteria, QueryBuilder queryBuilder, Collection<Criteria> orOperatorList, Collection<Field> fields) {
         for (Field field : fields) {
@@ -109,10 +109,10 @@ public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
     /**
      * Sets conditions based on the provided field and filter.
      *
-     * @param queryBuilder The QueryBuilder instance to modify.
+     * @param queryBuilder   The QueryBuilder instance to modify.
      * @param orOperatorList The list of Criteria to be combined with an OR operator.
-     * @param field The field to apply the filter on.
-     * @param fieldFilter The filter containing conditions.
+     * @param field          The field to apply the filter on.
+     * @param fieldFilter    The filter containing conditions.
      */
     private void setConditions(QueryBuilder queryBuilder, Collection<Criteria> orOperatorList, Field field, Filter<?> fieldFilter) {
         if (fieldFilter.getEq() != null) {
@@ -163,7 +163,7 @@ public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
     /**
      * Prepares pagination settings in the query builder.
      *
-     * @param pageable The pagination information.
+     * @param pageable     The pagination information.
      * @param queryBuilder The QueryBuilder instance to modify.
      */
     private void preparePagination(Pageable pageable, QueryBuilder queryBuilder) {
@@ -175,7 +175,7 @@ public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
     /**
      * Prepares include fields in the query builder based on the criteria.
      *
-     * @param criteria The filtering criteria.
+     * @param criteria     The filtering criteria.
      * @param queryBuilder The QueryBuilder instance to modify.
      */
     private void prepareIncludes(C criteria, QueryBuilder queryBuilder) {

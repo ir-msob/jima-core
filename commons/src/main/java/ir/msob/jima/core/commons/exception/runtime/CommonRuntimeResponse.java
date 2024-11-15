@@ -10,8 +10,6 @@ import lombok.Setter;
  * It includes an additional field for the message associated with the exception.
  * The class also provides several constructors for creating an instance of the response with different sets of parameters.
  * Additionally, it overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 500.
- *
- *
  */
 @Setter
 @Getter

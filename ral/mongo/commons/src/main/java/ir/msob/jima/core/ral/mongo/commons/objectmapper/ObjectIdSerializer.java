@@ -19,8 +19,8 @@ public class ObjectIdSerializer extends JsonSerializer<ObjectId> {
     /**
      * Serializes an ObjectId into a JSON string.
      *
-     * @param value the ObjectId to serialize.
-     * @param gen the JsonGenerator used to write JSON content.
+     * @param value       the ObjectId to serialize.
+     * @param gen         the JsonGenerator used to write JSON content.
      * @param serializers the SerializerProvider that can be used to get serializers for
      *                    serializing Objects value contains, if any.
      * @throws IOException if an error occurs during writing JSON content.

@@ -20,7 +20,6 @@ import java.util.Optional;
  * This class provides methods to construct MongoDB queries and updates.
  *
  * @param <T> The concrete query class extending this base class.
- *
  */
 @Getter
 @Setter

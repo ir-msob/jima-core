@@ -24,7 +24,6 @@ import java.util.Set;
  * The 'nin' methods create a filter for items that are not in a specified set or collection of values.
  *
  * @param <TYPE> The type of the filter criteria.
- *
  */
 @Setter
 @Getter

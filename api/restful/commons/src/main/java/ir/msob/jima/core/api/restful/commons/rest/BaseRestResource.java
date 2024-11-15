@@ -1,13 +1,15 @@
 package ir.msob.jima.core.api.restful.commons.rest;
 
+import ir.msob.jima.core.commons.exception.badrequest.BadRequestException;
 import ir.msob.jima.core.commons.resource.BaseResource;
 import ir.msob.jima.core.commons.security.BaseUser;
+import jakarta.validation.constraints.NotNull;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.server.ServerWebExchange;
 
 import java.io.Serializable;
 import java.security.Principal;
-import java.util.Optional;
 
 import static ir.msob.jima.core.commons.Constants.USER_INFO_HEADER_NAME;
 
@@ -24,9 +26,9 @@ public interface BaseRestResource<ID extends Comparable<ID> & Serializable, USER
      * Retrieve the user associated with the given Principal object.
      *
      * @param principal The Principal object representing the user.
-     * @return An Optional containing the user or empty if not found.
+     * @return the user
      */
-    default Optional<USER> getUser(Principal principal) {
+    default @NotNull USER getUser(Principal principal) {
         return getUserService().getUser(principal);
     }
 
@@ -34,9 +36,9 @@ public interface BaseRestResource<ID extends Comparable<ID> & Serializable, USER
      * Retrieve the user associated with the given user information.
      *
      * @param userInfo The user information string.
-     * @return An Optional containing the user or empty if not found.
+     * @return the user
      */
-    default Optional<USER> getUser(String userInfo) {
+    default @NotNull USER getUser(String userInfo) {
         return getUserService().getUser(userInfo, getUserClass());
     }
 
@@ -45,9 +47,9 @@ public interface BaseRestResource<ID extends Comparable<ID> & Serializable, USER
      *
      * @param serverWebExchange The ServerWebExchange object representing the web request and response.
      * @param principal         The Principal object representing the user.
-     * @return An Optional containing the user or empty if not found.
+     * @return the user
      */
-    default Optional<USER> getUser(ServerWebExchange serverWebExchange, Principal principal) {
+    default @NotNull USER getUser(ServerWebExchange serverWebExchange, Principal principal) {
         String userInfo = serverWebExchange.getRequest().getHeaders().getFirst(USER_INFO_HEADER_NAME);
         return getUserService().getUser(userInfo, principal, getUserClass());
     }
@@ -56,19 +58,23 @@ public interface BaseRestResource<ID extends Comparable<ID> & Serializable, USER
      * Retrieve the user associated with the user information extracted from the ServerWebExchange.
      *
      * @param serverWebExchange The ServerWebExchange object representing the web request and response.
-     * @return An Optional containing the user or empty if not found.
+     * @return the user
      */
-    default Optional<USER> getUser(ServerWebExchange serverWebExchange) {
-        return getUserService().getUser(getToken(serverWebExchange));
+    default @NotNull USER getUser(ServerWebExchange serverWebExchange) {
+        String token = getToken(serverWebExchange);
+        return getUserService().getUser(token);
     }
 
     /**
      * Retrieve the authentication token from the ServerWebExchange.
      *
      * @param serverWebExchange The ServerWebExchange object representing the web request and response.
-     * @return An Optional containing the authentication token or empty if not found.
+     * @return the authentication token
      */
-    default Optional<String> getToken(ServerWebExchange serverWebExchange) {
-        return Optional.ofNullable(serverWebExchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION));
+    default @NotNull String getToken(@NotNull ServerWebExchange serverWebExchange) {
+        String token = serverWebExchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+        if (Strings.isBlank(token))
+            throw new BadRequestException("Authorization header is missing or empty. Please provide a valid token.");
+        return token;
     }
 }

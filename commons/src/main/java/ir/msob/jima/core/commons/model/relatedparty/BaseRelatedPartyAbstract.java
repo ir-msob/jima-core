@@ -13,7 +13,6 @@ import java.util.TreeSet;
  * This abstract class represents a base related party with a sorted set of related parties.
  * It provides methods to get and set the related parties.
  * It implements the BaseRelatedParty interface.
- *
  */
 @Getter
 @Setter

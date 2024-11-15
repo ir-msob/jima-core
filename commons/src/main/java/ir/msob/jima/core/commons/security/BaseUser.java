@@ -11,7 +11,6 @@ import java.util.TreeSet;
  * This class represents a base user with an ID, session ID, username, roles, and audience.
  * It extends the ModelType class and implements Serializable interface for the object to be converted into a byte stream.
  * It provides methods to get and set the ID, session ID, username, roles, and audience.
- *
  */
 @Setter
 @Getter

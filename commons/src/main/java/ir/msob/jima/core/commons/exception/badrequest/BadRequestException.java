@@ -13,8 +13,6 @@ import java.io.Serializable;
  * It includes additional fields for the name of the field that has an invalid value and the invalid value itself.
  * The class also provides several constructors for creating an instance of the exception with different sets of parameters.
  * Additionally, it provides static methods for initializing and creating an instance of the exception with a formatted message.
- *
- *
  */
 @Setter
 @Getter

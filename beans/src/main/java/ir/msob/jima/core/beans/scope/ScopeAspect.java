@@ -1,8 +1,8 @@
 package ir.msob.jima.core.beans.scope;
 
 import ir.msob.jima.core.commons.exception.resourcenotfound.ResourceNotFoundException;
-import ir.msob.jima.core.commons.model.scope.Resource;
 import ir.msob.jima.core.commons.model.ResourceType;
+import ir.msob.jima.core.commons.model.scope.Resource;
 import ir.msob.jima.core.commons.model.scope.Scope;
 import ir.msob.jima.core.commons.operation.ConditionalOnOperationUtil;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +24,15 @@ import java.util.Objects;
 @Component
 @RequiredArgsConstructor
 public class ScopeAspect {
+
+    private static boolean isValidResourceType(ResourceType resourceType, ResourceType... types) {
+        for (ResourceType type : types) {
+            if (Objects.equals(resourceType, type)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * This method is an advice that runs before any method annotated with @Scope.
@@ -56,17 +65,8 @@ public class ScopeAspect {
             // Check if the operation specified in the @Scope annotation is present for the resource class
             // If the operation is present, allow the method to proceed
             if (ConditionalOnOperationUtil.hasOperation(scope.value(), resourceClass))
-               return joinPoint.proceed();
+                return joinPoint.proceed();
         }
         return null;
-    }
-
-    private static boolean isValidResourceType(ResourceType resourceType, ResourceType... types) {
-        for (ResourceType type : types) {
-            if (Objects.equals(resourceType, type)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

@@ -85,24 +85,21 @@ public class CoreTestData {
     public static final Collection<KeyValue<String, Integer>> DEFAULT_INTEGER_KEY_VALUES = Collections.singleton(DEFAULT_INTEGER_KEY_VALUE);
     public static final KeyValue<String, Integer> UPDATED_INTEGER_KEY_VALUE = new KeyValue<>(UPDATED_STRING, UPDATED_INTEGER);
     public static final Collection<KeyValue<String, Integer>> UPDATED_INTEGER_KEY_VALUES = Collections.singleton(UPDATED_INTEGER_KEY_VALUE);
-
-    // ID and Party ID constants
-    public static Object DEFAULT_ID;
-    public static Object UPDATED_ID;
     public static final String DEFAULT_PARTY_ID = DEFAULT_STRING;
     public static final String UPDATED_PARTY_ID = UPDATED_STRING;
-
-    // RelatedDomain and RelatedParty constants
-    public static RelatedDomain<?> DEFAULT_RELATED_DOMAIN;
-    public static RelatedDomain<?> DEFAULT_REQUIRED_RELATED_DOMAIN;
-    public static RelatedParty DEFAULT_RELATED_PARTY;
-    public static RelatedParty DEFAULT_REQUIRED_RELATED_PARTY;
-
     // TimePeriod constants
     public static final TimePeriod DEFAULT_TIME_PERIOD = initDefaultTimePeriod();
     public static final TimePeriod UPDATED_TIME_PERIOD = initUpdatedTimePeriod();
     public static final Collection<TimePeriod> DEFAULT_TIME_PERIODS = Collections.singleton(DEFAULT_TIME_PERIOD);
     public static final Collection<TimePeriod> UPDATED_TIME_PERIODS = Collections.singleton(UPDATED_TIME_PERIOD);
+    // ID and Party ID constants
+    public static Object DEFAULT_ID;
+    public static Object UPDATED_ID;
+    // RelatedDomain and RelatedParty constants
+    public static RelatedDomain<?> DEFAULT_RELATED_DOMAIN;
+    public static RelatedDomain<?> DEFAULT_REQUIRED_RELATED_DOMAIN;
+    public static RelatedParty DEFAULT_RELATED_PARTY;
+    public static RelatedParty DEFAULT_REQUIRED_RELATED_PARTY;
 
     private CoreTestData() {
         // Private constructor to prevent instantiation
@@ -158,7 +155,7 @@ public class CoreTestData {
      * Updates the provided sorted set of related domains with updated values.
      *
      * @param relatedDomains the sorted set of related domains to update
-     * @param <ID> the type of the domain identifier
+     * @param <ID>           the type of the domain identifier
      */
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_DOMAINS(SortedSet<RelatedDomain<ID>> relatedDomains) {
         relatedDomains.forEach(CoreTestData::UPDATED_REQUIRED_RELATED_DOMAIN);
@@ -178,7 +175,7 @@ public class CoreTestData {
      * Updates the provided sorted set of related domains with updated values.
      *
      * @param relatedDomains the sorted set of related domains to update
-     * @param <ID> the type of the domain identifier
+     * @param <ID>           the type of the domain identifier
      */
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_DOMAINS(SortedSet<RelatedDomain<ID>> relatedDomains) {
         relatedDomains.forEach(CoreTestData::UPDATED_RELATED_DOMAIN);
@@ -189,7 +186,7 @@ public class CoreTestData {
      *
      * @param defaultId the default ID
      * @param updatedId the updated ID
-     * @param <ID> the type of the domain identifier
+     * @param <ID>      the type of the domain identifier
      */
     public static <ID extends Comparable<ID> & Serializable> void init(ID defaultId, ID updatedId) {
         DEFAULT_ID = defaultId;
@@ -299,7 +296,7 @@ public class CoreTestData {
      * Updates the provided related domain with updated values.
      *
      * @param relatedDomain the related domain to update
-     * @param <ID> the type of the domain identifier
+     * @param <ID>          the type of the domain identifier
      */
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_DOMAIN(RelatedDomain<ID> relatedDomain) {
         relatedDomain.setObjectType(UPDATED_STRING);
@@ -324,7 +321,7 @@ public class CoreTestData {
      * Updates the provided required related domain with updated values.
      *
      * @param relatedDomain the required related domain to update
-     * @param <ID> the type of the domain identifier
+     * @param <ID>          the type of the domain identifier
      */
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_DOMAIN(RelatedDomain<ID> relatedDomain) {
         relatedDomain.setObjectType(UPDATED_STRING);

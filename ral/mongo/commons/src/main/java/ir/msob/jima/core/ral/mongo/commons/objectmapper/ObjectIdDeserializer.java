@@ -20,7 +20,7 @@ public class ObjectIdDeserializer extends JsonDeserializer<ObjectId> {
     /**
      * Deserializes a JSON string into an ObjectId.
      *
-     * @param p the JsonParser used to parse the JSON content.
+     * @param p                      the JsonParser used to parse the JSON content.
      * @param deserializationContext the context for deserialization.
      * @return an ObjectId if the input string is not blank; otherwise, returns null.
      * @throws IOException if an error occurs during parsing.

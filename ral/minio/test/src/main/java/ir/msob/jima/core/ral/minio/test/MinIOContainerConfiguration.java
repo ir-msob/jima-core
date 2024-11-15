@@ -22,7 +22,7 @@ public class MinIOContainerConfiguration {
      * The properties include the URL, access key, and secret key for the MinIO container.
      * The JimaProperties object is used to get the Docker image name, access key, and secret key for the MinIO container.
      *
-     * @param registry The DynamicPropertyRegistry used to dynamically register properties for the MinIO container.
+     * @param registry       The DynamicPropertyRegistry used to dynamically register properties for the MinIO container.
      * @param jimaProperties The JimaProperties object used to get the Docker image name, access key, and secret key for the MinIO container.
      * @return The created MinIOContainer bean.
      */

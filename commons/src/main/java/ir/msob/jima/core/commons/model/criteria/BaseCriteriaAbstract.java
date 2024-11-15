@@ -21,7 +21,6 @@ import java.util.Set;
  * The class is annotated with '@JsonInclude(JsonInclude.Include.NON_NULL)', which means that null fields will not be included in the JSON output.
  *
  * @param <ID> The type of the ID of the criteria.
- *
  */
 @Setter
 @Getter

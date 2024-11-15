@@ -7,7 +7,6 @@ import java.io.Serializable;
 /**
  * This interface represents a base model that can be serialized and copied.
  * It provides a default method to create a copy of the implementing class.
- *
  */
 public interface BaseModel extends Serializable {
 

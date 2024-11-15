@@ -18,7 +18,6 @@ import java.util.Set;
  * The interface also includes 'init' and 'validation' methods for initializing and validating the criteria.
  *
  * @param <ID> The type of the ID of the criteria.
- *
  */
 public interface BaseCriteria<ID extends Comparable<ID> & Serializable> extends BaseModel, BaseType {
 

@@ -12,9 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * This class is an integration test for the BaseCoreGraphqlResourceTestTest class.
@@ -61,8 +60,8 @@ class BaseCoreGraphqlResourceTestTest {
             }
 
             @Override
-            public Optional<BaseUser> getSampleUser() {
-                return Optional.empty();
+            public BaseUser getSampleUser() {
+                return new BaseUser();
             }
 
             @Override
@@ -104,8 +103,7 @@ class BaseCoreGraphqlResourceTestTest {
      */
     @Test
     void getSampleUserReturnsEmptyOptional() {
-        Optional<BaseUser> sampleUser = graphqlResourceTest.getSampleUser();
+        BaseUser sampleUser = graphqlResourceTest.getSampleUser();
         assertNotNull(sampleUser);
-        assertFalse(sampleUser.isPresent());
     }
 }

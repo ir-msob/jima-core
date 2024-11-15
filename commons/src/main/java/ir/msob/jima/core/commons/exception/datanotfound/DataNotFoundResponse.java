@@ -11,8 +11,6 @@ import lombok.ToString;
  * It includes additional fields for the name of the entity that was not found, the ID of the entity, and the class of the entity.
  * The class also provides several constructors for creating an instance of the response with different sets of parameters.
  * Additionally, it overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 404.
- *
- *
  */
 @Setter
 @Getter

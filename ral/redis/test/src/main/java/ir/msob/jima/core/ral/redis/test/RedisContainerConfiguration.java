@@ -22,7 +22,7 @@ public class RedisContainerConfiguration {
      * The JimaProperties object is used to get the Docker image name for the Redis container.
      * The @Bean annotation is used to indicate that this method produces a bean to be managed by the Spring container.
      *
-     * @param registry The DynamicPropertyRegistry used to dynamically register properties for the Redis container.
+     * @param registry       The DynamicPropertyRegistry used to dynamically register properties for the Redis container.
      * @param jimaProperties The JimaProperties object used to get the Docker image name for the Redis container.
      * @return The created RedisContainer bean.
      */

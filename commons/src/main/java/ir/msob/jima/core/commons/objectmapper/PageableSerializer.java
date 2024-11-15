@@ -1,4 +1,3 @@
-
 package ir.msob.jima.core.commons.objectmapper;
 
 import com.fasterxml.jackson.core.JsonGenerator;
