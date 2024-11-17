@@ -20,6 +20,7 @@ public interface BaseResource<ID extends Comparable<ID> & Serializable, USER ext
      *
      * @return The class type for the identifier.
      */
+    @SuppressWarnings("unchecked")
     default Class<ID> getIdClass() {
         return (Class<ID>) GenericTypeUtil.resolveTypeArguments(this.getClass(), BaseResource.class, 0);
     }
@@ -29,6 +30,7 @@ public interface BaseResource<ID extends Comparable<ID> & Serializable, USER ext
      *
      * @return The class type for the user.
      */
+    @SuppressWarnings("unchecked")
     default Class<USER> getUserClass() {
         return (Class<USER>) GenericTypeUtil.resolveTypeArguments(this.getClass(), BaseResource.class, 1);
     }

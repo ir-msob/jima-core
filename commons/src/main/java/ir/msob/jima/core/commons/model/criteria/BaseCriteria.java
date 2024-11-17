@@ -1,7 +1,6 @@
 package ir.msob.jima.core.commons.model.criteria;
 
 import ir.msob.jima.core.commons.exception.badrequest.BadRequestException;
-import ir.msob.jima.core.commons.model.BaseModel;
 import ir.msob.jima.core.commons.model.criteria.filter.Filter;
 import ir.msob.jima.core.commons.model.dto.BaseType;
 
@@ -19,7 +18,7 @@ import java.util.Set;
  *
  * @param <ID> The type of the ID of the criteria.
  */
-public interface BaseCriteria<ID extends Comparable<ID> & Serializable> extends BaseModel, BaseType {
+public interface BaseCriteria<ID extends Comparable<ID> & Serializable> extends BaseType {
 
     /**
      * Returns a set of includes for the criteria.

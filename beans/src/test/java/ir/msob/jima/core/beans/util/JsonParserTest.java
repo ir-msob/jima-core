@@ -13,16 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class JsonParserTest {
 
-    // ObjectMapper for JSON serialization/deserialization
-    private ObjectMapper objectMapper;
-
     // The JsonParser instance being tested
     private JsonParser jsonParser;
 
     @BeforeEach
     public void setup() {
         // Initialize ObjectMapper and JsonParser
-        objectMapper = new ObjectMapper();
+        // ObjectMapper for JSON serialization/deserialization
+        ObjectMapper objectMapper = new ObjectMapper();
         jsonParser = new JsonParser(objectMapper);
     }
 

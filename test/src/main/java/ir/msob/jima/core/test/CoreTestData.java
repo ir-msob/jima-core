@@ -147,6 +147,7 @@ public class CoreTestData {
      * @param <ID> the type of the domain identifier
      * @return a sorted set of default required related domains
      */
+    @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedDomain<ID>> DEFAULT_REQUIRED_RELATED_DOMAINS() {
         return Sets.newTreeSet(Collections.singleton((RelatedDomain<ID>) DEFAULT_REQUIRED_RELATED_DOMAIN));
     }
@@ -167,6 +168,7 @@ public class CoreTestData {
      * @param <ID> the type of the domain identifier
      * @return a sorted set of default related domains
      */
+    @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedDomain<ID>> DEFAULT_RELATED_DOMAINS() {
         return Sets.newTreeSet(Collections.singleton((RelatedDomain<ID>) DEFAULT_RELATED_DOMAIN));
     }
@@ -283,6 +285,7 @@ public class CoreTestData {
      *
      * @param <ID> the type of the domain identifier
      */
+    @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> void initDefaultRelatedDomain() {
         RelatedDomain<ID> relatedDomain = RelatedDomain.<ID>builder().build();
         relatedDomain.setObjectType(DEFAULT_STRING);
@@ -298,6 +301,7 @@ public class CoreTestData {
      * @param relatedDomain the related domain to update
      * @param <ID>          the type of the domain identifier
      */
+    @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_DOMAIN(RelatedDomain<ID> relatedDomain) {
         relatedDomain.setObjectType(UPDATED_STRING);
         relatedDomain.setObjectId((ID) UPDATED_ID);
@@ -310,6 +314,7 @@ public class CoreTestData {
      *
      * @param <ID> the type of the domain identifier
      */
+    @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> void initDefaultRequiredRelatedDomain() {
         RelatedDomain<ID> relatedDomain = RelatedDomain.<ID>builder().build();
         relatedDomain.setObjectType(DEFAULT_STRING);
@@ -323,6 +328,7 @@ public class CoreTestData {
      * @param relatedDomain the required related domain to update
      * @param <ID>          the type of the domain identifier
      */
+    @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_DOMAIN(RelatedDomain<ID> relatedDomain) {
         relatedDomain.setObjectType(UPDATED_STRING);
         relatedDomain.setObjectId((ID) UPDATED_ID);

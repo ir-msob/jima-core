@@ -17,7 +17,9 @@ public interface BaseModel extends Serializable {
      * @return a copy of the implementing class
      */
     default <T extends BaseModel> T copy() {
-        return (T) SerializationUtils.clone(this);
+        @SuppressWarnings("unchecked")
+        T copy = (T) SerializationUtils.clone(this);
+        return copy;
     }
 
 }

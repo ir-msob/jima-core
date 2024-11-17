@@ -85,6 +85,7 @@ public class KeyValue<K extends Comparable<K> & Serializable, V extends Serializ
             return false;
 
         if (o instanceof KeyValue<?, ?> keyValue) {
+            @SuppressWarnings("unchecked")
             KeyValue<K, V> that = (KeyValue<K, V>) keyValue;
             return Objects.equals(this.getKey(), that.getKey());
         }

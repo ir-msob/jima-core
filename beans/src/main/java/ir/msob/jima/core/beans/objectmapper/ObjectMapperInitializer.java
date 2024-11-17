@@ -43,6 +43,7 @@ public class ObjectMapperInitializer {
     /**
      * Register subtypes for various DTO and model classes. This method scans and registers subtypes of 'BaseType', 'BaseDto', and 'ModelType' within specific package prefixes.
      */
+
     private void registerSubTypes() {
         Set<String> prefixes = new HashSet<>();
         prefixes.add(Constants.CORE_FRAMEWORK_PACKAGE_PREFIX);

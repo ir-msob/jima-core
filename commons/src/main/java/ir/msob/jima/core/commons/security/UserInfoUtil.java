@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.util.Strings;
 
 import java.util.Base64;
-import java.util.Optional;
 
 /**
  * The 'UserInfoUtil' class is a utility class for encoding and decoding user information to/from Base64-encoded strings. It is typically used in the context of handling user-related data and security in a Spring-based application.

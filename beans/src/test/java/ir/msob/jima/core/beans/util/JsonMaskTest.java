@@ -17,13 +17,12 @@ public class JsonMaskTest {
 
     private static JsonMask jsonMask;
     private static ObjectMapper objectMapper;
-    private static PatchUtil patchUtil;
 
     // Initialize the necessary objects before running tests.
     @BeforeAll
     public static void setup() {
         objectMapper = new ObjectMapper();
-        patchUtil = new PatchUtil(objectMapper);
+        PatchUtil patchUtil = new PatchUtil(objectMapper);
         jsonMask = new JsonMask(objectMapper, patchUtil);
     }
 
@@ -40,6 +39,7 @@ public class JsonMaskTest {
 
         // Apply the mask and convert the result to a map.
         Object maskedObject = jsonMask.mask(masks, inputObject);
+        @SuppressWarnings("unchecked")
         Map<String, Map<String, String>> maskedMap = objectMapper.convertValue(maskedObject, Map.class);
 
         // Verify that the maskedMap contains the expected value.
@@ -59,6 +59,7 @@ public class JsonMaskTest {
 
         // Apply the mask to move the data and convert the result to a map.
         Object maskedObject = jsonMask.moveData(mask, inputObject, new HashMap<>());
+        @SuppressWarnings("unchecked")
         Map<String, Map<String, String>> maskedMap = objectMapper.convertValue(maskedObject, Map.class);
 
         // Verify that the maskedMap contains the expected value.
@@ -76,13 +77,14 @@ public class JsonMaskTest {
         inputObject.put("from", new HashMap<>());
         inputObject.get("from").put("path", new ArrayList<>());
         inputObject.get("from").get("path").add(new HashMap<>());
-        inputObject.get("from").get("path").get(0).put("subpath", "value");
+        inputObject.get("from").get("path").getFirst().put("subpath", "value");
 
         // Apply the mask to move the data and convert the result to a map.
         Object maskedObject = jsonMask.moveData(mask, inputObject, new HashMap<>());
+        @SuppressWarnings("unchecked")
         Map<String, Map<String, List<Map<String, String>>>> maskedMap = objectMapper.convertValue(maskedObject, Map.class);
 
         // Verify that the maskedMap contains the expected value.
-        Assertions.assertEquals("value", maskedMap.get("to").get("path").get(0).get("subpath"));
+        Assertions.assertEquals("value", maskedMap.get("to").get("path").getFirst().get("subpath"));
     }
 }

@@ -28,18 +28,21 @@ public interface BaseMongoProjectUserService extends BaseUserService {
 
 
     @Override
+    @SuppressWarnings("unchecked")
     default <USER extends BaseUser> USER getUser(Map<String, Object> claims) {
-        return (USER) ProjectUser.builder()
+        ProjectUser user = ProjectUser.builder()
                 .id(String.valueOf(claims.get(ClaimKey.ID)))
                 .sessionId(String.valueOf(claims.get(ClaimKey.SESSION_ID)))
                 .username(String.valueOf(claims.get(ClaimKey.SUBJECT)))
                 .audience(String.valueOf(claims.get(ClaimKey.AUDIENCE)))
                 .roles(new TreeSet<>((Collection<String>) claims.get(ClaimKey.ROLES)))
                 .build();
+        return (USER) user;
     }
 
 
     @Override
+    @SuppressWarnings("unchecked")
     default <USER extends BaseUser> USER getSystemUser() {
         if (SYSTEM_USER != null)
             return (USER) SYSTEM_USER;

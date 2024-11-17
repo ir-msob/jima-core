@@ -27,5 +27,6 @@ public class ServiceDto extends ModelType {
     /**
      * A sorted set of resources associated with the service.
      */
+    @Builder.Default
     private SortedSet<ResourceDto> resources = new TreeSet<>();
 }

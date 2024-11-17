@@ -26,7 +26,7 @@ public class MonoSerializer extends JsonSerializer<Mono<?>> {
      */
     @SneakyThrows
     @Override
-    public void serialize(Mono value, JsonGenerator gen, SerializerProvider serializers) {
+    public void serialize(Mono<?> value, JsonGenerator gen, SerializerProvider serializers) {
         if (value == null) {
             gen.writeNull();
         } else {

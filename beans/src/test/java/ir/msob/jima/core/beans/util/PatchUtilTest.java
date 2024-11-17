@@ -44,6 +44,7 @@ class PatchUtilTest {
         Map<String, String> initialObject = new HashMap<>();
 
         // Apply the JSON patch
+        @SuppressWarnings("unchecked")
         Map<String, String> result = (Map<String, String>) patchUtil.applyJsonPatch(jsonPatch, initialObject);
 
         // Assert the result
@@ -75,6 +76,7 @@ class PatchUtilTest {
         Map<String, Map<String, String>> initialObject = new HashMap<>();
         String path = "$.some.path";
 
+        @SuppressWarnings("unchecked")
         Map<String, Map<String, String>> result = (Map<String, Map<String, String>>) patchUtil.setValueToPath(initialObject, path, VALUE);
 
         // Assert the result

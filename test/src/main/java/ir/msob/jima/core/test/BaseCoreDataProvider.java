@@ -11,7 +11,6 @@ import ir.msob.jima.core.commons.service.BaseService;
 import ir.msob.jima.core.commons.util.GenericTypeUtil;
 
 import java.io.Serializable;
-import java.util.Optional;
 
 /**
  * A generic data provider interface for working with various types of data in a standardized way.
@@ -37,6 +36,7 @@ public interface BaseCoreDataProvider<ID extends Comparable<ID> & Serializable,
      *
      * @return The class representing the unique identifier.
      */
+    @SuppressWarnings("unchecked")
     default Class<ID> getIdClass() {
         return (Class<ID>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseCoreDataProvider.class, 0);
     }
@@ -46,6 +46,7 @@ public interface BaseCoreDataProvider<ID extends Comparable<ID> & Serializable,
      *
      * @return The class representing a user.
      */
+    @SuppressWarnings("unchecked")
     default Class<USER> getUserClass() {
         return (Class<USER>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseCoreDataProvider.class, 1);
     }
@@ -55,6 +56,7 @@ public interface BaseCoreDataProvider<ID extends Comparable<ID> & Serializable,
      *
      * @return The class representing the data entity.
      */
+    @SuppressWarnings("unchecked")
     default Class<D> getDomainClass() {
         return (Class<D>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseCoreDataProvider.class, 2);
     }
@@ -64,6 +66,7 @@ public interface BaseCoreDataProvider<ID extends Comparable<ID> & Serializable,
      *
      * @return The class representing the data transfer object.
      */
+    @SuppressWarnings("unchecked")
     default Class<DTO> getDtoClass() {
         return (Class<DTO>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseCoreDataProvider.class, 3);
     }
@@ -73,6 +76,7 @@ public interface BaseCoreDataProvider<ID extends Comparable<ID> & Serializable,
      *
      * @return The class representing the criteria.
      */
+    @SuppressWarnings("unchecked")
     default Class<C> getCriteriaClass() {
         return (Class<C>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseCoreDataProvider.class, 4);
     }

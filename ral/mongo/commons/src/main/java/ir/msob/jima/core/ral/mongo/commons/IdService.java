@@ -18,6 +18,7 @@ public class IdService implements BaseIdService {
      * @return a new ObjectId instance.
      */
     @Override
+    @SuppressWarnings("unchecked")
     public ObjectId newId() {
         return new ObjectId();
     }
@@ -30,6 +31,7 @@ public class IdService implements BaseIdService {
      * @throws IllegalArgumentException if the string is not a valid ObjectId.
      */
     @Override
+    @SuppressWarnings("unchecked")
     public ObjectId of(String id) {
         return new ObjectId(id);
     }

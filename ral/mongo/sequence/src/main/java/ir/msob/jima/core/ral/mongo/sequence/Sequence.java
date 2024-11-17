@@ -36,6 +36,7 @@ public class Sequence implements BaseDomain<String> {
      * The current value of the sequence.
      */
     @Field
+    @Builder.Default
     private long value = 1L;
 
     /**

@@ -39,6 +39,7 @@ public class AuditDomain implements Comparable<AuditDomain>, Serializable {
     /**
      * The version of the audit domain.
      */
+    @Builder.Default
     private Long version = 0L;
 
     /**

@@ -23,6 +23,7 @@ public interface BaseService<ID extends Comparable<ID> & Serializable, USER exte
      *
      * @return The class type for the identifier.
      */
+    @SuppressWarnings("unchecked")
     default Class<ID> getIdClass() {
         return (Class<ID>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseService.class, 0);
     }
@@ -32,6 +33,7 @@ public interface BaseService<ID extends Comparable<ID> & Serializable, USER exte
      *
      * @return The class type for the user.
      */
+    @SuppressWarnings("unchecked")
     default Class<USER> getUserClass() {
         return (Class<USER>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseService.class, 1);
     }
@@ -41,6 +43,7 @@ public interface BaseService<ID extends Comparable<ID> & Serializable, USER exte
      *
      * @return The class type for the domain entity.
      */
+    @SuppressWarnings("unchecked")
     default Class<D> getDomainClass() {
         return (Class<D>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseService.class, 2);
     }
@@ -50,6 +53,7 @@ public interface BaseService<ID extends Comparable<ID> & Serializable, USER exte
      *
      * @return The class type for the repository.
      */
+    @SuppressWarnings("unchecked")
     default Class<R> getRepositoryClass() {
         return (Class<R>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseService.class, 3);
     }

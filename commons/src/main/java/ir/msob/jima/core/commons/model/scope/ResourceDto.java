@@ -23,6 +23,7 @@ import java.util.TreeSet;
 public class ResourceDto implements BaseType, Comparable<ResourceDto> {
     private String value;
     private ResourceType type;
+    @Builder.Default
     private SortedSet<ScopeDto> scopes = new TreeSet<>();
 
     /**

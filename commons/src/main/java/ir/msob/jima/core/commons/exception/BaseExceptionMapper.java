@@ -40,6 +40,7 @@ public interface BaseExceptionMapper {
      * @param <ER> The type of the exception response.
      * @return The mapped exception response.
      */
+    @SuppressWarnings("unchecked")
     private <ER extends AbstractExceptionResponse, E extends BaseRuntimeException> ER castException(E ex) {
         if (ex != null) {
             if (ex instanceof BadRequestException exception) {

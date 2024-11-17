@@ -51,7 +51,7 @@ public class KafkaConfiguration {
      * @return Map of Kafka consumer properties.
      */
     public Map<String, Object> kafkaConsumerProperties() {
-        Map<String, Object> properties = kafkaProperties.buildConsumerProperties();
+        Map<String, Object> properties = kafkaProperties.getConsumer().buildProperties(null);
 
         // Set additional Kafka consumer properties
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
@@ -70,7 +70,7 @@ public class KafkaConfiguration {
      * @return Map of Kafka producer properties.
      */
     public Map<String, Object> kafkaProducerProperties() {
-        Map<String, Object> properties = kafkaProperties.buildProducerProperties();
+        Map<String, Object> properties = kafkaProperties.getProducer().buildProperties(null);
 
         // Set additional Kafka producer properties
         properties.put(ProducerConfig.ACKS_CONFIG, "all");

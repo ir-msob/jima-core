@@ -21,6 +21,7 @@ public class DefaultExceptionMapper implements BaseExceptionMapper {
      * @return The mapped `CommonRuntimeResponse`.
      */
     @Override
+    @SuppressWarnings("unchecked")
     public CommonRuntimeResponse cast(Throwable ex) {
         return new CommonRuntimeResponse(ex.getMessage());
     }

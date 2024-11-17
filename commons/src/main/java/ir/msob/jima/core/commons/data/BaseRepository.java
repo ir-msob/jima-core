@@ -23,7 +23,9 @@ public interface BaseRepository<ID extends Comparable<ID> & Serializable, USER e
      * @return The class type for the identifier.
      */
     default Class<ID> getIdClass() {
-        return (Class<ID>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseRepository.class, 0);
+        @SuppressWarnings("unchecked")
+        Class<ID> idClass = (Class<ID>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseRepository.class, 0);
+        return idClass;
     }
 
     /**
@@ -33,7 +35,9 @@ public interface BaseRepository<ID extends Comparable<ID> & Serializable, USER e
      * @return The class type for the user.
      */
     default Class<USER> getUserClass() {
-        return (Class<USER>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseRepository.class, 1);
+        @SuppressWarnings("unchecked")
+        Class<USER> userClass = (Class<USER>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseRepository.class, 1);
+        return userClass;
     }
 
     /**
@@ -43,6 +47,8 @@ public interface BaseRepository<ID extends Comparable<ID> & Serializable, USER e
      * @return The class type for the domain entity.
      */
     default Class<D> getDomainClass() {
-        return (Class<D>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseRepository.class, 2);
+        @SuppressWarnings("unchecked")
+        Class<D> domainClass = (Class<D>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseRepository.class, 2);
+        return domainClass;
     }
 }

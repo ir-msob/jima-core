@@ -30,6 +30,7 @@ public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
      *
      * @return The class representing the unique identifier.
      */
+    @SuppressWarnings("unchecked")
     default Class<ID> getIdClass() {
         return (Class<ID>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseCoreResourceTest.class, 0);
     }
@@ -39,6 +40,7 @@ public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
      *
      * @return The class representing a user.
      */
+    @SuppressWarnings("unchecked")
     default Class<USER> getUserClass() {
         return (Class<USER>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseCoreResourceTest.class, 1);
     }
@@ -48,6 +50,7 @@ public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
      *
      * @return The class representing the domain.
      */
+    @SuppressWarnings("unchecked")
     default Class<D> getDomainClass() {
         return (Class<D>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseCoreResourceTest.class, 2);
     }
@@ -57,6 +60,7 @@ public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
      *
      * @return The class representing the data transfer object.
      */
+    @SuppressWarnings("unchecked")
     default Class<DTO> getDtoClass() {
         return (Class<DTO>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseCoreResourceTest.class, 3);
     }
@@ -66,6 +70,7 @@ public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
      *
      * @return The class representing the criteria.
      */
+    @SuppressWarnings("unchecked")
     default Class<C> getCriteriaClass() {
         return (Class<C>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseCoreResourceTest.class, 4);
     }

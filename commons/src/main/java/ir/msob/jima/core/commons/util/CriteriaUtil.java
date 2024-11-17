@@ -26,6 +26,7 @@ public class CriteriaUtil {
      */
     @SneakyThrows
     public static <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>> C idCriteria(ID id) {
+        @SuppressWarnings("unchecked")
         C criteria = (C) new BaseCriteriaAbstract<ID>() {
 
         };
@@ -75,6 +76,7 @@ public class CriteriaUtil {
      */
     @SneakyThrows
     public static <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>> C idCriteria(Collection<ID> ids) {
+        @SuppressWarnings("unchecked")
         C criteria = (C) new BaseCriteriaAbstract<ID>() {
         };
         criteria.setId(Filter.in(Sets.newHashSet(ids)));
