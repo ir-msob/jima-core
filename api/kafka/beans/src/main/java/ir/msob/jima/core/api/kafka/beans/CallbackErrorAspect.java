@@ -105,7 +105,7 @@ public class CallbackErrorAspect {
      * @param throwable         The thrown exception
      * @return An error ChannelMessage
      */
-    private <USER extends BaseUser, DATA_REQ extends ModelType, ER extends AbstractExceptionResponse> List<ChannelMessage<USER, ER>> prepareErrorChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, Throwable throwable) {
+    <USER extends BaseUser, DATA_REQ extends ModelType, ER extends AbstractExceptionResponse> List<ChannelMessage<USER, ER>> prepareErrorChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, Throwable throwable) {
         ER er;
         if (throwable instanceof BaseRuntimeException e) {
             er = exceptionMapper.getExceptionResponse(e);
