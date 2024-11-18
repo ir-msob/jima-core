@@ -57,7 +57,7 @@ public interface BaseListener<ID extends Comparable<ID> & Serializable, USER ext
     default <DATA_REQ extends ModelType, DATA extends ModelType> ChannelMessage<USER, DATA> prepareChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, DATA data, Integer status, USER user) {
         ChannelMessage<USER, DATA> channelMessage = new ChannelMessage<>();
         channelMessage.setData(data);
-        channelMessage.setCallback(null);
+        channelMessage.setChannel(null);
         channelMessage.setMetadata(channelMessageReq.getMetadata());
         channelMessage.setStatus(status);
         return channelMessage;

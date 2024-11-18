@@ -42,7 +42,7 @@ class BaseListenerTest {
 
         // Assert
         assertEquals(data, preparedChannelMessage.getData());
-        assertNull(preparedChannelMessage.getCallback());
+        assertNull(preparedChannelMessage.getChannel());
         assertEquals(channelMessageReq.getMetadata(), preparedChannelMessage.getMetadata());
         assertEquals(status, preparedChannelMessage.getStatus());
     }

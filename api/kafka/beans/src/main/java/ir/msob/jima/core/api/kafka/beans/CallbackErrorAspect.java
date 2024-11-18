@@ -15,7 +15,6 @@ import ir.msob.jima.core.commons.model.channel.ChannelMessage;
 import ir.msob.jima.core.commons.model.dto.ModelType;
 import ir.msob.jima.core.commons.security.BaseUser;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.util.Strings;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -23,6 +22,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Parameter;
+import java.util.List;
 
 /**
  * The 'CallbackErrorAspect' class is an aspect that handles errors and executes callbacks for methods annotated with @CallbackError.
@@ -62,9 +62,12 @@ public class CallbackErrorAspect {
         ChannelMessage<USER, DATA> message = prepareChannelMessage(point);
         USER user = message.getUser();
 
-        ChannelMessage<USER, DATA> errorChannelMessage = prepareErrorChannelMessage(message, e);
-        if (Strings.isNotBlank(message.getErrorCallback()))
-            asyncClient.send(errorChannelMessage, message.getErrorCallback(), user);
+        List<? extends ChannelMessage<USER, ? extends AbstractExceptionResponse>> errorChannelMessages = prepareErrorChannelMessage(message, e);
+        if (!message.getErrorCallbacks().isEmpty()) {
+            for (ChannelMessage<USER, ? extends AbstractExceptionResponse> errorChannelMessage : errorChannelMessages) {
+                asyncClient.send(errorChannelMessage, errorChannelMessage.getChannel(), user);
+            }
+        }
     }
 
     /**
@@ -90,9 +93,9 @@ public class CallbackErrorAspect {
                 }
             }
         }
-        throw new CommonRuntimeException("Can not detect ChannelMessage arg. Class {}, Method {}"
-                , point.getSignature().getDeclaringTypeName()
-                , ((MethodSignature) point.getSignature()).getMethod().getName());
+        throw new CommonRuntimeException("Cannot detect ChannelMessage arg. Class {}, Method {}",
+                point.getSignature().getDeclaringTypeName(),
+                methodSignature.getMethod().getName());
     }
 
     /**
@@ -102,21 +105,25 @@ public class CallbackErrorAspect {
      * @param throwable         The thrown exception
      * @return An error ChannelMessage
      */
-    private <USER extends BaseUser
-            , DATA_REQ extends ModelType
-            , DATA extends ModelType
-            , ER extends AbstractExceptionResponse> ChannelMessage<USER, DATA> prepareErrorChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, Throwable throwable) {
+    private <USER extends BaseUser, DATA_REQ extends ModelType, ER extends AbstractExceptionResponse> List<ChannelMessage<USER, ER>> prepareErrorChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, Throwable throwable) {
         ER er;
-        if (throwable instanceof BaseRuntimeException e)
+        if (throwable instanceof BaseRuntimeException e) {
             er = exceptionMapper.getExceptionResponse(e);
-        else
+        } else {
             er = (ER) new CommonRuntimeResponse(throwable.getMessage());
+        }
 
-        ChannelMessage<USER, DATA> channelMessage = new ChannelMessage<>();
-        channelMessage.setData((DATA) er);
-        channelMessage.setCallback(null);
-        channelMessage.setMetadata(channelMessageReq.getMetadata());
-        channelMessage.setStatus(er.getStatus());
-        return channelMessage;
+        return channelMessageReq.getErrorCallbacks()
+                .stream()
+                .map(channelMessage -> {
+                    // Clone the channelMessage to avoid modifying the original
+                    ChannelMessage<USER, ER> clonedMessage = new ChannelMessage<>();
+                    clonedMessage.setData(er);
+                    clonedMessage.setStatus(er.getStatus());
+                    clonedMessage.setChannel(channelMessage.getChannel());
+                    clonedMessage.setMetadata(channelMessage.getMetadata());
+                    return clonedMessage;
+                })
+                .toList();
     }
 }

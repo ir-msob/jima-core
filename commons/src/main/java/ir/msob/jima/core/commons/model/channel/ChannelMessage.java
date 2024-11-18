@@ -1,6 +1,7 @@
 package ir.msob.jima.core.commons.model.channel;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
 import ir.msob.jima.core.commons.model.dto.BaseType;
 import ir.msob.jima.core.commons.model.dto.ModelType;
 import ir.msob.jima.core.commons.security.BaseUser;
@@ -73,7 +74,7 @@ public class ChannelMessage<USER extends BaseUser, DATA extends ModelType> imple
      * A list of error callbacks associated with the channel message.
      * This list can hold multiple ChannelMessage instances that represent error callbacks.
      */
-    private List<ChannelMessage<USER, ? extends ModelType>> errorCallbacks = new LinkedList<>();
+    private List<ChannelMessage<USER, ? extends AbstractExceptionResponse>> errorCallbacks = new LinkedList<>();
 
     /**
      * The 'FN' enum represents the field names of the class.

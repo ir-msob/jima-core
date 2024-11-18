@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.commons.annotation.methodstats.MethodStats;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
-import ir.msob.jima.core.commons.model.channel.ChannelInfoAbstract;
 import ir.msob.jima.core.commons.model.channel.ChannelMessage;
 import ir.msob.jima.core.commons.model.dto.ModelType;
 import ir.msob.jima.core.commons.security.BaseUser;
@@ -59,7 +58,7 @@ public class KafkaAsyncClient implements BaseAsyncClient {
     @Override
     public <USER extends BaseUser> void send(Map<String, Object> channelMessage, String channel, USER user) {
         // Set the user information in the ChannelMessage.
-        channelMessage.putIfAbsent(ChannelInfoAbstract.FN.user.name(), user);
+        channelMessage.putIfAbsent(ChannelMessage.FN.user.name(), user);
         sendMessage(channelMessage, channel);
     }
 
