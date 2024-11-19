@@ -6,9 +6,9 @@ import com.github.fge.jackson.jsonpointer.JsonPointer;
 import com.github.fge.jackson.jsonpointer.JsonPointerException;
 import com.github.fge.jsonpatch.JsonPatchOperation;
 import com.github.fge.jsonpatch.ReplaceOperation;
-import ir.msob.jima.core.commons.model.characteristic.Characteristic;
-import ir.msob.jima.core.commons.model.relateddomain.RelatedDomain;
-import ir.msob.jima.core.commons.model.relatedparty.RelatedParty;
+import ir.msob.jima.core.commons.characteristic.Characteristic;
+import ir.msob.jima.core.commons.relatedobject.relateddomain.RelatedDomain;
+import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedParty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -53,8 +53,8 @@ public class CoreTestJsonPatch {
      */
     public static <ID extends Comparable<ID> & Serializable> List<JsonPatchOperation> RELATED_DOMAINS_JSON_PATCH_OPERATION(ID id) throws JsonPointerException {
         List<JsonPatchOperation> operations = new ArrayList<>();
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedDomain.FN.objectType)), TextNode.valueOf(UPDATED_STRING)));
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedDomain.FN.objectId)), TextNode.valueOf(id.toString())));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedDomain.FN.name)), TextNode.valueOf(UPDATED_STRING)));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedDomain.FN.relatedId)), TextNode.valueOf(id.toString())));
         operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedDomain.FN.role)), TextNode.valueOf(UPDATED_STRING)));
         operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedDomain.FN.referringType)), TextNode.valueOf(UPDATED_STRING)));
         return operations;
@@ -70,8 +70,8 @@ public class CoreTestJsonPatch {
      */
     public static <ID extends Comparable<ID> & Serializable> List<JsonPatchOperation> RELATED_PARTIES_JSON_PATCH_OPERATION(ID id) throws JsonPointerException {
         List<JsonPatchOperation> operations = new ArrayList<>();
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedParty.FN.objectType)), TextNode.valueOf(UPDATED_STRING)));
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedParty.FN.objectId)), TextNode.valueOf(id.toString())));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedParty.FN.name)), TextNode.valueOf(UPDATED_STRING)));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedParty.FN.relatedId)), TextNode.valueOf(id.toString())));
         operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedParty.FN.role)), TextNode.valueOf(UPDATED_STRING)));
         operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedParty.FN.referringType)), TextNode.valueOf(UPDATED_STRING)));
         return operations;

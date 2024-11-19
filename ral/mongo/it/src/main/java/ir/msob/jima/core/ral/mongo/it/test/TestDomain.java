@@ -1,7 +1,7 @@
 package ir.msob.jima.core.ral.mongo.it.test;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.annotation.domain.DomainService;
+import ir.msob.jima.core.commons.domain.DomainService;
 import ir.msob.jima.core.ral.mongo.it.Microservices;
 import ir.msob.jima.core.ral.mongo.it.domain.ProjectDomainAbstract;
 import jakarta.validation.constraints.NotBlank;

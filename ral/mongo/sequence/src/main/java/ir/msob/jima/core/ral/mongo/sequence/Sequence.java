@@ -1,7 +1,7 @@
 package ir.msob.jima.core.ral.mongo.sequence;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.model.domain.BaseDomain;
+import ir.msob.jima.core.commons.domain.BaseDomain;
 import lombok.*;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;

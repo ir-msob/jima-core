@@ -9,7 +9,7 @@ import com.github.fge.jsonpatch.JsonPatchException;
 import ir.msob.jima.core.beans.spel.SpelRepository;
 import ir.msob.jima.core.beans.spel.StandardEvaluationContextUtil;
 import ir.msob.jima.core.beans.util.jsonpatch.PatchUtil;
-import ir.msob.jima.core.commons.annotation.patchparam.PatchParam;
+import ir.msob.jima.core.commons.patchparam.PatchParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.expression.spel.support.StandardEvaluationContext;

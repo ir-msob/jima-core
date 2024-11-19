@@ -2,8 +2,8 @@ package ir.msob.jima.core.commons.service;
 
 import ir.msob.jima.core.commons.ConcreteBaseService;
 import ir.msob.jima.core.commons.ConcreteBaseUser;
-import ir.msob.jima.core.commons.data.SampleRepository;
-import ir.msob.jima.core.commons.model.domain.SampleDomain;
+import ir.msob.jima.core.commons.domain.SampleDomain;
+import ir.msob.jima.core.commons.repository.SampleRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
 package ir.msob.jima.core.ral.mongo.commons.query;
 
-import ir.msob.jima.core.commons.data.BaseQuery;
+import ir.msob.jima.core.commons.repository.BaseQuery;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Pageable;

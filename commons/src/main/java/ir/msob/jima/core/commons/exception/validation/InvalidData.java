@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons.exception.validation;
 
-import ir.msob.jima.core.commons.model.BaseModel;
+import ir.msob.jima.core.commons.shared.BaseModel;
 import jakarta.validation.Path;
 import lombok.*;
 

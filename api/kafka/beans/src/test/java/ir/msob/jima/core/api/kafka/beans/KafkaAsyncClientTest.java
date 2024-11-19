@@ -1,8 +1,8 @@
 package ir.msob.jima.core.api.kafka.beans;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.msob.jima.core.commons.model.channel.ChannelMessage;
-import ir.msob.jima.core.commons.model.dto.ModelType;
+import ir.msob.jima.core.commons.channel.ChannelMessage;
+import ir.msob.jima.core.commons.dto.ModelType;
 import ir.msob.jima.core.commons.security.BaseUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

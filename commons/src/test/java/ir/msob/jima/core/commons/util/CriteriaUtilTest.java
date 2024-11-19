@@ -1,8 +1,8 @@
 package ir.msob.jima.core.commons.util;
 
 import com.google.common.collect.Sets;
-import ir.msob.jima.core.commons.model.criteria.BaseCriteria;
-import ir.msob.jima.core.commons.model.criteria.SampleCriteria;
+import ir.msob.jima.core.commons.shared.criteria.BaseCriteria;
+import ir.msob.jima.core.commons.shared.criteria.SampleCriteria;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;

@@ -1,11 +1,11 @@
 package ir.msob.jima.core.api.kafka.beans;
-import com.fasterxml.jackson.core.JsonProcessingException;
+
+import ir.msob.jima.core.commons.channel.ChannelMessage;
 import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
 import ir.msob.jima.core.commons.exception.BaseExceptionMapper;
 import ir.msob.jima.core.commons.exception.BaseRuntimeException;
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeResponse;
-import ir.msob.jima.core.commons.model.channel.ChannelMessage;
 import ir.msob.jima.core.commons.security.BaseUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

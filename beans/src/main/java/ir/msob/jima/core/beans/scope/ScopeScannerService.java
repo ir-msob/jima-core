@@ -1,9 +1,9 @@
 package ir.msob.jima.core.beans.scope;
 
-import ir.msob.jima.core.commons.model.scope.Resource;
-import ir.msob.jima.core.commons.model.scope.ResourceDto;
-import ir.msob.jima.core.commons.model.scope.Scope;
-import ir.msob.jima.core.commons.model.scope.ScopeDto;
+import ir.msob.jima.core.commons.scope.Resource;
+import ir.msob.jima.core.commons.scope.ResourceDto;
+import ir.msob.jima.core.commons.scope.Scope;
+import ir.msob.jima.core.commons.scope.ScopeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.annotation.AnnotationUtils;

@@ -1,6 +1,6 @@
 package ir.msob.jima.core.api.kafka.commons;
 
-import ir.msob.jima.core.commons.listener.BaseListener;
+import ir.msob.jima.core.commons.resource.listener.BaseListener;
 import ir.msob.jima.core.commons.security.BaseUser;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.listener.ContainerProperties;

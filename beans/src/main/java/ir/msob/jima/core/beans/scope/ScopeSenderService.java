@@ -2,11 +2,11 @@ package ir.msob.jima.core.beans.scope;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import ir.msob.jima.core.beans.properties.JimaProperties;
+import ir.msob.jima.core.commons.channel.ChannelMessage;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
 import ir.msob.jima.core.commons.logger.Logger;
 import ir.msob.jima.core.commons.logger.LoggerFactory;
-import ir.msob.jima.core.commons.model.channel.ChannelMessage;
-import ir.msob.jima.core.commons.model.scope.ServiceDto;
+import ir.msob.jima.core.commons.scope.ServiceDto;
 import lombok.RequiredArgsConstructor;
 
 /**

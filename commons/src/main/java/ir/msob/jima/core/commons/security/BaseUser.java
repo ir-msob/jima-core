@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons.security;
 
-import ir.msob.jima.core.commons.model.dto.ModelType;
+import ir.msob.jima.core.commons.dto.ModelType;
 import lombok.*;
 
 import java.io.Serial;

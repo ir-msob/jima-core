@@ -1,9 +1,10 @@
 package ir.msob.jima.core.commons.listener;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.msob.jima.core.commons.channel.ChannelMessage;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
-import ir.msob.jima.core.commons.model.channel.ChannelMessage;
-import ir.msob.jima.core.commons.model.dto.ModelType;
+import ir.msob.jima.core.commons.dto.ModelType;
+import ir.msob.jima.core.commons.resource.listener.BaseListener;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.security.BaseUserService;
 import org.junit.jupiter.api.Test;

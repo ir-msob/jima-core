@@ -1,7 +1,8 @@
 package ir.msob.jima.core.commons.annotation;
 
-import ir.msob.jima.core.commons.annotation.domain.DomainService;
+import ir.msob.jima.core.commons.domain.DomainService;
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
+import ir.msob.jima.core.commons.shared.annotation.ClassAnnotationInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
 package ir.msob.jima.core.ral.mongo.it.criteria;
 
-import ir.msob.jima.core.commons.model.criteria.BaseCriteriaAbstract;
+import ir.msob.jima.core.commons.shared.criteria.BaseCriteriaAbstract;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

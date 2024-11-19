@@ -1,10 +1,10 @@
 package ir.msob.jima.core.beans.scope;
 
 import ir.msob.jima.core.commons.exception.resourcenotfound.ResourceNotFoundException;
-import ir.msob.jima.core.commons.model.ResourceType;
-import ir.msob.jima.core.commons.model.scope.Resource;
-import ir.msob.jima.core.commons.model.scope.Scope;
 import ir.msob.jima.core.commons.operation.ConditionalOnOperationUtil;
+import ir.msob.jima.core.commons.scope.Resource;
+import ir.msob.jima.core.commons.scope.Scope;
+import ir.msob.jima.core.commons.shared.ResourceType;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

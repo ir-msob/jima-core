@@ -1,8 +1,8 @@
 package ir.msob.jima.core.ral.mongo.commons;
 
-import ir.msob.jima.core.commons.annotation.methodstats.MethodStats;
-import ir.msob.jima.core.commons.data.BaseRepository;
-import ir.msob.jima.core.commons.model.domain.BaseDomain;
+import ir.msob.jima.core.commons.domain.BaseDomain;
+import ir.msob.jima.core.commons.methodstats.MethodStats;
+import ir.msob.jima.core.commons.repository.BaseRepository;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.ral.mongo.commons.operator.QueryUtil;
 import ir.msob.jima.core.ral.mongo.commons.query.QueryBuilder;

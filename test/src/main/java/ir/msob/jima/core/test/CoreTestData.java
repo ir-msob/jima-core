@@ -1,13 +1,13 @@
 package ir.msob.jima.core.test;
 
 import com.google.common.collect.Sets;
-import ir.msob.jima.core.commons.model.DataType;
-import ir.msob.jima.core.commons.model.audit.AuditDomainActionType;
-import ir.msob.jima.core.commons.model.characteristic.Characteristic;
-import ir.msob.jima.core.commons.model.keyvalue.KeyValue;
-import ir.msob.jima.core.commons.model.relateddomain.RelatedDomain;
-import ir.msob.jima.core.commons.model.relatedparty.RelatedParty;
-import ir.msob.jima.core.commons.model.timeperiod.TimePeriod;
+import ir.msob.jima.core.commons.audit.AuditDomainActionType;
+import ir.msob.jima.core.commons.characteristic.Characteristic;
+import ir.msob.jima.core.commons.relatedobject.relateddomain.RelatedDomain;
+import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedParty;
+import ir.msob.jima.core.commons.shared.DataType;
+import ir.msob.jima.core.commons.shared.keyvalue.KeyValue;
+import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -241,8 +241,8 @@ public class CoreTestData {
      */
     public static void initDefaultRelatedParty() {
         RelatedParty relatedParty = RelatedParty.builder().build();
-        relatedParty.setObjectType(DEFAULT_STRING);
-        relatedParty.setObjectId(DEFAULT_PARTY_ID);
+        relatedParty.setName(DEFAULT_STRING);
+        relatedParty.setRelatedId(DEFAULT_PARTY_ID);
         relatedParty.setRole(DEFAULT_STRING);
         relatedParty.setReferringType(DEFAULT_STRING);
         DEFAULT_RELATED_PARTY = relatedParty;
@@ -254,8 +254,8 @@ public class CoreTestData {
      * @param relatedParty the related party to update
      */
     public static void UPDATED_RELATED_PARTY(RelatedParty relatedParty) {
-        relatedParty.setObjectType(UPDATED_STRING);
-        relatedParty.setObjectId(UPDATED_PARTY_ID);
+        relatedParty.setName(UPDATED_STRING);
+        relatedParty.setRelatedId(UPDATED_PARTY_ID);
         relatedParty.setRole(UPDATED_STRING);
         relatedParty.setReferringType(UPDATED_STRING);
     }
@@ -265,8 +265,8 @@ public class CoreTestData {
      */
     public static void initDefaultRequiredRelatedParty() {
         RelatedParty relatedParty = RelatedParty.builder().build();
-        relatedParty.setObjectType(DEFAULT_STRING);
-        relatedParty.setObjectId(DEFAULT_PARTY_ID);
+        relatedParty.setName(DEFAULT_STRING);
+        relatedParty.setRelatedId(DEFAULT_PARTY_ID);
         DEFAULT_REQUIRED_RELATED_PARTY = relatedParty;
     }
 
@@ -276,8 +276,8 @@ public class CoreTestData {
      * @param relatedParty the required related party to update
      */
     public static void UPDATED_REQUIRED_RELATED_PARTY(RelatedParty relatedParty) {
-        relatedParty.setObjectType(UPDATED_STRING);
-        relatedParty.setObjectId(UPDATED_PARTY_ID);
+        relatedParty.setName(UPDATED_STRING);
+        relatedParty.setRelatedId(UPDATED_PARTY_ID);
     }
 
     /**
@@ -288,8 +288,8 @@ public class CoreTestData {
     @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> void initDefaultRelatedDomain() {
         RelatedDomain<ID> relatedDomain = RelatedDomain.<ID>builder().build();
-        relatedDomain.setObjectType(DEFAULT_STRING);
-        relatedDomain.setObjectId((ID) DEFAULT_ID);
+        relatedDomain.setName(DEFAULT_STRING);
+        relatedDomain.setRelatedId((ID) DEFAULT_ID);
         relatedDomain.setRole(DEFAULT_STRING);
         relatedDomain.setReferringType(DEFAULT_STRING);
         DEFAULT_RELATED_DOMAIN = relatedDomain;
@@ -303,8 +303,8 @@ public class CoreTestData {
      */
     @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_DOMAIN(RelatedDomain<ID> relatedDomain) {
-        relatedDomain.setObjectType(UPDATED_STRING);
-        relatedDomain.setObjectId((ID) UPDATED_ID);
+        relatedDomain.setName(UPDATED_STRING);
+        relatedDomain.setRelatedId((ID) UPDATED_ID);
         relatedDomain.setRole(UPDATED_STRING);
         relatedDomain.setReferringType(UPDATED_STRING);
     }
@@ -317,8 +317,8 @@ public class CoreTestData {
     @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> void initDefaultRequiredRelatedDomain() {
         RelatedDomain<ID> relatedDomain = RelatedDomain.<ID>builder().build();
-        relatedDomain.setObjectType(DEFAULT_STRING);
-        relatedDomain.setObjectId((ID) DEFAULT_ID);
+        relatedDomain.setName(DEFAULT_STRING);
+        relatedDomain.setRelatedId((ID) DEFAULT_ID);
         DEFAULT_REQUIRED_RELATED_DOMAIN = relatedDomain;
     }
 
@@ -330,8 +330,8 @@ public class CoreTestData {
      */
     @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_DOMAIN(RelatedDomain<ID> relatedDomain) {
-        relatedDomain.setObjectType(UPDATED_STRING);
-        relatedDomain.setObjectId((ID) UPDATED_ID);
+        relatedDomain.setName(UPDATED_STRING);
+        relatedDomain.setRelatedId((ID) UPDATED_ID);
     }
 
     /**

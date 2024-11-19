@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons.operation;
 
-import ir.msob.jima.core.commons.annotation.ClassAnnotationInfo;
+import ir.msob.jima.core.commons.shared.annotation.ClassAnnotationInfo;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.ElementType;

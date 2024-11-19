@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.service;
 
-import ir.msob.jima.core.commons.data.BaseRepository;
-import ir.msob.jima.core.commons.model.domain.BaseDomain;
+import ir.msob.jima.core.commons.domain.BaseDomain;
+import ir.msob.jima.core.commons.repository.BaseRepository;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.util.GenericTypeUtil;
 

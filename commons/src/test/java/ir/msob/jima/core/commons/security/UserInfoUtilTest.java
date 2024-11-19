@@ -60,9 +60,9 @@ class UserInfoUtilTest {
     @Test
     void testDecodeUserWithEmptyEncodedUser() throws JsonProcessingException {
         String encodedUser = ""; // Empty encoded user
-        ConcreteBaseUser decodedUser = UserInfoUtil.decodeUser(objectMapper, encodedUser, ConcreteBaseUser.class);
-
-        assertNotNull(decodedUser);
+        assertThrows(IllegalArgumentException.class, () -> {
+            UserInfoUtil.decodeUser(objectMapper, encodedUser, ConcreteBaseUser.class);
+        });
     }
 
     @Test

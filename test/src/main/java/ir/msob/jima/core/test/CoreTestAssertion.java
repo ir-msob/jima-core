@@ -1,11 +1,11 @@
 package ir.msob.jima.core.test;
 
-import ir.msob.jima.core.commons.model.audit.AuditDomain;
-import ir.msob.jima.core.commons.model.characteristic.Characteristic;
-import ir.msob.jima.core.commons.model.keyvalue.KeyValue;
-import ir.msob.jima.core.commons.model.relateddomain.RelatedDomain;
-import ir.msob.jima.core.commons.model.relatedparty.RelatedParty;
-import ir.msob.jima.core.commons.model.timeperiod.TimePeriod;
+import ir.msob.jima.core.commons.audit.AuditDomain;
+import ir.msob.jima.core.commons.characteristic.Characteristic;
+import ir.msob.jima.core.commons.relatedobject.relateddomain.RelatedDomain;
+import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedParty;
+import ir.msob.jima.core.commons.shared.keyvalue.KeyValue;
+import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import org.assertj.core.api.Assertions;
 
 import java.io.Serializable;
@@ -84,8 +84,8 @@ public class CoreTestAssertion {
      * @param <ID>   The type of the identifier.
      */
     public static <ID extends Comparable<ID> & Serializable> void assertMandatoryRelatedDomain(RelatedDomain<ID> before, RelatedDomain<ID> after) {
-        Assertions.assertThat(before.getObjectType()).isEqualTo(after.getObjectType());
-        Assertions.assertThat(before.getObjectId()).isEqualTo(after.getObjectId());
+        Assertions.assertThat(before.getName()).isEqualTo(after.getName());
+        Assertions.assertThat(before.getRelatedId()).isEqualTo(after.getRelatedId());
     }
 
     /**
@@ -106,8 +106,8 @@ public class CoreTestAssertion {
      * @param after  The RelatedParty after an operation.
      */
     public static void assertMandatoryRelatedParty(RelatedParty before, RelatedParty after) {
-        Assertions.assertThat(before.getObjectType()).isEqualTo(after.getObjectType());
-        Assertions.assertThat(before.getObjectId()).isEqualTo(after.getObjectId());
+        Assertions.assertThat(before.getName()).isEqualTo(after.getName());
+        Assertions.assertThat(before.getRelatedId()).isEqualTo(after.getRelatedId());
     }
 
     /**
