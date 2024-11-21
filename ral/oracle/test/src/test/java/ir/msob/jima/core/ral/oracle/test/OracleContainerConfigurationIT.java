@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ContextConfiguration
 @Testcontainers
 @CommonsLog
-@Disabled
+//@Disabled
 class OracleContainerConfigurationIT {
 
     @Autowired
