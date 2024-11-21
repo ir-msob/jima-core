@@ -23,10 +23,10 @@ public class TimePeriodFilters implements BaseFilters {
     /**
      * Filter for the start instant of the time period.
      */
-    private Filter<Instant> start;
+    private Filter<Instant> startDate;
 
     /**
      * Filter for the end instant of the time period.
      */
-    private Filter<Instant> end;
+    private Filter<Instant> endDate;
 }

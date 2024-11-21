@@ -4,6 +4,7 @@ import ir.msob.jima.core.commons.domain.BaseDomainAbstract;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import org.bson.types.ObjectId;
 
 import java.io.Serial;
@@ -14,16 +15,13 @@ import java.io.Serial;
 @Setter
 @Getter
 @ToString(callSuper = true)
+@SuperBuilder
 public abstract class ProjectDomainAbstract extends BaseDomainAbstract<ObjectId> implements ProjectDomain {
     /**
      *
      */
     @Serial
     private static final long serialVersionUID = -6601527731070113825L;
-
-    protected ProjectDomainAbstract() {
-        super();
-    }
 
     public enum FN {
         id

@@ -22,12 +22,25 @@ public class TimePeriod implements Serializable {
     /**
      * The start instant of the time period.
      */
-    private Instant start;
+    private Instant startDate;
 
     /**
      * The end instant of the time period.
      */
-    private Instant end;
+    private Instant endDate;
+
+    /**
+     * Checks if the TimePeriod is valid based on the validity period.
+     *
+     * @return true if the TimePeriod is valid, false if it is not valid,
+     * and null if the validity period is not set.
+     */
+    public Boolean isValid() {
+        if (startDate == null && endDate == null) return null;
+        else if (startDate == null) return Instant.now().isBefore(endDate);
+        else if (endDate == null) return Instant.now().isAfter(startDate);
+        else return Instant.now().isAfter(startDate) && Instant.now().isBefore(endDate);
+    }
 
     /**
      * Indicates whether some other object is "equal to" this one.
@@ -44,8 +57,8 @@ public class TimePeriod implements Serializable {
             return false;
 
         if (o instanceof TimePeriod that) {
-            return Objects.equals(this.getStart(), that.getStart())
-                    && Objects.equals(this.getEnd(), that.getEnd());
+            return Objects.equals(this.getStartDate(), that.getStartDate())
+                    && Objects.equals(this.getEndDate(), that.getEndDate());
         }
         return false;
     }
@@ -57,13 +70,13 @@ public class TimePeriod implements Serializable {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(start, end);
+        return Objects.hash(startDate, endDate);
     }
 
     /**
      * Enum representing the field names of the TimePeriod class.
      */
     public enum FN {
-        start, end
+        startDate, endDate
     }
 }

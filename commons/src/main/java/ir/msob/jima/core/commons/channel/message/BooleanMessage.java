@@ -2,10 +2,7 @@ package ir.msob.jima.core.commons.channel.message;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.dto.ModelType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * The 'BooleanMessage' class represents a message that contains a boolean result.
@@ -15,6 +12,8 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@ToString(callSuper = true)
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)

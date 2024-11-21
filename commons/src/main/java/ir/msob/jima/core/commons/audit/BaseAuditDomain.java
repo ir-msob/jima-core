@@ -1,5 +1,7 @@
 package ir.msob.jima.core.commons.audit;
 
+import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedParty;
+
 import java.util.Comparator;
 import java.util.SortedSet;
 
@@ -9,21 +11,21 @@ import java.util.SortedSet;
  * The 'getLatestAuditDomain' method uses the Java 8 Stream API to find the audit domain with the maximum version.
  * The interface is parameterized with a type 'ID' that extends 'Comparable' and 'Serializable'.
  */
-public interface BaseAuditDomain {
+public interface BaseAuditDomain<RP extends RelatedParty> {
 
     /**
      * Get a sorted set of audit domains.
      *
      * @return A sorted set of audit domains.
      */
-    SortedSet<AuditDomain> getAuditDomains();
+    SortedSet<AuditDomain<RP>> getAuditDomains();
 
     /**
      * Set a sorted set of audit domains.
      *
      * @param auditDomains A sorted set of audit domains.
      */
-    void setAuditDomains(SortedSet<AuditDomain> auditDomains);
+    void setAuditDomains(SortedSet<AuditDomain<RP>> auditDomains);
 
     /**
      * Get the latest audit domain.
@@ -31,7 +33,7 @@ public interface BaseAuditDomain {
      *
      * @return The latest audit domain, or null if there are no audit domains.
      */
-    default AuditDomain getLatestAuditDomain() {
+    default AuditDomain<RP> getLatestAuditDomain() {
         return getAuditDomains()
                 .stream()
                 .max(Comparator.comparing(AuditDomain::getVersion))

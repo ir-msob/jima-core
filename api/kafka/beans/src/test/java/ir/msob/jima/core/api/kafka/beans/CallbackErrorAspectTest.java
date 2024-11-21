@@ -1,9 +1,9 @@
 package ir.msob.jima.core.api.kafka.beans;
 
 import ir.msob.jima.core.commons.channel.ChannelMessage;
-import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
 import ir.msob.jima.core.commons.exception.BaseExceptionMapper;
 import ir.msob.jima.core.commons.exception.BaseRuntimeException;
+import ir.msob.jima.core.commons.exception.ExceptionResponseAbstract;
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeResponse;
 import ir.msob.jima.core.commons.security.BaseUser;
@@ -28,7 +28,7 @@ class CallbackErrorAspectTest {
     private BaseExceptionMapper exceptionMapper;
 
     @Mock
-    private ChannelMessage<BaseUser, ? extends AbstractExceptionResponse> channelMessageReq;
+    private ChannelMessage<BaseUser, ? extends ExceptionResponseAbstract> channelMessageReq;
 
     @BeforeEach
     void setUp() {
@@ -41,9 +41,9 @@ class CallbackErrorAspectTest {
         CommonRuntimeResponse response = new CommonRuntimeResponse("Error occurred");
 
         when(exceptionMapper.getExceptionResponse(exception)).thenReturn(response);
-        when(channelMessageReq.getErrorCallbacks()).thenReturn(Collections.singletonList(new ChannelMessage<>()));
+        when(channelMessageReq.getErrorCallbacks()).thenReturn(Collections.singletonList(ChannelMessage.<BaseUser, ExceptionResponseAbstract>builder().build()));
 
-        List<? extends ChannelMessage<BaseUser, ? extends AbstractExceptionResponse>> result = callbackErrorAspect.prepareErrorChannelMessage(channelMessageReq, exception);
+        List<? extends ChannelMessage<BaseUser, ? extends ExceptionResponseAbstract>> result = callbackErrorAspect.prepareErrorChannelMessage(channelMessageReq, exception);
 
         assertEquals(1, result.size());
         assertEquals(response, result.getFirst().getData());
@@ -55,9 +55,9 @@ class CallbackErrorAspectTest {
         CommonRuntimeResponse response = new CommonRuntimeResponse("Error occurred");
 
         when(exceptionMapper.getExceptionResponse(exception)).thenReturn(response);
-        when(channelMessageReq.getErrorCallbacks()).thenReturn(Collections.singletonList(new ChannelMessage<>()));
+        when(channelMessageReq.getErrorCallbacks()).thenReturn(Collections.singletonList(ChannelMessage.<BaseUser, ExceptionResponseAbstract>builder().build()));
 
-        List<ChannelMessage<BaseUser, AbstractExceptionResponse>> result = callbackErrorAspect.prepareErrorChannelMessage(channelMessageReq, exception);
+        List<ChannelMessage<BaseUser, ExceptionResponseAbstract>> result = callbackErrorAspect.prepareErrorChannelMessage(channelMessageReq, exception);
 
         assertEquals(1, result.size());
         assertEquals(response, result.get(0).getData());

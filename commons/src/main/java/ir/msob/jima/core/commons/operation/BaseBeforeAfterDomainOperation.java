@@ -11,7 +11,7 @@ import java.util.Collection;
 
 /**
  * This interface provides a set of methods that are called before and after each CRUD operation.
- * It is designed to be implemented by domain services that need to perform additional processing or validation.
+ * It is designed to be implemented by domain services that need to perform additional processing or objectvalidation.
  *
  * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
  * @param <USER> the type of the user, which extends {@code BaseUser}

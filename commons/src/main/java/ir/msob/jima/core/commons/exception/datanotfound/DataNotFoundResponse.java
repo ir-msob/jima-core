@@ -1,22 +1,22 @@
 package ir.msob.jima.core.commons.exception.datanotfound;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
+import ir.msob.jima.core.commons.exception.ExceptionResponseAbstract;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 /**
- * The 'DataNotFoundResponse' class extends the 'AbstractExceptionResponse' class and represents a specific type of response that is returned when a requested data is not found.
+ * The 'DataNotFoundResponse' class extends the 'ExceptionResponseAbstract' class and represents a specific type of response that is returned when a requested data is not found.
  * It includes additional fields for the name of the entity that was not found, the ID of the entity, and the class of the entity.
  * The class also provides several constructors for creating an instance of the response with different sets of parameters.
- * Additionally, it overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 404.
+ * Additionally, it overrides the 'getStatus' method from the 'ExceptionResponseAbstract' class to return a status code of 404.
  */
 @Setter
 @Getter
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DataNotFoundResponse extends AbstractExceptionResponse {
+public class DataNotFoundResponse extends ExceptionResponseAbstract {
     /**
      * The name of the entity that was not found.
      */
@@ -54,7 +54,7 @@ public class DataNotFoundResponse extends AbstractExceptionResponse {
     }
 
     /**
-     * Overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 404.
+     * Overrides the 'getStatus' method from the 'ExceptionResponseAbstract' class to return a status code of 404.
      *
      * @return The status code for a data not found error.
      */

@@ -1,22 +1,22 @@
 package ir.msob.jima.core.commons.exception.conflict;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
+import ir.msob.jima.core.commons.exception.ExceptionResponseAbstract;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 /**
- * The 'ConflictResponse' class extends the 'AbstractExceptionResponse' class and represents a specific type of response that is returned when a conflict occurs.
+ * The 'ConflictResponse' class extends the 'ExceptionResponseAbstract' class and represents a specific type of response that is returned when a conflict occurs.
  * It includes an additional field for the message associated with the conflict.
  * The class also provides several constructors for creating an instance of the response with different sets of parameters.
- * Additionally, it overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 409.
+ * Additionally, it overrides the 'getStatus' method from the 'ExceptionResponseAbstract' class to return a status code of 409.
  */
 @Setter
 @Getter
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ConflictResponse extends AbstractExceptionResponse {
+public class ConflictResponse extends ExceptionResponseAbstract {
     /**
      * The message associated with the conflict.
      */
@@ -41,7 +41,7 @@ public class ConflictResponse extends AbstractExceptionResponse {
     }
 
     /**
-     * Overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 409.
+     * Overrides the 'getStatus' method from the 'ExceptionResponseAbstract' class to return a status code of 409.
      *
      * @return The status code for a conflict.
      */

@@ -1,8 +1,8 @@
 package ir.msob.jima.core.api.restful.beans.exception;
 
-import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
 import ir.msob.jima.core.commons.exception.BaseExceptionMapper;
 import ir.msob.jima.core.commons.exception.BaseRuntimeException;
+import ir.msob.jima.core.commons.exception.ExceptionResponseAbstract;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
      * @return a {@link ResponseEntity} containing the exception response
      */
     @ExceptionHandler(BaseRuntimeException.class)
-    public <ER extends AbstractExceptionResponse, E extends BaseRuntimeException> ResponseEntity<ER> baseRuntimeExceptionHandler(E ex) {
+    public <ER extends ExceptionResponseAbstract, E extends BaseRuntimeException> ResponseEntity<ER> baseRuntimeExceptionHandler(E ex) {
         ER response = exceptionMapper.getExceptionResponse(ex);
         if (response != null) {
             HttpStatus httpStatus = HttpStatus.resolve(response.getStatus());

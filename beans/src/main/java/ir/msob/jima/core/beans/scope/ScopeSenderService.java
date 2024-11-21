@@ -7,6 +7,7 @@ import ir.msob.jima.core.commons.client.BaseAsyncClient;
 import ir.msob.jima.core.commons.logger.Logger;
 import ir.msob.jima.core.commons.logger.LoggerFactory;
 import ir.msob.jima.core.commons.scope.ServiceDto;
+import ir.msob.jima.core.commons.security.BaseUser;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -45,7 +46,7 @@ public class ScopeSenderService {
                 .resources(scopeScannerService.getResources())
                 .build();
 
-        ChannelMessage<?, ServiceDto> channelMessage = new ChannelMessage<>();
+        ChannelMessage<BaseUser, ServiceDto> channelMessage = ChannelMessage.<BaseUser, ServiceDto>builder().build();
         channelMessage.setData(serviceDto);
         return channelMessage;
     }

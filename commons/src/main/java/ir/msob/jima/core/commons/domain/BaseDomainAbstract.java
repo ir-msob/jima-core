@@ -1,9 +1,9 @@
 package ir.msob.jima.core.commons.domain;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 
@@ -20,48 +20,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString(callSuper = true)
-@NoArgsConstructor
-public abstract class BaseDomainAbstract<ID extends Comparable<ID> & Serializable> implements BaseDomain<ID> {
+@SuperBuilder
+public abstract class BaseDomainAbstract<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements BaseDomain<ID> {
 
-    /**
-     * The ID of the domain model.
-     */
-    private ID id;
-
-    /**
-     * Returns the domain ID of the model.
-     *
-     * @return The domain ID.
-     */
-    @Override
-    public ID getDomainId() {
-        return id;
-    }
-
-    /**
-     * Sets the domain ID of the model.
-     *
-     * @param id The domain ID.
-     */
-    @Override
-    public void setDomainId(ID id) {
-        this.id = id;
-    }
-
-    /**
-     * Returns the domain ID field name of the model.
-     *
-     * @return The domain ID field name.
-     */
-    @Override
-    public String getDomainIdName() {
-        return FN.id.name();
-    }
-
-    /**
-     * The 'FN' enum represents the field names of the domain model.
-     */
-    public enum FN {
-        id
-    }
 }

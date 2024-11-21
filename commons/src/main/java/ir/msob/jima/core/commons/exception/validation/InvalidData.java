@@ -7,7 +7,7 @@ import lombok.*;
 import java.io.Serializable;
 
 /**
- * The 'InvalidData' class implements the 'BaseModel' interface and represents a specific type of model that is used to store information about invalid data associated with a validation exception.
+ * The 'InvalidData' class implements the 'BaseModel' interface and represents a specific type of model that is used to store information about invalid data associated with a objectvalidation exception.
  * It includes fields for the message associated with the invalid data, the property path of the invalid data, and the invalid value itself.
  * The class also provides several constructors for creating an instance of the model with different sets of parameters.
  * Additionally, it overrides the 'toString' method from the 'Object' class to return a string representation of the model.

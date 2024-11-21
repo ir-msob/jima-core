@@ -26,8 +26,8 @@ public class CoreTestAssertion {
      * @param after  The TimePeriod after an operation.
      */
     public static void assertOptionalTimePeriod(TimePeriod before, TimePeriod after) {
-        Assertions.assertThat(before.getStart()).isEqualTo(after.getStart());
-        Assertions.assertThat(before.getEnd()).isEqualTo(after.getEnd());
+        Assertions.assertThat(before.getStartDate()).isEqualTo(after.getStartDate());
+        Assertions.assertThat(before.getEndDate()).isEqualTo(after.getEndDate());
     }
 
     /**
@@ -117,7 +117,7 @@ public class CoreTestAssertion {
      * @param after  The AuditDomain after an operation.
      */
     public static void assertMandatoryAuditDomain(AuditDomain before, AuditDomain after) {
-        Assertions.assertThat(before.getRelatedPartyId()).isEqualTo(after.getRelatedPartyId());
+        Assertions.assertThat(before.getRelatedParty()).isEqualTo(after.getRelatedParty());
         Assertions.assertThat(before.getActionDate()).isEqualTo(after.getActionDate());
         Assertions.assertThat(before.getActionType()).isEqualTo(after.getActionType());
     }

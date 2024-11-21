@@ -2,10 +2,8 @@ package ir.msob.jima.core.commons.channel.message;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.github.fge.jsonpatch.JsonPatch;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import ir.msob.jima.core.commons.dto.ModelType;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -18,10 +16,16 @@ import java.io.Serializable;
  */
 @Setter
 @Getter
+@ToString(callSuper = true)
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class IdJsonPatchMessage<ID extends Comparable<ID> & Serializable> extends IdMessage<ID> {
+public class IdJsonPatchMessage<ID extends Comparable<ID> & Serializable> extends ModelType {
+    /**
+     * The ID of the message.
+     */
+    private ID id;
     /**
      * The 'jsonPatch' field holds the JSON Patch that is part of the message.
      * This is used when the message needs to carry modifications to a JSON document.

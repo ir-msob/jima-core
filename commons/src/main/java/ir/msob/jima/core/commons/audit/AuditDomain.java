@@ -1,5 +1,6 @@
 package ir.msob.jima.core.commons.audit;
 
+import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedParty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -13,6 +14,7 @@ import java.util.Objects;
  * This class provides several constructors for creating an instance of the model with different sets of parameters.
  * Additionally, it overrides the {@code compareTo}, {@code equals}, and {@code hashCode} methods from the {@code Object} class to provide custom comparison and hashing behavior.
  * The {@code FN} enum is used to represent the field names of the {@code AuditDomain} class.
+ * This class also implements the {@code Serializable} interface to allow instances to be serialized.
  */
 @Getter
 @Setter
@@ -20,12 +22,12 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AuditDomain implements Comparable<AuditDomain>, Serializable {
+public class AuditDomain<RP extends RelatedParty> implements Comparable<AuditDomain<RP>>, Serializable {
     /**
-     * The ID of the related party.
+     * The related party.
      */
     @NotNull
-    private String relatedPartyId;
+    private RP relatedParty;
     /**
      * The date of the action.
      */
@@ -49,7 +51,7 @@ public class AuditDomain implements Comparable<AuditDomain>, Serializable {
      * @return A negative integer, zero, or a positive integer as this audit domain is less than, equal to, or greater than the specified audit domain.
      */
     @Override
-    public int compareTo(AuditDomain o) {
+    public int compareTo(AuditDomain<RP> o) {
         if (this == o) {
             return 0;
         }
@@ -63,7 +65,7 @@ public class AuditDomain implements Comparable<AuditDomain>, Serializable {
             return compare;
         }
 
-        compare = Objects.compare(this.getRelatedPartyId(), o.getRelatedPartyId(), String::compareTo);
+        compare = Objects.compare(this.getRelatedParty(), o.getRelatedParty(), RelatedParty::compareTo);
         if (compare != 0) {
             return compare;
         }
@@ -85,8 +87,8 @@ public class AuditDomain implements Comparable<AuditDomain>, Serializable {
         if (o == null)
             return false;
 
-        if (o instanceof AuditDomain that) {
-            return Objects.equals(this.getRelatedPartyId(), that.getRelatedPartyId())
+        if (o instanceof AuditDomain<?> that) {
+            return Objects.equals(this.getRelatedParty(), that.getRelatedParty())
                     && Objects.equals(this.getActionDate(), that.getActionDate())
                     && Objects.equals(this.getActionType(), that.getActionType())
                     && Objects.equals(this.getVersion(), that.getVersion());
@@ -101,13 +103,13 @@ public class AuditDomain implements Comparable<AuditDomain>, Serializable {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(relatedPartyId, actionDate, actionType, version);
+        return Objects.hash(relatedParty, actionDate, actionType, version);
     }
 
     /**
      * The 'FN' enum represents the field names of the 'AuditDomain' class.
      */
     public enum FN {
-        relatedPartyId, actionDate, actionType, version
+        relatedParty, actionDate, actionType, version
     }
 }

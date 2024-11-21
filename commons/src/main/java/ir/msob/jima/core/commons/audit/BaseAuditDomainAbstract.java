@@ -1,5 +1,6 @@
 package ir.msob.jima.core.commons.audit;
 
+import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedParty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,9 +19,9 @@ import java.util.TreeSet;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseAuditDomainAbstract implements BaseAuditDomain {
+public abstract class BaseAuditDomainAbstract<RP extends RelatedParty> implements BaseAuditDomain<RP> {
     /**
      * A sorted set of audit domains.
      */
-    private SortedSet<AuditDomain> auditDomains = new TreeSet<>();
+    private SortedSet<AuditDomain<RP>> auditDomains = new TreeSet<>();
 }

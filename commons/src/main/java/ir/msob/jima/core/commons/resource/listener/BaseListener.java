@@ -55,11 +55,12 @@ public interface BaseListener<ID extends Comparable<ID> & Serializable, USER ext
      * @return A new ChannelMessage with modified properties.
      */
     default <DATA_REQ extends ModelType, DATA extends ModelType> ChannelMessage<USER, DATA> prepareChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, DATA data, Integer status, USER user) {
-        ChannelMessage<USER, DATA> channelMessage = new ChannelMessage<>();
-        channelMessage.setData(data);
-        channelMessage.setChannel(null);
-        channelMessage.setMetadata(channelMessageReq.getMetadata());
-        channelMessage.setStatus(status);
-        return channelMessage;
+        return ChannelMessage
+                .<USER, DATA>builder()
+                .data(data)
+                .channel(null)
+                .metadata(channelMessageReq.getMetadata())
+                .status(status)
+                .build();
     }
 }

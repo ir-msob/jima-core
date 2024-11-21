@@ -1,8 +1,10 @@
 package ir.msob.jima.core.commons.relatedobject;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.shared.auditinfo.AuditInfoFilters;
 import ir.msob.jima.core.commons.shared.criteria.filter.BaseFilters;
 import ir.msob.jima.core.commons.shared.criteria.filter.Filter;
+import ir.msob.jima.core.commons.shared.timeperiod.TimePeriodFilters;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -63,4 +65,9 @@ public class RelatedObjectFilters<ID extends Comparable<ID> & Serializable> impl
      * Filter for the expiration date of the related object.
      */
     private Filter<Instant> expirationDate;
+
+    private TimePeriodFilters validFor;
+
+    private AuditInfoFilters auditInfo;
+
 }

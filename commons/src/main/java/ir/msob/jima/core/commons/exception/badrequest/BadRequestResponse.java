@@ -1,22 +1,22 @@
 package ir.msob.jima.core.commons.exception.badrequest;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
+import ir.msob.jima.core.commons.exception.ExceptionResponseAbstract;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 
 /**
- * The 'BadRequestResponse' class extends the 'AbstractExceptionResponse' class and represents a specific type of response that is returned when a bad request is made.
+ * The 'BadRequestResponse' class extends the 'ExceptionResponseAbstract' class and represents a specific type of response that is returned when a bad request is made.
  * It includes additional fields for the name of the field that has an invalid value, the invalid value itself, and a message.
  * The class also provides several constructors for creating an instance of the response with different sets of parameters.
- * Additionally, it overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 400.
+ * Additionally, it overrides the 'getStatus' method from the 'ExceptionResponseAbstract' class to return a status code of 400.
  */
 @Setter
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BadRequestResponse extends AbstractExceptionResponse {
+public class BadRequestResponse extends ExceptionResponseAbstract {
     /**
      * The name of the field that has an invalid value.
      */
@@ -61,7 +61,7 @@ public class BadRequestResponse extends AbstractExceptionResponse {
     }
 
     /**
-     * Overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 400.
+     * Overrides the 'getStatus' method from the 'ExceptionResponseAbstract' class to return a status code of 400.
      *
      * @return The status code for a bad request.
      */

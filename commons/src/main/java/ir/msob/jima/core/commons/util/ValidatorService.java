@@ -19,7 +19,7 @@ public class ValidatorService {
      *
      * @param objects The collection of objects to validate.
      * @param <T>     The type of objects in the collection.
-     * @throws ValidationException if validation fails.
+     * @throws ValidationException if objectvalidation fails.
      */
     public <T> void validate(Collection<T> objects) throws ValidationException {
         for (T object : objects) {
@@ -32,21 +32,21 @@ public class ValidatorService {
      *
      * @param object The object to validate.
      * @param <T>    The type of the object.
-     * @throws ValidationException if validation fails.
+     * @throws ValidationException if objectvalidation fails.
      */
     public <T> void validate(T object) throws ValidationException {
         validateObject(object);
     }
 
     /**
-     * Performs validation operations on a single object.
+     * Performs objectvalidation operations on a single object.
      *
      * @param object The object to validate.
      * @param <T>    The type of the object.
-     * @throws ValidationException if validation fails.
+     * @throws ValidationException if objectvalidation fails.
      */
     private <T> void validateObject(@Valid T object) throws ValidationException {
-        // Perform the validation operations on the object
-        // If the validation operation fails, you can throw a ValidationException.
+        // Perform the objectvalidation operations on the object
+        // If the objectvalidation operation fails, you can throw a ValidationException.
     }
 }

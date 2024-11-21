@@ -16,7 +16,7 @@ import java.util.TreeSet;
  * The class uses the Lombok library to automatically generate getter and setter methods for the 'relatedProcesses' field.
  * It also generates a 'toString' method and a no-argument constructor.
  * The 'toString' method includes a call to the superclass's 'toString' method.
- * The 'relatedProcesses' field is annotated with '@Valid' to enable validation of the related processes.
+ * The 'relatedProcesses' field is annotated with '@Valid' to enable objectvalidation of the related processes.
  *
  * @param <RP> the type of the related process, which must extend RelatedProcess.
  */

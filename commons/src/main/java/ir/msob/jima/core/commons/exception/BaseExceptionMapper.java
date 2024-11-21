@@ -31,7 +31,7 @@ public interface BaseExceptionMapper {
      * @param <ER> The type of the exception response.
      * @return The mapped exception response.
      */
-    <ER extends AbstractExceptionResponse> ER cast(Throwable ex);
+    <ER extends ExceptionResponseAbstract> ER cast(Throwable ex);
 
     /**
      * This method provides a default implementation for mapping exceptions to their corresponding response objects.
@@ -41,7 +41,7 @@ public interface BaseExceptionMapper {
      * @return The mapped exception response.
      */
     @SuppressWarnings("unchecked")
-    private <ER extends AbstractExceptionResponse, E extends BaseRuntimeException> ER castException(E ex) {
+    private <ER extends ExceptionResponseAbstract, E extends BaseRuntimeException> ER castException(E ex) {
         if (ex != null) {
             if (ex instanceof BadRequestException exception) {
                 return (ER) new BadRequestResponse(exception.getMessage(), exception.getFieldName(), exception.getValue());
@@ -73,7 +73,7 @@ public interface BaseExceptionMapper {
      * @param <ER> The type of the exception response.
      * @return The mapped exception response.
      */
-    default <ER extends AbstractExceptionResponse, E extends BaseRuntimeException> ER getExceptionResponse(E ex) {
+    default <ER extends ExceptionResponseAbstract, E extends BaseRuntimeException> ER getExceptionResponse(E ex) {
         return castException(ex);
     }
 }

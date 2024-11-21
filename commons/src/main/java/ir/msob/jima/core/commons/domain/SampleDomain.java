@@ -2,9 +2,9 @@ package ir.msob.jima.core.commons.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 
@@ -21,8 +21,8 @@ import java.io.Serializable;
  */
 @Setter
 @Getter
-@NoArgsConstructor
 @ToString(callSuper = true)
+@SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @DomainService(serviceName = "sample-service", version = "v1", domainName = "sample-domain")
 public class SampleDomain<ID extends Comparable<ID> & Serializable> extends BaseDomainAbstract<ID> {

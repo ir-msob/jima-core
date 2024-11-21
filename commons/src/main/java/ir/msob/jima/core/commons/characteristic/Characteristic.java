@@ -1,43 +1,58 @@
 package ir.msob.jima.core.commons.characteristic;
 
-import ir.msob.jima.core.commons.shared.DataType;
-import ir.msob.jima.core.commons.shared.keyvalue.KeyValue;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.domain.BaseIdModelAbstract;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Objects;
 
 /**
  * The 'Characteristic' class represents a characteristic with a key, value, and data type.
- * It implements the 'Comparable' and 'Serializable' interfaces.
- * The class includes fields for key, value, and dataType, and getter and setter methods for these fields.
- * The 'key' field is annotated with '@NotBlank' to ensure that it is not blank.
- * The 'dataType' field is annotated with '@NotNull' to ensure that it is not null.
- * The 'compareTo' method compares this characteristic with another characteristic based on their keys.
- * If the keys are equal, it returns 0. If the keys are not equal, it compares their identity hash codes.
- * The 'equals' method checks whether this characteristic is equal to another object based on their keys.
- * The 'hashCode' method returns the hash code of this characteristic based on its fields.
+ * It extends the 'BaseIdModelAbstract' class and implements the 'Comparable' interface.
+ * This class includes the following fields:
+ * - {@code key}: A non-blank string representing the key of the characteristic.
+ * - {@code value}: A serializable object representing the value of the characteristic.
+ * - {@code dataType}: A non-blank string representing the data type of the characteristic.
+ *
+ * The class provides getter and setter methods for these fields, ensuring encapsulation.
+ * It overrides the {@code equals}, {@code hashCode}, and {@code compareTo} methods to provide
+ * proper equality checks, hash code generation, and comparison logic based on the key.
+ *
  * The 'FN' enum represents the field names of the class.
+ *
+ * @param <ID> The type of the identifier, which must be comparable and serializable.
  */
 @Getter
 @Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-public class Characteristic extends KeyValue<String, Serializable> {
+@ToString(callSuper = true)
+@SuperBuilder
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Characteristic<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<Characteristic<ID>> {
 
     /**
-     * The data type of the characteristic.
+     * A non-blank string representing the key of the characteristic.
+     */
+    @NotBlank
+    private String key;
+
+    /**
+     * A serializable object representing the value of the characteristic.
      */
     @NotNull
-    private DataType dataType;
+    private Serializable value;
 
-    @Override
-    public void setKey(@NotBlank String key) {
-        super.setKey(key);
-    }
+    /**
+     * A non-blank string representing the data type of the characteristic.
+     */
+    @NotBlank
+    private String dataType;
 
     /**
      * Checks whether this characteristic is equal to another object based on their keys.
@@ -53,7 +68,7 @@ public class Characteristic extends KeyValue<String, Serializable> {
         if (o == null)
             return false;
 
-        if (o instanceof Characteristic that)
+        if (o instanceof Characteristic<?> that)
             return Objects.equals(this.getKey(), that.getKey());
 
         return false;
@@ -67,6 +82,29 @@ public class Characteristic extends KeyValue<String, Serializable> {
     @Override
     public int hashCode() {
         return Objects.hash(getKey(), getValue(), dataType);
+    }
+
+    /**
+     * Compares this characteristic with another characteristic based on their keys.
+     *
+     * @param o The other characteristic to compare with.
+     * @return A negative integer, zero, or a positive integer as this characteristic is less than,
+     *         equal to, or greater than the specified characteristic.
+     */
+    @Override
+    public int compareTo(Characteristic<ID> o) {
+        if (this == o) {
+            return 0;
+        }
+
+        if (o != null && (this.getKey() != null && o.getKey() != null)) {
+            return this.getKey().compareTo(o.getKey());
+
+        }
+
+        return Comparator
+                .comparing(System::identityHashCode)
+                .compare(this, o);
     }
 
     /**

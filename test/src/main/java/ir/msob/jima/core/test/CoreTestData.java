@@ -210,11 +210,11 @@ public class CoreTestData {
 
         Calendar startCalendar = getDayCalendar();
         startCalendar.add(Calendar.DATE, 2);
-        timePeriod.setStart(startCalendar.toInstant());
+        timePeriod.setStartDate(startCalendar.toInstant());
 
         Calendar endCalendar = getDayCalendar();
         endCalendar.add(Calendar.DATE, 3);
-        timePeriod.setEnd(endCalendar.toInstant());
+        timePeriod.setEndDate(endCalendar.toInstant());
 
         return timePeriod;
     }
@@ -227,11 +227,11 @@ public class CoreTestData {
     public static TimePeriod initUpdatedTimePeriod() {
         TimePeriod timePeriod = new TimePeriod();
         Calendar startCalendar = getDayCalendar();
-        timePeriod.setStart(startCalendar.toInstant());
+        timePeriod.setStartDate(startCalendar.toInstant());
 
         Calendar endCalendar = getDayCalendar();
         endCalendar.add(Calendar.DATE, 1);
-        timePeriod.setEnd(endCalendar.toInstant());
+        timePeriod.setEndDate(endCalendar.toInstant());
 
         return timePeriod;
     }
@@ -339,11 +339,11 @@ public class CoreTestData {
      *
      * @return the initialized default required characteristic
      */
-    public static Characteristic initDefaultRequiredCharacteristic() {
-        Characteristic characteristic = new Characteristic();
+    public static Characteristic<?> initDefaultRequiredCharacteristic() {
+        Characteristic<?> characteristic = Characteristic.builder().build();
         characteristic.setKey(DEFAULT_STRING);
         characteristic.setValue(DEFAULT_STRING);
-        characteristic.setDataType(DEFAULT_DATA_TYPE);
+        characteristic.setDataType(DEFAULT_DATA_TYPE.name());
         return characteristic;
     }
 
@@ -354,7 +354,7 @@ public class CoreTestData {
      */
     public static void UPDATED_MANDATORY_CHARACTERISTIC(Characteristic characteristic) {
         characteristic.setKey(UPDATED_STRING);
-        characteristic.setDataType(UPDATED_DATA_TYPE);
+        characteristic.setDataType(UPDATED_DATA_TYPE.name());
     }
 
     /**

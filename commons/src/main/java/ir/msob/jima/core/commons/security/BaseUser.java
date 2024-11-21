@@ -15,8 +15,8 @@ import java.util.TreeSet;
 @Setter
 @Getter
 @ToString(callSuper = true)
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class BaseUser extends ModelType {
     /**
      * The serial version UID for the serialization.

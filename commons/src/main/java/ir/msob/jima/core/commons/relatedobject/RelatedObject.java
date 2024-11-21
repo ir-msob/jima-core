@@ -1,31 +1,53 @@
 package ir.msob.jima.core.commons.relatedobject;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.domain.BaseIdModelAbstract;
+import ir.msob.jima.core.commons.shared.auditinfo.AuditInfo;
+import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.Objects;
 
 /**
- * Base class representing a related object with a type, an ID, a role, and a referring type.
- * Implements Comparable interface to provide natural ordering of instances.
- *
+ * The {@code RelatedObject} class represents a related object with a type, an ID, a role, 
+ * and a referring type. It implements the {@link Comparable} interface to provide natural 
+ * ordering of instances based on specific fields.
+ * 
+ * <p>Fields:</p>
+ * - {@code name}: The name of the related object (must not be blank).
+ * - {@code relatedId}: The ID of the related object (must not be null).
+ * - {@code role}: The role of the related object, which can be null.
+ * - {@code referringType}: The type of the object that referred to this related object, which can be null.
+ * - {@code status}: The status of the related object, which can be null.
+ * - {@code enabled}: A boolean indicating whether the related object is enabled, which can be null.
+ * - {@code validFor}: A {@link TimePeriod} indicating the time period for which the related object is valid.
+ * - {@code auditInfo}: An {@link AuditInfo} object containing audit-related information for the related object.
+ * 
+ * <p>Methods:</p>
+ * - {@code compareTo(RelatedObject<ID> other)}: Compares this related object with another for order 
+ *   based on relatedId, name, role, and referringType.
+ * - {@code equals(Object obj)}: Indicates whether some other object is "equal to" this one based on 
+ *   relatedId, name, role, and referringType.
+ * - {@code hashCode()}: Returns a hash code value for the object based on its fields.
+ * 
+ * <p>Enum:</p>
+ * - {@link FN}: Represents the field names of the {@code RelatedObject} class, including name, 
+ *   relatedId, role, referringType, status, enabled, validFor, and auditInfo.
+ * 
  * @param <ID> the type of the related object ID, which must be comparable and serializable
  */
 @Getter
 @Setter
-@ToString
-@AllArgsConstructor
+@ToString(callSuper = true)
 @SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RelatedObject<ID extends Comparable<ID> & Serializable> implements Comparable<RelatedObject<ID>>, Serializable {
+public class RelatedObject<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<RelatedObject<ID>> {
 
     /**
      * The name of the related object.
@@ -60,25 +82,14 @@ public class RelatedObject<ID extends Comparable<ID> & Serializable> implements 
     private Boolean enabled;
 
     /**
-     * The date of the relationship with the related object.
+     * The time period for which the related object is valid.
      */
-    private Instant relationDate;
-
+    private TimePeriod validFor;
+   
     /**
-     * The expiration date of the related object.
+     * Represents the audit information associated with the related object.
      */
-    private Instant expirationDate;
-
-    /**
-     * Checks if the related object is expired.
-     *
-     * @return true if the related object is expired, false if it is not expired,
-     * and null if the expiration date is not set.
-     */
-    public Boolean isExpired() {
-        if (expirationDate == null) return null;
-        return Instant.now().isAfter(expirationDate);
-    }
+    private AuditInfo auditInfo;
 
     /**
      * Compares this related object with the specified related object for order.
@@ -125,11 +136,7 @@ public class RelatedObject<ID extends Comparable<ID> & Serializable> implements 
         return Objects.equals(relatedId, that.relatedId) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(role, that.role) &&
-                Objects.equals(referringType, that.referringType) &&
-                Objects.equals(status, that.status) &&
-                enabled == that.enabled &&
-                Objects.equals(relationDate, that.relationDate) &&
-                Objects.equals(expirationDate, that.expirationDate);
+                Objects.equals(referringType, that.referringType);
     }
 
     /**
@@ -139,13 +146,13 @@ public class RelatedObject<ID extends Comparable<ID> & Serializable> implements 
      */
     @Override
     public int hashCode() {
-        return Objects.hash(name, relatedId, role, referringType, status, enabled, relationDate, expirationDate);
+        return Objects.hash(name, relatedId, role, referringType, status, enabled, validFor, auditInfo);
     }
 
     /**
      * Enum representing the field names of the RelatedObject class.
      */
     public enum FN {
-        name, relatedId, role, referringType, status, enabled, relationDate, expirationDate
+        name, relatedId, role, referringType, status, enabled, validFor, auditInfo
     }
 }

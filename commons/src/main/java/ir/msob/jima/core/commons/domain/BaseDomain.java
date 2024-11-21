@@ -1,8 +1,6 @@
 package ir.msob.jima.core.commons.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import ir.msob.jima.core.commons.shared.BaseModel;
-import org.springframework.data.annotation.Transient;
 
 import java.io.Serializable;
 import java.util.Comparator;
@@ -20,32 +18,8 @@ import java.util.Comparator;
  *
  * @param <ID> The type of the ID of the domain model.
  */
-public interface BaseDomain<ID extends Comparable<ID> & Serializable> extends BaseModel, Comparable<BaseDomain<ID>> {
+public interface BaseDomain<ID extends Comparable<ID> & Serializable> extends BaseModel, Comparable<BaseDomain<ID>>, BaseIdModel<ID> {
 
-    /**
-     * Returns the domain ID of the model.
-     *
-     * @return The domain ID.
-     */
-    @Transient
-    @JsonIgnore
-    ID getDomainId();
-
-    /**
-     * Sets the domain ID of the model.
-     *
-     * @param id The domain ID.
-     */
-    void setDomainId(ID id);
-
-    /**
-     * Returns the domain ID field name of the model.
-     *
-     * @return The domain ID field name.
-     */
-    @Transient
-    @JsonIgnore
-    String getDomainIdName();
 
     /**
      * Compares this domain model with the specified domain model for order.

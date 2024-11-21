@@ -11,7 +11,7 @@ import java.util.Collection;
 
 /**
  * This interface provides a set of methods that are called before and after each CRUD operation.
- * It is designed to be implemented by domain services that need to perform additional processing or validation.
+ * It is designed to be implemented by domain services that need to perform additional processing or objectvalidation.
  */
 public interface BaseBeforeAfterOperation {
 

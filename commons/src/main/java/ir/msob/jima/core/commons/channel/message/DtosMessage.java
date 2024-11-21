@@ -3,10 +3,7 @@ package ir.msob.jima.core.commons.channel.message;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.dto.BaseDto;
 import ir.msob.jima.core.commons.dto.ModelType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,6 +22,8 @@ import java.util.Collection;
  */
 @Setter
 @Getter
+@ToString(callSuper = true)
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -32,5 +31,6 @@ public class DtosMessage<ID extends Comparable<ID> & Serializable, DTO extends B
     /**
      * The collection of DTOs in the message.
      */
+    @Builder.Default
     private Collection<DTO> dtos = new ArrayList<>();
 }

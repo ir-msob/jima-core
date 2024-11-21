@@ -6,6 +6,7 @@ import ir.msob.jima.core.commons.Constants;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * The 'ModelType' class is a concrete implementation of the 'BaseModel' and 'BaseType' interfaces.
@@ -18,6 +19,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@ToString(callSuper = true)
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NONE, property = Constants.TYPE_PROPERTY_NAME)

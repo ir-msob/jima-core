@@ -1,22 +1,22 @@
 package ir.msob.jima.core.commons.exception.domainnotfound;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
+import ir.msob.jima.core.commons.exception.ExceptionResponseAbstract;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 /**
- * The 'DomainNotFoundResponse' class extends the 'AbstractExceptionResponse' class and represents a specific type of response that is returned when a requested domain is not found.
+ * The 'DomainNotFoundResponse' class extends the 'ExceptionResponseAbstract' class and represents a specific type of response that is returned when a requested domain is not found.
  * It includes additional fields for the ID of the domain that was not found and the class of the domain.
  * The class also provides several constructors for creating an instance of the response with different sets of parameters.
- * Additionally, it overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 404.
+ * Additionally, it overrides the 'getStatus' method from the 'ExceptionResponseAbstract' class to return a status code of 404.
  */
 @Setter
 @Getter
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class DomainNotFoundResponse extends AbstractExceptionResponse {
+public class DomainNotFoundResponse extends ExceptionResponseAbstract {
     /**
      * The ID of the domain that was not found.
      */
@@ -67,7 +67,7 @@ public class DomainNotFoundResponse extends AbstractExceptionResponse {
     }
 
     /**
-     * Overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 404.
+     * Overrides the 'getStatus' method from the 'ExceptionResponseAbstract' class to return a status code of 404.
      *
      * @return The status code for a domain not found error.
      */

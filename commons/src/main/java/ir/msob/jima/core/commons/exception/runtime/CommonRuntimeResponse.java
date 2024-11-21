@@ -1,20 +1,20 @@
 package ir.msob.jima.core.commons.exception.runtime;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
+import ir.msob.jima.core.commons.exception.ExceptionResponseAbstract;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * The 'CommonRuntimeResponse' class extends the 'AbstractExceptionResponse' class and represents a specific type of response that is returned when a common runtime exception occurs.
+ * The 'CommonRuntimeResponse' class extends the 'ExceptionResponseAbstract' class and represents a specific type of response that is returned when a common runtime exception occurs.
  * It includes an additional field for the message associated with the exception.
  * The class also provides several constructors for creating an instance of the response with different sets of parameters.
- * Additionally, it overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 500.
+ * Additionally, it overrides the 'getStatus' method from the 'ExceptionResponseAbstract' class to return a status code of 500.
  */
 @Setter
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CommonRuntimeResponse extends AbstractExceptionResponse {
+public class CommonRuntimeResponse extends ExceptionResponseAbstract {
     /**
      * The message associated with the exception.
      */
@@ -38,7 +38,7 @@ public class CommonRuntimeResponse extends AbstractExceptionResponse {
     }
 
     /**
-     * Overrides the 'getStatus' method from the 'AbstractExceptionResponse' class to return a status code of 500.
+     * Overrides the 'getStatus' method from the 'ExceptionResponseAbstract' class to return a status code of 500.
      *
      * @return The status code for a common runtime error.
      */

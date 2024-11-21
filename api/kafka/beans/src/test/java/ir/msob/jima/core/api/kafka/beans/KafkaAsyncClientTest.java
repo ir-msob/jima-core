@@ -46,7 +46,7 @@ class KafkaAsyncClientTest {
     @Test
     void testSendChannelMessage() throws Exception {
         // Prepare test data
-        ChannelMessage<BaseUser, ModelType> channelMessage = new ChannelMessage<>();
+        ChannelMessage<BaseUser, ModelType> channelMessage = ChannelMessage.builder().build();
         String channel = "testChannel";
 
         // Mock behavior

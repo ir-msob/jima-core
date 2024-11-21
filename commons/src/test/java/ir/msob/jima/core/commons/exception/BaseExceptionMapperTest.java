@@ -38,7 +38,7 @@ class BaseExceptionMapperTest {
     void setUp() {
         baseExceptionMapper = new BaseExceptionMapper() {
             @Override
-            public <ER extends AbstractExceptionResponse> ER cast(Throwable ex) {
+            public <ER extends ExceptionResponseAbstract> ER cast(Throwable ex) {
                 return null;
             }
         };

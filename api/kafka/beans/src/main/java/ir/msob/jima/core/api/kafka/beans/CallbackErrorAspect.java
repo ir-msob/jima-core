@@ -6,9 +6,9 @@ import ir.msob.jima.core.commons.callback.CallbackError;
 import ir.msob.jima.core.commons.channel.ChannelMessage;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
 import ir.msob.jima.core.commons.dto.ModelType;
-import ir.msob.jima.core.commons.exception.AbstractExceptionResponse;
 import ir.msob.jima.core.commons.exception.BaseExceptionMapper;
 import ir.msob.jima.core.commons.exception.BaseRuntimeException;
+import ir.msob.jima.core.commons.exception.ExceptionResponseAbstract;
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeResponse;
 import ir.msob.jima.core.commons.logger.Logger;
@@ -62,9 +62,9 @@ public class CallbackErrorAspect {
         ChannelMessage<USER, DATA> message = prepareChannelMessage(point);
         USER user = message.getUser();
 
-        List<? extends ChannelMessage<USER, ? extends AbstractExceptionResponse>> errorChannelMessages = prepareErrorChannelMessage(message, e);
+        List<? extends ChannelMessage<USER, ? extends ExceptionResponseAbstract>> errorChannelMessages = prepareErrorChannelMessage(message, e);
         if (!message.getErrorCallbacks().isEmpty()) {
-            for (ChannelMessage<USER, ? extends AbstractExceptionResponse> errorChannelMessage : errorChannelMessages) {
+            for (ChannelMessage<USER, ? extends ExceptionResponseAbstract> errorChannelMessage : errorChannelMessages) {
                 asyncClient.send(errorChannelMessage, errorChannelMessage.getChannel(), user);
             }
         }
@@ -105,7 +105,7 @@ public class CallbackErrorAspect {
      * @param throwable         The thrown exception
      * @return An error ChannelMessage
      */
-    <USER extends BaseUser, DATA_REQ extends ModelType, ER extends AbstractExceptionResponse> List<ChannelMessage<USER, ER>> prepareErrorChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, Throwable throwable) {
+    <USER extends BaseUser, DATA_REQ extends ModelType, ER extends ExceptionResponseAbstract> List<ChannelMessage<USER, ER>> prepareErrorChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, Throwable throwable) {
         ER er;
         if (throwable instanceof BaseRuntimeException e) {
             er = exceptionMapper.getExceptionResponse(e);
@@ -117,12 +117,13 @@ public class CallbackErrorAspect {
                 .stream()
                 .map(channelMessage -> {
                     // Clone the channelMessage to avoid modifying the original
-                    ChannelMessage<USER, ER> clonedMessage = new ChannelMessage<>();
-                    clonedMessage.setData(er);
-                    clonedMessage.setStatus(er.getStatus());
-                    clonedMessage.setChannel(channelMessage.getChannel());
-                    clonedMessage.setMetadata(channelMessage.getMetadata());
-                    return clonedMessage;
+                    return ChannelMessage.
+                            <USER, ER>builder()
+                            .data(er)
+                            .status(er.getStatus())
+                            .channel(channelMessage.getChannel())
+                            .metadata(channelMessage.getMetadata())
+                            .build();
                 })
                 .toList();
     }

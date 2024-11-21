@@ -14,7 +14,7 @@ import java.util.Set;
  * The interface is a generic interface, with the generic type 'ID' extending 'Comparable' and 'Serializable'.
  * This means that the ID of the criteria can be of any type that is comparable and serializable.
  * The interface includes getter and setter methods for the ID filter and for include and include limitation sets.
- * The interface also includes 'init' and 'validation' methods for initializing and validating the criteria.
+ * The interface also includes 'init' and 'objectvalidation' methods for initializing and validating the criteria.
  *
  * @param <ID> The type of the ID of the criteria.
  */
@@ -77,7 +77,7 @@ public interface BaseCriteria<ID extends Comparable<ID> & Serializable> extends 
     /**
      * Validates the criteria data after initialization.
      *
-     * @throws BadRequestException If the validation fails.
+     * @throws BadRequestException If the objectvalidation fails.
      */
     default void validation() throws BadRequestException {
     }

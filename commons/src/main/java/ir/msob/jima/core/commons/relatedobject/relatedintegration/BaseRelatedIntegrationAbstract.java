@@ -16,7 +16,7 @@ import java.util.TreeSet;
  * The class uses the Lombok library to automatically generate getter and setter methods for the 'relatedIntegrations' field.
  * It also generates a 'toString' method and a no-argument constructor.
  * The 'toString' method includes a call to the superclass's 'toString' method.
- * The 'relatedIntegrations' field is annotated with '@Valid' to enable validation of the related integrations.
+ * The 'relatedIntegrations' field is annotated with '@Valid' to enable related integration of the related integrations.
  *
  * @param <RI> the type of the related integration, which must extend RelatedIntegration.
  */

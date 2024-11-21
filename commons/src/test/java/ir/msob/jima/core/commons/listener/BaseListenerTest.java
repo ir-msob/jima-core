@@ -34,7 +34,7 @@ class BaseListenerTest {
             }
         };
 
-        ChannelMessage<BaseUser, ModelType> channelMessageReq = new ChannelMessage<>();
+        ChannelMessage<BaseUser, ModelType> channelMessageReq = ChannelMessage.builder().build();
         ModelType data = new ModelType();
         Integer status = 200;
 
