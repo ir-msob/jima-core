@@ -15,25 +15,25 @@ import java.util.Comparator;
 import java.util.Objects;
 
 /**
- * The {@code RelatedAction} class represents an action that is related to a specific context 
- * within the application. It encapsulates various properties and behaviors associated with 
+ * The {@code RelatedAction} class represents an action that is related to a specific context
+ * within the application. It encapsulates various properties and behaviors associated with
  * the action, including its identification, status, and validity.
- * 
- * This class extends {@link BaseIdModelAbstract} and implements {@link Comparable} to allow 
+ * <p>
+ * This class extends {@link BaseIdModelAbstract} and implements {@link Comparable} to allow
  * for sorting based on the action's name.
- * 
+ *
  * <p>Fields:</p>
  * - {@code name}: The name of the related action (must not be blank).
  * - {@code status}: The current status of the related action (must not be blank).
  * - {@code mandatory}: A boolean indicating whether the related action is mandatory.
  * - {@code validFor}: A {@link TimePeriod} indicating the duration for which the action is valid.
  * - {@code auditInfo}: An {@link AuditInfo} object containing audit-related information for the action.
- * 
+ *
  * <p>Methods:</p>
  * - {@code equals(Object o)}: Compares this related action with another object for equality based on the name.
  * - {@code hashCode()}: Returns the hash code for this related action based on its fields.
  * - {@code compareTo(RelatedAction<ID> o)}: Compares this related action with another based on their names.
- * 
+ *
  * <p>Enum:</p>
  * - {@link FN}: Represents the field names of the class, including name, status, mandatory, validFor, and auditInfo.
  */

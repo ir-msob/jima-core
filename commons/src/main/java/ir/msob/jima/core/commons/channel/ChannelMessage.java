@@ -28,8 +28,8 @@ import java.util.Map;
  *
  * @param <USER> The type of user associated with the channel message.
  * @param <DATA> The type of data contained in the channel message.
- * 
- * This class also implements the 'Serializable' interface to allow instances to be serialized.
+ *               <p>
+ *               This class also implements the 'Serializable' interface to allow instances to be serialized.
  */
 @Setter
 @Getter

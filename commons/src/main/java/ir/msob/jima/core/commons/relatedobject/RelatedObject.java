@@ -15,10 +15,10 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * The {@code RelatedObject} class represents a related object with a type, an ID, a role, 
- * and a referring type. It implements the {@link Comparable} interface to provide natural 
+ * The {@code RelatedObject} class represents a related object with a type, an ID, a role,
+ * and a referring type. It implements the {@link Comparable} interface to provide natural
  * ordering of instances based on specific fields.
- * 
+ *
  * <p>Fields:</p>
  * - {@code name}: The name of the related object (must not be blank).
  * - {@code relatedId}: The ID of the related object (must not be null).
@@ -28,18 +28,18 @@ import java.util.Objects;
  * - {@code enabled}: A boolean indicating whether the related object is enabled, which can be null.
  * - {@code validFor}: A {@link TimePeriod} indicating the time period for which the related object is valid.
  * - {@code auditInfo}: An {@link AuditInfo} object containing audit-related information for the related object.
- * 
+ *
  * <p>Methods:</p>
- * - {@code compareTo(RelatedObject<ID> other)}: Compares this related object with another for order 
- *   based on relatedId, name, role, and referringType.
- * - {@code equals(Object obj)}: Indicates whether some other object is "equal to" this one based on 
- *   relatedId, name, role, and referringType.
+ * - {@code compareTo(RelatedObject<ID> other)}: Compares this related object with another for order
+ * based on relatedId, name, role, and referringType.
+ * - {@code equals(Object obj)}: Indicates whether some other object is "equal to" this one based on
+ * relatedId, name, role, and referringType.
  * - {@code hashCode()}: Returns a hash code value for the object based on its fields.
- * 
+ *
  * <p>Enum:</p>
- * - {@link FN}: Represents the field names of the {@code RelatedObject} class, including name, 
- *   relatedId, role, referringType, status, enabled, validFor, and auditInfo.
- * 
+ * - {@link FN}: Represents the field names of the {@code RelatedObject} class, including name,
+ * relatedId, role, referringType, status, enabled, validFor, and auditInfo.
+ *
  * @param <ID> the type of the related object ID, which must be comparable and serializable
  */
 @Getter
@@ -85,7 +85,7 @@ public class RelatedObject<ID extends Comparable<ID> & Serializable> extends Bas
      * The time period for which the related object is valid.
      */
     private TimePeriod validFor;
-   
+
     /**
      * Represents the audit information associated with the related object.
      */

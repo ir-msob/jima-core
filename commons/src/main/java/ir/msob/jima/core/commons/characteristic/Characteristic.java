@@ -20,11 +20,11 @@ import java.util.Objects;
  * - {@code key}: A non-blank string representing the key of the characteristic.
  * - {@code value}: A serializable object representing the value of the characteristic.
  * - {@code dataType}: A non-blank string representing the data type of the characteristic.
- *
+ * <p>
  * The class provides getter and setter methods for these fields, ensuring encapsulation.
  * It overrides the {@code equals}, {@code hashCode}, and {@code compareTo} methods to provide
  * proper equality checks, hash code generation, and comparison logic based on the key.
- *
+ * <p>
  * The 'FN' enum represents the field names of the class.
  *
  * @param <ID> The type of the identifier, which must be comparable and serializable.
@@ -89,7 +89,7 @@ public class Characteristic<ID extends Comparable<ID> & Serializable> extends Ba
      *
      * @param o The other characteristic to compare with.
      * @return A negative integer, zero, or a positive integer as this characteristic is less than,
-     *         equal to, or greater than the specified characteristic.
+     * equal to, or greater than the specified characteristic.
      */
     @Override
     public int compareTo(Characteristic<ID> o) {

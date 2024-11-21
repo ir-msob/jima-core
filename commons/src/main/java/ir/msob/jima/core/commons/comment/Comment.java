@@ -88,7 +88,7 @@ public class Comment<ID extends Comparable<ID> & Serializable, RP extends Relate
      *
      * @param o The other comment to compare with.
      * @return A negative integer, zero, or a positive integer as this comment is less than,
-     *         equal to, or greater than the specified comment.
+     * equal to, or greater than the specified comment.
      */
     @Override
     public int compareTo(Comment<ID, RP> o) {

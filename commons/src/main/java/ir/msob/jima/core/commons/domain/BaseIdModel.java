@@ -8,10 +8,10 @@ import java.io.Serializable;
 /**
  * The {@code BaseIdModel} interface represents the basic structure for domain models.
  * It is generic, allowing for any type of ID that is both {@code Comparable} and {@code Serializable}.
- * 
+ * <p>
  * Fields:
  * - ID: The type of the domain model's ID.
- * 
+ * <p>
  * Methods:
  * - {@code getDomainId()}: Returns the domain ID of the model.
  * - {@code setDomainId(ID id)}: Sets the domain ID of the model.

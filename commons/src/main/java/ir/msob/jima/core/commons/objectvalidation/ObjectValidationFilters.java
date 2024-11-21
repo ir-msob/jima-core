@@ -12,13 +12,13 @@ import lombok.ToString;
 /**
  * The {@code ObjectValidationFilters} class represents a set of filters for object validations.
  * It implements the {@link BaseFilters} interface.
- * 
+ * <p>
  * Fields:
  * - {@code name}: A filter for the name of the object validation. It is of type {@link Filter<String>}.
  * - {@code status}: A filter for the status of the object validation. It is of type {@link Filter<String>}.
  * - {@code enabled}: A filter indicating whether the object validation is enabled. It is of type {@link Filter<Boolean>}.
  * - {@code validFor}: A filter representing the validity period for the object validation. It is of type {@link TimePeriodFilters}.
- * 
+ * <p>
  * Methods:
  * - {@code getName()}: Returns the filter for the name of the object validation.
  * - {@code setName(Filter<String> name)}: Sets the filter for the name of the object validation.

@@ -16,18 +16,18 @@ import java.util.Objects;
 /**
  * The {@code ObjectValidation} class represents an object validation with a key, value, and data type.
  * It extends {@link BaseIdModelAbstract} and implements {@link Comparable} for sorting based on the name.
- * 
+ * <p>
  * Fields:
  * - {@code name}: The name of the object validation (must not be blank).
  * - {@code status}: The status of the object validation (must not be blank).
  * - {@code enabled}: A boolean indicating whether the object validation is enabled.
  * - {@code validFor}: A {@link TimePeriod} indicating the validity duration of the object validation.
- * 
+ * <p>
  * Methods:
  * - {@code equals(Object o)}: Checks whether this object validation is equal to another based on their names.
  * - {@code hashCode()}: Returns the hash code of this object validation based on its fields.
  * - {@code compareTo(ObjectValidation<ID> o)}: Compares this object validation with another based on their names.
- * 
+ * <p>
  * Enum:
  * - {@link FN}: Represents the field names of the class, including name, status, enabled, and validFor.
  */
