@@ -1,6 +1,7 @@
 package ir.msob.jima.core.commons.audit;
 
 import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedParty;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -36,8 +37,8 @@ public class AuditDomain<RP extends RelatedParty> implements Comparable<AuditDom
     /**
      * The type of the action.
      */
-    @NotNull
-    private AuditDomainActionType actionType;
+    @NotBlank
+    private String actionType;
     /**
      * The version of the audit domain.
      */
@@ -70,7 +71,7 @@ public class AuditDomain<RP extends RelatedParty> implements Comparable<AuditDom
             return compare;
         }
 
-        return Objects.compare(this.getActionType(), o.getActionType(), AuditDomainActionType::compareTo);
+        return Objects.compare(this.getActionType(), o.getActionType(), String::compareTo);
     }
 
     /**

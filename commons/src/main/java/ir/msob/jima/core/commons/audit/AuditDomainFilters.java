@@ -35,5 +35,5 @@ public class AuditDomainFilters<RPF extends RelatedPartyFilters> implements Base
     /**
      * Filter for the action type.
      */
-    private Filter<AuditDomainActionType> actionType;
+    private Filter<String> actionType;
 }
