@@ -32,6 +32,7 @@ public class AuditDomain<RP extends RelatedParty> implements Comparable<AuditDom
     /**
      * The date of the action.
      */
+    @Builder.Default
     private Instant actionDate = Instant.now();
     /**
      * The type of the action.
