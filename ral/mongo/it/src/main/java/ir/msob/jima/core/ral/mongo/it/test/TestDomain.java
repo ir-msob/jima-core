@@ -1,7 +1,7 @@
 package ir.msob.jima.core.ral.mongo.it.test;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.domain.DomainService;
+import ir.msob.jima.core.commons.domain.DomainInfo;
 import ir.msob.jima.core.ral.mongo.it.Microservices;
 import ir.msob.jima.core.ral.mongo.it.domain.ProjectDomainAbstract;
 import jakarta.validation.constraints.NotBlank;
@@ -19,7 +19,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Document(collection = TestDomain.DOMAIN_NAME)
-@DomainService(serviceName = Microservices.TEST_MICROSERVICE, version = Microservices.VERSION, domainName = TestDomain.DOMAIN_URI)
+@DomainInfo(serviceName = Microservices.TEST_MICROSERVICE, version = Microservices.VERSION, domainName = TestDomain.DOMAIN_URI)
 public class TestDomain extends ProjectDomainAbstract {
     @Transient
     public static final String DOMAIN_NAME = "TestDomain";

@@ -8,14 +8,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used to mark classes that represent domain services.
- * It is retained at runtime and can be applied to types only.
- * The annotation has several elements that provide additional information about the domain.
+ * This annotation is used to mark classes that represent domain services
+ * within a microservice architecture. It is retained at runtime and can
+ * be applied to types only. The annotation includes elements to specify
+ * the microservice name, version, domain name, and optional parent domain name.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface DomainService {
-    ClassAnnotationInfo<DomainService> info = new ClassAnnotationInfo<>(DomainService.class);
+public @interface DomainInfo {
+    ClassAnnotationInfo<DomainInfo> info = new ClassAnnotationInfo<>(DomainInfo.class);
 
     /**
      * This method is used to set the name of the microservice.

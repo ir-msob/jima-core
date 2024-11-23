@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons.annotation;
 
-import ir.msob.jima.core.commons.domain.DomainService;
+import ir.msob.jima.core.commons.domain.DomainInfo;
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
 import ir.msob.jima.core.commons.shared.annotation.ClassAnnotationInfo;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,17 +10,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ClassAnnotationInfoTest {
 
-    private ClassAnnotationInfo<DomainService> annotationInfo;
+    private ClassAnnotationInfo<DomainInfo> annotationInfo;
 
     @BeforeEach
     void setUp() {
-        annotationInfo = new ClassAnnotationInfo<>(DomainService.class);
+        annotationInfo = new ClassAnnotationInfo<>(DomainInfo.class);
     }
 
     @Test
     void testHasAnnotation_WhenAnnotationIsPresent_ShouldReturnTrue() {
         // Arrange
-        @DomainService(serviceName = "value", version = "value", domainName = "value")
+        @DomainInfo(serviceName = "value", version = "value", domainName = "value")
         class AnnotatedClass {
         }
 
@@ -47,12 +47,12 @@ class ClassAnnotationInfoTest {
     @Test
     void testGetAnnotation_WhenAnnotationIsPresent_ShouldReturnAnnotation() {
         // Arrange
-        @DomainService(serviceName = "value", version = "value", domainName = "value")
+        @DomainInfo(serviceName = "value", version = "value", domainName = "value")
         class AnnotatedClass {
         }
 
         // Act
-        DomainService annotation = annotationInfo.getAnnotation(AnnotatedClass.class);
+        DomainInfo annotation = annotationInfo.getAnnotation(AnnotatedClass.class);
 
         // Assert
         assertNotNull(annotation, "AnnotatedClass should have MyAnnotation");
@@ -66,7 +66,7 @@ class ClassAnnotationInfoTest {
         }
 
         // Act
-        DomainService annotation = annotationInfo.getAnnotation(NonAnnotatedClass.class);
+        DomainInfo annotation = annotationInfo.getAnnotation(NonAnnotatedClass.class);
 
         // Assert
         assertNull(annotation, "NonAnnotatedClass should not have MyAnnotation");
