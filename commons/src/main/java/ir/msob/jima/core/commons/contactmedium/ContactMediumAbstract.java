@@ -12,7 +12,7 @@ import lombok.experimental.SuperBuilder;
 import java.io.Serializable;
 
 /**
- * The 'ContactMedium' class represents a contact medium with a name, type, value, order, and validity period.
+ * The 'ContactMediumAbstract' class represents a contact medium with a name, type, value, order, and validity period.
  * It extends 'BaseIdModelAbstract' and implements 'Comparable' for sorting based on the contact medium.
  * <p>
  * Fields:
@@ -23,7 +23,7 @@ import java.io.Serializable;
  * - validFor: An optional 'TimePeriod' indicating the validity duration of the contact medium.
  * <p>
  * Methods:
- * - compareTo(ContactMedium<ID> o): Compares this contact medium with another based on their keys.
+ * - compareTo(ContactMediumAbstract<ID> o): Compares this contact medium with another based on their keys.
  * <p>
  * Enum:
  * - ContactMediumType: Represents various types of contact mediums such as PHONE, EMAIL, FAX, etc.
@@ -33,7 +33,7 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 @SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ContactMedium<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<ContactMedium<ID>> {
+public class ContactMediumAbstract<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<ContactMediumAbstract<ID>> {
 
     @NotBlank
     private String name;
@@ -46,7 +46,7 @@ public class ContactMedium<ID extends Comparable<ID> & Serializable> extends Bas
 
 
     @Override
-    public int compareTo(ContactMedium<ID> o) {
+    public int compareTo(ContactMediumAbstract<ID> o) {
         return 0;
     }
 

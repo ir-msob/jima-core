@@ -23,7 +23,7 @@ import java.util.TreeSet;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseObjectValidationAbstract<ID extends Comparable<ID> & Serializable, OV extends ObjectValidation<ID>> implements BaseObjectValidation<ID, OV> {
+public abstract class BaseObjectValidationAbstract<ID extends Comparable<ID> & Serializable, OV extends ObjectValidationAbstract<ID>> implements BaseObjectValidation<ID, OV> {
     /**
      * The objectValidation of the base object validation.
      */

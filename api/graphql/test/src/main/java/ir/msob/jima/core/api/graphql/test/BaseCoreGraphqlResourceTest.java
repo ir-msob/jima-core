@@ -3,7 +3,7 @@ package ir.msob.jima.core.api.graphql.test;
 import ir.msob.jima.core.commons.domain.BaseDomain;
 import ir.msob.jima.core.commons.dto.BaseDto;
 import ir.msob.jima.core.commons.security.BaseUser;
-import ir.msob.jima.core.commons.shared.criteria.BaseCriteria;
+import ir.msob.jima.core.commons.criteria.BaseCriteria;
 import ir.msob.jima.core.test.BaseCoreResourceTest;
 import org.springframework.graphql.test.tester.GraphQlTester;
 

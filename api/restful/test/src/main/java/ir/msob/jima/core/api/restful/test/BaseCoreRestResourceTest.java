@@ -5,7 +5,7 @@ import ir.msob.jima.core.commons.dto.BaseDto;
 import ir.msob.jima.core.commons.security.BaseTokenService;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.security.UserInfoUtil;
-import ir.msob.jima.core.commons.shared.criteria.BaseCriteria;
+import ir.msob.jima.core.commons.criteria.BaseCriteria;
 import ir.msob.jima.core.test.BaseCoreResourceTest;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpHeaders;

@@ -4,7 +4,7 @@ import ir.msob.jima.core.commons.dto.BaseDto;
 import ir.msob.jima.core.commons.exception.badrequest.BadRequestException;
 import ir.msob.jima.core.commons.exception.domainnotfound.DomainNotFoundException;
 import ir.msob.jima.core.commons.security.BaseUser;
-import ir.msob.jima.core.commons.shared.criteria.BaseCriteria;
+import ir.msob.jima.core.commons.criteria.BaseCriteria;
 
 import java.io.Serializable;
 import java.util.Collection;

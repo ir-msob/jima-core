@@ -1,9 +1,9 @@
 package ir.msob.jima.core.commons.util;
 
 import com.google.common.collect.Sets;
-import ir.msob.jima.core.commons.shared.criteria.BaseCriteria;
-import ir.msob.jima.core.commons.shared.criteria.BaseCriteriaAbstract;
-import ir.msob.jima.core.commons.shared.criteria.filter.Filter;
+import ir.msob.jima.core.commons.criteria.BaseCriteria;
+import ir.msob.jima.core.commons.criteria.BaseCriteriaAbstract;
+import ir.msob.jima.core.commons.criteria.filter.Filter;
 import lombok.SneakyThrows;
 
 import java.io.Serializable;

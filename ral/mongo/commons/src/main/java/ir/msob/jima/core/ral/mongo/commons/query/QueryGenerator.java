@@ -1,7 +1,7 @@
 package ir.msob.jima.core.ral.mongo.commons.query;
 
-import ir.msob.jima.core.commons.shared.criteria.BaseCriteria;
-import ir.msob.jima.core.commons.shared.criteria.filter.Filter;
+import ir.msob.jima.core.commons.criteria.BaseCriteria;
+import ir.msob.jima.core.commons.criteria.filter.Filter;
 import ir.msob.jima.core.ral.mongo.commons.criteria.MongoCriteria;
 import org.bson.types.ObjectId;
 import org.springframework.data.domain.Pageable;

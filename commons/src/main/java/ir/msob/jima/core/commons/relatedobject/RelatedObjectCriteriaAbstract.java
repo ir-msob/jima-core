@@ -2,9 +2,9 @@ package ir.msob.jima.core.commons.relatedobject;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.shared.audit.auditinfo.AuditInfoFilters;
-import ir.msob.jima.core.commons.shared.criteria.BaseCriteriaAbstract;
-import ir.msob.jima.core.commons.shared.criteria.filter.BaseFilters;
-import ir.msob.jima.core.commons.shared.criteria.filter.Filter;
+import ir.msob.jima.core.commons.criteria.BaseCriteriaAbstract;
+import ir.msob.jima.core.commons.criteria.filter.BaseFilters;
+import ir.msob.jima.core.commons.criteria.filter.Filter;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriodFilters;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

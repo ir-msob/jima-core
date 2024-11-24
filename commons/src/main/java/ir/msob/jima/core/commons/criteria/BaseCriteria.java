@@ -1,8 +1,8 @@
-package ir.msob.jima.core.commons.shared.criteria;
+package ir.msob.jima.core.commons.criteria;
 
+import ir.msob.jima.core.commons.criteria.filter.Filter;
 import ir.msob.jima.core.commons.dto.BaseType;
 import ir.msob.jima.core.commons.exception.badrequest.BadRequestException;
-import ir.msob.jima.core.commons.shared.criteria.filter.Filter;
 
 import java.io.Serializable;
 import java.util.HashSet;

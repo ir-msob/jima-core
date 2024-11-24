@@ -10,7 +10,7 @@ import java.util.SortedSet;
  * The 'SortedSet' ensures that the contact mediums are sorted in their natural order.
  * The 'getContactMedia' method returns the contact mediums, and the 'setContactMedia' method sets the contact mediums.
  */
-public interface BaseContactMedium<ID extends Comparable<ID> & Serializable, CM extends ContactMedium<ID>> {
+public interface BaseContactMedium<ID extends Comparable<ID> & Serializable, CM extends ContactMediumAbstract<ID>> {
 
     /**
      * Gets the contact mediums.

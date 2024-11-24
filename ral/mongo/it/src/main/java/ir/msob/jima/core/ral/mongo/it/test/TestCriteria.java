@@ -1,6 +1,6 @@
 package ir.msob.jima.core.ral.mongo.it.test;
 
-import ir.msob.jima.core.commons.shared.criteria.filter.Filter;
+import ir.msob.jima.core.commons.criteria.filter.Filter;
 import ir.msob.jima.core.ral.mongo.it.criteria.ProjectCriteriaAbstract;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

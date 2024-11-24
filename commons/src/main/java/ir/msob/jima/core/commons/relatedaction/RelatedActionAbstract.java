@@ -42,7 +42,7 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RelatedAction<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<RelatedAction<ID>> {
+public abstract class RelatedActionAbstract<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<RelatedActionAbstract<ID>> {
 
     @NotBlank
     private String name;
@@ -66,7 +66,7 @@ public class RelatedAction<ID extends Comparable<ID> & Serializable> extends Bas
         if (o == null)
             return false;
 
-        if (o instanceof RelatedAction<?> that)
+        if (o instanceof RelatedActionAbstract<?> that)
             return Objects.equals(this.getName(), that.getName());
 
         return false;
@@ -83,7 +83,7 @@ public class RelatedAction<ID extends Comparable<ID> & Serializable> extends Bas
     }
 
     @Override
-    public int compareTo(RelatedAction<ID> o) {
+    public int compareTo(RelatedActionAbstract<ID> o) {
         if (this == o) {
             return 0;
         }

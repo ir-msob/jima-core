@@ -1,6 +1,6 @@
-package ir.msob.jima.core.commons.shared.criteria;
+package ir.msob.jima.core.commons.criteria;
 
-import ir.msob.jima.core.commons.shared.criteria.filter.Filter;
+import ir.msob.jima.core.commons.criteria.filter.Filter;
 
 import java.io.Serializable;
 

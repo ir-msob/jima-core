@@ -2,7 +2,7 @@ package ir.msob.jima.core.commons.channel.message;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.dto.ModelType;
-import ir.msob.jima.core.commons.shared.criteria.BaseCriteria;
+import ir.msob.jima.core.commons.criteria.BaseCriteria;
 import lombok.*;
 import org.springframework.data.domain.Pageable;
 

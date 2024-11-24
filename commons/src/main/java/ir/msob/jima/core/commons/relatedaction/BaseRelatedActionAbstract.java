@@ -11,22 +11,22 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * The 'BaseRelatedActionAbstract' class represents an abstract base object validation with a set of objectValidation.
+ * The 'BaseRelatedActionAbstract' class represents an abstract base related action with a set of relatedAction.
  * It implements the 'BaseRelatedAction' interface.
- * The class includes a field for the objectValidation and getter and setter methods for this field.
- * The objectValidation are represented as a 'SortedSet' of 'RelatedAction' objects.
- * The 'SortedSet' ensures that the objectValidation are sorted in their natural order.
+ * The class includes a field for the relatedAction and getter and setter methods for this field.
+ * The relatedAction are represented as a 'SortedSet' of 'RelatedAction' objects.
+ * The 'SortedSet' ensures that the relatedAction are sorted in their natural order.
  * The class also includes a no-argument constructor.
- * The 'objectValidation' field is annotated with '@Valid' to enable objectvalidation of the objectValidation.
+ * The 'relatedAction' field is annotated with '@Valid' to enable relatedaction of the relatedAction.
  */
 @Getter
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseRelatedActionAbstract<ID extends Comparable<ID> & Serializable, CM extends RelatedAction<ID>> implements BaseRelatedAction<ID, CM> {
+public abstract class BaseRelatedActionAbstract<ID extends Comparable<ID> & Serializable, CM extends RelatedActionAbstract<ID>> implements BaseRelatedAction<ID, CM> {
     /**
-     * The objectValidation of the base object validation.
+     * The relatedAction of the base related action.
      */
     @Valid
-    private SortedSet<CM> objectValidation = new TreeSet<>();
+    private SortedSet<CM> relatedAction = new TreeSet<>();
 }

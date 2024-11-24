@@ -10,7 +10,7 @@ import java.util.SortedSet;
  * The 'SortedSet' ensures that the object validations are sorted in their natural order.
  * The 'getObjectValidation' method returns the object validations, and the 'setObjectValidation' method sets the object validations.
  */
-public interface BaseObjectValidation<ID extends Comparable<ID> & Serializable, OV extends ObjectValidation<ID>> {
+public interface BaseObjectValidation<ID extends Comparable<ID> & Serializable, OV extends ObjectValidationAbstract<ID>> {
 
     /**
      * Gets the object validations.

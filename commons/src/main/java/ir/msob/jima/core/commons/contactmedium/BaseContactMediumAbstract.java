@@ -23,7 +23,7 @@ import java.util.TreeSet;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseContactMediumAbstract<ID extends Comparable<ID> & Serializable, CM extends ContactMedium<ID>> implements BaseContactMedium<ID, CM> {
+public abstract class BaseContactMediumAbstract<ID extends Comparable<ID> & Serializable, CM extends ContactMediumAbstract<ID>> implements BaseContactMedium<ID, CM> {
     /**
      * The contactMedia of the base contact medium.
      */

@@ -3,7 +3,7 @@ package ir.msob.jima.core.api.kafka.test;
 import ir.msob.jima.core.commons.domain.BaseDomain;
 import ir.msob.jima.core.commons.dto.BaseDto;
 import ir.msob.jima.core.commons.security.BaseUser;
-import ir.msob.jima.core.commons.shared.criteria.BaseCriteria;
+import ir.msob.jima.core.commons.criteria.BaseCriteria;
 import ir.msob.jima.core.test.Assertable;
 import ir.msob.jima.core.test.BaseCoreResourceTest;
 import org.springframework.kafka.core.ConsumerFactory;

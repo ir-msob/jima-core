@@ -36,7 +36,7 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ObjectValidation<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<ObjectValidation<ID>> {
+public abstract class ObjectValidationAbstract<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<ObjectValidationAbstract<ID>> {
 
     @NotBlank
     private String name;
@@ -60,7 +60,7 @@ public class ObjectValidation<ID extends Comparable<ID> & Serializable> extends 
         if (o == null)
             return false;
 
-        if (o instanceof ObjectValidation<?> that)
+        if (o instanceof ObjectValidationAbstract<?> that)
             return Objects.equals(this.getName(), that.getName());
 
         return false;
@@ -77,7 +77,7 @@ public class ObjectValidation<ID extends Comparable<ID> & Serializable> extends 
     }
 
     @Override
-    public int compareTo(ObjectValidation<ID> o) {
+    public int compareTo(ObjectValidationAbstract<ID> o) {
         if (this == o) {
             return 0;
         }

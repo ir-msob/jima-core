@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.shared.criteria.filter;
+package ir.msob.jima.core.commons.criteria.filter;
 
 /**
  * The 'BaseFilters' interface represents a base for all filter classes.

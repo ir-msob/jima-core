@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.shared.criteria;
+package ir.msob.jima.core.commons.criteria;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

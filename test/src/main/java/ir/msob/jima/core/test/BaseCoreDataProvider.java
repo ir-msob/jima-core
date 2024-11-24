@@ -7,7 +7,7 @@ import ir.msob.jima.core.commons.dto.BaseDto;
 import ir.msob.jima.core.commons.repository.BaseRepository;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.service.BaseService;
-import ir.msob.jima.core.commons.shared.criteria.BaseCriteria;
+import ir.msob.jima.core.commons.criteria.BaseCriteria;
 import ir.msob.jima.core.commons.util.GenericTypeUtil;
 
 import java.io.Serializable;
