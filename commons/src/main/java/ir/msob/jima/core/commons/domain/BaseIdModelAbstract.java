@@ -1,10 +1,7 @@
 package ir.msob.jima.core.commons.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -24,7 +21,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString(callSuper = true)
-@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class BaseIdModelAbstract<ID extends Comparable<ID> & Serializable> implements BaseIdModel<ID> {
 

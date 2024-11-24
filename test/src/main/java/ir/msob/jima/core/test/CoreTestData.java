@@ -263,7 +263,7 @@ public class CoreTestData {
     @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_DOMAIN(RelatedDomainAbstract<ID> relatedDomain) {
         relatedDomain.setName(UPDATED_STRING);
-        relatedDomain.setRelatedId(UPDATED_STRING);
+        relatedDomain.setRelatedId((ID) UPDATED_ID);
         relatedDomain.setRole(UPDATED_STRING);
         relatedDomain.setReferringType(UPDATED_STRING);
     }
@@ -277,7 +277,7 @@ public class CoreTestData {
     @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_DOMAIN(RelatedDomainAbstract<ID> relatedDomain) {
         relatedDomain.setName(UPDATED_STRING);
-        relatedDomain.setRelatedId(UPDATED_STRING);
+        relatedDomain.setRelatedId((ID) UPDATED_ID);
     }
 
     /**
@@ -286,7 +286,7 @@ public class CoreTestData {
      * @return the initialized default required characteristic
      */
     public static Characteristic<?> initDefaultRequiredCharacteristic() {
-        Characteristic<?> characteristic = Characteristic.builder().build();
+        Characteristic<?> characteristic = new Characteristic<>();
         characteristic.setKey(DEFAULT_STRING);
         characteristic.setValue(DEFAULT_STRING);
         characteristic.setDataType(DEFAULT_DATA_TYPE.name());
@@ -298,7 +298,7 @@ public class CoreTestData {
      *
      * @param characteristic the mandatory characteristic to update
      */
-    public static void UPDATED_MANDATORY_CHARACTERISTIC(Characteristic characteristic) {
+    public static void UPDATED_MANDATORY_CHARACTERISTIC(Characteristic<?> characteristic) {
         characteristic.setKey(UPDATED_STRING);
         characteristic.setDataType(UPDATED_DATA_TYPE.name());
     }

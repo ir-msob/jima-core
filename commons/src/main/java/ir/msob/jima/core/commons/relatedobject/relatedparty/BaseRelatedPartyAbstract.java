@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -20,7 +21,7 @@ import java.util.TreeSet;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseRelatedPartyAbstract<RP extends RelatedPartyAbstract> implements BaseRelatedParty<RP> {
+public abstract class BaseRelatedPartyAbstract<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> implements BaseRelatedParty<ID, RP> {
 
     /**
      * A sorted set of related parties.

@@ -3,7 +3,6 @@ package ir.msob.jima.core.commons.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 
@@ -20,7 +19,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString(callSuper = true)
-@SuperBuilder
 public abstract class BaseDomainAbstract<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements BaseDomain<ID> {
 
 }

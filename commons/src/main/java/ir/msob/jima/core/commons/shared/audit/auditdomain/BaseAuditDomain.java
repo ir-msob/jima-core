@@ -19,14 +19,14 @@ public interface BaseAuditDomain<ID extends Comparable<ID> & Serializable, RP ex
      *
      * @return A sorted set of audit domains.
      */
-    SortedSet<AuditDomainAbstract<ID, RP>> getAuditDomains();
+    SortedSet<AuditDomain<ID, RP>> getAuditDomains();
 
     /**
      * Set a sorted set of audit domains.
      *
      * @param auditDomains A sorted set of audit domains.
      */
-    void setAuditDomains(SortedSet<AuditDomainAbstract<ID, RP>> auditDomains);
+    void setAuditDomains(SortedSet<AuditDomain<ID, RP>> auditDomains);
 
     /**
      * Get the latest audit domain.
@@ -34,10 +34,10 @@ public interface BaseAuditDomain<ID extends Comparable<ID> & Serializable, RP ex
      *
      * @return The latest audit domain, or null if there are no audit domains.
      */
-    default AuditDomainAbstract<ID, RP> getLatestAuditDomain() {
+    default AuditDomain<ID, RP> getLatestAuditDomain() {
         return getAuditDomains()
                 .stream()
-                .max(Comparator.comparing(AuditDomainAbstract::getVersion))
+                .max(Comparator.comparing(AuditDomain::getVersion))
                 .orElse(null);
     }
 

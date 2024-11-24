@@ -2,9 +2,9 @@ package ir.msob.jima.core.ral.mongo.it.domain;
 
 import ir.msob.jima.core.commons.domain.BaseDomainAbstract;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.SuperBuilder;
 import org.bson.types.ObjectId;
 
 import java.io.Serial;
@@ -15,7 +15,7 @@ import java.io.Serial;
 @Setter
 @Getter
 @ToString(callSuper = true)
-@SuperBuilder
+@NoArgsConstructor
 public abstract class ProjectDomainAbstract extends BaseDomainAbstract<ObjectId> implements ProjectDomain {
     /**
      *

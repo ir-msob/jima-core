@@ -25,7 +25,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedObjectCriteriaAbstract<ID extends Comparable<ID> & Serializable> extends BaseCriteriaAbstract<ID> implements BaseFilters {
+public abstract class RelatedObjectCriteriaAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable> extends BaseCriteriaAbstract<ID> implements BaseFilters {
 
     /**
      * Filter for the name of the related object.
@@ -35,7 +35,7 @@ public abstract class RelatedObjectCriteriaAbstract<ID extends Comparable<ID> & 
     /**
      * Filter for the ID of the related object.
      */
-    private Filter<ID> relatedId;
+    private Filter<RID> relatedId;
 
     /**
      * Filter for the role of the related object.

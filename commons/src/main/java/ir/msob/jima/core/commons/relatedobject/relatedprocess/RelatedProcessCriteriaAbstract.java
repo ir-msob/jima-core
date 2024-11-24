@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * This class represents the filters that can be applied when searching for related processes.
  * It extends the BaseRelatedFilters class and provides filters for the related process type, ID, role, and referred type.
@@ -16,5 +18,5 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedProcessCriteriaAbstract extends RelatedObjectCriteriaAbstract<String> {
+public abstract class RelatedProcessCriteriaAbstract<ID extends Comparable<ID> & Serializable> extends RelatedObjectCriteriaAbstract<ID, String> {
 }

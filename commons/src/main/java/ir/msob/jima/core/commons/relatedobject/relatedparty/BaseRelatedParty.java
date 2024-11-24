@@ -1,5 +1,6 @@
 package ir.msob.jima.core.commons.relatedobject.relatedparty;
 
+import java.io.Serializable;
 import java.util.SortedSet;
 
 /**
@@ -8,7 +9,7 @@ import java.util.SortedSet;
  *
  * @param <RP> the type of the related party, which must extend RelatedPartyAbstract.
  */
-public interface BaseRelatedParty<RP extends RelatedPartyAbstract> {
+public interface BaseRelatedParty<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> {
 
     /**
      * Returns a sorted set of related parties.

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * This class represents the filters that can be applied when searching for related parties.
  * It implements the BaseFilters interface and provides filters for the related party type, ID, role, and referred type.
@@ -16,6 +18,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedPartyCriteriaAbstract extends RelatedObjectCriteriaAbstract<String> {
+public abstract class RelatedPartyCriteriaAbstract<ID extends Comparable<ID> & Serializable> extends RelatedObjectCriteriaAbstract<ID, String> {
 
 }

@@ -24,5 +24,5 @@ public abstract class BaseAuditDomainAbstract<ID extends Comparable<ID> & Serial
     /**
      * A sorted set of audit domains.
      */
-    private SortedSet<AuditDomainAbstract<ID, RP>> auditDomains = new TreeSet<>();
+    private SortedSet<AuditDomain<ID, RP>> auditDomains = new TreeSet<>();
 }

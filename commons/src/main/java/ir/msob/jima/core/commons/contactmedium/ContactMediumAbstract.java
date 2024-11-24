@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.domain.BaseIdModelAbstract;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -31,7 +28,8 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString(callSuper = true)
-@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ContactMediumAbstract<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<ContactMediumAbstract<ID>> {
 

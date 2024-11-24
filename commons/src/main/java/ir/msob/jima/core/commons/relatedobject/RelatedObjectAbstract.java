@@ -5,10 +5,7 @@ import ir.msob.jima.core.commons.domain.BaseIdModelAbstract;
 import ir.msob.jima.core.commons.shared.audit.auditinfo.AuditInfo;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -44,9 +41,10 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString(callSuper = true)
-@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<RelatedObjectAbstract<ID>> {
+public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<RelatedObjectAbstract<ID, RID>> {
 
     /**
      * The name of the related object.
@@ -58,7 +56,7 @@ public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializ
      * The ID of the related object.
      */
     @NotBlank
-    private String relatedId;
+    private RID relatedId;
 
     /**
      * The role of the related object.
@@ -97,7 +95,7 @@ public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializ
      * @return a negative integer, zero, or a positive integer as this related object is less than, equal to, or greater than the specified related object
      */
     @Override
-    public int compareTo(RelatedObjectAbstract<ID> other) {
+    public int compareTo(RelatedObjectAbstract<ID, RID> other) {
         if (this == other) {
             return 0;
         }
@@ -131,7 +129,7 @@ public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializ
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        RelatedObjectAbstract<?> that = (RelatedObjectAbstract<?>) obj;
+        RelatedObjectAbstract<?, ?> that = (RelatedObjectAbstract<?, ?>) obj;
         return Objects.equals(relatedId, that.relatedId) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(role, that.role) &&

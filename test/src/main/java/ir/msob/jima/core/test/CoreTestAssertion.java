@@ -3,7 +3,7 @@ package ir.msob.jima.core.test;
 import ir.msob.jima.core.commons.characteristic.Characteristic;
 import ir.msob.jima.core.commons.relatedobject.relateddomain.RelatedDomainAbstract;
 import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyAbstract;
-import ir.msob.jima.core.commons.shared.audit.auditdomain.AuditDomainAbstract;
+import ir.msob.jima.core.commons.shared.audit.auditdomain.AuditDomain;
 import ir.msob.jima.core.commons.shared.keyvalue.KeyValue;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import org.assertj.core.api.Assertions;
@@ -13,7 +13,7 @@ import java.io.Serializable;
 /**
  * The `CoreTestAssert` class provides a set of static methods for performing assertions in unit tests.
  * Each method is designed to assert specific properties or attributes of various model objects such as TimePeriod,
- * Characteristic, KeyValue, RelatedDomainAbstract, RelatedPartyAbstract, and AuditDomainAbstract.
+ * Characteristic, KeyValue, RelatedDomainAbstract, RelatedPartyAbstract, and AuditDomain.
  */
 public class CoreTestAssertion {
     private CoreTestAssertion() {
@@ -111,12 +111,12 @@ public class CoreTestAssertion {
     }
 
     /**
-     * Asserts the equality of mandatory AuditDomainAbstract objects.
+     * Asserts the equality of mandatory AuditDomain objects.
      *
-     * @param before The AuditDomainAbstract before an operation.
-     * @param after  The AuditDomainAbstract after an operation.
+     * @param before The AuditDomain before an operation.
+     * @param after  The AuditDomain after an operation.
      */
-    public static void assertMandatoryAuditDomain(AuditDomainAbstract before, AuditDomainAbstract after) {
+    public static void assertMandatoryAuditDomain(AuditDomain before, AuditDomain after) {
         Assertions.assertThat(before.getRelatedParty()).isEqualTo(after.getRelatedParty());
         Assertions.assertThat(before.getActionDate()).isEqualTo(after.getActionDate());
         Assertions.assertThat(before.getActionType()).isEqualTo(after.getActionType());
