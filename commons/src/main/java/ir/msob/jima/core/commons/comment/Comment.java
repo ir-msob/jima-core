@@ -24,7 +24,7 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Comment<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract> extends BaseIdModelAbstract<ID> implements Comparable<Comment<ID, RP>> {
+public class Comment<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> extends BaseIdModelAbstract<ID> implements Comparable<Comment<ID, RP>> {
 
     /**
      * A non-blank string representing the content of the comment.

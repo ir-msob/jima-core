@@ -1,11 +1,11 @@
 package ir.msob.jima.core.commons.comment;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.criteria.filter.BaseFilters;
+import ir.msob.jima.core.commons.criteria.filter.Filter;
 import ir.msob.jima.core.commons.relatedobject.RelatedObjectCriteriaAbstract;
 import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyCriteriaAbstract;
 import ir.msob.jima.core.commons.shared.audit.auditinfo.AuditInfoFilters;
-import ir.msob.jima.core.commons.criteria.filter.BaseFilters;
-import ir.msob.jima.core.commons.criteria.filter.Filter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

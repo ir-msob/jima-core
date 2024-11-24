@@ -11,7 +11,6 @@ import lombok.experimental.SuperBuilder;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
-import java.lang.String;
 
 /**
  * The 'BaseCriteriaAbstract' class is an abstract class that provides a basic implementation for domain filters.

@@ -20,9 +20,9 @@ import java.util.TreeSet;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseAuditDomainAbstract<ID extends Comparable<ID> & Serializable,RP extends RelatedPartyAbstract<ID>> implements BaseAuditDomain<ID,RP> {
+public abstract class BaseAuditDomainAbstract<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> implements BaseAuditDomain<ID, RP> {
     /**
      * A sorted set of audit domains.
      */
-    private SortedSet<AuditDomainAbstract<ID,RP>> auditDomains = new TreeSet<>();
+    private SortedSet<AuditDomainAbstract<ID, RP>> auditDomains = new TreeSet<>();
 }

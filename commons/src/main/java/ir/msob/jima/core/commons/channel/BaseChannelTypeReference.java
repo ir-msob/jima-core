@@ -3,10 +3,10 @@ package ir.msob.jima.core.commons.channel;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.commons.channel.message.*;
+import ir.msob.jima.core.commons.criteria.BaseCriteria;
 import ir.msob.jima.core.commons.dto.BaseDto;
 import ir.msob.jima.core.commons.dto.ModelType;
 import ir.msob.jima.core.commons.security.BaseUser;
-import ir.msob.jima.core.commons.criteria.BaseCriteria;
 import lombok.SneakyThrows;
 
 import java.io.Serializable;

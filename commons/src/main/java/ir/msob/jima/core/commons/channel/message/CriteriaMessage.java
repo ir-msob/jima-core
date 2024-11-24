@@ -1,8 +1,8 @@
 package ir.msob.jima.core.commons.channel.message;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.dto.ModelType;
 import ir.msob.jima.core.commons.criteria.BaseCriteria;
+import ir.msob.jima.core.commons.dto.ModelType;
 import lombok.*;
 
 import java.io.Serializable;

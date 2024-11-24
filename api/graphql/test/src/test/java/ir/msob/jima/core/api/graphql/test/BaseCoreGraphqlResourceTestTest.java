@@ -1,11 +1,11 @@
 package ir.msob.jima.core.api.graphql.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.msob.jima.core.commons.criteria.SampleCriteria;
 import ir.msob.jima.core.commons.domain.SampleDomain;
 import ir.msob.jima.core.commons.dto.SampleDto;
 import ir.msob.jima.core.commons.resource.BaseResource;
 import ir.msob.jima.core.commons.security.BaseUser;
-import ir.msob.jima.core.commons.criteria.SampleCriteria;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

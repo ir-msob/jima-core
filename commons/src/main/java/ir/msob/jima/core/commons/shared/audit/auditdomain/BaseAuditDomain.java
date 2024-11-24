@@ -12,21 +12,21 @@ import java.util.SortedSet;
  * The 'getLatestAuditDomain' method uses the Java 8 Stream API to find the audit domain with the maximum version.
  * The interface is parameterized with a type 'ID' that extends 'Comparable' and 'Serializable'.
  */
-public interface BaseAuditDomain<ID extends Comparable<ID> & Serializable,RP extends RelatedPartyAbstract<ID>> {
+public interface BaseAuditDomain<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> {
 
     /**
      * Get a sorted set of audit domains.
      *
      * @return A sorted set of audit domains.
      */
-    SortedSet<AuditDomainAbstract<ID,RP>> getAuditDomains();
+    SortedSet<AuditDomainAbstract<ID, RP>> getAuditDomains();
 
     /**
      * Set a sorted set of audit domains.
      *
      * @param auditDomains A sorted set of audit domains.
      */
-    void setAuditDomains(SortedSet<AuditDomainAbstract<ID,RP>> auditDomains);
+    void setAuditDomains(SortedSet<AuditDomainAbstract<ID, RP>> auditDomains);
 
     /**
      * Get the latest audit domain.
@@ -34,7 +34,7 @@ public interface BaseAuditDomain<ID extends Comparable<ID> & Serializable,RP ext
      *
      * @return The latest audit domain, or null if there are no audit domains.
      */
-    default AuditDomainAbstract<ID,RP> getLatestAuditDomain() {
+    default AuditDomainAbstract<ID, RP> getLatestAuditDomain() {
         return getAuditDomains()
                 .stream()
                 .max(Comparator.comparing(AuditDomainAbstract::getVersion))

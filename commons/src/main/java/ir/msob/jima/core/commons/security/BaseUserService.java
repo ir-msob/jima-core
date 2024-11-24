@@ -100,5 +100,5 @@ public interface BaseUserService {
      * @param user The user for whom the related party is to be retrieved.
      * @return the related party
      */
-     <ID extends Comparable<ID> & Serializable, USER extends BaseUser, RP extends RelatedPartyAbstract<ID>> RP getRelatedParty(USER user);
+    <ID extends Comparable<ID> & Serializable, USER extends BaseUser, RP extends RelatedPartyAbstract<ID>> RP getRelatedParty(USER user);
 }
