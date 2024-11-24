@@ -2,10 +2,9 @@ package ir.msob.jima.core.commons.relatedobject;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.domain.BaseIdModelAbstract;
-import ir.msob.jima.core.commons.shared.auditinfo.AuditInfo;
+import ir.msob.jima.core.commons.shared.audit.auditinfo.AuditInfo;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +14,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * The {@code RelatedObject} class represents a related object with a type, an ID, a role,
+ * The {@code RelatedObjectAbstract} class represents a related object with a type, an ID, a role,
  * and a referring type. It implements the {@link Comparable} interface to provide natural
  * ordering of instances based on specific fields.
  *
@@ -30,14 +29,14 @@ import java.util.Objects;
  * - {@code auditInfo}: An {@link AuditInfo} object containing audit-related information for the related object.
  *
  * <p>Methods:</p>
- * - {@code compareTo(RelatedObject<ID> other)}: Compares this related object with another for order
+ * - {@code compareTo(RelatedObjectAbstract<ID> other)}: Compares this related object with another for order
  * based on relatedId, name, role, and referringType.
  * - {@code equals(Object obj)}: Indicates whether some other object is "equal to" this one based on
  * relatedId, name, role, and referringType.
  * - {@code hashCode()}: Returns a hash code value for the object based on its fields.
  *
  * <p>Enum:</p>
- * - {@link FN}: Represents the field names of the {@code RelatedObject} class, including name,
+ * - {@link FN}: Represents the field names of the {@code RelatedObjectAbstract} class, including name,
  * relatedId, role, referringType, status, enabled, validFor, and auditInfo.
  *
  * @param <ID> the type of the related object ID, which must be comparable and serializable
@@ -47,7 +46,7 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RelatedObject<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<RelatedObject<ID>> {
+public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<RelatedObjectAbstract<ID>> {
 
     /**
      * The name of the related object.
@@ -98,7 +97,7 @@ public class RelatedObject<ID extends Comparable<ID> & Serializable> extends Bas
      * @return a negative integer, zero, or a positive integer as this related object is less than, equal to, or greater than the specified related object
      */
     @Override
-    public int compareTo(RelatedObject<ID> other) {
+    public int compareTo(RelatedObjectAbstract<ID> other) {
         if (this == other) {
             return 0;
         }
@@ -132,7 +131,7 @@ public class RelatedObject<ID extends Comparable<ID> & Serializable> extends Bas
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        RelatedObject<?> that = (RelatedObject<?>) obj;
+        RelatedObjectAbstract<?> that = (RelatedObjectAbstract<?>) obj;
         return Objects.equals(relatedId, that.relatedId) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(role, that.role) &&
@@ -150,7 +149,7 @@ public class RelatedObject<ID extends Comparable<ID> & Serializable> extends Bas
     }
 
     /**
-     * Enum representing the field names of the RelatedObject class.
+     * Enum representing the field names of the RelatedObjectAbstract class.
      */
     public enum FN {
         name, relatedId, role, referringType, status, enabled, validFor, auditInfo

@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.relatedobject.relatedprocess;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.relatedobject.RelatedObjectFilters;
+import ir.msob.jima.core.commons.relatedobject.RelatedObjectCriteriaAbstract;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,5 +16,5 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RelatedProcessFilters extends RelatedObjectFilters<String> {
+public abstract class RelatedProcessCriteriaAbstract extends RelatedObjectCriteriaAbstract<String> {
 }

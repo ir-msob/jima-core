@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.shared.auditinfo;
+package ir.msob.jima.core.commons.shared.audit.auditinfo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.shared.criteria.filter.BaseFilters;

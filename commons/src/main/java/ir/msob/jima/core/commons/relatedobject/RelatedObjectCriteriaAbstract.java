@@ -1,7 +1,8 @@
 package ir.msob.jima.core.commons.relatedobject;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.shared.auditinfo.AuditInfoFilters;
+import ir.msob.jima.core.commons.shared.audit.auditinfo.AuditInfoFilters;
+import ir.msob.jima.core.commons.shared.criteria.BaseCriteriaAbstract;
 import ir.msob.jima.core.commons.shared.criteria.filter.BaseFilters;
 import ir.msob.jima.core.commons.shared.criteria.filter.Filter;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriodFilters;
@@ -24,7 +25,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RelatedObjectFilters<ID extends Comparable<ID> & Serializable> implements BaseFilters {
+public abstract class RelatedObjectCriteriaAbstract<ID extends Comparable<ID> & Serializable> extends BaseCriteriaAbstract<ID> implements BaseFilters {
 
     /**
      * Filter for the name of the related object.

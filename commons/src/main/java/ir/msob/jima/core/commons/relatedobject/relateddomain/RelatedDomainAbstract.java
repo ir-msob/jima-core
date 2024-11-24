@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.relatedobject.relateddomain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.relatedobject.RelatedObject;
+import ir.msob.jima.core.commons.relatedobject.RelatedObjectAbstract;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,5 +20,5 @@ import java.io.Serializable;
 @ToString
 @SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RelatedDomain<ID extends Comparable<ID> & Serializable> extends RelatedObject<ID> {
+public abstract class RelatedDomainAbstract<ID extends Comparable<ID> & Serializable> extends RelatedObjectAbstract<ID> {
 }

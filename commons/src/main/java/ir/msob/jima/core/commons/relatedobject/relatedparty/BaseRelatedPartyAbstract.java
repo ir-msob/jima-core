@@ -14,13 +14,13 @@ import java.util.TreeSet;
  * It provides methods to get and set the related parties.
  * It implements the BaseRelatedParty interface.
  *
- * @param <RP> the type of the related party, which must extend RelatedParty.
+ * @param <RP> the type of the related party, which must extend RelatedPartyAbstract.
  */
 @Getter
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseRelatedPartyAbstract<RP extends RelatedParty> implements BaseRelatedParty<RP> {
+public abstract class BaseRelatedPartyAbstract<RP extends RelatedPartyAbstract> implements BaseRelatedParty<RP> {
 
     /**
      * A sorted set of related parties.

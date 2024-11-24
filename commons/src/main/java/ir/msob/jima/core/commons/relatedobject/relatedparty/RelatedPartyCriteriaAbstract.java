@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.relatedobject.relatedparty;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.relatedobject.RelatedObjectFilters;
+import ir.msob.jima.core.commons.relatedobject.RelatedObjectCriteriaAbstract;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +16,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RelatedPartyFilters extends RelatedObjectFilters<String> {
+public abstract class RelatedPartyCriteriaAbstract extends RelatedObjectCriteriaAbstract<String> {
 
 }

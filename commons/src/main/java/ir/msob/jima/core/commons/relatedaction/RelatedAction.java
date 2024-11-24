@@ -2,7 +2,7 @@ package ir.msob.jima.core.commons.relatedaction;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.domain.BaseIdModelAbstract;
-import ir.msob.jima.core.commons.shared.auditinfo.AuditInfo;
+import ir.msob.jima.core.commons.shared.audit.auditinfo.AuditInfo;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

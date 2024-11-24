@@ -1,11 +1,11 @@
 package ir.msob.jima.core.test;
 
 import com.google.common.collect.Sets;
-import ir.msob.jima.core.commons.audit.AuditDomainActionType;
 import ir.msob.jima.core.commons.characteristic.Characteristic;
-import ir.msob.jima.core.commons.relatedobject.relateddomain.RelatedDomain;
-import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedParty;
+import ir.msob.jima.core.commons.relatedobject.relateddomain.RelatedDomainAbstract;
+import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyAbstract;
 import ir.msob.jima.core.commons.shared.DataType;
+import ir.msob.jima.core.commons.shared.audit.auditdomain.AuditDomainActionType;
 import ir.msob.jima.core.commons.shared.keyvalue.KeyValue;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 
@@ -95,11 +95,11 @@ public class CoreTestData {
     // ID and Party ID constants
     public static Object DEFAULT_ID;
     public static Object UPDATED_ID;
-    // RelatedDomain and RelatedParty constants
-    public static RelatedDomain<?> DEFAULT_RELATED_DOMAIN;
-    public static RelatedDomain<?> DEFAULT_REQUIRED_RELATED_DOMAIN;
-    public static RelatedParty DEFAULT_RELATED_PARTY;
-    public static RelatedParty DEFAULT_REQUIRED_RELATED_PARTY;
+    // RelatedDomainAbstract and RelatedPartyAbstract constants
+    public static RelatedDomainAbstract<?> DEFAULT_RELATED_DOMAIN;
+    public static RelatedDomainAbstract<?> DEFAULT_REQUIRED_RELATED_DOMAIN;
+    public static RelatedPartyAbstract DEFAULT_RELATED_PARTY;
+    public static RelatedPartyAbstract DEFAULT_REQUIRED_RELATED_PARTY;
 
     private CoreTestData() {
         // Private constructor to prevent instantiation
@@ -110,7 +110,7 @@ public class CoreTestData {
      *
      * @return a sorted set of default required related parties
      */
-    public static SortedSet<RelatedParty> DEFAULT_REQUIRED_RELATED_PARTIES() {
+    public static SortedSet<RelatedPartyAbstract> DEFAULT_REQUIRED_RELATED_PARTIES() {
         return Sets.newTreeSet(Collections.singleton(DEFAULT_REQUIRED_RELATED_PARTY));
     }
 
@@ -119,7 +119,7 @@ public class CoreTestData {
      *
      * @param relatedParties the sorted set of related parties to update
      */
-    public static void UPDATED_REQUIRED_RELATED_PARTIES(SortedSet<RelatedParty> relatedParties) {
+    public static void UPDATED_REQUIRED_RELATED_PARTIES(SortedSet<RelatedPartyAbstract> relatedParties) {
         relatedParties.forEach(CoreTestData::UPDATED_REQUIRED_RELATED_PARTY);
     }
 
@@ -128,7 +128,7 @@ public class CoreTestData {
      *
      * @return a sorted set of default related parties
      */
-    public static SortedSet<RelatedParty> DEFAULT_RELATED_PARTIES() {
+    public static SortedSet<RelatedPartyAbstract> DEFAULT_RELATED_PARTIES() {
         return Sets.newTreeSet(Collections.singleton(DEFAULT_RELATED_PARTY));
     }
 
@@ -137,7 +137,7 @@ public class CoreTestData {
      *
      * @param relatedParties the sorted set of related parties to update
      */
-    public static void UPDATED_RELATED_PARTIES(SortedSet<RelatedParty> relatedParties) {
+    public static void UPDATED_RELATED_PARTIES(SortedSet<RelatedPartyAbstract> relatedParties) {
         relatedParties.forEach(CoreTestData::UPDATED_RELATED_PARTY);
     }
 
@@ -148,8 +148,8 @@ public class CoreTestData {
      * @return a sorted set of default required related domains
      */
     @SuppressWarnings("unchecked")
-    public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedDomain<ID>> DEFAULT_REQUIRED_RELATED_DOMAINS() {
-        return Sets.newTreeSet(Collections.singleton((RelatedDomain<ID>) DEFAULT_REQUIRED_RELATED_DOMAIN));
+    public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedDomainAbstract<ID>> DEFAULT_REQUIRED_RELATED_DOMAINS() {
+        return Sets.newTreeSet(Collections.singleton((RelatedDomainAbstract<ID>) DEFAULT_REQUIRED_RELATED_DOMAIN));
     }
 
     /**
@@ -158,7 +158,7 @@ public class CoreTestData {
      * @param relatedDomains the sorted set of related domains to update
      * @param <ID>           the type of the domain identifier
      */
-    public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_DOMAINS(SortedSet<RelatedDomain<ID>> relatedDomains) {
+    public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_DOMAINS(SortedSet<RelatedDomainAbstract<ID>> relatedDomains) {
         relatedDomains.forEach(CoreTestData::UPDATED_REQUIRED_RELATED_DOMAIN);
     }
 
@@ -169,8 +169,8 @@ public class CoreTestData {
      * @return a sorted set of default related domains
      */
     @SuppressWarnings("unchecked")
-    public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedDomain<ID>> DEFAULT_RELATED_DOMAINS() {
-        return Sets.newTreeSet(Collections.singleton((RelatedDomain<ID>) DEFAULT_RELATED_DOMAIN));
+    public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedDomainAbstract<ID>> DEFAULT_RELATED_DOMAINS() {
+        return Sets.newTreeSet(Collections.singleton((RelatedDomainAbstract<ID>) DEFAULT_RELATED_DOMAIN));
     }
 
     /**
@@ -179,7 +179,7 @@ public class CoreTestData {
      * @param relatedDomains the sorted set of related domains to update
      * @param <ID>           the type of the domain identifier
      */
-    public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_DOMAINS(SortedSet<RelatedDomain<ID>> relatedDomains) {
+    public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_DOMAINS(SortedSet<RelatedDomainAbstract<ID>> relatedDomains) {
         relatedDomains.forEach(CoreTestData::UPDATED_RELATED_DOMAIN);
     }
 
@@ -193,11 +193,6 @@ public class CoreTestData {
     public static <ID extends Comparable<ID> & Serializable> void init(ID defaultId, ID updatedId) {
         DEFAULT_ID = defaultId;
         UPDATED_ID = updatedId;
-
-        initDefaultRelatedDomain();
-        initDefaultRequiredRelatedDomain();
-        initDefaultRelatedParty();
-        initDefaultRequiredRelatedParty();
     }
 
     /**
@@ -236,24 +231,13 @@ public class CoreTestData {
         return timePeriod;
     }
 
-    /**
-     * Initializes the default related party.
-     */
-    public static void initDefaultRelatedParty() {
-        RelatedParty relatedParty = RelatedParty.builder().build();
-        relatedParty.setName(DEFAULT_STRING);
-        relatedParty.setRelatedId(DEFAULT_PARTY_ID);
-        relatedParty.setRole(DEFAULT_STRING);
-        relatedParty.setReferringType(DEFAULT_STRING);
-        DEFAULT_RELATED_PARTY = relatedParty;
-    }
 
     /**
      * Updates the provided related party with updated values.
      *
      * @param relatedParty the related party to update
      */
-    public static void UPDATED_RELATED_PARTY(RelatedParty relatedParty) {
+    public static void UPDATED_RELATED_PARTY(RelatedPartyAbstract relatedParty) {
         relatedParty.setName(UPDATED_STRING);
         relatedParty.setRelatedId(UPDATED_PARTY_ID);
         relatedParty.setRole(UPDATED_STRING);
@@ -261,38 +245,13 @@ public class CoreTestData {
     }
 
     /**
-     * Initializes the default required related party.
-     */
-    public static void initDefaultRequiredRelatedParty() {
-        RelatedParty relatedParty = RelatedParty.builder().build();
-        relatedParty.setName(DEFAULT_STRING);
-        relatedParty.setRelatedId(DEFAULT_PARTY_ID);
-        DEFAULT_REQUIRED_RELATED_PARTY = relatedParty;
-    }
-
-    /**
      * Updates the provided required related party with updated values.
      *
      * @param relatedParty the required related party to update
      */
-    public static void UPDATED_REQUIRED_RELATED_PARTY(RelatedParty relatedParty) {
+    public static void UPDATED_REQUIRED_RELATED_PARTY(RelatedPartyAbstract relatedParty) {
         relatedParty.setName(UPDATED_STRING);
         relatedParty.setRelatedId(UPDATED_PARTY_ID);
-    }
-
-    /**
-     * Initializes the default related domain.
-     *
-     * @param <ID> the type of the domain identifier
-     */
-    @SuppressWarnings("unchecked")
-    public static <ID extends Comparable<ID> & Serializable> void initDefaultRelatedDomain() {
-        RelatedDomain<ID> relatedDomain = RelatedDomain.<ID>builder().build();
-        relatedDomain.setName(DEFAULT_STRING);
-        relatedDomain.setRelatedId(DEFAULT_STRING);
-        relatedDomain.setRole(DEFAULT_STRING);
-        relatedDomain.setReferringType(DEFAULT_STRING);
-        DEFAULT_RELATED_DOMAIN = relatedDomain;
     }
 
     /**
@@ -302,24 +261,11 @@ public class CoreTestData {
      * @param <ID>          the type of the domain identifier
      */
     @SuppressWarnings("unchecked")
-    public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_DOMAIN(RelatedDomain<ID> relatedDomain) {
+    public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_DOMAIN(RelatedDomainAbstract<ID> relatedDomain) {
         relatedDomain.setName(UPDATED_STRING);
         relatedDomain.setRelatedId(UPDATED_STRING);
         relatedDomain.setRole(UPDATED_STRING);
         relatedDomain.setReferringType(UPDATED_STRING);
-    }
-
-    /**
-     * Initializes the default required related domain.
-     *
-     * @param <ID> the type of the domain identifier
-     */
-    @SuppressWarnings("unchecked")
-    public static <ID extends Comparable<ID> & Serializable> void initDefaultRequiredRelatedDomain() {
-        RelatedDomain<ID> relatedDomain = RelatedDomain.<ID>builder().build();
-        relatedDomain.setName(DEFAULT_STRING);
-        relatedDomain.setRelatedId(DEFAULT_STRING);
-        DEFAULT_REQUIRED_RELATED_DOMAIN = relatedDomain;
     }
 
     /**
@@ -329,7 +275,7 @@ public class CoreTestData {
      * @param <ID>          the type of the domain identifier
      */
     @SuppressWarnings("unchecked")
-    public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_DOMAIN(RelatedDomain<ID> relatedDomain) {
+    public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_DOMAIN(RelatedDomainAbstract<ID> relatedDomain) {
         relatedDomain.setName(UPDATED_STRING);
         relatedDomain.setRelatedId(UPDATED_STRING);
     }

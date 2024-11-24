@@ -1,7 +1,7 @@
-package ir.msob.jima.core.commons.relatedobject.relatedparty;
+package ir.msob.jima.core.commons.relatedobject.relatedintegration;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.relatedobject.RelatedObject;
+import ir.msob.jima.core.commons.relatedobject.RelatedObjectAbstract;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 import java.io.Serializable;
 
 /**
- * This class represents a related party with a type, an ID, a role, and a referred type.
+ * This class represents a related integration with a type, an ID, a role, and a referred type.
  * It implements Comparable interface to provide a natural ordering of its instances.
  */
 @Getter
@@ -18,5 +18,5 @@ import java.io.Serializable;
 @ToString
 @SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RelatedParty<ID extends Comparable<ID> & Serializable> extends RelatedObject<ID> {
+public abstract class RelatedIntegrationAbstract<ID extends Comparable<ID> & Serializable> extends RelatedObjectAbstract<ID> {
 }

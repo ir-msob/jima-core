@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons.security;
 
-import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedParty;
+import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyAbstract;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -100,12 +100,5 @@ public interface BaseUserService {
      * @param user The user for whom the related party is to be retrieved.
      * @return the related party
      */
-    default <ID extends Comparable<ID> & Serializable, USER extends BaseUser, RP extends RelatedParty<ID>> RP getRelatedParty(USER user) {
-        @SuppressWarnings("unchecked")
-        RP relatedParty = (RP) RelatedParty.<ID>builder()
-                .relatedId(user.getId())
-                .name(user.getName())
-                .build();
-        return relatedParty;
-    }
+     <ID extends Comparable<ID> & Serializable, USER extends BaseUser, RP extends RelatedPartyAbstract<ID>> RP getRelatedParty(USER user);
 }

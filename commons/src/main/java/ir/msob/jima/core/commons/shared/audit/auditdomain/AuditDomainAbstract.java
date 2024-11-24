@@ -1,20 +1,21 @@
-package ir.msob.jima.core.commons.audit;
+package ir.msob.jima.core.commons.shared.audit.auditdomain;
 
-import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedParty;
+import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyAbstract;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
 /**
- * The {@code AuditDomain} class represents a domain object for auditing purposes.
+ * The {@code AuditDomainAbstract} class represents a domain object for auditing purposes.
  * It includes fields for the related party ID, action date, action type, and version.
  * This class provides several constructors for creating an instance of the model with different sets of parameters.
  * Additionally, it overrides the {@code compareTo}, {@code equals}, and {@code hashCode} methods from the {@code Object} class to provide custom comparison and hashing behavior.
- * The {@code FN} enum is used to represent the field names of the {@code AuditDomain} class.
+ * The {@code FN} enum is used to represent the field names of the {@code AuditDomainAbstract} class.
  * This class also implements the {@code Serializable} interface to allow instances to be serialized.
  */
 @Getter
@@ -22,8 +23,8 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class AuditDomain<RP extends RelatedParty> implements Comparable<AuditDomain<RP>>, Serializable {
+@SuperBuilder
+public abstract class AuditDomainAbstract<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> implements Comparable<AuditDomainAbstract<ID, RP>>, Serializable {
     /**
      * The related party.
      */
@@ -52,7 +53,7 @@ public class AuditDomain<RP extends RelatedParty> implements Comparable<AuditDom
      * @return A negative integer, zero, or a positive integer as this audit domain is less than, equal to, or greater than the specified audit domain.
      */
     @Override
-    public int compareTo(AuditDomain<RP> o) {
+    public int compareTo(AuditDomainAbstract<ID, RP> o) {
         if (this == o) {
             return 0;
         }
@@ -66,7 +67,7 @@ public class AuditDomain<RP extends RelatedParty> implements Comparable<AuditDom
             return compare;
         }
 
-        compare = Objects.compare(this.getRelatedParty(), o.getRelatedParty(), RelatedParty::compareTo);
+        compare = Objects.compare(this.getRelatedParty(), o.getRelatedParty(), RelatedPartyAbstract::compareTo);
         if (compare != 0) {
             return compare;
         }
@@ -88,7 +89,7 @@ public class AuditDomain<RP extends RelatedParty> implements Comparable<AuditDom
         if (o == null)
             return false;
 
-        if (o instanceof AuditDomain<?> that) {
+        if (o instanceof AuditDomainAbstract<?, ?> that) {
             return Objects.equals(this.getRelatedParty(), that.getRelatedParty())
                     && Objects.equals(this.getActionDate(), that.getActionDate())
                     && Objects.equals(this.getActionType(), that.getActionType())
@@ -108,7 +109,7 @@ public class AuditDomain<RP extends RelatedParty> implements Comparable<AuditDom
     }
 
     /**
-     * The 'FN' enum represents the field names of the 'AuditDomain' class.
+     * The 'FN' enum represents the field names of the 'AuditDomainAbstract' class.
      */
     public enum FN {
         relatedParty, actionDate, actionType, version

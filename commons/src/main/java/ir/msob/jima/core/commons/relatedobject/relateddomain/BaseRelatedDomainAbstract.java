@@ -20,13 +20,13 @@ import java.util.TreeSet;
  * The 'relatedDomains' field is annotated with '@Valid' to enable objectvalidation of the related domains.
  *
  * @param <ID> the type of the identifier of the related domain. It must be comparable and serializable.
- * @param <RD> the type of the related domain, which must extend RelatedDomain<ID>.
+ * @param <RD> the type of the related domain, which must extend RelatedDomainAbstract<ID>.
  */
 @Getter
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseRelatedDomainAbstract<ID extends Comparable<ID> & Serializable, RD extends RelatedDomain<ID>> implements BaseRelatedDomain<ID, RD> {
+public abstract class BaseRelatedDomainAbstract<ID extends Comparable<ID> & Serializable, RD extends RelatedDomainAbstract<ID>> implements BaseRelatedDomain<ID, RD> {
     /**
      * A sorted set of related domains.
      * The set is initialized to an empty 'TreeSet'.

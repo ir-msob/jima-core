@@ -1,6 +1,7 @@
 package ir.msob.jima.core.commons.objectvalidation;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.shared.criteria.BaseCriteriaAbstract;
 import ir.msob.jima.core.commons.shared.criteria.filter.BaseFilters;
 import ir.msob.jima.core.commons.shared.criteria.filter.Filter;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriodFilters;
@@ -9,8 +10,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
- * The {@code ObjectValidationFilters} class represents a set of filters for object validations.
+ * The {@code ObjectValidationCriteria} class represents a set of filters for object validations.
  * It implements the {@link BaseFilters} interface.
  * <p>
  * Fields:
@@ -34,7 +37,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ObjectValidationFilters implements BaseFilters {
+public class ObjectValidationCriteria<ID extends Comparable<ID> & Serializable> extends BaseCriteriaAbstract<ID> implements BaseFilters {
     private Filter<String> name;
     private Filter<String> status;
     private Filter<Boolean> enabled;

@@ -6,9 +6,9 @@ import java.util.SortedSet;
  * The 'BaseRelatedParty' interface represents a related party with a set of related parties.
  * It provides methods to get and set the related parties.
  *
- * @param <RP> the type of the related party, which must extend RelatedParty.
+ * @param <RP> the type of the related party, which must extend RelatedPartyAbstract.
  */
-public interface BaseRelatedParty<RP extends RelatedParty> {
+public interface BaseRelatedParty<RP extends RelatedPartyAbstract> {
 
     /**
      * Returns a sorted set of related parties.

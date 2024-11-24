@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.audit;
+package ir.msob.jima.core.commons.shared.audit.auditdomain;
 
 /**
  * The 'AuditDomainActionType' enum represents the type of action performed on an audit domain.

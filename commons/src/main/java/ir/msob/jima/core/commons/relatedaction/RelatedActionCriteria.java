@@ -1,7 +1,8 @@
 package ir.msob.jima.core.commons.relatedaction;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.shared.auditinfo.AuditInfoFilters;
+import ir.msob.jima.core.commons.shared.audit.auditinfo.AuditInfoFilters;
+import ir.msob.jima.core.commons.shared.criteria.BaseCriteriaAbstract;
 import ir.msob.jima.core.commons.shared.criteria.filter.BaseFilters;
 import ir.msob.jima.core.commons.shared.criteria.filter.Filter;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriodFilters;
@@ -10,8 +11,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
- * The {@code RelatedActionFilters} class represents a set of filters for querying related actions.
+ * The {@code RelatedActionCriteria} class represents a set of filters for querying related actions.
  * It implements the {@link BaseFilters} interface, allowing for flexible filtering of related actions
  * based on various criteria.
  *
@@ -44,7 +47,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RelatedActionFilters implements BaseFilters {
+public class RelatedActionCriteria<ID extends Comparable<ID> & Serializable> extends BaseCriteriaAbstract<ID> implements BaseFilters {
     private Filter<String> name;
     private Filter<String> status;
     private Filter<Boolean> mandatory;

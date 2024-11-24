@@ -1,6 +1,7 @@
 package ir.msob.jima.core.commons.characteristic;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.shared.criteria.BaseCriteriaAbstract;
 import ir.msob.jima.core.commons.shared.criteria.filter.BaseFilters;
 import ir.msob.jima.core.commons.shared.criteria.filter.Filter;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- * The 'RelatedActionFilters' class represents a set of filters for characteristics.
+ * The 'RelatedActionCriteria' class represents a set of filters for characteristics.
  * It implements the 'BaseFilters' interface.
  * The class includes fields for key, value, dataType, and isArray filters, and getter and setter methods for these fields.
  * Each filter is represented as a 'Filter' object.
@@ -26,7 +27,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CharacteristicFilters implements BaseFilters {
+public class CharacteristicCriteria<ID extends Comparable<ID> & Serializable> extends BaseCriteriaAbstract<ID> implements BaseFilters {
     /**
      * The key filter of the characteristic filters.
      */

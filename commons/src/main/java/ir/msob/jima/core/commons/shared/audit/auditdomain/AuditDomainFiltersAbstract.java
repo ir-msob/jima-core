@@ -1,7 +1,7 @@
-package ir.msob.jima.core.commons.audit;
+package ir.msob.jima.core.commons.shared.audit.auditdomain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyFilters;
+import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyCriteriaAbstract;
 import ir.msob.jima.core.commons.shared.criteria.filter.BaseFilters;
 import ir.msob.jima.core.commons.shared.criteria.filter.Filter;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import lombok.ToString;
 import java.time.Instant;
 
 /**
- * The {@code AuditDomainFilters} class represents a set of filters for querying audit domains.
+ * The {@code AuditDomainFiltersAbstract} class represents a set of filters for querying audit domains.
  * It includes filters for the related party ID, action date, and action type.
  * This class implements the {@code BaseFilters} interface and includes getter and setter methods for each filter.
  * Additionally, it provides a no-argument constructor and a {@code toString} method that calls the superclass's {@code toString} method.
@@ -23,7 +23,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AuditDomainFilters<RPF extends RelatedPartyFilters> implements BaseFilters {
+public abstract class AuditDomainFiltersAbstract<RPF extends RelatedPartyCriteriaAbstract> implements BaseFilters {
     /**
      * Filter for the related party.
      */

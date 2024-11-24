@@ -10,9 +10,9 @@ import java.util.SortedSet;
  * The interface also includes a 'setRelatedDomains' method that sets the sorted set of related domains.
  *
  * @param <ID> the type of the identifier of the related domain. It must be comparable and serializable.
- * @param <RD> the type of the related domain, which must extend RelatedDomain<ID>.
+ * @param <RD> the type of the related domain, which must extend RelatedDomainAbstract<ID>.
  */
-public interface BaseRelatedDomain<ID extends Comparable<ID> & Serializable, RD extends RelatedDomain<ID>> {
+public interface BaseRelatedDomain<ID extends Comparable<ID> & Serializable, RD extends RelatedDomainAbstract<ID>> {
 
     /**
      * Gets the sorted set of related domains.

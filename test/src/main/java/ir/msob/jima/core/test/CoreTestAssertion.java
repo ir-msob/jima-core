@@ -1,9 +1,9 @@
 package ir.msob.jima.core.test;
 
-import ir.msob.jima.core.commons.audit.AuditDomain;
 import ir.msob.jima.core.commons.characteristic.Characteristic;
-import ir.msob.jima.core.commons.relatedobject.relateddomain.RelatedDomain;
-import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedParty;
+import ir.msob.jima.core.commons.relatedobject.relateddomain.RelatedDomainAbstract;
+import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyAbstract;
+import ir.msob.jima.core.commons.shared.audit.auditdomain.AuditDomainAbstract;
 import ir.msob.jima.core.commons.shared.keyvalue.KeyValue;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import org.assertj.core.api.Assertions;
@@ -13,7 +13,7 @@ import java.io.Serializable;
 /**
  * The `CoreTestAssert` class provides a set of static methods for performing assertions in unit tests.
  * Each method is designed to assert specific properties or attributes of various model objects such as TimePeriod,
- * Characteristic, KeyValue, RelatedDomain, RelatedParty, and AuditDomain.
+ * Characteristic, KeyValue, RelatedDomainAbstract, RelatedPartyAbstract, and AuditDomainAbstract.
  */
 public class CoreTestAssertion {
     private CoreTestAssertion() {
@@ -65,58 +65,58 @@ public class CoreTestAssertion {
     }
 
     /**
-     * Asserts the equality of optional RelatedDomain objects.
+     * Asserts the equality of optional RelatedDomainAbstract objects.
      *
-     * @param before The RelatedDomain before an operation.
-     * @param after  The RelatedDomain after an operation.
+     * @param before The RelatedDomainAbstract before an operation.
+     * @param after  The RelatedDomainAbstract after an operation.
      * @param <ID>   The type of the identifier.
      */
-    public static <ID extends Comparable<ID> & Serializable> void assertOptionalRelatedDomain(RelatedDomain<ID> before, RelatedDomain<ID> after) {
+    public static <ID extends Comparable<ID> & Serializable> void assertOptionalRelatedDomain(RelatedDomainAbstract<ID> before, RelatedDomainAbstract<ID> after) {
         Assertions.assertThat(before.getRole()).isEqualTo(after.getRole());
         Assertions.assertThat(before.getReferringType()).isEqualTo(after.getReferringType());
     }
 
     /**
-     * Asserts the equality of mandatory RelatedDomain objects.
+     * Asserts the equality of mandatory RelatedDomainAbstract objects.
      *
-     * @param before The RelatedDomain before an operation.
-     * @param after  The RelatedDomain after an operation.
+     * @param before The RelatedDomainAbstract before an operation.
+     * @param after  The RelatedDomainAbstract after an operation.
      * @param <ID>   The type of the identifier.
      */
-    public static <ID extends Comparable<ID> & Serializable> void assertMandatoryRelatedDomain(RelatedDomain<ID> before, RelatedDomain<ID> after) {
+    public static <ID extends Comparable<ID> & Serializable> void assertMandatoryRelatedDomain(RelatedDomainAbstract<ID> before, RelatedDomainAbstract<ID> after) {
         Assertions.assertThat(before.getName()).isEqualTo(after.getName());
         Assertions.assertThat(before.getRelatedId()).isEqualTo(after.getRelatedId());
     }
 
     /**
-     * Asserts the equality of optional RelatedParty objects.
+     * Asserts the equality of optional RelatedPartyAbstract objects.
      *
-     * @param before The RelatedParty before an operation.
-     * @param after  The RelatedParty after an operation.
+     * @param before The RelatedPartyAbstract before an operation.
+     * @param after  The RelatedPartyAbstract after an operation.
      */
-    public static void assertOptionalRelatedParty(RelatedParty before, RelatedParty after) {
+    public static void assertOptionalRelatedParty(RelatedPartyAbstract before, RelatedPartyAbstract after) {
         Assertions.assertThat(before.getRole()).isEqualTo(after.getRole());
         Assertions.assertThat(before.getReferringType()).isEqualTo(after.getReferringType());
     }
 
     /**
-     * Asserts the equality of mandatory RelatedParty objects.
+     * Asserts the equality of mandatory RelatedPartyAbstract objects.
      *
-     * @param before The RelatedParty before an operation.
-     * @param after  The RelatedParty after an operation.
+     * @param before The RelatedPartyAbstract before an operation.
+     * @param after  The RelatedPartyAbstract after an operation.
      */
-    public static void assertMandatoryRelatedParty(RelatedParty before, RelatedParty after) {
+    public static void assertMandatoryRelatedParty(RelatedPartyAbstract before, RelatedPartyAbstract after) {
         Assertions.assertThat(before.getName()).isEqualTo(after.getName());
         Assertions.assertThat(before.getRelatedId()).isEqualTo(after.getRelatedId());
     }
 
     /**
-     * Asserts the equality of mandatory AuditDomain objects.
+     * Asserts the equality of mandatory AuditDomainAbstract objects.
      *
-     * @param before The AuditDomain before an operation.
-     * @param after  The AuditDomain after an operation.
+     * @param before The AuditDomainAbstract before an operation.
+     * @param after  The AuditDomainAbstract after an operation.
      */
-    public static void assertMandatoryAuditDomain(AuditDomain before, AuditDomain after) {
+    public static void assertMandatoryAuditDomain(AuditDomainAbstract before, AuditDomainAbstract after) {
         Assertions.assertThat(before.getRelatedParty()).isEqualTo(after.getRelatedParty());
         Assertions.assertThat(before.getActionDate()).isEqualTo(after.getActionDate());
         Assertions.assertThat(before.getActionType()).isEqualTo(after.getActionType());
