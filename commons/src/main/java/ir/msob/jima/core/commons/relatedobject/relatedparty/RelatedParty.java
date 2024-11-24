@@ -7,6 +7,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
+
 /**
  * This class represents a related party with a type, an ID, a role, and a referred type.
  * It implements Comparable interface to provide a natural ordering of its instances.
@@ -16,5 +18,5 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @SuperBuilder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RelatedParty extends RelatedObject<String> {
+public class RelatedParty<ID extends Comparable<ID> & Serializable> extends RelatedObject<ID> {
 }

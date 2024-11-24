@@ -1,10 +1,12 @@
 package ir.msob.jima.core.commons.security;
 
+import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedParty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.security.core.Authentication;
 
+import java.io.Serializable;
 import java.security.Principal;
 import java.util.Map;
 
@@ -91,4 +93,19 @@ public interface BaseUserService {
      * @return the system user
      */
     <USER extends BaseUser> USER getSystemUser();
+
+    /**
+     * Retrieves the related party for a user.
+     *
+     * @param user The user for whom the related party is to be retrieved.
+     * @return the related party
+     */
+    default <ID extends Comparable<ID> & Serializable, USER extends BaseUser, RP extends RelatedParty<ID>> RP getRelatedParty(USER user) {
+        @SuppressWarnings("unchecked")
+        RP relatedParty = (RP) RelatedParty.<ID>builder()
+                .relatedId(user.getId())
+                .name(user.getName())
+                .build();
+        return relatedParty;
+    }
 }

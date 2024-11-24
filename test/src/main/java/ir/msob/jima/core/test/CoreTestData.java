@@ -289,7 +289,7 @@ public class CoreTestData {
     public static <ID extends Comparable<ID> & Serializable> void initDefaultRelatedDomain() {
         RelatedDomain<ID> relatedDomain = RelatedDomain.<ID>builder().build();
         relatedDomain.setName(DEFAULT_STRING);
-        relatedDomain.setRelatedId((ID) DEFAULT_ID);
+        relatedDomain.setRelatedId(DEFAULT_STRING);
         relatedDomain.setRole(DEFAULT_STRING);
         relatedDomain.setReferringType(DEFAULT_STRING);
         DEFAULT_RELATED_DOMAIN = relatedDomain;
@@ -304,7 +304,7 @@ public class CoreTestData {
     @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_DOMAIN(RelatedDomain<ID> relatedDomain) {
         relatedDomain.setName(UPDATED_STRING);
-        relatedDomain.setRelatedId((ID) UPDATED_ID);
+        relatedDomain.setRelatedId(UPDATED_STRING);
         relatedDomain.setRole(UPDATED_STRING);
         relatedDomain.setReferringType(UPDATED_STRING);
     }
@@ -318,7 +318,7 @@ public class CoreTestData {
     public static <ID extends Comparable<ID> & Serializable> void initDefaultRequiredRelatedDomain() {
         RelatedDomain<ID> relatedDomain = RelatedDomain.<ID>builder().build();
         relatedDomain.setName(DEFAULT_STRING);
-        relatedDomain.setRelatedId((ID) DEFAULT_ID);
+        relatedDomain.setRelatedId(DEFAULT_STRING);
         DEFAULT_REQUIRED_RELATED_DOMAIN = relatedDomain;
     }
 
@@ -331,7 +331,7 @@ public class CoreTestData {
     @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_DOMAIN(RelatedDomain<ID> relatedDomain) {
         relatedDomain.setName(UPDATED_STRING);
-        relatedDomain.setRelatedId((ID) UPDATED_ID);
+        relatedDomain.setRelatedId(UPDATED_STRING);
     }
 
     /**

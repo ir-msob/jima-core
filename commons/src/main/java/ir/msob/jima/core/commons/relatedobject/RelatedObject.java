@@ -58,8 +58,8 @@ public class RelatedObject<ID extends Comparable<ID> & Serializable> extends Bas
     /**
      * The ID of the related object.
      */
-    @NotNull
-    private ID relatedId;
+    @NotBlank
+    private String relatedId;
 
     /**
      * The role of the related object.
