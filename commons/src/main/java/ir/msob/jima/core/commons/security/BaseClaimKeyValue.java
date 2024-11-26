@@ -5,7 +5,7 @@ package ir.msob.jima.core.commons.security;
  * It provides constants for unknown, web, mobile, and tablet audiences.
  * It has a private constructor to prevent instantiation.
  */
-public class ClaimKeyValue {
+public class BaseClaimKeyValue {
     /**
      * The value for an unknown audience.
      */
@@ -29,7 +29,7 @@ public class ClaimKeyValue {
     /**
      * Private constructor to prevent instantiation.
      */
-    private ClaimKeyValue() {
+    private BaseClaimKeyValue() {
     }
 
 }

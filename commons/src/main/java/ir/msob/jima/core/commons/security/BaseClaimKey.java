@@ -5,7 +5,7 @@ package ir.msob.jima.core.commons.security;
  * It provides constants for the ID, session ID, subject, roles, and audience keys.
  * It has a protected constructor to prevent instantiation.
  */
-public class ClaimKey {
+public class BaseClaimKey {
     /**
      * The key for the ID claim.
      */
@@ -34,6 +34,6 @@ public class ClaimKey {
     /**
      * Protected constructor to prevent instantiation.
      */
-    protected ClaimKey() {
+    protected BaseClaimKey() {
     }
 }

@@ -21,6 +21,7 @@
         <module>ral</module>
         <module>api</module>
         <module>web</module>
+        <module>starter</module>
         <module>reports</module>
     </modules>
     <scm>

@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.service;
+package ir.msob.jima.core.commons.id;
 
 import java.io.Serializable;
 

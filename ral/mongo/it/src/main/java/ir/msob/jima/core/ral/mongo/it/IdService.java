@@ -1,6 +1,6 @@
-package ir.msob.jima.core.ral.mongo.commons;
+package ir.msob.jima.core.ral.mongo.it;
 
-import ir.msob.jima.core.commons.service.BaseIdService;
+import ir.msob.jima.core.commons.id.BaseIdService;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 

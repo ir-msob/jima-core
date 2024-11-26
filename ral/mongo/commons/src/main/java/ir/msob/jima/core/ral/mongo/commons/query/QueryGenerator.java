@@ -3,10 +3,10 @@ package ir.msob.jima.core.ral.mongo.commons.query;
 import ir.msob.jima.core.commons.criteria.BaseCriteria;
 import ir.msob.jima.core.commons.criteria.filter.Filter;
 import ir.msob.jima.core.ral.mongo.commons.criteria.MongoCriteria;
-import org.bson.types.ObjectId;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.query.Criteria;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,9 +16,9 @@ import java.util.List;
 /**
  * A Query Generator for creating MongoDB queries based on filtering criteria.
  *
- * @param <C> The type of the criteria, extending BaseCriteria with ObjectId.
+ * @param <C> The type of the criteria, extending BaseCriteria with ID.
  */
-public class QueryGenerator<C extends BaseCriteria<ObjectId>> {
+public class QueryGenerator<ID extends Comparable<ID> & Serializable,C extends BaseCriteria<ID>> {
 
     /**
      * Prepares an OR operation in the query builder using the provided criteria.

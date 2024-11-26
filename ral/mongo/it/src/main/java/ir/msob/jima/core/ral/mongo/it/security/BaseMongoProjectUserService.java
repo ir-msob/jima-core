@@ -3,8 +3,8 @@ package ir.msob.jima.core.ral.mongo.it.security;
 import com.google.common.collect.Sets;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.security.BaseUserService;
-import ir.msob.jima.core.commons.security.ClaimKey;
-import ir.msob.jima.core.commons.security.ClaimKeyValue;
+import ir.msob.jima.core.commons.security.BaseClaimKey;
+import ir.msob.jima.core.commons.security.BaseClaimKeyValue;
 import org.bson.types.ObjectId;
 
 import java.util.Collection;
@@ -23,7 +23,7 @@ public interface BaseMongoProjectUserService extends BaseUserService {
             .sessionId(new ObjectId().toString())
             .username("system")
             .roles(Sets.newTreeSet(Collections.singleton(Roles.ADMIN)))
-            .audience(ClaimKeyValue.AUDIENCE_WEB)
+            .audience(BaseClaimKeyValue.AUDIENCE_WEB)
             .build();
 
 
@@ -31,11 +31,11 @@ public interface BaseMongoProjectUserService extends BaseUserService {
     @SuppressWarnings("unchecked")
     default <USER extends BaseUser> USER getUser(Map<String, Object> claims) {
         ProjectUser user = ProjectUser.builder()
-                .id(String.valueOf(claims.get(ClaimKey.ID)))
-                .sessionId(String.valueOf(claims.get(ClaimKey.SESSION_ID)))
-                .username(String.valueOf(claims.get(ClaimKey.SUBJECT)))
-                .audience(String.valueOf(claims.get(ClaimKey.AUDIENCE)))
-                .roles(new TreeSet<>((Collection<String>) claims.get(ClaimKey.ROLES)))
+                .id(String.valueOf(claims.get(BaseClaimKey.ID)))
+                .sessionId(String.valueOf(claims.get(BaseClaimKey.SESSION_ID)))
+                .username(String.valueOf(claims.get(BaseClaimKey.SUBJECT)))
+                .audience(String.valueOf(claims.get(BaseClaimKey.AUDIENCE)))
+                .roles(new TreeSet<>((Collection<String>) claims.get(BaseClaimKey.ROLES)))
                 .build();
         return (USER) user;
     }

@@ -6,7 +6,6 @@ import ir.msob.jima.core.commons.repository.BaseRepository;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.ral.mongo.commons.operator.QueryUtil;
 import ir.msob.jima.core.ral.mongo.commons.query.QueryBuilder;
-import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
@@ -14,6 +13,7 @@ import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -22,8 +22,8 @@ import java.util.ArrayList;
  * @param <USER> The type of the user.
  * @param <D>    The type of the domain.
  */
-public interface BaseMongoRepository<USER extends BaseUser, D extends BaseDomain<ObjectId>> extends
-        BaseRepository<ObjectId, USER, D> {
+public interface BaseMongoRepository<ID extends Comparable<ID> & Serializable,USER extends BaseUser, D extends BaseDomain<ID>> extends
+        BaseRepository<ID, USER, D> {
 
     /**
      * Get the ReactiveMongoTemplate for performing database operations.
@@ -50,7 +50,7 @@ public interface BaseMongoRepository<USER extends BaseUser, D extends BaseDomain
      * @return A Mono that emits the found entity or completes empty if none is found.
      */
     @MethodStats
-    default Mono<D> findById(ObjectId id) {
+    default Mono<D> findById(ID id) {
         return getReactiveMongoTemplate().findById(id, getDomainClass());
     }
 

@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons;
 
-import ir.msob.jima.core.commons.service.BaseIdService;
+import ir.msob.jima.core.commons.id.BaseIdService;
 
 import java.io.Serializable;
 
