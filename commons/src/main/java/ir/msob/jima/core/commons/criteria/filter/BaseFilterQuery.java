@@ -96,4 +96,9 @@ public class BaseFilterQuery<TYPE extends Comparable<TYPE> & Serializable> imple
         return this.getNin() == null || !this.getNin().contains(value);
     }
 
+    @SuppressWarnings("unchecked")
+    public boolean isMatchingSerializable(Serializable value) {
+        return isMatching((TYPE) value);
+    }
+
 }

@@ -1,9 +1,11 @@
 package ir.msob.jima.core.commons.related.relatedobject;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.criteria.BaseCriteria;
 import ir.msob.jima.core.commons.criteria.BaseCriteriaAbstract;
 import ir.msob.jima.core.commons.criteria.filter.BaseFilters;
 import ir.msob.jima.core.commons.criteria.filter.Filter;
+import ir.msob.jima.core.commons.domain.BaseIdModel;
 import ir.msob.jima.core.commons.shared.audit.auditinfo.AuditInfoFilters;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriodFilters;
 import lombok.Getter;
@@ -59,5 +61,33 @@ public abstract class RelatedObjectCriteriaAbstract<ID extends Comparable<ID> & 
     private TimePeriodFilters validFor;
 
     private AuditInfoFilters auditInfo;
+
+    public <C extends RelatedObjectCriteriaAbstract<ID, RID>, DTO extends RelatedObjectAbstract<ID, RID>> boolean isMatching(C criteria, DTO dto) {
+        if (!super.isMatching((BaseCriteria<ID>) criteria, (BaseIdModel<ID>) dto)) {
+            return false;
+        }
+        if (Filter.isMatching(criteria.getName(), dto.getName())) {
+            return false;
+        }
+        if (Filter.isMatching(criteria.getRelatedId(), dto.getRelatedId())) {
+            return false;
+        }
+        if (Filter.isMatching(criteria.getRole(), dto.getRole())) {
+            return false;
+        }
+        if (Filter.isMatching(criteria.getReferringType(), dto.getReferringType())) {
+            return false;
+        }
+        if (Filter.isMatching(criteria.getStatus(), dto.getStatus())) {
+            return false;
+        }
+        if (Filter.isMatching(criteria.getEnabled(), dto.getEnabled())) {
+            return false;
+        }
+        if (TimePeriodFilters.isMatching(criteria.getValidFor(), dto.getValidFor())) {
+            return false;
+        }
+        return !AuditInfoFilters.isMatching(criteria.getAuditInfo(), dto.getAuditInfo());
+    }
 
 }

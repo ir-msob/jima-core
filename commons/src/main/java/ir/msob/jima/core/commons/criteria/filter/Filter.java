@@ -169,4 +169,12 @@ public class Filter<TYPE extends Comparable<TYPE> & Serializable> extends BaseFi
     public static <TYPE extends Comparable<TYPE> & Serializable> Filter<TYPE> nin(Collection<TYPE> nin) {
         return Filter.<TYPE>builder().nin(new HashSet<>(nin)).build();
     }
+
+    public static <TYPE extends Comparable<TYPE> & Serializable> boolean isMatching(Filter<TYPE> filter, TYPE value) {
+        if (filter != null) {
+            return filter.isMatching(value);
+        }
+        return true;
+    }
+
 }

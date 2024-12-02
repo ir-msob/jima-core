@@ -1,6 +1,7 @@
 package ir.msob.jima.core.commons.criteria;
 
 import ir.msob.jima.core.commons.criteria.filter.Filter;
+import ir.msob.jima.core.commons.domain.BaseIdModel;
 import ir.msob.jima.core.commons.dto.BaseType;
 import ir.msob.jima.core.commons.exception.badrequest.BadRequestException;
 
@@ -68,17 +69,17 @@ public interface BaseCriteria<ID extends Comparable<ID> & Serializable> extends 
      */
     void setId(Filter<ID> id);
 
-    /**
-     * Initializes and sets some conditions to the criteria.
-     */
-    default void init() {
+    default <C extends BaseCriteria<ID>, DTO extends BaseIdModel<ID>> boolean isMatching(C criteria, DTO dto) {
+        if (dto == null) {
+            throw new BadRequestException("DTO is null");
+        }
+        if (criteria == null) {
+            return true;
+        }
+        return !Filter.isMatching(criteria.getId(), dto.getDomainId());
     }
 
-    /**
-     * Validates the criteria data after initialization.
-     *
-     * @throws BadRequestException If the objectvalidation fails.
-     */
-    default void validation() throws BadRequestException {
+    default <DTO extends BaseIdModel<ID>> boolean isMatching(DTO dto) {
+        return isMatching(this, dto);
     }
 }

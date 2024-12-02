@@ -33,6 +33,12 @@ public class AuditInfoFilters implements BaseFilters {
      */
     private Filter<Instant> updatedAt;
 
+    public static boolean isMatching(AuditInfoFilters filter, AuditInfo auditInfo) {
+        if (filter != null) {
+            return filter.isMatching(auditInfo);
+        }
+        return true;
+    }
 
     public boolean isMatching(AuditInfo auditInfo) {
         if (this.getCreatedAt() != null) {

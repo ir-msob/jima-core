@@ -30,6 +30,13 @@ public class TimePeriodFilters implements BaseFilters {
      */
     private Filter<Instant> endDate;
 
+    public static boolean isMatching(TimePeriodFilters filter, TimePeriod timePeriod) {
+        if (filter != null) {
+            return filter.isMatching(timePeriod);
+        }
+        return true;
+    }
+
     public boolean isMatching(TimePeriod timePeriod) {
         if (this.getStartDate() != null) {
             if (timePeriod == null) {
@@ -44,13 +51,9 @@ public class TimePeriodFilters implements BaseFilters {
         }
         if (this.getEndDate() != null) {
             if (timePeriod == null) {
-                if (!this.getEndDate().isMatching(null)) {
-                    return false;
-                }
+                return this.getEndDate().isMatching(null);
             } else {
-                if (!this.getEndDate().isMatching(timePeriod.getEndDate())) {
-                    return false;
-                }
+                return this.getEndDate().isMatching(timePeriod.getEndDate());
             }
         }
         return true;

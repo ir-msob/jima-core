@@ -1,9 +1,11 @@
 package ir.msob.jima.core.commons.related.objectvalidation;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.criteria.BaseCriteria;
 import ir.msob.jima.core.commons.criteria.BaseCriteriaAbstract;
 import ir.msob.jima.core.commons.criteria.filter.BaseFilters;
 import ir.msob.jima.core.commons.criteria.filter.Filter;
+import ir.msob.jima.core.commons.domain.BaseIdModel;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriodFilters;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,4 +44,20 @@ public abstract class ObjectValidationCriteriaAbstract<ID extends Comparable<ID>
     private Filter<String> status;
     private Filter<Boolean> enabled;
     private TimePeriodFilters validFor;
+
+    public <C extends ObjectValidationCriteriaAbstract<ID>, DTO extends ObjectValidationAbstract<ID>> boolean isMatching(C criteria, DTO dto) {
+        if (!super.isMatching((BaseCriteria<ID>) criteria, (BaseIdModel<ID>) dto)) {
+            return false;
+        }
+        if (Filter.isMatching(criteria.getName(), dto.getName())) {
+            return false;
+        }
+        if (Filter.isMatching(criteria.getStatus(), dto.getStatus())) {
+            return false;
+        }
+        if (Filter.isMatching(criteria.getEnabled(), dto.getEnabled())) {
+            return false;
+        }
+        return !TimePeriodFilters.isMatching(criteria.getValidFor(), dto.getValidFor());
+    }
 }
