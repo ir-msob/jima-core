@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons.shared.audit.auditdomain;
 
-import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyAbstract;
+import ir.msob.jima.core.commons.related.relatedobject.relatedparty.RelatedPartyAbstract;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

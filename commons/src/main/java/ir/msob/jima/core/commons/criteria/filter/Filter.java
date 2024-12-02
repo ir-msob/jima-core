@@ -29,7 +29,7 @@ import java.util.Set;
 @Getter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public class Filter<TYPE extends Serializable> extends BaseFilter<TYPE> {
+public class Filter<TYPE extends Comparable<TYPE> & Serializable> extends BaseFilter<TYPE> {
     /**
      * Constructs a new 'Filter' with the specified filter criteria.
      *
@@ -46,7 +46,7 @@ public class Filter<TYPE extends Serializable> extends BaseFilter<TYPE> {
      * @param or     The 'or' filter.
      */
     @Builder
-    public Filter(TYPE eq, TYPE ne, TYPE regex, TYPE gte, TYPE gt, TYPE lte, TYPE lt, Boolean exists, Set<TYPE> in, Set<TYPE> nin, BaseFilterQuery<TYPE> or) {
+    public Filter(TYPE eq, TYPE ne, String regex, TYPE gte, TYPE gt, TYPE lte, TYPE lt, Boolean exists, Set<TYPE> in, Set<TYPE> nin, BaseFilterQuery<TYPE> or) {
         super(eq, ne, regex, gte, gt, lte, lt, exists, in, nin, or);
     }
 
@@ -56,7 +56,7 @@ public class Filter<TYPE extends Serializable> extends BaseFilter<TYPE> {
      * @param eq The specified value.
      * @return The created filter.
      */
-    public static <TYPE extends Serializable> Filter<TYPE> eq(TYPE eq) {
+    public static <TYPE extends Comparable<TYPE> & Serializable> Filter<TYPE> eq(TYPE eq) {
         return Filter.<TYPE>builder().eq(eq).build();
     }
 
@@ -66,7 +66,7 @@ public class Filter<TYPE extends Serializable> extends BaseFilter<TYPE> {
      * @param ne The specified value.
      * @return The created filter.
      */
-    public static <TYPE extends Serializable> Filter<TYPE> ne(TYPE ne) {
+    public static <TYPE extends Comparable<TYPE> & Serializable> Filter<TYPE> ne(TYPE ne) {
         return Filter.<TYPE>builder().ne(ne).build();
     }
 
@@ -76,8 +76,8 @@ public class Filter<TYPE extends Serializable> extends BaseFilter<TYPE> {
      * @param regex The specified regular expression.
      * @return The created filter.
      */
-    public static <TYPE extends Serializable> Filter<TYPE> regex(TYPE regex) {
-        return Filter.<TYPE>builder().regex(regex).build();
+    public static Filter<String> regex(String regex) {
+        return Filter.<String>builder().regex(regex).build();
     }
 
     /**
@@ -86,7 +86,7 @@ public class Filter<TYPE extends Serializable> extends BaseFilter<TYPE> {
      * @param gte The specified value.
      * @return The created filter.
      */
-    public static <TYPE extends Serializable> Filter<TYPE> gte(TYPE gte) {
+    public static <TYPE extends Comparable<TYPE> & Serializable> Filter<TYPE> gte(TYPE gte) {
         return Filter.<TYPE>builder().gte(gte).build();
     }
 
@@ -96,7 +96,7 @@ public class Filter<TYPE extends Serializable> extends BaseFilter<TYPE> {
      * @param gt The specified value.
      * @return The created filter.
      */
-    public static <TYPE extends Serializable> Filter<TYPE> gt(TYPE gt) {
+    public static <TYPE extends Comparable<TYPE> & Serializable> Filter<TYPE> gt(TYPE gt) {
         return Filter.<TYPE>builder().gt(gt).build();
     }
 
@@ -106,7 +106,7 @@ public class Filter<TYPE extends Serializable> extends BaseFilter<TYPE> {
      * @param lte The specified value.
      * @return The created filter.
      */
-    public static <TYPE extends Serializable> Filter<TYPE> lte(TYPE lte) {
+    public static <TYPE extends Comparable<TYPE> & Serializable> Filter<TYPE> lte(TYPE lte) {
         return Filter.<TYPE>builder().lte(lte).build();
     }
 
@@ -116,7 +116,7 @@ public class Filter<TYPE extends Serializable> extends BaseFilter<TYPE> {
      * @param lt The specified value.
      * @return The created filter.
      */
-    public static <TYPE extends Serializable> Filter<TYPE> lt(TYPE lt) {
+    public static <TYPE extends Comparable<TYPE> & Serializable> Filter<TYPE> lt(TYPE lt) {
         return Filter.<TYPE>builder().lt(lt).build();
     }
 
@@ -136,7 +136,7 @@ public class Filter<TYPE extends Serializable> extends BaseFilter<TYPE> {
      * @param in The specified set of values.
      * @return The created filter.
      */
-    public static <TYPE extends Serializable> Filter<TYPE> in(Set<TYPE> in) {
+    public static <TYPE extends Comparable<TYPE> & Serializable> Filter<TYPE> in(Set<TYPE> in) {
         return Filter.<TYPE>builder().in(in).build();
     }
 
@@ -146,7 +146,7 @@ public class Filter<TYPE extends Serializable> extends BaseFilter<TYPE> {
      * @param in The specified collection of values.
      * @return The created filter.
      */
-    public static <TYPE extends Serializable> Filter<TYPE> in(Collection<TYPE> in) {
+    public static <TYPE extends Comparable<TYPE> & Serializable> Filter<TYPE> in(Collection<TYPE> in) {
         return Filter.<TYPE>builder().in(new HashSet<>(in)).build();
     }
 
@@ -156,7 +156,7 @@ public class Filter<TYPE extends Serializable> extends BaseFilter<TYPE> {
      * @param nin The specified set of values.
      * @return The created filter.
      */
-    public static <TYPE extends Serializable> Filter<TYPE> nin(Set<TYPE> nin) {
+    public static <TYPE extends Comparable<TYPE> & Serializable> Filter<TYPE> nin(Set<TYPE> nin) {
         return Filter.<TYPE>builder().nin(nin).build();
     }
 
@@ -166,7 +166,7 @@ public class Filter<TYPE extends Serializable> extends BaseFilter<TYPE> {
      * @param nin The specified collection of values.
      * @return The created filter.
      */
-    public static <TYPE extends Serializable> Filter<TYPE> nin(Collection<TYPE> nin) {
+    public static <TYPE extends Comparable<TYPE> & Serializable> Filter<TYPE> nin(Collection<TYPE> nin) {
         return Filter.<TYPE>builder().nin(new HashSet<>(nin)).build();
     }
 }

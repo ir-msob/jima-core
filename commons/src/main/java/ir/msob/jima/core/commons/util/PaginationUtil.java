@@ -3,6 +3,7 @@ package ir.msob.jima.core.commons.util;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.validation.constraints.NotNull;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,8 +33,8 @@ public class PaginationUtil {
     public static PageImpl<?> preparePage(JsonNode jsonNode, JsonParser jsonParser) throws IOException {
         List<?> content = prepareContent(jsonNode.get("content"), jsonParser);
         Pageable pageable = preparePageableFromPage(jsonNode);
-        long totalElements = asLong(jsonNode.get("totalElements"));
-        return new PageImpl<>(content, pageable, totalElements);
+        Long totalElements = asLong(jsonNode.get("totalElements"));
+        return new PageImpl<>(content, pageable, totalElements == null ? 0 : totalElements);
     }
 
     /**
@@ -43,9 +44,9 @@ public class PaginationUtil {
      * @return A {@link Pageable} instance.
      */
     public static Pageable preparePageableFromPage(JsonNode jsonNode) {
-        int pageNumber = asInteger(jsonNode.get("number"));
-        int pageSize = asInteger(jsonNode.get("size"));
-        return PageRequest.of(pageNumber, pageSize);
+        Integer pageNumber = asInteger(jsonNode.get("number"));
+        Integer pageSize = asInteger(jsonNode.get("size"));
+        return PageRequest.of(pageNumber == null ? 0 : pageNumber, pageSize == null ? 0 : pageSize);
     }
 
     /**
@@ -56,9 +57,9 @@ public class PaginationUtil {
      */
     public static Pageable preparePageable(JsonNode jsonNode) {
         List<Sort.Order> orderList = prepareOrders(jsonNode.get("sort"));
-        int pageNumber = asInteger(jsonNode.get("pageNumber"));
-        int pageSize = asInteger(jsonNode.get("pageSize"));
-        return PageRequest.of(pageNumber, pageSize, Sort.by(orderList));
+        Integer pageNumber = asInteger(jsonNode.get("pageNumber"));
+        Integer pageSize = asInteger(jsonNode.get("pageSize"));
+        return PageRequest.of(pageNumber == null ? 0 : pageNumber, pageSize == null ? 0 : pageSize, Sort.by(orderList));
     }
 
     /**
@@ -164,9 +165,23 @@ public class PaginationUtil {
             return null;
         }
         String directionString = jsonNode.asText();
-        return (directionString.equalsIgnoreCase(Sort.Direction.DESC.name())) ? Sort.Direction.DESC :
-                (directionString.equalsIgnoreCase(Sort.Direction.ASC.name())) ? Sort.Direction.ASC : null;
+        return getDirection(directionString);
     }
+
+    private static Sort.Direction getDirection(String directionString) {
+        // Return null if the input string is null or blank
+        if (Strings.isBlank(directionString)) {
+            return null; // Consider throwing IllegalArgumentException for invalid input
+        }
+
+        // Determine the corresponding Sort.Direction based on the normalized input
+        return switch (directionString.trim().toUpperCase()) {
+            case "DESC" -> Sort.Direction.DESC; // Return DESC for "DESC"
+            case "ASC" -> Sort.Direction.ASC;   // Return ASC for "ASC"
+            default -> null; // Return null for unrecognized direction; consider throwing an exception
+        };
+    }
+
 
     /**
      * Convert a {@link JsonNode} to a {@link Sort.NullHandling}.
@@ -179,9 +194,21 @@ public class PaginationUtil {
             return Sort.NullHandling.NATIVE;
         }
         String nullHandlingString = jsonNode.asText();
-        return (nullHandlingString.equalsIgnoreCase(Sort.NullHandling.NATIVE.name())) ? Sort.NullHandling.NATIVE :
-                (nullHandlingString.equalsIgnoreCase(Sort.NullHandling.NULLS_FIRST.name())) ? Sort.NullHandling.NULLS_FIRST :
-                        (nullHandlingString.equalsIgnoreCase(Sort.NullHandling.NULLS_LAST.name())) ? Sort.NullHandling.NULLS_LAST :
-                                Sort.NullHandling.NATIVE;
+        return getNullHandling(nullHandlingString);
+    }
+
+    private static Sort.NullHandling getNullHandling(String nullHandlingString) {
+        // Check for null or blank input
+        if (Strings.isBlank(nullHandlingString)) {
+            return Sort.NullHandling.NATIVE; // Default to NATIVE if input is null or blank
+        }
+
+        // Determine the Sort.NullHandling based on the normalized input
+        return switch (nullHandlingString.trim().toUpperCase()) {
+            case "NATIVE" -> Sort.NullHandling.NATIVE;
+            case "NULLS_FIRST" -> Sort.NullHandling.NULLS_FIRST;
+            case "NULLS_LAST" -> Sort.NullHandling.NULLS_LAST;
+            default -> Sort.NullHandling.NATIVE; // Default case for unrecognized input
+        };
     }
 }

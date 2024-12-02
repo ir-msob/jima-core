@@ -32,4 +32,27 @@ public class AuditInfoFilters implements BaseFilters {
      * This filter can be used to specify a range or exact match for the updatedAt field.
      */
     private Filter<Instant> updatedAt;
+
+
+    public boolean isMatching(AuditInfo auditInfo) {
+        if (this.getCreatedAt() != null) {
+            if (auditInfo == null) {
+                if (!this.getCreatedAt().isMatching(null)) {
+                    return false;
+                }
+            } else {
+                if (!this.getCreatedAt().isMatching(auditInfo.getCreatedAt())) {
+                    return false;
+                }
+            }
+        }
+        if (this.getUpdatedAt() != null) {
+            if (auditInfo == null) {
+                return this.getUpdatedAt().isMatching(null);
+            } else {
+                return this.getUpdatedAt().isMatching(auditInfo.getUpdatedAt());
+            }
+        }
+        return true;
+    }
 }

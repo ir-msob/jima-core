@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons.security;
 
-import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyAbstract;
+import ir.msob.jima.core.commons.related.relatedobject.relatedparty.RelatedPartyAbstract;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

@@ -16,6 +16,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 /**
  * This Mojo (Maven Plugin) generates a gRPC interface service class.
@@ -69,11 +70,8 @@ public class GrpcInterfaceService extends AbstractMojo {
             modifyGrpcServiceClass(compilationUnit, serviceInterfaceName);
 
             File outputFile = new File(outputDirectoryFile, grpcClassFileName);
-            boolean isDeleted = inputFile.delete();
+            Files.delete(outputFile.toPath());
 
-            if (!isDeleted) {
-                throw new RuntimeException("Failed to delete the input file: " + inputFile.getAbsolutePath());
-            }
             writeContentToFile(outputFile, compilationUnit.toString());
 
             logInfo("Generated Java class: " + outputFile.getAbsolutePath());

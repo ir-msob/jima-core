@@ -84,7 +84,7 @@ class PatchUtilTest {
     }
 
     @Test
-    void testApplyJsonPatchWithUnknownOperationType() throws JsonPatchException, JsonProcessingException, JsonPointerException {
+    void testApplyJsonPatchWithUnknownOperationType() {
         // Create a JSON patch with an unknown operation type
         List<PatchOperation> patchOperations = new ArrayList<>();
         patchOperations.add(new PatchOperation("unknown", PATH, VALUE));

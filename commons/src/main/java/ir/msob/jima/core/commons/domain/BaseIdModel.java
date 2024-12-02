@@ -17,7 +17,7 @@ import java.io.Serializable;
  * - {@code setDomainId(ID id)}: Sets the domain ID of the model.
  * - {@code getDomainIdName()}: Returns the name of the domain ID field.
  */
-public interface BaseIdModel<ID extends Comparable<ID> & Serializable> {
+public interface BaseIdModel<ID extends Comparable<ID> & Serializable> extends Serializable {
 
     /**
      * Returns the domain ID of the model.

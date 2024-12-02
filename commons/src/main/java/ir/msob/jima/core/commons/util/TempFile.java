@@ -32,7 +32,7 @@ public class TempFile {
      *
      * @param tempDirectoryName The name of the temporary directory.
      */
-    public TempFile(String tempDirectoryName) {
+    public TempFile(String tempDirectoryName) throws IOException {
         try {
             // Create a temporary directory with a unique name based on the provided name.
             FileAttribute<?> attributes = PosixFilePermissions.asFileAttribute(PosixFilePermissions.fromString("rwx------"));
@@ -49,13 +49,9 @@ public class TempFile {
      *
      * @param file The file to be deleted.
      */
-    public static void deleteFile(File file) {
+    public static void deleteFile(File file) throws IOException {
         if (file != null && file.exists()) {
-            boolean isDeleted = file.delete();
-
-            if (!isDeleted) {
-                log.debug("Failed to delete the file: {}", file.getAbsolutePath());
-            }
+            Files.deleteIfExists(file.toPath());
         }
     }
 
@@ -75,9 +71,11 @@ public class TempFile {
     /**
      * Close the temporary file management, deleting all created files and the temporary directory.
      */
-    public void close() {
+    public void close() throws IOException {
         // Delete all temporary files.
-        files.forEach(TempFile::deleteFile);
+        for (File file : files) {
+            deleteFile(file);
+        }
 
         // Delete the temporary directory itself.
         deleteFile(tempDirectory);

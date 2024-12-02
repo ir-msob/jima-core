@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons.shared.audit.auditdomain;
 
-import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyAbstract;
+import ir.msob.jima.core.commons.related.relatedobject.relatedparty.RelatedPartyAbstract;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

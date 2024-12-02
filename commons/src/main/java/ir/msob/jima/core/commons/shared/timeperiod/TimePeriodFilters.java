@@ -29,4 +29,30 @@ public class TimePeriodFilters implements BaseFilters {
      * Filter for the end instant of the time period.
      */
     private Filter<Instant> endDate;
+
+    public boolean isMatching(TimePeriod timePeriod) {
+        if (this.getStartDate() != null) {
+            if (timePeriod == null) {
+                if (!this.getStartDate().isMatching(null)) {
+                    return false;
+                }
+            } else {
+                if (!this.getStartDate().isMatching(timePeriod.getStartDate())) {
+                    return false;
+                }
+            }
+        }
+        if (this.getEndDate() != null) {
+            if (timePeriod == null) {
+                if (!this.getEndDate().isMatching(null)) {
+                    return false;
+                }
+            } else {
+                if (!this.getEndDate().isMatching(timePeriod.getEndDate())) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }

@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @param <C> The type of the criteria, extending BaseCriteria with ID.
  */
-public class QueryGenerator<ID extends Comparable<ID> & Serializable,C extends BaseCriteria<ID>> {
+public class QueryGenerator<ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>> {
 
     /**
      * Prepares an OR operation in the query builder using the provided criteria.

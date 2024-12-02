@@ -6,6 +6,7 @@ import ir.msob.jima.core.commons.shared.ResourceType;
 import lombok.*;
 
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -80,5 +81,16 @@ public class ResourceDto implements BaseType, Comparable<ResourceDto> {
         }
 
         return this.compareTo(other) == 0;
+    }
+
+    /**
+     * Returns a hash code value for the object.
+     * The hash code is based on the value and type fields.
+     *
+     * @return a hash code value for this object
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, type);
     }
 }

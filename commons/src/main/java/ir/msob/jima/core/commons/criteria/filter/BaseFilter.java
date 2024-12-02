@@ -30,7 +30,7 @@ import java.util.Set;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseFilter<TYPE extends Serializable> extends BaseFilterQuery<TYPE> {
+public class BaseFilter<TYPE extends Comparable<TYPE> & Serializable> extends BaseFilterQuery<TYPE> {
     /**
      * The 'or' filter of the base filter.
      */
@@ -51,7 +51,7 @@ public class BaseFilter<TYPE extends Serializable> extends BaseFilterQuery<TYPE>
      * @param nin    The 'nin' criterion.
      * @param or     The 'or' filter.
      */
-    public BaseFilter(TYPE eq, TYPE ne, TYPE regex, TYPE gte, TYPE gt, TYPE lte, TYPE lt, Boolean exists, Set<TYPE> in, Set<TYPE> nin, BaseFilterQuery<TYPE> or) {
+    public BaseFilter(TYPE eq, TYPE ne, String regex, TYPE gte, TYPE gt, TYPE lte, TYPE lt, Boolean exists, Set<TYPE> in, Set<TYPE> nin, BaseFilterQuery<TYPE> or) {
         super(eq, ne, regex, gte, gt, lte, lt, exists, in, nin);
         this.or = or;
     }

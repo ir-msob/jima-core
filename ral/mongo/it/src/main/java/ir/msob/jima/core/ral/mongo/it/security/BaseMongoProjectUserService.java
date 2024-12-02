@@ -1,10 +1,10 @@
 package ir.msob.jima.core.ral.mongo.it.security;
 
 import com.google.common.collect.Sets;
-import ir.msob.jima.core.commons.security.BaseUser;
-import ir.msob.jima.core.commons.security.BaseUserService;
 import ir.msob.jima.core.commons.security.BaseClaimKey;
 import ir.msob.jima.core.commons.security.BaseClaimKeyValue;
+import ir.msob.jima.core.commons.security.BaseUser;
+import ir.msob.jima.core.commons.security.BaseUserService;
 import org.bson.types.ObjectId;
 
 import java.util.Collection;

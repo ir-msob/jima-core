@@ -1,8 +1,8 @@
 package ir.msob.jima.core.test;
 
-import ir.msob.jima.core.commons.characteristic.Characteristic;
-import ir.msob.jima.core.commons.relatedobject.relateddomain.RelatedDomainAbstract;
-import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyAbstract;
+import ir.msob.jima.core.commons.related.characteristic.Characteristic;
+import ir.msob.jima.core.commons.related.relatedobject.relateddomain.RelatedDomainAbstract;
+import ir.msob.jima.core.commons.related.relatedobject.relatedparty.RelatedPartyAbstract;
 import ir.msob.jima.core.commons.shared.audit.auditdomain.AuditDomainAbstract;
 import ir.msob.jima.core.commons.shared.keyvalue.KeyValue;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
@@ -36,7 +36,7 @@ public class CoreTestAssertion {
      * @param before The Characteristic before an operation.
      * @param after  The Characteristic after an operation.
      */
-    public static void assertOptionalCharacteristic(Characteristic before, Characteristic after) {
+    public static <ID extends Comparable<ID> & Serializable> void assertOptionalCharacteristic(Characteristic<ID> before, Characteristic<ID> after) {
         Assertions.assertThat(before.getValue()).isEqualTo(after.getValue());
     }
 
@@ -46,7 +46,7 @@ public class CoreTestAssertion {
      * @param before The Characteristic before an operation.
      * @param after  The Characteristic after an operation.
      */
-    public static void assertMandatoryCharacteristic(Characteristic before, Characteristic after) {
+    public static <ID extends Comparable<ID> & Serializable> void assertMandatoryCharacteristic(Characteristic<ID> before, Characteristic<ID> after) {
         Assertions.assertThat(before.getKey()).isEqualTo(after.getKey());
         Assertions.assertThat(before.getDataType()).isEqualTo(after.getDataType());
     }
@@ -94,7 +94,7 @@ public class CoreTestAssertion {
      * @param before The RelatedPartyAbstract before an operation.
      * @param after  The RelatedPartyAbstract after an operation.
      */
-    public static void assertOptionalRelatedParty(RelatedPartyAbstract before, RelatedPartyAbstract after) {
+    public static <ID extends Comparable<ID> & Serializable> void assertOptionalRelatedParty(RelatedPartyAbstract<ID> before, RelatedPartyAbstract<ID> after) {
         Assertions.assertThat(before.getRole()).isEqualTo(after.getRole());
         Assertions.assertThat(before.getReferringType()).isEqualTo(after.getReferringType());
     }
@@ -105,7 +105,7 @@ public class CoreTestAssertion {
      * @param before The RelatedPartyAbstract before an operation.
      * @param after  The RelatedPartyAbstract after an operation.
      */
-    public static void assertMandatoryRelatedParty(RelatedPartyAbstract before, RelatedPartyAbstract after) {
+    public static <ID extends Comparable<ID> & Serializable> void assertMandatoryRelatedParty(RelatedPartyAbstract<ID> before, RelatedPartyAbstract<ID> after) {
         Assertions.assertThat(before.getName()).isEqualTo(after.getName());
         Assertions.assertThat(before.getRelatedId()).isEqualTo(after.getRelatedId());
     }
@@ -116,7 +116,7 @@ public class CoreTestAssertion {
      * @param before The AuditDomainAbstract before an operation.
      * @param after  The AuditDomainAbstract after an operation.
      */
-    public static void assertMandatoryAuditDomain(AuditDomainAbstract before, AuditDomainAbstract after) {
+    public static <ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> void assertMandatoryAuditDomain(AuditDomainAbstract<ID, RP> before, AuditDomainAbstract<ID, RP> after) {
         Assertions.assertThat(before.getRelatedParty()).isEqualTo(after.getRelatedParty());
         Assertions.assertThat(before.getActionDate()).isEqualTo(after.getActionDate());
         Assertions.assertThat(before.getActionType()).isEqualTo(after.getActionType());

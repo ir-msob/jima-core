@@ -58,14 +58,16 @@ public class ScopeAspect {
         if (isValidResourceType(resource.type(), ResourceType.RESTFUL, ResourceType.GRPC, ResourceType.RSOCKET)) {
             // Check if the operation specified in the @Scope annotation is present for the resource class
             // If the operation is not present, throw a ResourceNotFoundException
-            if (!ConditionalOnOperationUtil.hasOperation(scope.value(), resourceClass))
+            if (!ConditionalOnOperationUtil.hasOperation(scope.value(), resourceClass)) {
                 throw new ResourceNotFoundException("Unable to find resource", scope.value());
+            }
             return joinPoint.proceed();
         } else if (isValidResourceType(resource.type(), ResourceType.KAFKA)) {
             // Check if the operation specified in the @Scope annotation is present for the resource class
             // If the operation is present, allow the method to proceed
-            if (ConditionalOnOperationUtil.hasOperation(scope.value(), resourceClass))
+            if (ConditionalOnOperationUtil.hasOperation(scope.value(), resourceClass)) {
                 return joinPoint.proceed();
+            }
         }
         return null;
     }

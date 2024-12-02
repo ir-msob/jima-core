@@ -1,9 +1,9 @@
 package ir.msob.jima.core.test;
 
 import com.google.common.collect.Sets;
-import ir.msob.jima.core.commons.characteristic.Characteristic;
-import ir.msob.jima.core.commons.relatedobject.relateddomain.RelatedDomainAbstract;
-import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyAbstract;
+import ir.msob.jima.core.commons.related.characteristic.Characteristic;
+import ir.msob.jima.core.commons.related.relatedobject.relateddomain.RelatedDomainAbstract;
+import ir.msob.jima.core.commons.related.relatedobject.relatedparty.RelatedPartyAbstract;
 import ir.msob.jima.core.commons.shared.DataType;
 import ir.msob.jima.core.commons.shared.audit.auditdomain.AuditDomainActionType;
 import ir.msob.jima.core.commons.shared.keyvalue.KeyValue;
@@ -71,10 +71,10 @@ public class CoreTestData {
     public static final SortedSet<AuditDomainActionType> UPDATED_AUDIT_DOMAIN_ACTION_TYPES = Sets.newTreeSet(Collections.singleton(UPDATED_AUDIT_DOMAIN_ACTION_TYPE));
 
     // Characteristic constants
-    public static final Characteristic DEFAULT_REQUIRED_CHARACTERISTIC = initDefaultRequiredCharacteristic();
-    public static final SortedSet<Characteristic> DEFAULT_REQUIRED_CHARACTERISTICS = Sets.newTreeSet(Collections.singleton(DEFAULT_REQUIRED_CHARACTERISTIC));
-    public static final Characteristic DEFAULT_CHARACTERISTIC = initDefaultCharacteristic();
-    public static final SortedSet<Characteristic> DEFAULT_CHARACTERISTICS = Sets.newTreeSet(Collections.singleton(DEFAULT_CHARACTERISTIC));
+    public static final Characteristic<?> DEFAULT_REQUIRED_CHARACTERISTIC = initDefaultRequiredCharacteristic();
+    public static final SortedSet<Characteristic<?>> DEFAULT_REQUIRED_CHARACTERISTICS = Sets.newTreeSet(Collections.singleton(DEFAULT_REQUIRED_CHARACTERISTIC));
+    public static final Characteristic<?> DEFAULT_CHARACTERISTIC = initDefaultCharacteristic();
+    public static final SortedSet<Characteristic<?>> DEFAULT_CHARACTERISTICS = Sets.newTreeSet(Collections.singleton(DEFAULT_CHARACTERISTIC));
 
     // KeyValue constants
     public static final KeyValue<String, String> DEFAULT_STRING_KEY_VALUE = new KeyValue<>(DEFAULT_STRING, DEFAULT_STRING);
@@ -98,8 +98,8 @@ public class CoreTestData {
     // RelatedDomainAbstract and RelatedPartyAbstract constants
     public static RelatedDomainAbstract<?> DEFAULT_RELATED_DOMAIN;
     public static RelatedDomainAbstract<?> DEFAULT_REQUIRED_RELATED_DOMAIN;
-    public static RelatedPartyAbstract DEFAULT_RELATED_PARTY;
-    public static RelatedPartyAbstract DEFAULT_REQUIRED_RELATED_PARTY;
+    public static RelatedPartyAbstract<?> DEFAULT_RELATED_PARTY;
+    public static RelatedPartyAbstract<?> DEFAULT_REQUIRED_RELATED_PARTY;
 
     private CoreTestData() {
         // Private constructor to prevent instantiation
@@ -110,8 +110,8 @@ public class CoreTestData {
      *
      * @return a sorted set of default required related parties
      */
-    public static SortedSet<RelatedPartyAbstract> DEFAULT_REQUIRED_RELATED_PARTIES() {
-        return Sets.newTreeSet(Collections.singleton(DEFAULT_REQUIRED_RELATED_PARTY));
+    public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedPartyAbstract<ID>> DEFAULT_REQUIRED_RELATED_PARTIES() {
+        return Sets.newTreeSet(Collections.singleton((RelatedPartyAbstract<ID>) DEFAULT_REQUIRED_RELATED_PARTY));
     }
 
     /**
@@ -119,7 +119,7 @@ public class CoreTestData {
      *
      * @param relatedParties the sorted set of related parties to update
      */
-    public static void UPDATED_REQUIRED_RELATED_PARTIES(SortedSet<RelatedPartyAbstract> relatedParties) {
+    public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_PARTIES(SortedSet<RelatedPartyAbstract<ID>> relatedParties) {
         relatedParties.forEach(CoreTestData::UPDATED_REQUIRED_RELATED_PARTY);
     }
 
@@ -128,8 +128,8 @@ public class CoreTestData {
      *
      * @return a sorted set of default related parties
      */
-    public static SortedSet<RelatedPartyAbstract> DEFAULT_RELATED_PARTIES() {
-        return Sets.newTreeSet(Collections.singleton(DEFAULT_RELATED_PARTY));
+    public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedPartyAbstract<ID>> DEFAULT_RELATED_PARTIES() {
+        return Sets.newTreeSet(Collections.singleton((RelatedPartyAbstract<ID>) DEFAULT_RELATED_PARTY));
     }
 
     /**
@@ -137,7 +137,7 @@ public class CoreTestData {
      *
      * @param relatedParties the sorted set of related parties to update
      */
-    public static void UPDATED_RELATED_PARTIES(SortedSet<RelatedPartyAbstract> relatedParties) {
+    public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_PARTIES(SortedSet<RelatedPartyAbstract<ID>> relatedParties) {
         relatedParties.forEach(CoreTestData::UPDATED_RELATED_PARTY);
     }
 
@@ -237,7 +237,7 @@ public class CoreTestData {
      *
      * @param relatedParty the related party to update
      */
-    public static void UPDATED_RELATED_PARTY(RelatedPartyAbstract relatedParty) {
+    public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_PARTY(RelatedPartyAbstract<ID> relatedParty) {
         relatedParty.setName(UPDATED_STRING);
         relatedParty.setRelatedId(UPDATED_PARTY_ID);
         relatedParty.setRole(UPDATED_STRING);
@@ -249,7 +249,7 @@ public class CoreTestData {
      *
      * @param relatedParty the required related party to update
      */
-    public static void UPDATED_REQUIRED_RELATED_PARTY(RelatedPartyAbstract relatedParty) {
+    public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_PARTY(RelatedPartyAbstract<ID> relatedParty) {
         relatedParty.setName(UPDATED_STRING);
         relatedParty.setRelatedId(UPDATED_PARTY_ID);
     }
@@ -285,8 +285,8 @@ public class CoreTestData {
      *
      * @return the initialized default required characteristic
      */
-    public static Characteristic<?> initDefaultRequiredCharacteristic() {
-        Characteristic<?> characteristic = new Characteristic<>();
+    public static <ID extends Comparable<ID> & Serializable> Characteristic<ID> initDefaultRequiredCharacteristic() {
+        Characteristic<ID> characteristic = new Characteristic<>();
         characteristic.setKey(DEFAULT_STRING);
         characteristic.setValue(DEFAULT_STRING);
         characteristic.setDataType(DEFAULT_DATA_TYPE.name());
@@ -308,7 +308,7 @@ public class CoreTestData {
      *
      * @param characteristics the sorted set of mandatory characteristics to update
      */
-    public static void UPDATED_MANDATORY_CHARACTERISTICS(SortedSet<Characteristic> characteristics) {
+    public static <ID extends Comparable<ID> & Serializable> void UPDATED_MANDATORY_CHARACTERISTICS(SortedSet<Characteristic<ID>> characteristics) {
         characteristics.forEach(CoreTestData::UPDATED_MANDATORY_CHARACTERISTIC);
     }
 
@@ -317,8 +317,8 @@ public class CoreTestData {
      *
      * @return the initialized default characteristic
      */
-    public static Characteristic initDefaultCharacteristic() {
-        Characteristic characteristic = initDefaultRequiredCharacteristic();
+    public static <ID extends Comparable<ID> & Serializable> Characteristic<ID> initDefaultCharacteristic() {
+        Characteristic<ID> characteristic = initDefaultRequiredCharacteristic();
         characteristic.setValue(DEFAULT_STRING);
         return characteristic;
     }
@@ -328,7 +328,7 @@ public class CoreTestData {
      *
      * @param characteristic the characteristic to update
      */
-    public static void UPDATED_CHARACTERISTIC(Characteristic characteristic) {
+    public static <ID extends Comparable<ID> & Serializable> void UPDATED_CHARACTERISTIC(Characteristic<ID> characteristic) {
         UPDATED_MANDATORY_CHARACTERISTIC(characteristic);
         characteristic.setValue(UPDATED_INTEGER);
     }
@@ -338,7 +338,7 @@ public class CoreTestData {
      *
      * @param characteristics the sorted set of characteristics to update
      */
-    public static void UPDATED_CHARACTERISTICS(SortedSet<Characteristic> characteristics) {
+    public static <ID extends Comparable<ID> & Serializable> void UPDATED_CHARACTERISTICS(SortedSet<Characteristic<ID>> characteristics) {
         characteristics.forEach(CoreTestData::UPDATED_CHARACTERISTIC);
     }
 

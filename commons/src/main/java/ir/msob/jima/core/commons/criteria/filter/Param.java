@@ -21,6 +21,6 @@ import java.io.Serializable;
 @Getter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public class Param<TYPE extends Serializable> extends BaseFilter<TYPE> {
+public class Param<TYPE extends Comparable<TYPE> & Serializable> extends BaseFilter<TYPE> {
 
 }

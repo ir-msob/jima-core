@@ -3,12 +3,13 @@ package ir.msob.jima.core.commons.shared.audit.auditdomain;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.criteria.filter.BaseFilters;
 import ir.msob.jima.core.commons.criteria.filter.Filter;
-import ir.msob.jima.core.commons.relatedobject.relatedparty.RelatedPartyCriteriaAbstract;
+import ir.msob.jima.core.commons.related.relatedobject.relatedparty.RelatedPartyCriteriaAbstract;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 /**
@@ -23,7 +24,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class AuditDomainFiltersAbstract<RPF extends RelatedPartyCriteriaAbstract> implements BaseFilters {
+public abstract class AuditDomainFiltersAbstract<ID extends Comparable<ID> & Serializable, RPF extends RelatedPartyCriteriaAbstract<ID>> implements BaseFilters {
     /**
      * Filter for the related party.
      */

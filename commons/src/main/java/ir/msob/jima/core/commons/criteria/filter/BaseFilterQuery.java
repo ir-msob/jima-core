@@ -30,7 +30,7 @@ import java.util.Set;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseFilterQuery<TYPE extends Serializable> implements BaseModel {
+public class BaseFilterQuery<TYPE extends Comparable<TYPE> & Serializable> implements BaseModel {
     /**
      * The 'eq' criterion of the base filter query.
      */
@@ -44,7 +44,7 @@ public class BaseFilterQuery<TYPE extends Serializable> implements BaseModel {
     /**
      * The 'regex' criterion of the base filter query.
      */
-    private TYPE regex;
+    private String regex;
 
     /**
      * The 'gte' criterion of the base filter query.
@@ -80,4 +80,20 @@ public class BaseFilterQuery<TYPE extends Serializable> implements BaseModel {
      * The 'nin' criterion of the base filter query.
      */
     private Set<TYPE> nin;
+
+    public boolean isMatching(TYPE value) {
+        if (this.getEq() != null && !this.getEq().equals(value)) return false;
+        if (this.getNe() != null && this.getNe().equals(value)) return false;
+        if (this.getRegex() != null && !String.valueOf(value).matches(this.getRegex())) return false;
+        if (this.getGte() != null && this.getGte().compareTo(value) >= 0) return false;
+        if (this.getGt() != null && this.getGt().compareTo(value) > 0) return false;
+        if (this.getLte() != null && this.getLte().compareTo(value) <= 0) return false;
+        if (this.getLt() != null && this.getLt().compareTo(value) < 0) return false;
+        if (this.getExists() != null && ((this.getExists() && value == null) ||
+                (!this.getExists() && value != null))) return false;
+        if (this.getIn() != null && !this.getIn().contains(value)) return false;
+
+        return this.getNin() == null || !this.getNin().contains(value);
+    }
+
 }

@@ -138,12 +138,11 @@ public class JsonParser {
             Object value = object.get(key);
             jsonPath = parentPath + "." + key;
 
-            if (value instanceof JSONArray v) {
-                readArray(v, jsonPath, data);
-            } else if (value instanceof JSONObject v) {
-                readObject(v, jsonPath, data);
-            } else { // is a value
-                data.put(jsonPath, value);
+            switch (value) {
+                case JSONArray v -> readArray(v, jsonPath, data);
+                case JSONObject v -> readObject(v, jsonPath, data);
+                case null, default ->  // is a value
+                        data.put(jsonPath, value);
             }
         }
     }
@@ -161,12 +160,11 @@ public class JsonParser {
             Object value = array.get(i);
             jsonPath = parentPath + "[" + i + "]";
 
-            if (value instanceof JSONArray v) {
-                readArray(v, jsonPath, data);
-            } else if (value instanceof JSONObject v) {
-                readObject(v, jsonPath, data);
-            } else { // is a value
-                data.put(jsonPath, value);
+            switch (value) {
+                case JSONArray v -> readArray(v, jsonPath, data);
+                case JSONObject v -> readObject(v, jsonPath, data);
+                case null, default ->  // is a value
+                        data.put(jsonPath, value);
             }
         }
     }

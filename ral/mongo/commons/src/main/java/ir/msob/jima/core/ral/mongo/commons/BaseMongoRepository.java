@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * @param <USER> The type of the user.
  * @param <D>    The type of the domain.
  */
-public interface BaseMongoRepository<ID extends Comparable<ID> & Serializable,USER extends BaseUser, D extends BaseDomain<ID>> extends
+public interface BaseMongoRepository<ID extends Comparable<ID> & Serializable, USER extends BaseUser, D extends BaseDomain<ID>> extends
         BaseRepository<ID, USER, D> {
 
     /**

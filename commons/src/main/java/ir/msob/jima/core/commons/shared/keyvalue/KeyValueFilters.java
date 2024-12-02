@@ -33,7 +33,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class KeyValueFilters<K extends Comparable<K> & Serializable, V extends Serializable> implements BaseFilters {
+public class KeyValueFilters<K extends Comparable<K> & Serializable, V extends Comparable<V> & Serializable> implements BaseFilters {
     /**
      * The key filter of the 'KeyValueFilters'.
      */

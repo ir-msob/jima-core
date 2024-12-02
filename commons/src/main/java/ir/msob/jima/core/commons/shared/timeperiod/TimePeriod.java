@@ -2,6 +2,7 @@ package ir.msob.jima.core.commons.shared.timeperiod;
 
 import lombok.*;
 
+import javax.annotation.Nullable;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
@@ -35,7 +36,7 @@ public class TimePeriod implements Serializable {
      * @return true if the TimePeriod is valid, false if it is not valid,
      * and null if the validity period is not set.
      */
-    public Boolean isValid() {
+    public @Nullable Boolean isValid() {
         if (startDate == null && endDate == null) return null;
         else if (startDate == null) return Instant.now().isBefore(endDate);
         else if (endDate == null) return Instant.now().isAfter(startDate);

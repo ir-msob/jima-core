@@ -14,12 +14,12 @@ class TempFileTest {
     private TempFile tempFile;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         tempFile = new TempFile("tempTestDir");
     }
 
     @AfterEach
-    void tearDown() {
+    void tearDown() throws IOException {
         tempFile.close();
     }
 
@@ -41,7 +41,7 @@ class TempFileTest {
     }
 
     @Test
-    void testDeleteFileNonExistent() {
+    void testDeleteFileNonExistent() throws IOException {
         File nonExistentFile = new File("non_existent_file.txt");
         TempFile.deleteFile(nonExistentFile);
         // Deleting a non-existent file should not result in an error.

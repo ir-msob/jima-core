@@ -18,7 +18,7 @@ import java.util.Set;
  *
  * @param <ID> The type of the ID of the criteria.
  */
-public interface BaseCriteria<ID extends Comparable<ID> & Serializable> extends BaseType {
+public interface BaseCriteria<ID extends Comparable<ID> & Serializable> extends BaseType, Serializable {
 
     /**
      * Returns a set of includes for the criteria.

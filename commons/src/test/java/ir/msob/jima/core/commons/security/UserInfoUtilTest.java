@@ -58,7 +58,7 @@ class UserInfoUtilTest {
     }
 
     @Test
-    void testDecodeUserWithEmptyEncodedUser() throws JsonProcessingException {
+    void testDecodeUserWithEmptyEncodedUser() {
         String encodedUser = ""; // Empty encoded user
         assertThrows(IllegalArgumentException.class, () -> {
             UserInfoUtil.decodeUser(objectMapper, encodedUser, ConcreteBaseUser.class);
@@ -66,7 +66,7 @@ class UserInfoUtilTest {
     }
 
     @Test
-    void testDecodeUserWithInvalidEncodedUser() throws JsonProcessingException {
+    void testDecodeUserWithInvalidEncodedUser() {
         String encodedUser = "InvalidBase64String"; // Invalid encoded user
         assertThrows(JsonEOFException.class, () -> UserInfoUtil.decodeUser(objectMapper, encodedUser, ConcreteBaseUser.class));
     }
