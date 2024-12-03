@@ -1,10 +1,10 @@
-package ir.msob.jima.core.commons.shared.audit.auditdomain;
+package ir.msob.jima.core.commons.related.auditdomain;
 
+import ir.msob.jima.core.commons.related.BaseRelatedModelAbstract;
 import ir.msob.jima.core.commons.related.relatedobject.relatedparty.RelatedPartyAbstract;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -20,11 +20,10 @@ import java.util.Objects;
  */
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
-public abstract class AuditDomainAbstract<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> implements Comparable<AuditDomainAbstract<ID, RP>>, Serializable {
+public abstract class AuditDomainAbstract<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> extends BaseRelatedModelAbstract<ID> implements Comparable<AuditDomainAbstract<ID, RP>> {
     /**
      * The related party.
      */
@@ -33,7 +32,6 @@ public abstract class AuditDomainAbstract<ID extends Comparable<ID> & Serializab
     /**
      * The date of the action.
      */
-    @Builder.Default
     private Instant actionDate = Instant.now();
     /**
      * The type of the action.
@@ -43,7 +41,6 @@ public abstract class AuditDomainAbstract<ID extends Comparable<ID> & Serializab
     /**
      * The version of the audit domain.
      */
-    @Builder.Default
     private Long version = 0L;
 
     /**

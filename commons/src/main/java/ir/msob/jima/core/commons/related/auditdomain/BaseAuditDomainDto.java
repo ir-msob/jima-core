@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.shared.audit.auditdomain;
+package ir.msob.jima.core.commons.related.auditdomain;
 
 import ir.msob.jima.core.commons.related.relatedobject.relatedparty.RelatedPartyAbstract;
 
@@ -7,12 +7,12 @@ import java.util.Comparator;
 import java.util.SortedSet;
 
 /**
- * The 'BaseAuditDomain' interface represents a base interface for audit domain classes.
+ * The 'BaseAuditDomainDto' interface represents a base interface for audit domain classes.
  * It includes methods for getting and setting a sorted set of audit domains, and a default method for getting the latest audit domain.
  * The 'getLatestAuditDomain' method uses the Java 8 Stream API to find the audit domain with the maximum version.
  * The interface is parameterized with a type 'ID' that extends 'Comparable' and 'Serializable'.
  */
-public interface BaseAuditDomain<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> {
+public interface BaseAuditDomainDto<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> {
 
     /**
      * Get a sorted set of audit domains.

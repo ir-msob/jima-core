@@ -1,11 +1,9 @@
 package ir.msob.jima.core.commons.related.characteristic;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.criteria.BaseCriteria;
-import ir.msob.jima.core.commons.criteria.BaseCriteriaAbstract;
 import ir.msob.jima.core.commons.criteria.filter.BaseFilters;
 import ir.msob.jima.core.commons.criteria.filter.Filter;
-import ir.msob.jima.core.commons.domain.BaseIdModel;
+import ir.msob.jima.core.commons.related.BaseRelatedModelCriteriaAbstract;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,7 +27,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CharacteristicCriteria<ID extends Comparable<ID> & Serializable> extends BaseCriteriaAbstract<ID> implements BaseFilters {
+public class CharacteristicCriteria<ID extends Comparable<ID> & Serializable, RM extends Characteristic<ID>> extends BaseRelatedModelCriteriaAbstract<ID, RM> implements BaseFilters {
     /**
      * The key filter of the characteristic filters.
      */
@@ -45,18 +43,20 @@ public class CharacteristicCriteria<ID extends Comparable<ID> & Serializable> ex
      */
     private Filter<String> dataType;
 
-    public <C extends CharacteristicCriteria<ID>, DTO extends Characteristic<ID>> boolean isMatching(C criteria, DTO dto) {
-        if (!super.isMatching((BaseCriteria<ID>) criteria, (BaseIdModel<ID>) dto)) {
+    @Override
+    public boolean isMatching(RM relatedModel) {
+        if (!super.isMatching(relatedModel)) {
             return false;
         }
-        if (Filter.isMatching(criteria.getKey(), dto.getKey())) {
+
+        if (Filter.isMatching(this.getKey(), relatedModel.getKey())) {
             return false;
         }
-        if (criteria.getValue() != null) {
-            if (!criteria.getValue().isMatchingSerializable(dto.getValue())) {
+        if (this.getValue() != null) {
+            if (!this.getValue().isMatchingSerializable(relatedModel.getValue())) {
                 return false;
             }
         }
-        return !Filter.isMatching(criteria.getDataType(), dto.getDataType());
+        return !Filter.isMatching(this.getDataType(), relatedModel.getDataType());
     }
 }

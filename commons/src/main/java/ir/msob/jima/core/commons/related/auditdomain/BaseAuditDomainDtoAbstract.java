@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.shared.audit.auditdomain;
+package ir.msob.jima.core.commons.related.auditdomain;
 
 import ir.msob.jima.core.commons.related.relatedobject.relatedparty.RelatedPartyAbstract;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * The {@code BaseAuditDomainAbstract} class is an abstract class that implements the {@code BaseAuditDomain} interface.
+ * The {@code BaseAuditDomainDtoAbstract} class is an abstract class that implements the {@code BaseAuditDomainDto} interface.
  * It includes a field for a sorted set of audit domains and getter and setter methods for this field.
  * The class uses the {@code TreeSet} class to provide a sorted set implementation.
  * Additionally, it provides a no-argument constructor and a {@code toString} method that calls the superclass's {@code toString} method.
@@ -20,7 +20,7 @@ import java.util.TreeSet;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseAuditDomainAbstract<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> implements BaseAuditDomain<ID, RP> {
+public abstract class BaseAuditDomainDtoAbstract<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> implements BaseAuditDomainDto<ID, RP> {
     /**
      * A sorted set of audit domains.
      */

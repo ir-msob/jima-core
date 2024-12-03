@@ -1,7 +1,6 @@
 package ir.msob.jima.core.commons.criteria;
 
 import ir.msob.jima.core.commons.criteria.filter.Filter;
-import ir.msob.jima.core.commons.dto.BaseChildDto;
 
 import java.io.Serializable;
 
@@ -34,10 +33,4 @@ public interface BaseChildCriteria<ID extends Comparable<ID> & Serializable> ext
      */
     void setParentId(Filter<ID> id);
 
-    default <C extends BaseChildCriteria<ID>, DTO extends BaseChildDto<ID>> boolean isMatching(C criteria, DTO dto) {
-        if (!BaseCriteria.super.isMatching(criteria, dto)) {
-            return false;
-        }
-        return !Filter.isMatching(criteria.getParentId(), dto.getParentId());
-    }
 }

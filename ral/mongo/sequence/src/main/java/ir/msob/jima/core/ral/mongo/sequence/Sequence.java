@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
  */
 @Getter
 @Setter
-@ToString
+@ToString(callSuper = true)
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,35 +39,6 @@ public class Sequence implements BaseDomain<String> {
     @Builder.Default
     private long value = 1L;
 
-    /**
-     * Retrieves the domain ID of the sequence.
-     *
-     * @return the ID of the sequence.
-     */
-    @Override
-    public String getDomainId() {
-        return getId();
-    }
-
-    /**
-     * Sets the domain ID of the sequence.
-     *
-     * @param s the ID to set.
-     */
-    @Override
-    public void setDomainId(String s) {
-        setId(s);
-    }
-
-    /**
-     * Retrieves the name of the domain ID field.
-     *
-     * @return the name of the ID field.
-     */
-    @Override
-    public String getDomainIdName() {
-        return FN.id.name();
-    }
 
     /**
      * Enum representing the field names of the sequence.

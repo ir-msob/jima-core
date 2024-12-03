@@ -32,32 +32,12 @@ public abstract class BaseIdModelAbstract<ID extends Comparable<ID> & Serializab
     private ID id;
 
     /**
-     * Returns the domain ID of the model.
-     *
-     * @return The domain ID.
-     */
-    @Override
-    public ID getDomainId() {
-        return id;
-    }
-
-    /**
-     * Sets the domain ID of the model.
-     *
-     * @param id The domain ID.
-     */
-    @Override
-    public void setDomainId(ID id) {
-        this.id = id;
-    }
-
-    /**
      * Returns the domain ID field name of the model.
      *
      * @return The domain ID field name.
      */
     @Override
-    public String getDomainIdName() {
+    public String getIdName() {
         return FN.id.name();
     }
 

@@ -1,7 +1,7 @@
-package ir.msob.jima.core.commons.dto;
+package ir.msob.jima.core.commons.related;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.domain.BaseIdModelAbstract;
+import ir.msob.jima.core.commons.dto.BaseChildDtoAbstract;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +14,5 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class BaseDtoAbstract<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements BaseDto<ID> {
-
+public abstract class BaseRelatedModelAbstract<ID extends Comparable<ID> & Serializable> extends BaseChildDtoAbstract<ID> implements BaseRelatedModel<ID> {
 }

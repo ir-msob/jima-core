@@ -1,8 +1,5 @@
 package ir.msob.jima.core.commons.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.annotation.Transient;
-
 import java.io.Serializable;
 
 /**
@@ -24,24 +21,22 @@ public interface BaseIdModel<ID extends Comparable<ID> & Serializable> extends S
      *
      * @return The domain ID.
      */
-    @Transient
-    @JsonIgnore
-    ID getDomainId();
+    ID getId();
 
     /**
      * Sets the domain ID of the model.
      *
      * @param id The domain ID.
      */
-    void setDomainId(ID id);
+    void setId(ID id);
 
     /**
      * Returns the domain ID field name of the model.
      *
      * @return The domain ID field name.
      */
-    @Transient
-    @JsonIgnore
-    String getDomainIdName();
+    default String getIdName() {
+        return "id";
+    }
 
 }

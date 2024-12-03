@@ -1,8 +1,8 @@
 package ir.msob.jima.core.commons.related.relatedobject;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.domain.BaseIdModelAbstract;
-import ir.msob.jima.core.commons.shared.audit.auditinfo.AuditInfo;
+import ir.msob.jima.core.commons.related.BaseRelatedModelAbstract;
+import ir.msob.jima.core.commons.shared.auditinfo.AuditInfo;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -44,7 +44,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<RelatedObjectAbstract<ID, RID>> {
+public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable> extends BaseRelatedModelAbstract<ID> implements Comparable<RelatedObjectAbstract<ID, RID>> {
 
     /**
      * The name of the related object.

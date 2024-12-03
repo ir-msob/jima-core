@@ -1,12 +1,10 @@
 package ir.msob.jima.core.commons.related.relatedobject;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.criteria.BaseCriteria;
-import ir.msob.jima.core.commons.criteria.BaseCriteriaAbstract;
 import ir.msob.jima.core.commons.criteria.filter.BaseFilters;
 import ir.msob.jima.core.commons.criteria.filter.Filter;
-import ir.msob.jima.core.commons.domain.BaseIdModel;
-import ir.msob.jima.core.commons.shared.audit.auditinfo.AuditInfoFilters;
+import ir.msob.jima.core.commons.related.BaseRelatedModelCriteriaAbstract;
+import ir.msob.jima.core.commons.shared.auditinfo.AuditInfoFilters;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriodFilters;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,9 +22,9 @@ import java.io.Serializable;
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedObjectCriteriaAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable> extends BaseCriteriaAbstract<ID> implements BaseFilters {
+public abstract class RelatedObjectCriteriaAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable, RM extends RelatedObjectAbstract<ID, RID>> extends BaseRelatedModelCriteriaAbstract<ID, RM> implements BaseFilters {
 
     /**
      * Filter for the name of the related object.
@@ -62,32 +60,33 @@ public abstract class RelatedObjectCriteriaAbstract<ID extends Comparable<ID> & 
 
     private AuditInfoFilters auditInfo;
 
-    public <C extends RelatedObjectCriteriaAbstract<ID, RID>, DTO extends RelatedObjectAbstract<ID, RID>> boolean isMatching(C criteria, DTO dto) {
-        if (!super.isMatching((BaseCriteria<ID>) criteria, (BaseIdModel<ID>) dto)) {
+    @Override
+    public boolean isMatching(RM relatedModel) {
+        if (!super.isMatching(relatedModel)) {
             return false;
         }
-        if (Filter.isMatching(criteria.getName(), dto.getName())) {
+        if (Filter.isMatching(this.getName(), relatedModel.getName())) {
             return false;
         }
-        if (Filter.isMatching(criteria.getRelatedId(), dto.getRelatedId())) {
+        if (Filter.isMatching(this.getRelatedId(), relatedModel.getRelatedId())) {
             return false;
         }
-        if (Filter.isMatching(criteria.getRole(), dto.getRole())) {
+        if (Filter.isMatching(this.getRole(), relatedModel.getRole())) {
             return false;
         }
-        if (Filter.isMatching(criteria.getReferringType(), dto.getReferringType())) {
+        if (Filter.isMatching(this.getReferringType(), relatedModel.getReferringType())) {
             return false;
         }
-        if (Filter.isMatching(criteria.getStatus(), dto.getStatus())) {
+        if (Filter.isMatching(this.getStatus(), relatedModel.getStatus())) {
             return false;
         }
-        if (Filter.isMatching(criteria.getEnabled(), dto.getEnabled())) {
+        if (Filter.isMatching(this.getEnabled(), relatedModel.getEnabled())) {
             return false;
         }
-        if (TimePeriodFilters.isMatching(criteria.getValidFor(), dto.getValidFor())) {
+        if (TimePeriodFilters.isMatching(this.getValidFor(), relatedModel.getValidFor())) {
             return false;
         }
-        return !AuditInfoFilters.isMatching(criteria.getAuditInfo(), dto.getAuditInfo());
+        return !AuditInfoFilters.isMatching(this.getAuditInfo(), relatedModel.getAuditInfo());
     }
 
 }

@@ -32,7 +32,7 @@ import java.io.Serializable;
 @SuperBuilder
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class BaseChildCriteriaAbstract<ID extends Comparable<ID> & Serializable> extends BaseCriteriaAbstract<ID> {
+public abstract class BaseChildCriteriaAbstract<ID extends Comparable<ID> & Serializable> extends BaseCriteriaAbstract<ID> implements BaseChildCriteria<ID> {
 
     /**
      * The version control for the class.
@@ -44,5 +44,4 @@ public abstract class BaseChildCriteriaAbstract<ID extends Comparable<ID> & Seri
      * The parent criteria ID of the model.
      */
     private Filter<ID> parentId;
-
 }

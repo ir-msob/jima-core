@@ -1,11 +1,9 @@
 package ir.msob.jima.core.commons.related.contactmedium;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.criteria.BaseCriteria;
-import ir.msob.jima.core.commons.criteria.BaseCriteriaAbstract;
 import ir.msob.jima.core.commons.criteria.filter.BaseFilters;
 import ir.msob.jima.core.commons.criteria.filter.Filter;
-import ir.msob.jima.core.commons.domain.BaseIdModel;
+import ir.msob.jima.core.commons.related.BaseRelatedModelCriteriaAbstract;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriodFilters;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,29 +28,30 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ContactMediumCriteriaAbstract<ID extends Comparable<ID> & Serializable> extends BaseCriteriaAbstract<ID> implements BaseFilters {
+public class ContactMediumCriteriaAbstract<ID extends Comparable<ID> & Serializable, RM extends ContactMediumAbstract<ID>> extends BaseRelatedModelCriteriaAbstract<ID, RM> implements BaseFilters {
     private Filter<String> name;
     private Filter<String> type;
     private Filter<String> value;
     private Filter<Integer> order;
     private TimePeriodFilters validFor;
 
-    public <C extends ContactMediumCriteriaAbstract<ID>, DTO extends ContactMediumAbstract<ID>> boolean isMatching(C criteria, DTO dto) {
-        if (!super.isMatching((BaseCriteria<ID>) criteria, (BaseIdModel<ID>) dto)) {
+    @Override
+    public boolean isMatching(RM relatedModel) {
+        if (!super.isMatching(relatedModel)) {
             return false;
         }
-        if (Filter.isMatching(criteria.getName(), dto.getName())) {
+        if (Filter.isMatching(this.getName(), relatedModel.getName())) {
             return false;
         }
-        if (Filter.isMatching(criteria.getType(), dto.getType())) {
+        if (Filter.isMatching(this.getType(), relatedModel.getType())) {
             return false;
         }
-        if (Filter.isMatching(criteria.getValue(), dto.getValue())) {
+        if (Filter.isMatching(this.getValue(), relatedModel.getValue())) {
             return false;
         }
-        if (Filter.isMatching(criteria.getOrder(), dto.getOrder())) {
+        if (Filter.isMatching(this.getOrder(), relatedModel.getOrder())) {
             return false;
         }
-        return !TimePeriodFilters.isMatching(criteria.getValidFor(), dto.getValidFor());
+        return !TimePeriodFilters.isMatching(this.getValidFor(), relatedModel.getValidFor());
     }
 }

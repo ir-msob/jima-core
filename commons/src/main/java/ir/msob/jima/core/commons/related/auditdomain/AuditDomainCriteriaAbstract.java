@@ -1,8 +1,10 @@
-package ir.msob.jima.core.commons.shared.audit.auditdomain;
+package ir.msob.jima.core.commons.related.auditdomain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.criteria.filter.BaseFilters;
 import ir.msob.jima.core.commons.criteria.filter.Filter;
+import ir.msob.jima.core.commons.related.BaseRelatedModelCriteriaAbstract;
+import ir.msob.jima.core.commons.related.relatedobject.relatedparty.RelatedPartyAbstract;
 import ir.msob.jima.core.commons.related.relatedobject.relatedparty.RelatedPartyCriteriaAbstract;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,7 @@ import java.io.Serializable;
 import java.time.Instant;
 
 /**
- * The {@code AuditDomainFiltersAbstract} class represents a set of filters for querying audit domains.
+ * The {@code AuditDomainCriteriaAbstract} class represents a set of filters for querying audit domains.
  * It includes filters for the related party ID, action date, and action type.
  * This class implements the {@code BaseFilters} interface and includes getter and setter methods for each filter.
  * Additionally, it provides a no-argument constructor and a {@code toString} method that calls the superclass's {@code toString} method.
@@ -24,7 +26,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class AuditDomainFiltersAbstract<ID extends Comparable<ID> & Serializable, RPF extends RelatedPartyCriteriaAbstract<ID>> implements BaseFilters {
+public abstract class AuditDomainCriteriaAbstract<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>, RPF extends RelatedPartyCriteriaAbstract<ID, RP>, RM extends AuditDomainAbstract<ID, RP>> extends BaseRelatedModelCriteriaAbstract<ID, RM> implements BaseFilters {
     /**
      * Filter for the related party.
      */
@@ -37,4 +39,20 @@ public abstract class AuditDomainFiltersAbstract<ID extends Comparable<ID> & Ser
      * Filter for the action type.
      */
     private Filter<String> actionType;
+
+    @Override
+    public boolean isMatching(RM relatedModel) {
+        if (!super.isMatching(relatedModel)) {
+            return false;
+        }
+        if (this.getRelatedParty() != null) {
+            if (!this.getRelatedParty().isMatching(relatedModel.getRelatedParty())) {
+                return false;
+            }
+        }
+        if (Filter.isMatching(this.getActionDate(), relatedModel.getActionDate())) {
+            return false;
+        }
+        return !Filter.isMatching(this.getActionType(), relatedModel.getActionType());
+    }
 }

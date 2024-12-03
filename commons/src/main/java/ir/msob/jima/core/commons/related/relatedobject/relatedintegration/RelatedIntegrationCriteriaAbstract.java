@@ -18,5 +18,5 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedIntegrationCriteriaAbstract<ID extends Comparable<ID> & Serializable> extends RelatedObjectCriteriaAbstract<ID, String> {
+public abstract class RelatedIntegrationCriteriaAbstract<ID extends Comparable<ID> & Serializable, RM extends RelatedIntegrationAbstract<ID>> extends RelatedObjectCriteriaAbstract<ID, String, RM> {
 }

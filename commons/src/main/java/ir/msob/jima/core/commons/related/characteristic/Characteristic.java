@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.related.characteristic;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.domain.BaseIdModelAbstract;
+import ir.msob.jima.core.commons.related.BaseRelatedModelAbstract;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -32,7 +32,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Characteristic<ID extends Comparable<ID> & Serializable> extends BaseIdModelAbstract<ID> implements Comparable<Characteristic<ID>> {
+public class Characteristic<ID extends Comparable<ID> & Serializable> extends BaseRelatedModelAbstract<ID> implements Comparable<Characteristic<ID>> {
 
     /**
      * A non-blank string representing the key of the characteristic.

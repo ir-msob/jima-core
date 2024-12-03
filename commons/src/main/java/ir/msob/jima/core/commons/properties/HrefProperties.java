@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
+@ToString(callSuper = true)
 public class HrefProperties {
 
     /**
