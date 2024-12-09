@@ -1,6 +1,6 @@
 package ir.msob.jima.core.beans.scope;
 
-import ir.msob.jima.core.commons.scope.Resource;
+import ir.msob.jima.core.commons.resource.Resource;
 import ir.msob.jima.core.commons.scope.ResourceDto;
 import ir.msob.jima.core.commons.scope.Scope;
 import ir.msob.jima.core.commons.scope.ScopeDto;

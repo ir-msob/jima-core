@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Utility class for handling pagination-related tasks.
+ * Utility class for handling pagination-child tasks.
  */
 public class PaginationUtil {
 

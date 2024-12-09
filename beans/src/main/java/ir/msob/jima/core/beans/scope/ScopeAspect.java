@@ -3,7 +3,7 @@ package ir.msob.jima.core.beans.scope;
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import ir.msob.jima.core.commons.exception.resourcenotfound.ResourceNotFoundException;
 import ir.msob.jima.core.commons.operation.ConditionalOnOperationUtil;
-import ir.msob.jima.core.commons.scope.Resource;
+import ir.msob.jima.core.commons.resource.Resource;
 import ir.msob.jima.core.commons.scope.Scope;
 import ir.msob.jima.core.commons.shared.ResourceType;
 import lombok.RequiredArgsConstructor;

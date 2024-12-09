@@ -2,6 +2,7 @@ package ir.msob.jima.core.commons.scope;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.dto.BaseType;
+import ir.msob.jima.core.commons.resource.Resource;
 import ir.msob.jima.core.commons.shared.ResourceType;
 import lombok.*;
 

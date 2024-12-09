@@ -38,7 +38,7 @@ import java.util.Map;
 public class ChannelMessage<USER extends BaseUser, DATA extends ModelType> implements BaseType {
     /**
      * The metadata of the channel information.
-     * This map can hold additional information related to the channel message.
+     * This map can hold additional information child to the channel message.
      */
     @Builder.Default
     private Map<String, Serializable> metadata = new HashMap<>();

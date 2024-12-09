@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons.operation;
 
-import ir.msob.jima.core.commons.scope.Element;
+import ir.msob.jima.core.commons.element.Element;
 import ir.msob.jima.core.commons.shared.annotation.ClassAnnotationInfo;
 
 import java.lang.annotation.ElementType;
@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
  * <ul>
  *     <li>{@code operations}: An array of strings that specifies the types of operations
  *     that can be performed. This attribute is optional and defaults to an empty array.</li>
- *     <li>{@code related}: An array of {@link Element} that defines related elements
+ *     <li>{@code child}: An array of {@link Element} that defines child elements
  *     that may influence the conditional inclusion or exclusion of the component. This
  *     attribute is also optional and defaults to an empty array.</li>
  *     <li>{@code info}: A {@link ClassAnnotationInfo} object that provides metadata about
@@ -59,10 +59,10 @@ public @interface ConditionalOnOperation {
     String[] operations() default {};
 
     /**
-     * Specifies the related elements that may influence the conditional inclusion or
+     * Specifies the child elements that may influence the conditional inclusion or
      * exclusion of the component. This attribute is an alias for the 'value' attribute.
      *
-     * @return The related elements.
+     * @return The child elements.
      */
     Element[] related() default {};
 }

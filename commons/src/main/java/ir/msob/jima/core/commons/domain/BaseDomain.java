@@ -1,5 +1,6 @@
 package ir.msob.jima.core.commons.domain;
 
+import ir.msob.jima.core.commons.element.BaseElement;
 import ir.msob.jima.core.commons.shared.BaseModel;
 
 import java.io.Serializable;
@@ -17,6 +18,6 @@ import java.io.Serializable;
  *
  * @param <ID> The type of the ID of the domain model.
  */
-public interface BaseDomain<ID extends Comparable<ID> & Serializable> extends BaseModel, BaseIdModel<ID> {
+public interface BaseDomain<ID extends Comparable<ID> & Serializable> extends BaseModel, BaseElement<ID> {
 
 }

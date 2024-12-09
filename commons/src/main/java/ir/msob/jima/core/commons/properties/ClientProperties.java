@@ -6,9 +6,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * The `ClientProperties` class is a simple POJO (Plain Old Java Object) that holds client-related properties.
+ * The `ClientProperties` class is a simple POJO (Plain Old Java Object) that holds client-child properties.
  * It uses Lombok annotations for automatic generation of getters, setters, a no-argument constructor, and a toString method.
- * The `retry` field is an instance of the nested `Retry` class, which holds retry-related properties.
+ * The `retry` field is an instance of the nested `Retry` class, which holds retry-child properties.
  */
 @Setter
 @Getter
@@ -17,13 +17,13 @@ import lombok.ToString;
 public class ClientProperties {
     /**
      * The `retry` field is an instance of the `RetryProperties` class.
-     * This field holds retry-related properties for the client.
+     * This field holds retry-child properties for the client.
      */
     RetryProperties retryRequest = new RetryProperties();
 
     /**
      * The `retryConnection` field is an instance of the `RetryProperties` class.
-     * This field holds retry-related properties for the client's connections.
+     * This field holds retry-child properties for the client's connections.
      */
     RetryProperties retryConnection = new RetryProperties();
 }

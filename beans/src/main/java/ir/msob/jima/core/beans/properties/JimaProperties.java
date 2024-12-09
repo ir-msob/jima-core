@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  * constructor, streamlining the management of application properties.
  * </p>
  * <p>
- * The properties defined in this class include various configurations related to
+ * The properties defined in this class include various configurations child to
  * method statistics, security, client settings, test containers, locking mechanisms,
  * search functionalities, href management, signature handling, messaging, scope,
  * and CRUD operations.
@@ -31,17 +31,17 @@ import org.springframework.context.annotation.Configuration;
 public class JimaProperties {
 
     /**
-     * Configuration properties related to method statistics logging.
+     * Configuration properties child to method statistics logging.
      */
     private MethodStatsProperties methodStats = new MethodStatsProperties();
 
     /**
-     * Configuration properties related to application security settings.
+     * Configuration properties child to application security settings.
      */
     private SecurityProperties security = new SecurityProperties();
 
     /**
-     * Configuration properties related to client-specific settings.
+     * Configuration properties child to client-specific settings.
      */
     private ClientProperties client = new ClientProperties();
 
@@ -51,12 +51,12 @@ public class JimaProperties {
     private TestContainerProperties testContainer = new TestContainerProperties();
 
     /**
-     * Configuration properties related to locking mechanisms.
+     * Configuration properties child to locking mechanisms.
      */
     private LockProperties lock = new LockProperties();
 
     /**
-     * Configuration properties related to search functionalities.
+     * Configuration properties child to search functionalities.
      */
     private SearchProperties search = new SearchProperties();
 
@@ -66,7 +66,7 @@ public class JimaProperties {
     private HrefProperties href = new HrefProperties();
 
     /**
-     * Configuration properties related to signature handling.
+     * Configuration properties child to signature handling.
      */
     private SignatureProperties signature = new SignatureProperties();
 
@@ -76,12 +76,12 @@ public class JimaProperties {
     private MessageProperties message = new MessageProperties();
 
     /**
-     * Configuration properties related to scope management.
+     * Configuration properties child to scope management.
      */
     private ScopeProperties scope = new ScopeProperties();
 
     /**
-     * Configuration properties related to CRUD operations.
+     * Configuration properties child to CRUD operations.
      */
     private CrudProperties crud = new CrudProperties();
 }

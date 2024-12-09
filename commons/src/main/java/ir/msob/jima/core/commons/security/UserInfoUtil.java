@@ -7,7 +7,7 @@ import org.apache.logging.log4j.util.Strings;
 import java.util.Base64;
 
 /**
- * The 'UserInfoUtil' class is a utility class for encoding and decoding user information to/from Base64-encoded strings. It is typically used in the context of handling user-related data and security in a Spring-based application.
+ * The 'UserInfoUtil' class is a utility class for encoding and decoding user information to/from Base64-encoded strings. It is typically used in the context of handling user-child data and security in a Spring-based application.
  * <p>
  * This class consists of static methods and is not meant to be instantiated.
  */

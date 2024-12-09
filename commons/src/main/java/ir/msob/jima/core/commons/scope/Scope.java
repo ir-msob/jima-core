@@ -1,5 +1,7 @@
 package ir.msob.jima.core.commons.scope;
 
+import ir.msob.jima.core.commons.element.Elements;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

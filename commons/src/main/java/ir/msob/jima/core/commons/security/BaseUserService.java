@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons.security;
 
-import ir.msob.jima.core.commons.related.relatedobject.relatedparty.RelatedPartyAbstract;
+import ir.msob.jima.core.commons.child.relatedobject.relatedparty.RelatedPartyAbstract;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -95,10 +95,10 @@ public interface BaseUserService {
     <USER extends BaseUser> USER getSystemUser();
 
     /**
-     * Retrieves the related party for a user.
+     * Retrieves the child party for a user.
      *
-     * @param user The user for whom the related party is to be retrieved.
-     * @return the related party
+     * @param user The user for whom the child party is to be retrieved.
+     * @return the child party
      */
     <ID extends Comparable<ID> & Serializable, USER extends BaseUser, RP extends RelatedPartyAbstract<ID>> RP getRelatedParty(USER user);
 }

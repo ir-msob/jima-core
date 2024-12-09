@@ -23,7 +23,7 @@ public interface BaseCoreRsocketResource<ID extends Comparable<ID> & Serializabl
 
     /**
      * Get the user service associated with this RSocket resource. The user service can be used to
-     * perform operations related to user management.
+     * perform operations child to user management.
      *
      * @return An instance of {@link BaseUserService} specific to the application.
      */

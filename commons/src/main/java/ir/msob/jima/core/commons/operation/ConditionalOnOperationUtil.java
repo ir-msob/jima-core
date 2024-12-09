@@ -1,9 +1,9 @@
 package ir.msob.jima.core.commons.operation;
 
+import ir.msob.jima.core.commons.element.Element;
+import ir.msob.jima.core.commons.element.Elements;
 import ir.msob.jima.core.commons.properties.CrudProperties;
-import ir.msob.jima.core.commons.scope.Element;
-import ir.msob.jima.core.commons.scope.Elements;
-import ir.msob.jima.core.commons.scope.Resource;
+import ir.msob.jima.core.commons.resource.Resource;
 import ir.msob.jima.core.commons.scope.Scope;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -94,7 +94,7 @@ public class ConditionalOnOperationUtil {
     }
 
     /**
-     * Validates related operations based on the provided scope and
+     * Validates child operations based on the provided scope and
      * conditional operation annotations.
      *
      * @param scope                  The scope to evaluate.
