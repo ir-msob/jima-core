@@ -8,8 +8,31 @@ import java.util.Comparator;
 import java.util.Objects;
 
 /**
- * Data Transfer Object (DTO) for scopes.
- * Represents a scope with a single string value.
+ * The {@code ScopeDto} class is a Data Transfer Object (DTO) that represents a scope
+ * with associated string values for element and operation. It is used to transfer
+ * data between different layers of the application, particularly in scenarios involving
+ * scope management and operations.
+ *
+ * <p>This class implements the {@link Comparable} interface, allowing instances of
+ * {@code ScopeDto} to be compared based on their element and operation values.</p>
+ *
+ * <p>Key Features:</p>
+ * <ul>
+ *     <li>Provides a builder pattern for easy instantiation.</li>
+ *     <li>Includes methods for cloning from a {@link Scope} object.</li>
+ *     <li>Overrides {@code equals}, {@code hashCode}, and {@code compareTo} methods
+ *     for proper comparison and hashing behavior.</li>
+ * </ul>
+ *
+ * <p>Example usage:</p>
+ * <pre>
+ * {@code
+ * ScopeDto scopeDto = ScopeDto.builder()
+ *     .element("exampleElement")
+ *     .operation("exampleOperation")
+ *     .build();
+ * }
+ * </pre>
  */
 @Getter
 @Setter
@@ -19,26 +42,29 @@ import java.util.Objects;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ScopeDto implements BaseType, Comparable<ScopeDto> {
-    private String scope;
+    private String element;
+    private String operation;
 
     /**
      * Creates a clone of the given {@link Scope} as a {@link ScopeDto}.
      *
      * @param scope the scope to clone
-     * @return a new instance of ScopeDto with the same value as the given scope
+     * @return a new instance of {@code ScopeDto} with the same values as the given scope
      */
     public static ScopeDto clone(Scope scope) {
         return ScopeDto.builder()
-                .scope(scope.value())
+                .element(scope.element())
+                .operation(scope.operation())
                 .build();
     }
 
     /**
-     * Compares this ScopeDto with another for order.
-     * Comparison is based on the scope field, with nulls considered less than non-nulls.
+     * Compares this {@code ScopeDto} with another for order.
+     * Comparison is based on the element field, with nulls considered less than non-nulls.
      *
-     * @param o the ScopeDto to be compared
-     * @return a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object
+     * @param o the {@code ScopeDto} to be compared
+     * @return a negative integer, zero, or a positive integer as this object is less than,
+     * equal to, or greater than the specified object
      */
     @Override
     public int compareTo(ScopeDto o) {
@@ -50,16 +76,18 @@ public class ScopeDto implements BaseType, Comparable<ScopeDto> {
             return 1;
         }
 
-        String thisScope = Objects.requireNonNull(this.scope);
-        String otherScope = Objects.requireNonNull(o.scope);
+        // Compare by element
+        int elementComparison = Comparator.nullsFirst(String::compareTo)
+                .compare(this.element, o.element);
 
-        return Comparator.comparing(String::valueOf, Comparator.nullsFirst(String::compareTo))
-                .compare(thisScope, otherScope);
+        // If elements are equal, compare by operation
+        return (elementComparison != 0) ? elementComparison :
+                Comparator.nullsFirst(String::compareTo).compare(this.operation, o.operation);
     }
 
     /**
      * Indicates whether some other object is "equal to" this one.
-     * Equality is based on the scope field.
+     * Equality is based on the element and operation fields.
      *
      * @param o the reference object with which to compare
      * @return true if this object is the same as the obj argument; false otherwise
@@ -70,17 +98,19 @@ public class ScopeDto implements BaseType, Comparable<ScopeDto> {
         if (o == null || getClass() != o.getClass()) return false;
 
         ScopeDto scopeDto = (ScopeDto) o;
-        return Objects.equals(scope, scopeDto.scope);
+        return Objects.equals(element, scopeDto.element) &&
+                Objects.equals(operation, scopeDto.operation);
     }
 
     /**
      * Returns a hash code value for the object.
-     * This method is supported for the benefit of hash tables such as those provided by {@link java.util.HashMap}.
+     * This method is supported for the benefit of hash tables such as those provided by
+     * {@link java.util.HashMap}.
      *
      * @return a hash code value for this object
      */
     @Override
     public int hashCode() {
-        return Objects.hash(scope);
+        return Objects.hash(element, operation);
     }
 }

@@ -1,54 +1,146 @@
 package ir.msob.jima.core.commons.operation;
 
+import ir.msob.jima.core.commons.properties.CrudProperties;
+import ir.msob.jima.core.commons.scope.Element;
+import ir.msob.jima.core.commons.scope.Elements;
+import ir.msob.jima.core.commons.scope.Resource;
+import ir.msob.jima.core.commons.scope.Scope;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
- * The 'ConditionalOnOperationUtil' class provides utility methods for working with 'ConditionalOnOperation' annotations.
- * The class includes a 'hasOperation' method that checks whether a specific operation is allowed for a given class.
- * The class also includes a private constructor to prevent instantiation.
+ * The {@code ConditionalOnOperationUtil} class provides utility methods for handling
+ * {@code ConditionalOnOperation} annotations. It includes functionality to determine
+ * if a specific operation is permitted for a given class based on its associated
+ * scope and CRUD properties.
+ * <p>
+ * This utility class is designed to facilitate the evaluation of operations
+ * in the context of defined scopes and CRUD properties, ensuring that
+ * operations are only permitted when appropriate conditions are met.
+ * </p>
  */
 public class ConditionalOnOperationUtil {
 
     /**
      * Private constructor to prevent instantiation.
+     * <p>
+     * This constructor is private to prevent the instantiation of this utility class,
+     * as it is intended to be used statically.
+     * </p>
      */
     private ConditionalOnOperationUtil() {
-        // The initial class cannot be instantiated by other classes.
+        // Prevent instantiation of utility class
     }
 
     /**
-     * Checks whether a specific operation is allowed for a given class.
-     * The method retrieves the 'ConditionalOnOperation' annotation from the class.
-     * If the annotation is not present, the method returns true, indicating that the operation is allowed.
-     * If the annotation is present, the method checks whether the operation is included in the operations specified in the annotation.
-     * The method treats the 'READ' operation as equivalent to the 'READS' operation, and the 'WRITE' operation as equivalent to the 'WRITES' operation.
+     * Checks if a specific operation is permitted for a given class based on the
+     * provided scope and CRUD properties.
      *
-     * @param operation The operation to check.
-     * @param clazz     The class to check.
-     * @return True if the operation is allowed for the class, false otherwise.
+     * @param scope          The scope to evaluate against.
+     * @param crudProperties The CRUD properties containing domain and element information.
+     * @param clazz          The class to evaluate.
+     * @return {@code true} if the operation is permitted for the class; {@code false} otherwise.
      */
-    public static boolean hasOperation(String operation, Class<?> clazz) {
+    public static boolean hasOperation(Scope scope, CrudProperties crudProperties, Class<?> clazz) {
+        Resource resource = Resource.info.getAnnotation(clazz);
+        if (resource == null) {
+            return true;
+        }
         ConditionalOnOperation conditionalOnOperation = ConditionalOnOperation.info.getAnnotation(clazz);
-        if (conditionalOnOperation == null) {
-            // If domain information is not found, the CRUD operation is allowed for the class.
+
+        CrudProperties.Domain domain = crudProperties.getDomains().stream()
+                .filter(d -> d.getName().equalsIgnoreCase(resource.value()))
+                .findFirst()
+                .orElse(null);
+
+        // If no domain and no conditional operation, allow the operation
+        if (domain == null && conditionalOnOperation == null) {
             return true;
         }
 
-        // Convert CRUD operations to a stream and check for a match with the input operation.
-        return Arrays.stream(ArrayUtils.addAll(conditionalOnOperation.value(), conditionalOnOperation.operations()))
-                .flatMap(co -> {
-                    if (Objects.equals(co, Operations.READ)) {
-                        return Stream.of(Operations.READS);
-                    } else if (Objects.equals(co, Operations.WRITE)) {
-                        return Stream.of(Operations.WRITES);
-                    } else {
-                        return Stream.of(co);
-                    }
-                })
-                .anyMatch(operationType -> operationType.equals(operation));
+        // Check based on the scope element
+        if (scope.element().equalsIgnoreCase(Elements.DOMAIN)) {
+            return checkDomainOperations(scope, domain, conditionalOnOperation);
+        } else {
+            return checkRelatedOperations(scope, domain, conditionalOnOperation);
+        }
+    }
+
+    /**
+     * Validates domain-specific operations based on the provided scope and
+     * conditional operation annotations.
+     *
+     * @param scope                  The scope to evaluate.
+     * @param domain                 The domain containing operation definitions.
+     * @param conditionalOnOperation The conditional operation annotation for the class.
+     * @return {@code true} if the operation is allowed; {@code false} otherwise.
+     */
+    private static boolean checkDomainOperations(Scope scope, CrudProperties.Domain domain,
+                                                 ConditionalOnOperation conditionalOnOperation) {
+        if (domain != null) {
+            return domain.getOperations().stream()
+                    .flatMap(ConditionalOnOperationUtil::mapOperations)
+                    .anyMatch(operationType -> operationType.equalsIgnoreCase(scope.operation()));
+        } else if (conditionalOnOperation != null) {
+            return Arrays.stream(ArrayUtils.addAll(conditionalOnOperation.operations()))
+                    .flatMap(ConditionalOnOperationUtil::mapOperations)
+                    .anyMatch(operationType -> operationType.equalsIgnoreCase(scope.operation()));
+        }
+        return true;
+    }
+
+    /**
+     * Validates related operations based on the provided scope and
+     * conditional operation annotations.
+     *
+     * @param scope                  The scope to evaluate.
+     * @param domain                 The domain containing operation definitions.
+     * @param conditionalOnOperation The conditional operation annotation for the class.
+     * @return {@code true} if the operation is allowed; {@code false} otherwise.
+     */
+    private static boolean checkRelatedOperations(Scope scope, CrudProperties.Domain domain,
+                                                  ConditionalOnOperation conditionalOnOperation) {
+        Optional<Element> element = Arrays.stream(conditionalOnOperation.related())
+                .filter(e -> e.element().equalsIgnoreCase(scope.element()))
+                .findFirst();
+
+        Optional<CrudProperties.Element> elementProperty = Optional.empty();
+        if (domain != null) {
+            elementProperty = domain.getElements().stream()
+                    .filter(e -> e.getName().equalsIgnoreCase(scope.element()))
+                    .findFirst();
+        }
+
+        if (elementProperty.isPresent()) {
+            return elementProperty.get().getOperations().stream()
+                    .flatMap(ConditionalOnOperationUtil::mapOperations)
+                    .anyMatch(operationType -> operationType.equalsIgnoreCase(scope.operation()));
+        } else if (element.isPresent()) {
+            return Arrays.stream(ArrayUtils.addAll(element.get().operations()))
+                    .flatMap(ConditionalOnOperationUtil::mapOperations)
+                    .anyMatch(operationType -> operationType.equalsIgnoreCase(scope.operation()));
+        }
+        return true;
+    }
+
+    /**
+     * Maps a given operation to its corresponding operation types, expanding
+     * READ and WRITE operations to their respective multiple types.
+     *
+     * @param operation The operation to map.
+     * @return A stream of operation types corresponding to the input operation.
+     */
+    private static Stream<String> mapOperations(String operation) {
+        if (Objects.equals(operation, Operations.READ)) {
+            return Operations.READS.stream();
+        } else if (Objects.equals(operation, Operations.WRITE)) {
+            return Operations.WRITES.stream();
+        } else {
+            return Stream.of(operation);
+        }
     }
 }

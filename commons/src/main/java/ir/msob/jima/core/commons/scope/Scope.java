@@ -6,17 +6,51 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used to mark a method as a Scope.
- * It provides a single property: value.
+ * The {@code Scope} annotation is used to define specific scopes within the application.
+ * It provides metadata about the scope type and the operations that can be performed
+ * within that scope.
+ *
+ * <p>This annotation is particularly useful for marking methods that define the boundaries
+ * of operations in a domain-driven design, allowing for better organization and management
+ * of application logic.</p>
+ *
+ * <p>Properties:</p>
+ * <ul>
+ *     <li>{@code element}: Specifies the type of scope, such as "domain", "relatedParty",
+ *     or "relatedAction". This property defaults to {@link Elements#DOMAIN}.</li>
+ *     <li>{@code operation}: Specifies the type of operation that can be performed within
+ *     the defined scope, such as "count", "count-all", "save", or "save-many". This
+ *     property is mandatory.</li>
+ * </ul>
+ *
+ * <p>Example usage:</p>
+ * <pre>
+ * {@code
+ * @Scope(operation = "save")
+ * public void saveEntity(MyEntity entity) {
+ *     // Implementation here
+ * }
+ * }
+ * </pre>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Scope {
     /**
-     * This property represents the value of the Scope.
-     * It is a required property.
+     * Specifies the type of scope.
+     * This value can represent various scope types, such as "domain", "relatedParty",
+     * or "relatedAction". The default value is {@link Elements#DOMAIN}.
      *
-     * @return The value of the Scope.
+     * @return the type of scope
      */
-    String value();
+    String element() default Elements.DOMAIN;
+
+    /**
+     * Specifies the type of operation that can be performed within the defined scope.
+     * This value can represent various operation types, such as "count", "count-all",
+     * "save", or "save-many". This property is required.
+     *
+     * @return the type of operation
+     */
+    String operation();
 }

@@ -52,10 +52,10 @@ public class Operations {
     public static final List<String> DELETES = List.of(DELETE_BY_ID, DELETE_BY_KEY, DELETE_BY_NAME, DELETE_BY_RELATED_ID, DELETE, DELETE_MANY, DELETE_ALL);
     public static final List<String> SAVES = List.of(SAVE, SAVE_MANY);
     public static final List<String> UPDATES = List.of(UPDATE_BY_ID, UPDATE_BY_KEY, UPDATE_BY_NAME, UPDATE_BY_RELATED_ID, UPDATE, UPDATE_MANY, EDIT_BY_ID, EDIT, EDIT_MANY, RESUME, SUSPEND, COMPLETE, START, RESUME_BY_ID, SUSPEND_BY_ID, COMPLETE_BY_ID, START_BY_ID);
-    public static final List<String> READS = List.of(COUNT, COUNT_ALL, GET_BY_ID, GET_ONE, GET_MANY, GET_STREAM, GET_PAGE, REPORT, REDIRECT);
     public static final List<String> WRITES = Stream.of(SAVES, UPDATES, DELETES)
             .flatMap(List::stream)
             .toList();
+    public static final List<String> READS = List.of(COUNT, COUNT_ALL, GET_BY_ID, GET_ONE, GET_MANY, GET_STREAM, GET_PAGE, REPORT, REDIRECT);
 
     private Operations() {
     }

@@ -8,10 +8,20 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * This class represents the properties for the Jima application.
- * It is annotated with @Configuration to indicate that it is a source of bean definitions.
- * The @ConfigurationProperties annotation is used to specify the prefix used in the properties file.
- * It uses Lombok annotations for automatic generation of getters, setters, and a no-argument constructor.
+ * The {@code JimaProperties} class serves as a configuration holder for the Jima application.
+ * <p>
+ * This class is annotated with {@link Configuration} to indicate that it provides
+ * bean definitions and is annotated with {@link ConfigurationProperties} to specify
+ * the prefix used for properties in the application configuration files. It utilizes
+ * Lombok annotations for automatic generation of getters, setters, and a no-argument
+ * constructor, streamlining the management of application properties.
+ * </p>
+ * <p>
+ * The properties defined in this class include various configurations related to
+ * method statistics, security, client settings, test containers, locking mechanisms,
+ * search functionalities, href management, signature handling, messaging, scope,
+ * and CRUD operations.
+ * </p>
  */
 @Setter
 @Getter
@@ -21,62 +31,57 @@ import org.springframework.context.annotation.Configuration;
 public class JimaProperties {
 
     /**
-     * An instance of MethodStatsProperties class.
-     * It holds properties related to method statistics logging.
+     * Configuration properties related to method statistics logging.
      */
     private MethodStatsProperties methodStats = new MethodStatsProperties();
 
     /**
-     * An instance of SecurityProperties class.
-     * It holds security-related properties.
+     * Configuration properties related to application security settings.
      */
     private SecurityProperties security = new SecurityProperties();
 
     /**
-     * An instance of ClientProperties class.
-     * It holds client-related properties.
+     * Configuration properties related to client-specific settings.
      */
     private ClientProperties client = new ClientProperties();
 
     /**
-     * An instance of TestContainerProperties class.
-     * It holds test container-related properties.
+     * Configuration properties for test container management.
      */
     private TestContainerProperties testContainer = new TestContainerProperties();
 
     /**
-     * An instance of LockProperties class.
-     * It holds properties related to locking.
+     * Configuration properties related to locking mechanisms.
      */
     private LockProperties lock = new LockProperties();
 
     /**
-     * An instance of SearchProperties class.
-     * It holds properties related to search.
+     * Configuration properties related to search functionalities.
      */
     private SearchProperties search = new SearchProperties();
 
     /**
-     * An instance of HrefProperties class.
-     * It holds properties related to href.
+     * Configuration properties for managing href settings.
      */
     private HrefProperties href = new HrefProperties();
 
     /**
-     * An instance of SignatureProperties class.
-     * It holds properties related to signature.
+     * Configuration properties related to signature handling.
      */
     private SignatureProperties signature = new SignatureProperties();
 
     /**
-     * An instance of MessageProperties class.
-     * It holds properties related to messages.
+     * Configuration properties for message handling within the application.
      */
     private MessageProperties message = new MessageProperties();
 
     /**
-     * An instance of ScopeProperties class.
-     * It holds properties related to scope.
+     * Configuration properties related to scope management.
      */
     private ScopeProperties scope = new ScopeProperties();
+
+    /**
+     * Configuration properties related to CRUD operations.
+     */
+    private CrudProperties crud = new CrudProperties();
 }
