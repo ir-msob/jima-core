@@ -11,9 +11,12 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@ToString(callSuper = true)
 @NoArgsConstructor
+@ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class BaseDtoAbstract<ID extends Comparable<ID> & Serializable> extends BaseDomainAbstract<ID> implements BaseDto<ID> {
 
+    public BaseDtoAbstract(ID id) {
+        super(id);
+    }
 }

@@ -6,7 +6,6 @@ import ir.msob.jima.core.commons.util.GenericTypeUtil;
 
 import java.io.Serializable;
 
-
 public interface BaseChildDto<ID extends Comparable<ID> & Serializable> extends BaseChild<ID> {
 
 

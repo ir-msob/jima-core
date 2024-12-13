@@ -2,6 +2,7 @@ package ir.msob.jima.core.commons.domain;
 
 import ir.msob.jima.core.commons.element.BaseElementAbstract;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -19,7 +20,11 @@ import java.io.Serializable;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 @ToString(callSuper = true)
 public abstract class BaseDomainAbstract<ID extends Comparable<ID> & Serializable> extends BaseElementAbstract<ID> implements BaseDomain<ID> {
 
+    public BaseDomainAbstract(ID id) {
+        super(id);
+    }
 }

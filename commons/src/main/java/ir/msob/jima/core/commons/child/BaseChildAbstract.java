@@ -20,6 +20,11 @@ public abstract class BaseChildAbstract<ID extends Comparable<ID> & Serializable
      */
     private ID parentId;
 
+    public BaseChildAbstract(ID id, ID parentId) {
+        super(id);
+        this.parentId = parentId;
+    }
+
     /**
      * The 'FN' enum represents the field names of the 'BaseChildDomainAbstract' class.
      * It includes a single value 'parentId' which represents the parent domain ID field of the class.

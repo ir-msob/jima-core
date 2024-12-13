@@ -6,6 +6,7 @@ import ir.msob.jima.core.ral.mongo.it.Microservices;
 import ir.msob.jima.core.ral.mongo.it.domain.ProjectDomainAbstract;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,8 +14,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @Getter
 @ToString(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Document(collection = TestDomain.DOMAIN_NAME)
 @DomainInfo(serviceName = Microservices.TEST_MICROSERVICE, version = Microservices.VERSION, domainName = TestDomain.DOMAIN_URI)
@@ -26,6 +25,10 @@ public class TestDomain extends ProjectDomainAbstract {
 
     @NotBlank
     private String domainField;
+
+    public TestDomain(ObjectId objectId) {
+        super(objectId);
+    }
 
     public enum FN {
         domainField

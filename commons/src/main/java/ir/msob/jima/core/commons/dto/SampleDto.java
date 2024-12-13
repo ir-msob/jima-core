@@ -23,7 +23,9 @@ import java.io.Serializable;
 @Setter
 @Getter
 @ToString(callSuper = true)
-@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SampleDto<ID extends Comparable<ID> & Serializable> extends SampleDomain<ID> implements BaseDto<ID> {
+    public SampleDto(ID id) {
+        super(id);
+    }
 }

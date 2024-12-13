@@ -1,5 +1,6 @@
 package ir.msob.jima.core.api.restful.test;
 
+import ir.msob.jima.core.commons.Constants;
 import ir.msob.jima.core.commons.criteria.BaseCriteria;
 import ir.msob.jima.core.commons.domain.BaseDomain;
 import ir.msob.jima.core.commons.dto.BaseDto;
@@ -72,7 +73,7 @@ public interface BaseCoreRestResourceTest<ID extends Comparable<ID> & Serializab
      */
     @SneakyThrows
     default void prepareUserInfoHeader(org.springframework.http.HttpHeaders httpHeaders) {
-        httpHeaders.add(ir.msob.jima.core.commons.Constants.USER_INFO_HEADER_NAME, UserInfoUtil.encodeUser(getObjectMapper(), this.getSampleUser()));
+        httpHeaders.add(Constants.USER_INFO_HEADER_NAME, UserInfoUtil.encodeUser(getObjectMapper(), this.getSampleUser()));
     }
 
     /**
