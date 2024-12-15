@@ -11,8 +11,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * The 'BaseRelatedActionDtoAbstract' class represents an abstract base contact medium with a set of contactMedia.
- * It implements the 'BaseRelatedActionDto' interface.
+ * The 'BaseRelatedActionContainerAbstract' class represents an abstract base contact medium with a set of contactMedia.
+ * It implements the 'BaseRelatedActionContainer' interface.
  * The class includes a field for the contactMedia and getter and setter methods for this field.
  * The contactMedia are represented as a 'SortedSet' of 'RelatedAction' objects.
  * The 'SortedSet' ensures that the contactMedia are sorted in their natural order.
@@ -23,10 +23,9 @@ import java.util.TreeSet;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseContactMediumDtoAbstract<ID extends Comparable<ID> & Serializable, CM extends ContactMediumAbstract<ID>> implements BaseContactMediumDto<ID, CM> {
+public abstract class BaseContactMediumContainerAbstract<ID extends Comparable<ID> & Serializable, CM extends ContactMediumAbstract<ID>> implements BaseContactMediumContainer<ID, CM> {
     /**
      * The contactMedia of the base contact medium.
      */
-    @Valid
-    private SortedSet<CM> contactMedia = new TreeSet<>();
+    private SortedSet<@Valid CM> contactMediums = new TreeSet<>();
 }

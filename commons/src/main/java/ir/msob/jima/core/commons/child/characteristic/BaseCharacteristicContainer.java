@@ -1,19 +1,18 @@
 package ir.msob.jima.core.commons.child.characteristic;
 
-import ir.msob.jima.core.commons.child.BaseChildDto;
+import ir.msob.jima.core.commons.child.BaseContainer;
 
 import java.io.Serializable;
 import java.util.SortedSet;
 
 /**
- * The 'BaseRelatedActionDto' interface represents a base characteristic with a set of characteristics.
+ * The 'BaseRelatedActionContainer' interface represents a base characteristic with a set of characteristics.
  * It includes methods to get and set the characteristics.
  * The characteristics are represented as a 'SortedSet' of 'RelatedAction' objects.
  * The 'SortedSet' ensures that the characteristics are sorted in their natural order.
  * The 'getContactMedia' method returns the characteristics, and the 'setContactMedia' method sets the characteristics.
  */
-public interface BaseCharacteristicDto<ID extends Comparable<ID> & Serializable, CH extends Characteristic<ID>>
-        extends BaseChildDto<ID> {
+public interface BaseCharacteristicContainer<ID extends Comparable<ID> & Serializable, CH extends Characteristic<ID>> extends BaseContainer {
 
     /**
      * Gets the characteristics.

@@ -3,6 +3,7 @@ package ir.msob.jima.core.ral.minio.test;
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.testcontainers.containers.MinIOContainer;
@@ -16,6 +17,12 @@ import org.testcontainers.utility.DockerImageName;
 @TestConfiguration(proxyBeanMethods = false)
 public class MinIOContainerConfiguration {
 
+    public static void registry(DynamicPropertyRegistry registry, MinIOContainer container) {
+        registry.add("spring.minio.url", container::getS3URL);
+        registry.add("spring.minio.access-key", container::getUserName);
+        registry.add("spring.minio.secret-key", container::getPassword);
+    }
+
     /**
      * This method creates a MinIOContainer bean for testing purposes.
      * It uses the DynamicPropertyRegistry to dynamically register properties for the MinIO container.
@@ -27,7 +34,8 @@ public class MinIOContainerConfiguration {
      * @return The created MinIOContainer bean.
      */
     @Bean
-    public MinIOContainer minIOContainer(DynamicPropertyRegistry registry, JimaProperties jimaProperties) {
+    @ServiceConnection
+    public MinIOContainer minIOContainer(JimaProperties jimaProperties) {
         MinIOContainer container = new MinIOContainer(DockerImageName.parse(jimaProperties.getTestContainer().getMinio().getImage()));
         if (Strings.isNotBlank(jimaProperties.getTestContainer().getMinio().getAccessKey()))
             container.withUserName(jimaProperties.getTestContainer().getMinio().getAccessKey());
@@ -36,9 +44,7 @@ public class MinIOContainerConfiguration {
             container.withPassword(jimaProperties.getTestContainer().getMinio().getSecretKey());
 
         container.withReuse(jimaProperties.getTestContainer().getMinio().isReuse());
-        registry.add("spring.minio.url", container::getS3URL);
-        registry.add("spring.minio.access-key", container::getUserName);
-        registry.add("spring.minio.secret-key", container::getPassword);
+
         return container;
     }
 }

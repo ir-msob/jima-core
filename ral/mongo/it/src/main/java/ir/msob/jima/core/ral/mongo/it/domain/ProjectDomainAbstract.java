@@ -15,6 +15,7 @@ import java.io.Serial;
 @Setter
 @Getter
 @ToString(callSuper = true)
+@NoArgsConstructor
 public abstract class ProjectDomainAbstract extends BaseDomainAbstract<ObjectId> implements ProjectDomain {
     /**
      *

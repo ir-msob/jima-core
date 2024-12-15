@@ -11,7 +11,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * The 'BaseRelatedDomainDtoAbstract' class provides a basic implementation of the 'BaseRelatedDomainDto' interface.
+ * The 'BaseRelatedDomainContainerAbstract' class provides a basic implementation of the 'BaseRelatedDomainContainer' interface.
  * It is an abstract class where 'ID' is a type parameter that extends 'Comparable' and 'Serializable'.
  * The class includes a 'relatedDomains' field that holds a sorted set of child domains.
  * The class uses the Lombok library to automatically generate getter and setter methods for the 'relatedDomains' field.
@@ -26,11 +26,10 @@ import java.util.TreeSet;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseRelatedDomainDtoAbstract<ID extends Comparable<ID> & Serializable, RD extends RelatedDomainAbstract<ID>> implements BaseRelatedDomainDto<ID, RD> {
+public abstract class BaseRelatedDomainContainerAbstract<ID extends Comparable<ID> & Serializable, RD extends RelatedDomainAbstract<ID>> implements BaseRelatedDomainContainer<ID, RD> {
     /**
      * A sorted set of child domains.
      * The set is initialized to an empty 'TreeSet'.
      */
-    @Valid
-    private SortedSet<RD> relatedDomains = new TreeSet<>();
+    private SortedSet<@Valid RD> relatedDomains = new TreeSet<>();
 }

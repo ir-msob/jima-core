@@ -1,18 +1,18 @@
 package ir.msob.jima.core.commons.child.relatedobject.relatedintegration;
 
-import ir.msob.jima.core.commons.child.relatedobject.BaseRelatedObjectDto;
+import ir.msob.jima.core.commons.child.BaseContainer;
 
 import java.io.Serializable;
 import java.util.SortedSet;
 
 /**
- * The 'BaseRelatedIntegrationDto' interface defines the basic structure for a child integration in the application.
+ * The 'BaseRelatedIntegrationContainer' interface defines the basic structure for a child integration in the application.
  * It is a generic interface where 'RI' is a type parameter that extends 'RelatedIntegrationAbstract'.
  * The interface includes a method to get and set a sorted set of child integrations.
  *
  * @param <RI> the type of the child integration, which must extend RelatedIntegrationAbstract.
  */
-public interface BaseRelatedIntegrationDto<ID extends Comparable<ID> & Serializable, RI extends RelatedIntegrationAbstract<ID>> extends BaseRelatedObjectDto<ID> {
+public interface BaseRelatedIntegrationContainer<ID extends Comparable<ID> & Serializable, RI extends RelatedIntegrationAbstract<ID>> extends BaseContainer {
 
     /**
      * Gets the sorted set of child integrations.

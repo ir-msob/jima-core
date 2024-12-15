@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.DynamicPropertyRegistrar;
 import org.testcontainers.containers.OracleContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -31,6 +33,13 @@ class OracleContainerConfigurationIT {
     private String configUsername;
     @Value("${spring.datasource.password}")
     private String configPassword;
+
+    @Bean
+    public DynamicPropertyRegistrar dynamicPropertyRegistrar(OracleContainer container) {
+        return registry -> {
+            OracleContainerConfiguration.registry(registry, container);
+        };
+    }
 
     @Test
     @DisplayName("Container is running after initialization")

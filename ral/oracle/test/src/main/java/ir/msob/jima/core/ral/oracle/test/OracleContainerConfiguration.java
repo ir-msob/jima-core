@@ -17,6 +17,13 @@ import org.testcontainers.utility.DockerImageName;
 @TestConfiguration(proxyBeanMethods = false)
 public class OracleContainerConfiguration {
 
+    public static void registry(DynamicPropertyRegistry registry, OracleContainer container) {
+        registry.add("spring.datasource.driverClassName", container::getDriverClassName);
+        registry.add("spring.datasource.url", container::getJdbcUrl);
+        registry.add("spring.datasource.username", container::getUsername);
+        registry.add("spring.datasource.password", container::getPassword);
+    }
+
     /**
      * This method creates an OracleContainer bean for testing purposes.
      * It uses the DynamicPropertyRegistry to dynamically register properties for the Oracle container.
@@ -31,7 +38,7 @@ public class OracleContainerConfiguration {
      */
     @Bean
     @ServiceConnection
-    public OracleContainer kafkaContainer(DynamicPropertyRegistry registry, JimaProperties jimaProperties) {
+    public OracleContainer kafkaContainer(JimaProperties jimaProperties) {
         OracleContainer container = new OracleContainer(DockerImageName.parse(jimaProperties.getTestContainer().getOracle().getImage()));
         if (Strings.isNotBlank(jimaProperties.getTestContainer().getOracle().getUsername()))
             container.withUsername(jimaProperties.getTestContainer().getOracle().getUsername());
@@ -39,11 +46,6 @@ public class OracleContainerConfiguration {
             container.withPassword(jimaProperties.getTestContainer().getOracle().getPassword());
 
         container.withReuse(jimaProperties.getTestContainer().getOracle().isReuse());
-
-        registry.add("spring.datasource.driverClassName", container::getDriverClassName);
-        registry.add("spring.datasource.url", container::getJdbcUrl);
-        registry.add("spring.datasource.username", container::getUsername);
-        registry.add("spring.datasource.password", container::getPassword);
         return container;
     }
 }

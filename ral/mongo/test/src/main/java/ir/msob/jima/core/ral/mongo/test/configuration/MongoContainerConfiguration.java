@@ -16,6 +16,10 @@ import org.testcontainers.utility.DockerImageName;
 @TestConfiguration(proxyBeanMethods = false)
 public class MongoContainerConfiguration {
 
+    public static void registry(DynamicPropertyRegistry registry, MongoDBContainer container) {
+        registry.add("spring.data.mongodb.uri", container::getReplicaSetUrl);
+    }
+
     /**
      * This method creates a MongoDBContainer bean for testing purposes.
      * It uses the DynamicPropertyRegistry to dynamically register properties for the MongoDB container.
@@ -28,10 +32,9 @@ public class MongoContainerConfiguration {
      */
     @Bean
     @ServiceConnection
-    public MongoDBContainer mongoDBContainer(DynamicPropertyRegistry registry, JimaProperties jimaProperties) {
+    public MongoDBContainer mongoDBContainer(JimaProperties jimaProperties) {
         MongoDBContainer container = new MongoDBContainer(DockerImageName.parse(jimaProperties.getTestContainer().getMongo().getImage()));
         container.withReuse(jimaProperties.getTestContainer().getMongo().isReuse());
-        registry.add("spring.data.mongodb.uri", container::getReplicaSetUrl);
         return container;
     }
 }

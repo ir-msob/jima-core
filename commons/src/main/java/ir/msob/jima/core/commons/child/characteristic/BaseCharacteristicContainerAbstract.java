@@ -11,8 +11,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * The 'BaseRelatedActionDtoAbstract' class represents an abstract base characteristic with a set of characteristics.
- * It implements the 'BaseRelatedActionDto' interface.
+ * The 'BaseRelatedActionContainerAbstract' class represents an abstract base characteristic with a set of characteristics.
+ * It implements the 'BaseRelatedActionContainer' interface.
  * The class includes a field for the characteristics and getter and setter methods for this field.
  * The characteristics are represented as a 'SortedSet' of 'RelatedAction' objects.
  * The 'SortedSet' ensures that the characteristics are sorted in their natural order.
@@ -23,10 +23,9 @@ import java.util.TreeSet;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseCharacteristicDtoAbstract<ID extends Comparable<ID> & Serializable, CH extends Characteristic<ID>> implements BaseCharacteristicDto<ID, CH> {
+public abstract class BaseCharacteristicContainerAbstract<ID extends Comparable<ID> & Serializable, CH extends Characteristic<ID>> implements BaseCharacteristicContainer<ID, CH> {
     /**
      * The characteristics of the base characteristic.
      */
-    @Valid
-    private SortedSet<CH> characteristics = new TreeSet<>();
+    private SortedSet<@Valid CH> characteristics = new TreeSet<>();
 }

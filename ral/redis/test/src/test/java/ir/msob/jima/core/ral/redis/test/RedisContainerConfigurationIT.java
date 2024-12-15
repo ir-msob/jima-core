@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.DynamicPropertyRegistrar;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,6 +30,13 @@ class RedisContainerConfigurationIT {
     private String configHost;
     @Value("${spring.data.redis.port}")
     private Integer configPort;
+
+    @Bean
+    public DynamicPropertyRegistrar dynamicPropertyRegistrar(RedisContainer container) {
+        return registry -> {
+            RedisContainerConfiguration.registry(registry, container);
+        };
+    }
 
     @Test
     @DisplayName("Container is running after initialization")

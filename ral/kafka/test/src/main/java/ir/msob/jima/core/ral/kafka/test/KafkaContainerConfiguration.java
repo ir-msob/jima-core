@@ -10,36 +10,33 @@ import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.utility.DockerImageName;
 
 /**
- * This class provides the configuration for setting up a Kafka container for testing purposes.
- * It is annotated with @TestConfiguration to indicate that it is a source of bean definitions.
- * The proxyBeanMethods attribute is set to false to optimize runtime bean creation.
+ * Configuration for setting up a Kafka container for testing purposes.
  */
 @TestConfiguration(proxyBeanMethods = false)
 public class KafkaContainerConfiguration {
 
+    public static void registry(DynamicPropertyRegistry registry, KafkaContainer container) {
+        registry.add("spring.kafka.bootstrap-servers", container::getBootstrapServers);
+        registry.add("spring.kafka.consumer.bootstrap-servers", container::getBootstrapServers);
+        registry.add("spring.kafka.producer.bootstrap-servers", container::getBootstrapServers);
+    }
+
     /**
-     * This method creates a KafkaContainer bean for testing purposes.
-     * It uses the DynamicPropertyRegistry to dynamically register properties for the Kafka container.
-     * The properties include the bootstrap servers for Kafka consumer and producer.
-     * The JimaProperties object is used to get the Docker image name and cluster ID for the Kafka container.
-     * If the cluster ID is not blank, it is set to the Kafka container.
+     * Creates a KafkaContainer bean for testing purposes.
      * The @ServiceConnection annotation is used to indicate that this bean is used for establishing a connection to a service.
      *
-     * @param registry       The DynamicPropertyRegistry used to dynamically register properties for the Kafka container.
      * @param jimaProperties The JimaProperties object used to get the Docker image name and cluster ID for the Kafka container.
      * @return The created KafkaContainer bean.
      */
     @Bean
     @ServiceConnection
-    public KafkaContainer kafkaContainer(DynamicPropertyRegistry registry, JimaProperties jimaProperties) {
+    public KafkaContainer kafkaContainer(JimaProperties jimaProperties) {
         KafkaContainer container = new KafkaContainer(DockerImageName.parse(jimaProperties.getTestContainer().getKafka().getImage()));
         if (Strings.isNotBlank(jimaProperties.getTestContainer().getKafka().getClusterId())) {
             container.withClusterId(jimaProperties.getTestContainer().getKafka().getClusterId());
         }
         container.withReuse(jimaProperties.getTestContainer().getKafka().isReuse());
-        registry.add("spring.kafka.bootstrap-servers", container::getBootstrapServers);
-        registry.add("spring.kafka.consumer.bootstrap-servers", container::getBootstrapServers);
-        registry.add("spring.kafka.producer.bootstrap-servers", container::getBootstrapServers);
         return container;
     }
+
 }

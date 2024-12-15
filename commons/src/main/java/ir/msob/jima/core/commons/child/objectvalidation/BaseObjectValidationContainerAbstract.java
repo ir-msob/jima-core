@@ -11,8 +11,8 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * The 'BaseRelatedActionDtoAbstract' class represents an abstract base object validation with a set of objectValidation.
- * It implements the 'BaseRelatedActionDto' interface.
+ * The 'BaseRelatedActionContainerAbstract' class represents an abstract base object validation with a set of objectValidation.
+ * It implements the 'BaseRelatedActionContainer' interface.
  * The class includes a field for the objectValidation and getter and setter methods for this field.
  * The objectValidation are represented as a 'SortedSet' of 'RelatedAction' objects.
  * The 'SortedSet' ensures that the objectValidation are sorted in their natural order.
@@ -23,10 +23,9 @@ import java.util.TreeSet;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseObjectValidationDtoAbstract<ID extends Comparable<ID> & Serializable, OV extends ObjectValidationAbstract<ID>> implements BaseObjectValidationDto<ID, OV> {
+public abstract class BaseObjectValidationContainerAbstract<ID extends Comparable<ID> & Serializable, OV extends ObjectValidationAbstract<ID>> implements BaseObjectValidationContainer<ID, OV> {
     /**
      * The objectValidation of the base object validation.
      */
-    @Valid
-    private SortedSet<OV> objectValidation = new TreeSet<>();
+    private SortedSet<@Valid OV> objectValidations = new TreeSet<>();
 }

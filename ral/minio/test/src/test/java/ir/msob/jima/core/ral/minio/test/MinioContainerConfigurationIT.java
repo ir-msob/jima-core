@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.DynamicPropertyRegistrar;
 import org.testcontainers.containers.MinIOContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -27,6 +29,13 @@ class MinioContainerConfigurationIT {
     private String configAccessKey;
     @Value("${spring.minio.secret-key}")
     private String configSecretKey;
+
+    @Bean
+    public DynamicPropertyRegistrar dynamicPropertyRegistrar(MinIOContainer container) {
+        return registry -> {
+            MinIOContainerConfiguration.registry(registry, container);
+        };
+    }
 
     @Test
     @DisplayName("Container is running after initialization")

@@ -11,7 +11,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
- * The 'BaseRelatedProcessDtoAbstract' class provides a basic implementation of the 'BaseRelatedProcessDto' interface.
+ * The 'BaseRelatedProcessContainerAbstract' class provides a basic implementation of the 'BaseRelatedProcessContainer' interface.
  * It is an abstract class where 'RP' is a type parameter that extends 'RelatedProcessAbstract'.
  * This class includes a 'relatedProcesses' field that holds a sorted set of child processes.
  * The class uses the Lombok library to automatically generate getter and setter methods for the 'relatedProcesses' field.
@@ -25,11 +25,10 @@ import java.util.TreeSet;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class BaseRelatedProcessDtoAbstract<ID extends Comparable<ID> & Serializable, RP extends RelatedProcessAbstract<ID>> implements BaseRelatedProcessDto<ID, RP> {
+public abstract class BaseRelatedProcessContainerAbstract<ID extends Comparable<ID> & Serializable, RP extends RelatedProcessAbstract<ID>> implements BaseRelatedProcessContainer<ID, RP> {
     /**
      * A sorted set of child processes.
      * The set is initialized to an empty 'TreeSet'.
      */
-    @Valid
-    private SortedSet<RP> relatedProcesses = new TreeSet<>();
+    private SortedSet<@Valid RP> relatedProcesses = new TreeSet<>();
 }

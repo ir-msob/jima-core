@@ -3,6 +3,7 @@ package ir.msob.jima.core.ral.redis.test;
 import com.redis.testcontainers.RedisContainer;
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.testcontainers.utility.DockerImageName;
@@ -14,6 +15,12 @@ import org.testcontainers.utility.DockerImageName;
  */
 @TestConfiguration(proxyBeanMethods = false)
 public class RedisContainerConfiguration {
+
+    public static void registry(DynamicPropertyRegistry registry, RedisContainer container) {
+        registry.add("spring.data.redis.host", container::getHost);
+        registry.add("spring.data.redis.port", container.getExposedPorts().stream().findFirst()::get);
+        registry.add("spring.data.redis.url", container::getRedisURI);
+    }
 
     /**
      * This method creates a RedisContainer bean for testing purposes.
@@ -27,12 +34,10 @@ public class RedisContainerConfiguration {
      * @return The created RedisContainer bean.
      */
     @Bean
-    public RedisContainer redisContainer(DynamicPropertyRegistry registry, JimaProperties jimaProperties) {
+    @ServiceConnection
+    public RedisContainer redisContainer(JimaProperties jimaProperties) {
         RedisContainer container = new RedisContainer(DockerImageName.parse(jimaProperties.getTestContainer().getRedis().getImage()));
         container.withReuse(jimaProperties.getTestContainer().getRedis().isReuse());
-        registry.add("spring.data.redis.host", container::getHost);
-        registry.add("spring.data.redis.port", container.getExposedPorts().stream().findFirst()::get);
-        registry.add("spring.data.redis.url", container::getRedisURI);
         return container;
     }
 }
