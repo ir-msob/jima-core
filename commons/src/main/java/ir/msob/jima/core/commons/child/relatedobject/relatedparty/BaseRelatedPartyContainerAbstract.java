@@ -26,6 +26,6 @@ public abstract class BaseRelatedPartyContainerAbstract<ID extends Comparable<ID
     /**
      * A sorted set of child parties.
      */
-    private SortedSet<@Valid RP> relatedParties = new TreeSet<>();
+    private SortedSet<RP> relatedParties = new TreeSet<>();
 
 }

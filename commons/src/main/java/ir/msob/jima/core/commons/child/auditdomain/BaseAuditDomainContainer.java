@@ -2,6 +2,7 @@ package ir.msob.jima.core.commons.child.auditdomain;
 
 import ir.msob.jima.core.commons.child.BaseContainer;
 import ir.msob.jima.core.commons.child.relatedobject.relatedparty.RelatedPartyAbstract;
+import jakarta.validation.Valid;
 
 import java.io.Serializable;
 import java.util.Comparator;

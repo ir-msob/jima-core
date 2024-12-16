@@ -27,5 +27,5 @@ public abstract class BaseObjectValidationContainerAbstract<ID extends Comparabl
     /**
      * The objectValidation of the base object validation.
      */
-    private SortedSet<@Valid OV> objectValidations = new TreeSet<>();
+    private SortedSet<OV> objectValidations = new TreeSet<>();
 }

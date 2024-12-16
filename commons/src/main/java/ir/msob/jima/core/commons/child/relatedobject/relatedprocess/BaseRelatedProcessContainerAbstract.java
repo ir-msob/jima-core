@@ -30,5 +30,5 @@ public abstract class BaseRelatedProcessContainerAbstract<ID extends Comparable<
      * A sorted set of child processes.
      * The set is initialized to an empty 'TreeSet'.
      */
-    private SortedSet<@Valid RP> relatedProcesses = new TreeSet<>();
+    private SortedSet<RP> relatedProcesses = new TreeSet<>();
 }

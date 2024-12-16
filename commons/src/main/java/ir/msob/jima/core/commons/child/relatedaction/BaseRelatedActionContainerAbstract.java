@@ -27,5 +27,5 @@ public abstract class BaseRelatedActionContainerAbstract<ID extends Comparable<I
     /**
      * The relatedAction of the base child action.
      */
-    private SortedSet<@Valid CM> relatedActions = new TreeSet<>();
+    private SortedSet<CM> relatedActions = new TreeSet<>();
 }

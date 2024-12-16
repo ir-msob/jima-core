@@ -27,5 +27,5 @@ public abstract class BaseContactMediumContainerAbstract<ID extends Comparable<I
     /**
      * The contactMedia of the base contact medium.
      */
-    private SortedSet<@Valid CM> contactMediums = new TreeSet<>();
+    private SortedSet<CM> contactMediums = new TreeSet<>();
 }

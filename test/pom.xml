@@ -15,7 +15,7 @@
         <!-- MSob-->
         <dependency>
             <groupId>ir.msob.jima.core</groupId>
-            <artifactId>core-commons</artifactId>
+            <artifactId>core-beans</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
         <!-- Test -->

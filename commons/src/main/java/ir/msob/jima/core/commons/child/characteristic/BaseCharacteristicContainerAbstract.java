@@ -27,5 +27,5 @@ public abstract class BaseCharacteristicContainerAbstract<ID extends Comparable<
     /**
      * The characteristics of the base characteristic.
      */
-    private SortedSet<@Valid CH> characteristics = new TreeSet<>();
+    private SortedSet<CH> characteristics = new TreeSet<>();
 }

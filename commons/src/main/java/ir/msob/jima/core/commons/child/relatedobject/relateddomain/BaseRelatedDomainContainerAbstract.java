@@ -31,5 +31,5 @@ public abstract class BaseRelatedDomainContainerAbstract<ID extends Comparable<I
      * A sorted set of child domains.
      * The set is initialized to an empty 'TreeSet'.
      */
-    private SortedSet<@Valid RD> relatedDomains = new TreeSet<>();
+    private SortedSet<RD> relatedDomains = new TreeSet<>();
 }

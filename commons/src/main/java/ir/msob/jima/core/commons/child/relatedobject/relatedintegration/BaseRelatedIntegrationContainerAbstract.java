@@ -30,5 +30,5 @@ public abstract class BaseRelatedIntegrationContainerAbstract<ID extends Compara
      * A sorted set of child integrations.
      * The set is initialized to an empty 'TreeSet'.
      */
-    private SortedSet<@Valid RI> relatedIntegrations = new TreeSet<>();
+    private SortedSet<RI> relatedIntegrations = new TreeSet<>();
 }

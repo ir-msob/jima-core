@@ -1,6 +1,7 @@
 package ir.msob.jima.core.commons.child.relatedobject.relatedprocess;
 
 import ir.msob.jima.core.commons.child.BaseContainer;
+import jakarta.validation.Valid;
 
 import java.io.Serializable;
 import java.util.SortedSet;

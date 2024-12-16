@@ -1,6 +1,7 @@
 package ir.msob.jima.core.api.graphql.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.msob.jima.core.beans.properties.JimaProperties;
 import ir.msob.jima.core.commons.criteria.SampleCriteria;
 import ir.msob.jima.core.commons.domain.SampleDomain;
 import ir.msob.jima.core.commons.dto.SampleDto;
@@ -62,6 +63,11 @@ class BaseCoreGraphqlResourceTestTest {
             @Override
             public BaseUser getSampleUser() {
                 return new BaseUser();
+            }
+
+            @Override
+            public JimaProperties getJimaProperties() {
+                return null;
             }
 
             @Override

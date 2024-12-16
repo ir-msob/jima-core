@@ -1,6 +1,7 @@
 package ir.msob.jima.core.commons.child.auditdomain;
 
 import ir.msob.jima.core.commons.child.relatedobject.relatedparty.RelatedPartyAbstract;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
