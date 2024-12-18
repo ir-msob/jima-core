@@ -1,10 +1,10 @@
 package ir.msob.jima.core.test;
 
 import com.google.common.collect.Sets;
-import ir.msob.jima.core.commons.child.auditdomain.AuditDomainActionType;
-import ir.msob.jima.core.commons.child.characteristic.Characteristic;
-import ir.msob.jima.core.commons.child.relatedobject.relateddomain.RelatedDomainAbstract;
-import ir.msob.jima.core.commons.child.relatedobject.relatedparty.RelatedPartyAbstract;
+import ir.msob.jima.core.commons.childdomain.auditdomain.AuditDomainActionType;
+import ir.msob.jima.core.commons.childdomain.characteristic.Characteristic;
+import ir.msob.jima.core.commons.childdomain.relatedobject.relateddomain.RelatedDomainAbstract;
+import ir.msob.jima.core.commons.childdomain.relatedobject.relatedparty.RelatedPartyAbstract;
 import ir.msob.jima.core.commons.shared.DataType;
 import ir.msob.jima.core.commons.shared.keyvalue.KeyValue;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
@@ -106,46 +106,46 @@ public class CoreTestData {
     }
 
     /**
-     * Returns a sorted set of default required child parties.
+     * Returns a sorted set of default required childdomain parties.
      *
-     * @return a sorted set of default required child parties
+     * @return a sorted set of default required childdomain parties
      */
     public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedPartyAbstract<ID>> DEFAULT_REQUIRED_RELATED_PARTIES() {
         return Sets.newTreeSet(Collections.singleton((RelatedPartyAbstract<ID>) DEFAULT_REQUIRED_RELATED_PARTY));
     }
 
     /**
-     * Updates the provided sorted set of child parties with updated values.
+     * Updates the provided sorted set of childdomain parties with updated values.
      *
-     * @param relatedParties the sorted set of child parties to update
+     * @param relatedParties the sorted set of childdomain parties to update
      */
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_PARTIES(SortedSet<RelatedPartyAbstract<ID>> relatedParties) {
         relatedParties.forEach(CoreTestData::UPDATED_REQUIRED_RELATED_PARTY);
     }
 
     /**
-     * Returns a sorted set of default child parties.
+     * Returns a sorted set of default childdomain parties.
      *
-     * @return a sorted set of default child parties
+     * @return a sorted set of default childdomain parties
      */
     public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedPartyAbstract<ID>> DEFAULT_RELATED_PARTIES() {
         return Sets.newTreeSet(Collections.singleton((RelatedPartyAbstract<ID>) DEFAULT_RELATED_PARTY));
     }
 
     /**
-     * Updates the provided sorted set of child parties with updated values.
+     * Updates the provided sorted set of childdomain parties with updated values.
      *
-     * @param relatedParties the sorted set of child parties to update
+     * @param relatedParties the sorted set of childdomain parties to update
      */
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_PARTIES(SortedSet<RelatedPartyAbstract<ID>> relatedParties) {
         relatedParties.forEach(CoreTestData::UPDATED_RELATED_PARTY);
     }
 
     /**
-     * Returns a sorted set of default required child domains.
+     * Returns a sorted set of default required childdomain domains.
      *
      * @param <ID> the type of the domain identifier
-     * @return a sorted set of default required child domains
+     * @return a sorted set of default required childdomain domains
      */
     @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedDomainAbstract<ID>> DEFAULT_REQUIRED_RELATED_DOMAINS() {
@@ -153,9 +153,9 @@ public class CoreTestData {
     }
 
     /**
-     * Updates the provided sorted set of child domains with updated values.
+     * Updates the provided sorted set of childdomain domains with updated values.
      *
-     * @param relatedDomains the sorted set of child domains to update
+     * @param relatedDomains the sorted set of childdomain domains to update
      * @param <ID>           the type of the domain identifier
      */
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_DOMAINS(SortedSet<RelatedDomainAbstract<ID>> relatedDomains) {
@@ -163,10 +163,10 @@ public class CoreTestData {
     }
 
     /**
-     * Returns a sorted set of default child domains.
+     * Returns a sorted set of default childdomain domains.
      *
      * @param <ID> the type of the domain identifier
-     * @return a sorted set of default child domains
+     * @return a sorted set of default childdomain domains
      */
     @SuppressWarnings("unchecked")
     public static <ID extends Comparable<ID> & Serializable> SortedSet<RelatedDomainAbstract<ID>> DEFAULT_RELATED_DOMAINS() {
@@ -174,9 +174,9 @@ public class CoreTestData {
     }
 
     /**
-     * Updates the provided sorted set of child domains with updated values.
+     * Updates the provided sorted set of childdomain domains with updated values.
      *
-     * @param relatedDomains the sorted set of child domains to update
+     * @param relatedDomains the sorted set of childdomain domains to update
      * @param <ID>           the type of the domain identifier
      */
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_DOMAINS(SortedSet<RelatedDomainAbstract<ID>> relatedDomains) {
@@ -184,7 +184,7 @@ public class CoreTestData {
     }
 
     /**
-     * Initializes the default and updated IDs and child entities.
+     * Initializes the default and updated IDs and childdomain entities.
      *
      * @param defaultId the default ID
      * @param updatedId the updated ID
@@ -233,9 +233,9 @@ public class CoreTestData {
 
 
     /**
-     * Updates the provided child party with updated values.
+     * Updates the provided childdomain party with updated values.
      *
-     * @param relatedParty the child party to update
+     * @param relatedParty the childdomain party to update
      */
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_RELATED_PARTY(RelatedPartyAbstract<ID> relatedParty) {
         relatedParty.setName(UPDATED_STRING);
@@ -245,9 +245,9 @@ public class CoreTestData {
     }
 
     /**
-     * Updates the provided required child party with updated values.
+     * Updates the provided required childdomain party with updated values.
      *
-     * @param relatedParty the required child party to update
+     * @param relatedParty the required childdomain party to update
      */
     public static <ID extends Comparable<ID> & Serializable> void UPDATED_REQUIRED_RELATED_PARTY(RelatedPartyAbstract<ID> relatedParty) {
         relatedParty.setName(UPDATED_STRING);
@@ -255,9 +255,9 @@ public class CoreTestData {
     }
 
     /**
-     * Updates the provided child domain with updated values.
+     * Updates the provided childdomain domain with updated values.
      *
-     * @param relatedDomain the child domain to update
+     * @param relatedDomain the childdomain domain to update
      * @param <ID>          the type of the domain identifier
      */
     @SuppressWarnings("unchecked")
@@ -269,9 +269,9 @@ public class CoreTestData {
     }
 
     /**
-     * Updates the provided required child domain with updated values.
+     * Updates the provided required childdomain domain with updated values.
      *
-     * @param relatedDomain the required child domain to update
+     * @param relatedDomain the required childdomain domain to update
      * @param <ID>          the type of the domain identifier
      */
     @SuppressWarnings("unchecked")

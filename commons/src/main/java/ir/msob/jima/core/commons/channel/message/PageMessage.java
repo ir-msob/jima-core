@@ -1,8 +1,8 @@
 package ir.msob.jima.core.commons.channel.message;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.dto.BaseDto;
-import ir.msob.jima.core.commons.dto.ModelType;
+import ir.msob.jima.core.commons.domain.BaseDto;
+import ir.msob.jima.core.commons.shared.ModelType;
 import lombok.*;
 import org.springframework.data.domain.Page;
 

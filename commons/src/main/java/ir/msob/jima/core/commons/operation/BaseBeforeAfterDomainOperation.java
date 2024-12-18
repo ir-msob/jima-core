@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.operation;
 
-import ir.msob.jima.core.commons.criteria.BaseCriteria;
-import ir.msob.jima.core.commons.dto.BaseDto;
+import ir.msob.jima.core.commons.domain.BaseCriteria;
+import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.exception.badrequest.BadRequestException;
 import ir.msob.jima.core.commons.exception.domainnotfound.DomainNotFoundException;
 import ir.msob.jima.core.commons.security.BaseUser;

@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.scope;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.dto.ModelType;
+import ir.msob.jima.core.commons.shared.ModelType;
 import lombok.*;
 
 import java.util.SortedSet;

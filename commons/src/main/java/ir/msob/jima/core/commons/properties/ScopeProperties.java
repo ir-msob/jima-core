@@ -7,7 +7,7 @@ import lombok.ToString;
 
 /**
  * Configuration properties for scope settings.
- * This class holds configuration for scope-child settings, including the channel name and enablement status.
+ * This class holds configuration for scope-childdomain settings, including the channel name and enablement status.
  */
 @Setter
 @Getter

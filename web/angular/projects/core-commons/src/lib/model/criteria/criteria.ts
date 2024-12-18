@@ -3,7 +3,7 @@ import {BaseModel} from "../base-model";
 import {BaseType} from "../dto/base-type";
 
 /**
- * Namespace for Criteria child interfaces and classes.
+ * Namespace for Criteria childdomain interfaces and classes.
  */
 export namespace Criteria {
   /**

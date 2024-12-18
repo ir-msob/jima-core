@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons.exception;
 
-import ir.msob.jima.core.commons.dto.ModelType;
+import ir.msob.jima.core.commons.shared.ModelType;
 
 /**
  * The {@code ExceptionResponseAbstract} class extends the {@code ModelType} class and serves as a base class for all types of exception responses.

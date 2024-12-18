@@ -34,7 +34,7 @@ public class CoreCommonsRuntimeHints implements RuntimeHintsRegistrar {
         // Register TreeSet for reflection
         NativeUtil.register(hints, TreeSet.class);
 
-        // Register JSON Patch child classes for reflection
+        // Register JSON Patch childdomain classes for reflection
         NativeUtil.register(hints, MessageBundleLoader.class);
         NativeUtil.register(hints, JsonPatchMessages.class);
         NativeUtil.register(hints, JsonPointerMessages.class);

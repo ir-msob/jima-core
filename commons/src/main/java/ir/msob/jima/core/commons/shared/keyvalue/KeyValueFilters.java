@@ -1,8 +1,8 @@
 package ir.msob.jima.core.commons.shared.keyvalue;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.criteria.filter.BaseFilters;
-import ir.msob.jima.core.commons.criteria.filter.Filter;
+import ir.msob.jima.core.commons.filter.BaseFilters;
+import ir.msob.jima.core.commons.filter.Filter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

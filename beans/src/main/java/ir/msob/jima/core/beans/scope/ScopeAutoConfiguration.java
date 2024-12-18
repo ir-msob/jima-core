@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Configuration class for setting up the scope-child services.
+ * Configuration class for setting up the scope-childdomain services.
  * This configuration is activated when the property 'jima.scope.enabled' is set to true.
  * It initializes the ScopeSenderService upon application startup.
  */

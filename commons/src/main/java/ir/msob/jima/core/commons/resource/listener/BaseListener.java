@@ -3,9 +3,9 @@ package ir.msob.jima.core.commons.resource.listener;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.commons.channel.ChannelMessage;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
-import ir.msob.jima.core.commons.dto.ModelType;
 import ir.msob.jima.core.commons.resource.BaseResource;
 import ir.msob.jima.core.commons.security.BaseUser;
+import ir.msob.jima.core.commons.shared.ModelType;
 
 import java.io.Serializable;
 

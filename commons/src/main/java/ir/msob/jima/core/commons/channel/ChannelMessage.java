@@ -1,10 +1,10 @@
 package ir.msob.jima.core.commons.channel;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.dto.BaseType;
-import ir.msob.jima.core.commons.dto.ModelType;
 import ir.msob.jima.core.commons.exception.ExceptionResponseAbstract;
 import ir.msob.jima.core.commons.security.BaseUser;
+import ir.msob.jima.core.commons.shared.BaseType;
+import ir.msob.jima.core.commons.shared.ModelType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,7 +38,7 @@ import java.util.Map;
 public class ChannelMessage<USER extends BaseUser, DATA extends ModelType> implements BaseType {
     /**
      * The metadata of the channel information.
-     * This map can hold additional information child to the channel message.
+     * This map can hold additional information childdomain to the channel message.
      */
     @Builder.Default
     private Map<String, Serializable> metadata = new HashMap<>();

@@ -1,8 +1,8 @@
 package ir.msob.jima.core.api.rsocket.test;
 
-import ir.msob.jima.core.commons.criteria.BaseCriteria;
+import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.domain.BaseDomain;
-import ir.msob.jima.core.commons.dto.BaseDto;
+import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.test.BaseCoreResourceTest;
 import org.springframework.messaging.rsocket.RSocketRequester;
@@ -16,7 +16,7 @@ import java.io.Serializable;
  * an RSocketRequester for testing RSocket interactions.
  *
  * @param <ID>   The type of identifier for the entities being tested.
- * @param <USER> The type of user or user-child data in the application.
+ * @param <USER> The type of user or user-childdomain data in the application.
  * @param <D>    The type of domain entities being tested.
  * @param <DTO>  The type of Data Transfer Object (DTO) for the domain entities.
  * @param <C>    The type of criteria used for filtering domain entities.

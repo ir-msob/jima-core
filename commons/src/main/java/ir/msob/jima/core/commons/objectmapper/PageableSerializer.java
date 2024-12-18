@@ -27,7 +27,7 @@ public class PageableSerializer extends BasePageableSerializer<Pageable> {
         // Start writing the JSON object
         jsonGenerator.writeStartObject();
 
-        // Write page-child fields
+        // Write page-childdomain fields
         jsonGenerator.writeNumberField("offset", pageable.getOffset());
         jsonGenerator.writeNumberField("pageNumber", pageable.getPageNumber());
         jsonGenerator.writeNumberField("pageSize", pageable.getPageSize());

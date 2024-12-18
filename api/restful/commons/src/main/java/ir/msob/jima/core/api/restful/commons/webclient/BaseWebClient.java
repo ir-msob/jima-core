@@ -24,9 +24,9 @@ public interface BaseWebClient {
     /**
      * Set user information in the HTTP headers of a web client request by encoding user data into a JSON string.
      *
-     * @param <USER>  The type representing a user entity for working with user-child information.
+     * @param <USER>  The type representing a user entity for working with user-childdomain information.
      * @param builder The HttpHeaders object representing the HTTP headers of the request.
-     * @param user    An Optional containing user-child information.
+     * @param user    An Optional containing user-childdomain information.
      * @throws JsonProcessingException if there is an issue with JSON processing.
      */
     default <USER extends BaseUser> void setUserInfo(HttpHeaders builder, USER user) throws JsonProcessingException {

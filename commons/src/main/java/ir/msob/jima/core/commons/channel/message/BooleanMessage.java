@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.channel.message;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.dto.ModelType;
+import ir.msob.jima.core.commons.shared.ModelType;
 import lombok.*;
 
 /**

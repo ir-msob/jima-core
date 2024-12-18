@@ -94,7 +94,7 @@ public class ConditionalOnOperationUtil {
     }
 
     /**
-     * Validates child operations based on the provided scope and
+     * Validates childdomain operations based on the provided scope and
      * conditional operation annotations.
      *
      * @param scope                  The scope to evaluate.

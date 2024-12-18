@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.util;
 
 import com.google.common.collect.Sets;
-import ir.msob.jima.core.commons.criteria.SampleCriteria;
+import ir.msob.jima.core.commons.domain.SampleCriteria;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;

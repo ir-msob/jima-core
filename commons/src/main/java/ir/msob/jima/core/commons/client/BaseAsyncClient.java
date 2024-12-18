@@ -2,9 +2,9 @@ package ir.msob.jima.core.commons.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import ir.msob.jima.core.commons.channel.ChannelMessage;
-import ir.msob.jima.core.commons.dto.ModelType;
 import ir.msob.jima.core.commons.methodstats.MethodStats;
 import ir.msob.jima.core.commons.security.BaseUser;
+import ir.msob.jima.core.commons.shared.ModelType;
 
 import java.util.Map;
 

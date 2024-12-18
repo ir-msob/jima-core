@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.scope;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.dto.BaseType;
+import ir.msob.jima.core.commons.shared.BaseType;
 import lombok.*;
 
 import java.util.Comparator;

@@ -6,8 +6,8 @@ import com.github.fge.jackson.jsonpointer.JsonPointer;
 import com.github.fge.jackson.jsonpointer.JsonPointerException;
 import com.github.fge.jsonpatch.JsonPatchOperation;
 import com.github.fge.jsonpatch.ReplaceOperation;
-import ir.msob.jima.core.commons.child.characteristic.Characteristic;
-import ir.msob.jima.core.commons.child.relatedobject.RelatedObjectAbstract;
+import ir.msob.jima.core.commons.childdomain.characteristic.Characteristic;
+import ir.msob.jima.core.commons.childdomain.relatedobject.RelatedObjectAbstract;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import static ir.msob.jima.core.test.CoreTestData.*;
 
 /**
  * This class, CoreJsonPatch, provides methods for generating JSON Patch operations used in testing scenarios.
- * It includes methods for creating operations child to characteristics, child domains, and child parties.
+ * It includes methods for creating operations childdomain to characteristics, childdomain domains, and childdomain parties.
  */
 public class CoreTestJsonPatch {
 
@@ -43,9 +43,9 @@ public class CoreTestJsonPatch {
     }
 
     /**
-     * Generates a list of JSON Patch operations for updating child domains.
+     * Generates a list of JSON Patch operations for updating childdomain domains.
      *
-     * @param id   The identifier of the child domain.
+     * @param id   The identifier of the childdomain domain.
      * @param <ID> The type of the identifier.
      * @return A list of JSON Patch operations.
      * @throws JsonPointerException If there's an issue with JSON pointers.
@@ -60,9 +60,9 @@ public class CoreTestJsonPatch {
     }
 
     /**
-     * Generates a list of JSON Patch operations for updating child parties.
+     * Generates a list of JSON Patch operations for updating childdomain parties.
      *
-     * @param id   The identifier of the child party.
+     * @param id   The identifier of the childdomain party.
      * @param <ID> The type of the identifier.
      * @return A list of JSON Patch operations.
      * @throws JsonPointerException If there's an issue with JSON pointers.
