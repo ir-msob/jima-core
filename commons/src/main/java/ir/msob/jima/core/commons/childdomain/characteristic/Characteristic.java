@@ -30,7 +30,6 @@ import java.util.Objects;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Characteristic<ID extends Comparable<ID> & Serializable> extends BaseChildDomainAbstract<ID> implements Comparable<Characteristic<ID>> {
 
@@ -51,6 +50,13 @@ public class Characteristic<ID extends Comparable<ID> & Serializable> extends Ba
      */
     @NotBlank
     private String dataType;
+
+    public Characteristic(ID id, ID parentId, String key, Serializable value, String dataType) {
+        super(id, parentId);
+        this.key = key;
+        this.value = value;
+        this.dataType = dataType;
+    }
 
     /**
      * Checks whether this characteristic is equal to another object based on their keys.

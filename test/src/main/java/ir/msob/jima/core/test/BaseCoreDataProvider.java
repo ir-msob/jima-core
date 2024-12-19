@@ -114,7 +114,7 @@ public interface BaseCoreDataProvider<ID extends Comparable<ID> & Serializable,
      *
      * @param dto The DTO to be updated.
      */
-    void getUpdateDto(DTO dto);
+    void updateDto(DTO dto);
 
     /**
      * Get a mandatory new instance of the data transfer object.
@@ -128,7 +128,7 @@ public interface BaseCoreDataProvider<ID extends Comparable<ID> & Serializable,
      *
      * @param dto The DTO to be updated (mandatory).
      */
-    void getMandatoryUpdateDto(DTO dto);
+    void updateMandatoryDto(DTO dto);
 
     /**
      * Get the data service for working with data entities.

@@ -1,22 +1,37 @@
 package ir.msob.jima.core.commons.childdomain;
 
 import ir.msob.jima.core.commons.childdomain.criteria.BaseChildCriteria;
+import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.domain.BaseDto;
+import ir.msob.jima.core.commons.element.BaseElement;
 import lombok.SneakyThrows;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.SortedSet;
+import java.util.*;
 import java.util.function.Function;
 
 public class ChildDomainUtil {
 
+    public static Collection<Field> getFields(Class<?> type) {
+        List<Field> fields = new ArrayList<>();
+        if (type != null) {
+            while (type != null && type != BaseElement.class) {
+                Field[] classFields = type.getDeclaredFields();
+                if (classFields.length > 0)
+                    fields.addAll(Arrays.asList(classFields));
+                type = type.getSuperclass();
+            }
+        }
+        return fields;
+    }
 
     @SneakyThrows
     public static <ID extends Comparable<ID> & Serializable, DTO extends BaseDto<ID>, CD extends BaseChildDomain<ID>> boolean hasFunction(Class<CD> cdClass, Class<DTO> dtoClass) {
         // Iterate through all declared fields of the current class
-        for (var field : dtoClass.getDeclaredFields()) {
+        for (var field : getFields(dtoClass)) {
             // Check if the field is annotated with ChildDomain
             if (field.isAnnotationPresent(ChildDomain.class)) {
                 ChildDomain childDomain = field.getAnnotation(ChildDomain.class);
@@ -32,7 +47,7 @@ public class ChildDomainUtil {
     @SneakyThrows
     public static <ID extends Comparable<ID> & Serializable, DTO extends BaseDto<ID>, CD extends BaseChildDomain<ID>> Function<DTO, SortedSet<CD>> getFunction(Class<CD> cdClass, Class<DTO> dtoClass) {
         // Iterate through all declared fields of the current class
-        for (var field : dtoClass.getDeclaredFields()) {
+        for (var field : getFields(dtoClass)) {
             // Check if the field is annotated with ChildDomain
             if (field.isAnnotationPresent(ChildDomain.class)) {
                 ChildDomain childDomain = field.getAnnotation(ChildDomain.class);
@@ -69,7 +84,7 @@ public class ChildDomainUtil {
     // Method to get the criteria class based on childDomain and DTO
     public static <ID extends Comparable<ID> & Serializable, DTO extends BaseDto<ID>, CD extends BaseChildDomain<ID>, CC extends BaseChildCriteria<ID, CD>> Class<CC> getCriteriaClass(Class<CD> cdClass, Class<DTO> dtoClass) {
         // Use reflection to find the ChildDomain annotation
-        for (var field : dtoClass.getDeclaredFields()) {
+        for (var field : getFields(dtoClass)) {
             if (field.isAnnotationPresent(ChildDomain.class)) {
                 ChildDomain childDomain = field.getAnnotation(ChildDomain.class);
                 // Check if the annotated ChildDomain class matches or is a superclass of the provided class
