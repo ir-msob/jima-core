@@ -2,7 +2,7 @@ package ir.msob.jima.core.api.kafka.beans;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.msob.jima.core.commons.channel.ChannelMessage;
+import ir.msob.jima.core.commons.channel.BaseChannelMessage;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
 import ir.msob.jima.core.commons.methodstats.MethodStats;
 import ir.msob.jima.core.commons.security.BaseUser;
@@ -24,17 +24,17 @@ public class KafkaAsyncClient implements BaseAsyncClient {
     private final ObjectMapper objectMapper;
 
     /**
-     * Send a ChannelMessage to a Kafka channel.
+     * Send a BaseChannelMessage to a Kafka channel.
      *
-     * @param channelMessage The ChannelMessage to be sent.
+     * @param channelMessage The BaseChannelMessage to be sent.
      * @param channel        The Kafka channel to which the message should be sent.
      * @param user           An optional user associated with the message.
      */
     @MethodStats
     @SneakyThrows
     @Override
-    public <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel, USER user) {
-        // Set the user information in the ChannelMessage.
+    public <USER extends BaseUser, DATA extends ModelType> void send(BaseChannelMessage<USER, DATA> channelMessage, String channel, USER user) {
+        // Set the user information in the BaseChannelMessage.
         if (channelMessage.getUser() == null)
             channelMessage.setUser(user);
 
@@ -42,7 +42,7 @@ public class KafkaAsyncClient implements BaseAsyncClient {
     }
 
     @Override
-    public <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel) throws JsonProcessingException {
+    public <USER extends BaseUser, DATA extends ModelType> void send(BaseChannelMessage<USER, DATA> channelMessage, String channel) throws JsonProcessingException {
         sendMessage(channelMessage, channel);
     }
 
@@ -57,8 +57,8 @@ public class KafkaAsyncClient implements BaseAsyncClient {
     @SneakyThrows
     @Override
     public <USER extends BaseUser> void send(Map<String, Object> channelMessage, String channel, USER user) {
-        // Set the user information in the ChannelMessage.
-        channelMessage.putIfAbsent(ChannelMessage.FN.user.name(), user);
+        // Set the user information in the BaseChannelMessage.
+        channelMessage.putIfAbsent(BaseChannelMessage.FN.user.name(), user);
         sendMessage(channelMessage, channel);
     }
 

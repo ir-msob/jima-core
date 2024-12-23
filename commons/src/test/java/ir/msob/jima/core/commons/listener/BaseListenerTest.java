@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.listener;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.msob.jima.core.commons.channel.ChannelMessage;
+import ir.msob.jima.core.commons.channel.BaseChannelMessage;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
 import ir.msob.jima.core.commons.resource.listener.BaseListener;
 import ir.msob.jima.core.commons.security.BaseUser;
@@ -34,12 +34,12 @@ class BaseListenerTest {
             }
         };
 
-        ChannelMessage<BaseUser, ModelType> channelMessageReq = ChannelMessage.builder().build();
+        BaseChannelMessage<BaseUser, ModelType> channelMessageReq = BaseChannelMessage.builder().build();
         ModelType data = new ModelType();
         Integer status = 200;
 
         // Act
-        ChannelMessage<BaseUser, ModelType> preparedChannelMessage = baseKafkaParentListener.prepareChannelMessage(channelMessageReq, data, status, new BaseUser());
+        BaseChannelMessage<BaseUser, ModelType> preparedChannelMessage = baseKafkaParentListener.prepareChannelMessage(channelMessageReq, data, status, new BaseUser());
 
         // Assert
         assertEquals(data, preparedChannelMessage.getData());

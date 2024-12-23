@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import ir.msob.jima.core.commons.channel.ChannelMessage;
+import ir.msob.jima.core.commons.channel.BaseChannelMessage;
 import ir.msob.jima.core.commons.methodstats.MethodStats;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.shared.ModelType;
@@ -26,7 +26,7 @@ public interface BaseAsyncClient {
      * @param user           Optional: the destination user
      */
     @MethodStats
-    <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel, USER user);
+    <USER extends BaseUser, DATA extends ModelType> void send(BaseChannelMessage<USER, DATA> channelMessage, String channel, USER user);
 
     /**
      * This method sends a generic channel message.
@@ -38,7 +38,7 @@ public interface BaseAsyncClient {
      * @param channel        The channel name
      */
     @MethodStats
-    <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel) throws JsonProcessingException;
+    <USER extends BaseUser, DATA extends ModelType> void send(BaseChannelMessage<USER, DATA> channelMessage, String channel) throws JsonProcessingException;
 
     /**
      * This method sends a channel message of type Map.

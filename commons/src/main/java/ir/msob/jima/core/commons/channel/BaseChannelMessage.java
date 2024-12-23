@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The 'ChannelMessage' class represents a message that is sent through a channel.
+ * The 'BaseChannelMessage' class represents a message that is sent through a channel.
  * It extends the 'ChannelInfoAbstract' class and implements the 'BaseType' interface.
  * The class includes fields for data, user, status, channel, and callbacks, along with their respective getter and setter methods.
  * The class uses the 'JsonInclude' annotation to specify that null fields should not be included in the JSON representation of an instance.
@@ -35,7 +35,7 @@ import java.util.Map;
 @Getter
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ChannelMessage<USER extends BaseUser, DATA extends ModelType> implements BaseType {
+public class BaseChannelMessage<USER extends BaseUser, DATA extends ModelType> implements BaseType {
     /**
      * The metadata of the channel information.
      * This map can hold additional information childdomain to the channel message.
@@ -69,17 +69,17 @@ public class ChannelMessage<USER extends BaseUser, DATA extends ModelType> imple
 
     /**
      * A list of callbacks associated with the channel message.
-     * This list can hold multiple ChannelMessage instances that are callbacks.
+     * This list can hold multiple BaseChannelMessage instances that are callbacks.
      */
     @Singular
-    private List<ChannelMessage<USER, ? extends ModelType>> callbacks;
+    private List<BaseChannelMessage<USER, ? extends ModelType>> callbacks;
 
     /**
      * A list of error callbacks associated with the channel message.
-     * This list can hold multiple ChannelMessage instances that represent error callbacks.
+     * This list can hold multiple BaseChannelMessage instances that represent error callbacks.
      */
     @Singular
-    private List<ChannelMessage<USER, ? extends ExceptionResponseAbstract>> errorCallbacks;
+    private List<BaseChannelMessage<USER, ? extends ExceptionResponseAbstract>> errorCallbacks;
 
     /**
      * The 'FN' enum represents the field names of the class.

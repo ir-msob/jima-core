@@ -1,7 +1,7 @@
 package ir.msob.jima.core.api.kafka.beans;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import ir.msob.jima.core.commons.channel.ChannelMessage;
+import ir.msob.jima.core.commons.channel.BaseChannelMessage;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.shared.ModelType;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,14 +39,14 @@ class KafkaAsyncClientTest {
     }
 
     /**
-     * Tests the send method of KafkaAsyncClient with a ChannelMessage.
+     * Tests the send method of KafkaAsyncClient with a BaseChannelMessage.
      *
      * @throws Exception if an error occurs during the test execution.
      */
     @Test
     void testSendChannelMessage() throws Exception {
         // Prepare test data
-        ChannelMessage<BaseUser, ModelType> channelMessage = ChannelMessage.builder().build();
+        BaseChannelMessage<BaseUser, ModelType> channelMessage = BaseChannelMessage.builder().build();
         String channel = "testChannel";
 
         // Mock behavior
