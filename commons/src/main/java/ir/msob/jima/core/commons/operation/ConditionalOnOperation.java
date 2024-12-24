@@ -64,5 +64,5 @@ public @interface ConditionalOnOperation {
      *
      * @return The childdomain elements.
      */
-    Element[] related() default {};
+    Element[] children() default {};
 }

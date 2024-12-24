@@ -3,7 +3,7 @@ package ir.msob.jima.core.api.kafka.beans;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.commons.callback.CallbackError;
-import ir.msob.jima.core.commons.channel.BaseChannelMessage;
+import ir.msob.jima.core.commons.channel.ChannelMessage;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
 import ir.msob.jima.core.commons.exception.BaseExceptionMapper;
 import ir.msob.jima.core.commons.exception.BaseRuntimeException;
@@ -59,25 +59,25 @@ public class CallbackErrorAspect {
      * @param e     The thrown exception
      */
     private <USER extends BaseUser, DATA extends ModelType> void callback(JoinPoint point, Throwable e) throws JsonProcessingException {
-        BaseChannelMessage<USER, DATA> message = prepareChannelMessage(point);
+        ChannelMessage<USER, DATA> message = prepareChannelMessage(point);
         USER user = message.getUser();
 
-        List<? extends BaseChannelMessage<USER, ? extends ExceptionResponseAbstract>> errorChannelMessages = prepareErrorChannelMessage(message, e);
+        List<? extends ChannelMessage<USER, ? extends ExceptionResponseAbstract>> errorChannelMessages = prepareErrorChannelMessage(message, e);
         if (!message.getErrorCallbacks().isEmpty()) {
-            for (BaseChannelMessage<USER, ? extends ExceptionResponseAbstract> errorChannelMessage : errorChannelMessages) {
+            for (ChannelMessage<USER, ? extends ExceptionResponseAbstract> errorChannelMessage : errorChannelMessages) {
                 asyncClient.send(errorChannelMessage, errorChannelMessage.getChannel(), user);
             }
         }
     }
 
     /**
-     * This method prepares a BaseChannelMessage object from the method parameters.
+     * This method prepares a ChannelMessage object from the method parameters.
      *
      * @param point The join point of the method
-     * @return A BaseChannelMessage object
+     * @return A ChannelMessage object
      * @throws JsonProcessingException If there's an issue with JSON processing
      */
-    private <USER extends BaseUser, DATA extends ModelType> BaseChannelMessage<USER, DATA> prepareChannelMessage(JoinPoint point) throws JsonProcessingException {
+    private <USER extends BaseUser, DATA extends ModelType> ChannelMessage<USER, DATA> prepareChannelMessage(JoinPoint point) throws JsonProcessingException {
         MethodSignature methodSignature = (MethodSignature) point.getSignature();
         Parameter[] parameters = methodSignature.getMethod().getParameters();
         CallbackError callbackError = methodSignature.getMethod().getAnnotation(CallbackError.class);
@@ -87,25 +87,25 @@ public class CallbackErrorAspect {
             if (parameter.getName().equals(callbackError.value())) {
                 Object paramValue = point.getArgs()[i];
                 if (paramValue instanceof String dto) {
-                    return objectMapper.readValue(dto, BaseChannelMessage.class);
-                } else if (paramValue instanceof BaseChannelMessage channelMessage) {
+                    return objectMapper.readValue(dto, ChannelMessage.class);
+                } else if (paramValue instanceof ChannelMessage channelMessage) {
                     return channelMessage;
                 }
             }
         }
-        throw new CommonRuntimeException("Cannot detect BaseChannelMessage arg. Class {}, Method {}",
+        throw new CommonRuntimeException("Cannot detect ChannelMessage arg. Class {}, Method {}",
                 point.getSignature().getDeclaringTypeName(),
                 methodSignature.getMethod().getName());
     }
 
     /**
-     * This method prepares an error BaseChannelMessage based on an exception.
+     * This method prepares an error ChannelMessage based on an exception.
      *
-     * @param channelMessageReq The original BaseChannelMessage
+     * @param channelMessageReq The original ChannelMessage
      * @param throwable         The thrown exception
-     * @return An error BaseChannelMessage
+     * @return An error ChannelMessage
      */
-    <USER extends BaseUser, DATA_REQ extends ModelType, ER extends ExceptionResponseAbstract> List<BaseChannelMessage<USER, ER>> prepareErrorChannelMessage(BaseChannelMessage<USER, DATA_REQ> channelMessageReq, Throwable throwable) {
+    <USER extends BaseUser, DATA_REQ extends ModelType, ER extends ExceptionResponseAbstract> List<ChannelMessage<USER, ER>> prepareErrorChannelMessage(ChannelMessage<USER, DATA_REQ> channelMessageReq, Throwable throwable) {
         ER er;
         if (throwable instanceof BaseRuntimeException e) {
             er = exceptionMapper.getExceptionResponse(e);
@@ -117,7 +117,7 @@ public class CallbackErrorAspect {
                 .stream()
                 .map(channelMessage -> {
                     // Clone the channelMessage to avoid modifying the original
-                    return BaseChannelMessage.
+                    return ChannelMessage.
                             <USER, ER>builder()
                             .data(er)
                             .status(er.getStatus())

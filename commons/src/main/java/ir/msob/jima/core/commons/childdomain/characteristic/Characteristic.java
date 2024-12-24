@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.childdomain.BaseChildDomainAbstract;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Comparator;

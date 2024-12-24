@@ -2,7 +2,7 @@ package ir.msob.jima.core.beans.scope;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import ir.msob.jima.core.beans.properties.JimaProperties;
-import ir.msob.jima.core.commons.channel.BaseChannelMessage;
+import ir.msob.jima.core.commons.channel.ChannelMessage;
 import ir.msob.jima.core.commons.client.BaseAsyncClient;
 import ir.msob.jima.core.commons.logger.Logger;
 import ir.msob.jima.core.commons.logger.LoggerFactory;
@@ -30,7 +30,7 @@ public class ScopeSenderService {
      */
     public void send() throws JsonProcessingException {
         logger.info("Starting ScopeSenderService...");
-        BaseChannelMessage<?, ServiceDto> channelMessage = prepareChannelMessage();
+        ChannelMessage<?, ServiceDto> channelMessage = prepareChannelMessage();
         asyncClient.send(channelMessage, jimaProperties.getScope().getChannel());
         logger.info("ScopeSenderService started successfully.");
     }
@@ -38,15 +38,15 @@ public class ScopeSenderService {
     /**
      * Prepares a channel message containing the service details.
      *
-     * @return a BaseChannelMessage object containing the service details.
+     * @return a ChannelMessage object containing the service details.
      */
-    private BaseChannelMessage<?, ServiceDto> prepareChannelMessage() {
+    private ChannelMessage<?, ServiceDto> prepareChannelMessage() {
         ServiceDto serviceDto = ServiceDto.builder()
                 .serviceName(applicationName)
                 .resources(scopeScannerService.getResources())
                 .build();
 
-        BaseChannelMessage<BaseUser, ServiceDto> channelMessage = BaseChannelMessage.<BaseUser, ServiceDto>builder().build();
+        ChannelMessage<BaseUser, ServiceDto> channelMessage = ChannelMessage.<BaseUser, ServiceDto>builder().build();
         channelMessage.setData(serviceDto);
         return channelMessage;
     }

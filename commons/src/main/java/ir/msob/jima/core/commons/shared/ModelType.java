@@ -3,9 +3,7 @@ package ir.msob.jima.core.commons.shared;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import ir.msob.jima.core.commons.Constants;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 /**
@@ -17,8 +15,6 @@ import lombok.ToString;
  * The type information is included as a property with the name specified in 'Constants.TYPE_PROPERTY_NAME'.
  * The '@JsonTypeInfo' annotation is set to use 'JsonTypeInfo.Id.NONE', which means that no type information will be included in the JSON output.
  */
-@Setter
-@Getter
 @ToString(callSuper = true)
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
