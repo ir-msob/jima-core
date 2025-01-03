@@ -10,8 +10,8 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- * This class represents the filters that can be applied when searching for childdomain integrations.
- * It extends the BaseRelatedFilters class and provides filters for the childdomain integration type, ID, role, and referred type.
+ * This class represents the filters that can be applied when searching for related integrations.
+ * It extends the BaseRelatedFilters class and provides filters for the related integration type, ID, role, and referred type.
  */
 @Setter
 @Getter

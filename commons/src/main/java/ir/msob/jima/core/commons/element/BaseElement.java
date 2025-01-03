@@ -10,9 +10,9 @@ import java.io.Serializable;
  * - ID: The type of the domain model's ID.
  * <p>
  * Methods:
- * - {@code getDomainId()}: Returns the domain ID of the model.
- * - {@code setDomainId(ID id)}: Sets the domain ID of the model.
- * - {@code getDomainIdName()}: Returns the name of the domain ID field.
+ * - {@code getId()}: Returns the domain ID of the model.
+ * - {@code setId(ID id)}: Sets the domain ID of the model.
+ * - {@code getIdName()}: Returns the name of the domain ID field.
  */
 public interface BaseElement<ID extends Comparable<ID> & Serializable> extends Serializable {
 

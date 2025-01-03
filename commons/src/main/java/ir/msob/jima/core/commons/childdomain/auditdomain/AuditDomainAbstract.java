@@ -12,7 +12,7 @@ import java.util.Objects;
 
 /**
  * The {@code AuditDomainAbstract} class represents a domain object for auditing purposes.
- * It includes fields for the childdomain party ID, action date, action type, and version.
+ * It includes fields for the related party ID, action date, action type, and version.
  * This class provides several constructors for creating an instance of the model with different sets of parameters.
  * Additionally, it overrides the {@code compareTo}, {@code equals}, and {@code hashCode} methods from the {@code Object} class to provide custom comparison and hashing behavior.
  * The {@code FN} enum is used to represent the field names of the {@code AuditDomainAbstract} class.
@@ -25,7 +25,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public abstract class AuditDomainAbstract<ID extends Comparable<ID> & Serializable, RP extends RelatedPartyAbstract<ID>> extends BaseChildDomainAbstract<ID> implements Comparable<AuditDomainAbstract<ID, RP>> {
     /**
-     * The childdomain party.
+     * The related party.
      */
     @NotNull
     private RP relatedParty;

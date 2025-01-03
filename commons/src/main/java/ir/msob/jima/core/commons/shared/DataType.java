@@ -9,5 +9,4 @@ public enum DataType {
     INSTANT,
     BOOLEAN,
     OBJECT
-
 }

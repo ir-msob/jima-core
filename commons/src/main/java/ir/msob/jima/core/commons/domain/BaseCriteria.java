@@ -9,11 +9,9 @@ import java.util.Set;
 
 /**
  * The 'BaseCriteria' interface represents the basic class for domain filters.
- * It extends the 'BaseModel' and 'BaseType' interfaces.
- * The interface is a generic interface, with the generic type 'ID' extending 'Comparable' and 'Serializable'.
+ * It extends the 'BaseType' interface and is a generic interface with the generic type 'ID' extending 'Comparable' and 'Serializable'.
  * This means that the ID of the criteria can be of any type that is comparable and serializable.
  * The interface includes getter and setter methods for the ID filter and for include and include limitation sets.
- * The interface also includes 'init' and 'objectvalidation' methods for initializing and validating the criteria.
  *
  * @param <ID> The type of the ID of the criteria.
  */

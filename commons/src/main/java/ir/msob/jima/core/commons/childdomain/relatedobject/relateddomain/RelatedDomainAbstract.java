@@ -10,10 +10,10 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- * This class represents a childdomain domain with a type, an ID, a role, and a referred type.
+ * This class represents a related domain with a type, an ID, a role, and a referred type.
  * It implements Comparable interface to provide a natural ordering of its instances.
  *
- * @param <ID> the type of the childdomain domain ID, which must be comparable and serializable
+ * @param <ID> the type of the related domain ID, which must be comparable and serializable
  */
 @Getter
 @Setter

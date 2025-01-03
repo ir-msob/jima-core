@@ -11,22 +11,22 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * The {@code RelatedObjectAbstract} class represents a childdomain object with a type, an ID, a role,
+ * The {@code RelatedObjectAbstract} class represents a related object with a type, an ID, a role,
  * and a referring type. It implements the {@link Comparable} interface to provide natural
  * ordering of instances based on specific fields.
  *
  * <p>Fields:</p>
- * - {@code name}: The name of the childdomain object (must not be blank).
- * - {@code relatedId}: The ID of the childdomain object (must not be null).
- * - {@code role}: The role of the childdomain object, which can be null.
- * - {@code referringType}: The type of the object that referred to this childdomain object, which can be null.
- * - {@code status}: The status of the childdomain object, which can be null.
- * - {@code enabled}: A boolean indicating whether the childdomain object is enabled, which can be null.
- * - {@code validFor}: A {@link TimePeriod} indicating the time period for which the childdomain object is valid.
- * - {@code auditInfo}: An {@link AuditInfo} object containing audit-childdomain information for the childdomain object.
+ * - {@code name}: The name of the related object (must not be blank).
+ * - {@code relatedId}: The ID of the related object (must not be null).
+ * - {@code role}: The role of the related object, which can be null.
+ * - {@code referringType}: The type of the object that referred to this related object, which can be null.
+ * - {@code status}: The status of the related object, which can be null.
+ * - {@code enabled}: A boolean indicating whether the related object is enabled, which can be null.
+ * - {@code validFor}: A {@link TimePeriod} indicating the time period for which the related object is valid.
+ * - {@code auditInfo}: An {@link AuditInfo} object containing audit-related object information for the related object.
  *
  * <p>Methods:</p>
- * - {@code compareTo(RelatedObjectAbstract<ID> other)}: Compares this childdomain object with another for order
+ * - {@code compareTo(RelatedObjectAbstract<ID> other)}: Compares this related object with another for order
  * based on relatedId, name, role, and referringType.
  * - {@code equals(Object obj)}: Indicates whether some other object is "equal to" this one based on
  * relatedId, name, role, and referringType.
@@ -36,7 +36,7 @@ import java.util.Objects;
  * - {@link FN}: Represents the field names of the {@code RelatedObjectAbstract} class, including name,
  * relatedId, role, referringType, status, enabled, validFor, and auditInfo.
  *
- * @param <ID> the type of the childdomain object ID, which must be comparable and serializable
+ * @param <ID> the type of the related object ID, which must be comparable and serializable
  */
 @Getter
 @Setter
@@ -47,52 +47,52 @@ import java.util.Objects;
 public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable> extends BaseChildDomainAbstract<ID> implements Comparable<RelatedObjectAbstract<ID, RID>> {
 
     /**
-     * The name of the childdomain object.
+     * The name of the related object.
      */
     @NotBlank
     private String name;
 
     /**
-     * The ID of the childdomain object.
+     * The ID of the related object.
      */
     @NotBlank
     private RID relatedId;
 
     /**
-     * The role of the childdomain object.
+     * The role of the related object.
      */
     private String role;
 
     /**
-     * The type of the object that referred to this childdomain object.
+     * The type of the object that referred to this related object.
      */
     private String referringType;
 
     /**
-     * The status of the childdomain object.
+     * The status of the related object.
      */
     private String status;
 
     /**
-     * Indicates whether the childdomain object is enabled.
+     * Indicates whether the related object is enabled.
      */
     private Boolean enabled;
 
     /**
-     * The time period for which the childdomain object is valid.
+     * The time period for which the related object is valid.
      */
     private TimePeriod validFor;
 
     /**
-     * Represents the audit information associated with the childdomain object.
+     * Represents the audit information associated with the related object.
      */
     private AuditInfo auditInfo;
 
     /**
-     * Compares this childdomain object with the specified childdomain object for order.
+     * Compares this related object with the specified related object for order.
      *
-     * @param other the childdomain object to be compared
-     * @return a negative integer, zero, or a positive integer as this childdomain object is less than, equal to, or greater than the specified childdomain object
+     * @param other the related object to be compared
+     * @return a negative integer, zero, or a positive integer as this related object is less than, equal to, or greater than the specified related object
      */
     @Override
     public int compareTo(RelatedObjectAbstract<ID, RID> other) {

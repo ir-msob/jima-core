@@ -10,8 +10,8 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- * This class represents the filters that can be applied when searching for childdomain parties.
- * It implements the BaseFilters interface and provides filters for the childdomain party type, ID, role, and referred type.
+ * This class represents the filters that can be applied when searching for related parties.
+ * It implements the BaseFilters interface and provides filters for the related party type, ID, role, and referred type.
  */
 @Setter
 @Getter

@@ -10,8 +10,8 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- * This class represents the filters that can be applied when searching for childdomain processes.
- * It extends the BaseRelatedFilters class and provides filters for the childdomain process type, ID, role, and referred type.
+ * This class represents the filters that can be applied when searching for related processes.
+ * It extends the BaseRelatedFilters class and provides filters for the related process type, ID, role, and referred type.
  */
 @Setter
 @Getter

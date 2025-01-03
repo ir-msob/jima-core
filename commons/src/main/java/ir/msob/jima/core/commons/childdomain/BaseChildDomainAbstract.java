@@ -9,27 +9,41 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
+/**
+ * Abstract base class for child domain entities.
+ *
+ * @param <ID> the type of the identifier, which must be comparable and serializable
+ */
 @Getter
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class BaseChildDomainAbstract<ID extends Comparable<ID> & Serializable> extends BaseElementAbstract<ID> implements BaseChildDomain<ID> {
+
     /**
      * The parent domain ID of the model.
      */
     private ID parentId;
 
+    /**
+     * Constructs a new instance with the specified ID and parent ID.
+     *
+     * @param id the ID of the entity
+     * @param parentId the parent domain ID of the entity
+     */
     public BaseChildDomainAbstract(ID id, ID parentId) {
         super(id);
         this.parentId = parentId;
     }
 
     /**
-     * The 'FN' enum represents the field names of the 'BaseChildDomainAbstract' class.
-     * It includes a single value 'parentId' which represents the parent domain ID field of the class.
+     * Enum representing the field names of the `BaseChildDomainAbstract` class.
      */
     public enum FN {
+        /**
+         * Represents the parent domain ID field.
+         */
         parentId
     }
 }

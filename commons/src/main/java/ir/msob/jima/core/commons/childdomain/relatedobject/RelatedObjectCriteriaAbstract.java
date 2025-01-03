@@ -15,10 +15,12 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- * Base class representing the filters that can be applied when searching for childdomain entities.
- * It implements the BaseFilters interface and provides filters for the childdomain entity type, ID, role, referring type, status, enabled state, relation date, and expiration date.
+ * Base class representing the filters that can be applied when searching for related object entities.
+ * It implements the BaseFilters interface and provides filters for the related object entity type, ID, role, referring type, status, enabled state, relation date, and expiration date.
  *
- * @param <ID> the type of the childdomain entity ID, which must be comparable and serializable
+ * @param <ID> the type of the related object entity ID, which must be comparable and serializable
+ * @param <RID> the type of the related ID, which must be comparable and serializable
+ * @param <CD> the type of the related object entity
  */
 @Setter
 @Getter
@@ -28,39 +30,51 @@ import java.io.Serializable;
 public abstract class RelatedObjectCriteriaAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable, CD extends RelatedObjectAbstract<ID, RID>> extends BaseChildCriteriaAbstract<ID, CD> implements BaseChildCriteriaRelatedId<ID, RID, CD>, BaseFilters {
 
     /**
-     * Filter for the name of the childdomain object.
+     * Filter for the name of the related object.
      */
     private Filter<String> name;
 
     /**
-     * Filter for the ID of the childdomain object.
+     * Filter for the ID of the related object.
      */
     private Filter<RID> relatedId;
 
     /**
-     * Filter for the role of the childdomain object.
+     * Filter for the role of the related object.
      */
     private Filter<String> role;
 
     /**
-     * Filter for the type of the object that referred to this childdomain object.
+     * Filter for the type of the object that referred to this related object.
      */
     private Filter<String> referringType;
 
     /**
-     * Filter for the status of the childdomain object.
+     * Filter for the status of the related object.
      */
     private Filter<String> status;
 
     /**
-     * Filter for the enabled state of the childdomain object.
+     * Filter for the enabled state of the related object.
      */
     private Filter<Boolean> enabled;
 
+    /**
+     * Filters for the valid time period of the related object.
+     */
     private TimePeriodFilters validFor;
 
+    /**
+     * Filters for the audit information of the related object.
+     */
     private AuditInfoFilters auditInfo;
 
+    /**
+     * Checks if the given related model matches the criteria defined by the filters.
+     *
+     * @param relatedModel the related model to be checked
+     * @return true if the related model matches the criteria, false otherwise
+     */
     @Override
     public boolean isMatching(CD relatedModel) {
         if (!super.isMatching(relatedModel)) {

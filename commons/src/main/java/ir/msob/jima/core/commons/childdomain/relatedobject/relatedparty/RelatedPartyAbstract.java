@@ -10,7 +10,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- * This class represents a childdomain party with a type, an ID, a role, and a referred type.
+ * This class represents a related party with a type, an ID, a role, and a referred type.
  * It implements Comparable interface to provide a natural ordering of its instances.
  */
 @Getter

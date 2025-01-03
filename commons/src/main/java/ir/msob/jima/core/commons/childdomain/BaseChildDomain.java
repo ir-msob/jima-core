@@ -5,7 +5,11 @@ import ir.msob.jima.core.commons.util.GenericTypeUtil;
 
 import java.io.Serializable;
 
-
+/**
+ * Interface representing a base child domain entity.
+ *
+ * @param <ID> the type of the identifier, which must be comparable and serializable
+ */
 public interface BaseChildDomain<ID extends Comparable<ID> & Serializable> extends BaseElement<ID> {
 
     /**
@@ -31,6 +35,4 @@ public interface BaseChildDomain<ID extends Comparable<ID> & Serializable> exten
     default Class<ID> getIdClass() {
         return (Class<ID>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseChildDomain.class, 0);
     }
-
-
 }
