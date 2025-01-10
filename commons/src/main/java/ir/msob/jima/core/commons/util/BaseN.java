@@ -123,7 +123,7 @@ public class BaseN {
                 list.set(j - 1, list.get(j) * base + list.get(j - 1));
             }
         }
-        return list.get(0);
+        return list.getFirst();
     }
 
     /**

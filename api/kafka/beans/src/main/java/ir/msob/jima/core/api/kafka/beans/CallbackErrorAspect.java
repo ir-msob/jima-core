@@ -46,7 +46,7 @@ public class CallbackErrorAspect {
      * @param point    The join point of the method
      * @param throwing The thrown exception
      */
-    @AfterThrowing(value = "@annotation(ir.msob.jima.core.commons.annotation.async.CallbackError)", throwing = "throwing")
+    @AfterThrowing(value = "@annotation(ir.msob.jima.core.commons.callback.CallbackError)", throwing = "throwing")
     public void afterThrowing(JoinPoint point, Throwable throwing) throws JsonProcessingException {
         callback(point, throwing);
         log.error(throwing);
@@ -71,31 +71,57 @@ public class CallbackErrorAspect {
     }
 
     /**
-     * This method prepares a ChannelMessage object from the method parameters.
+     * Prepares a ChannelMessage object from the method parameters.
      *
-     * @param point The join point of the method
-     * @return A ChannelMessage object
-     * @throws JsonProcessingException If there's an issue with JSON processing
+     * @param point The join point of the method.
+     * @return A ChannelMessage object.
+     * @throws JsonProcessingException If there's an issue with JSON processing.
      */
     private <USER extends BaseUser, DATA extends ModelType> ChannelMessage<USER, DATA> prepareChannelMessage(JoinPoint point) throws JsonProcessingException {
         MethodSignature methodSignature = (MethodSignature) point.getSignature();
         Parameter[] parameters = methodSignature.getMethod().getParameters();
         CallbackError callbackError = methodSignature.getMethod().getAnnotation(CallbackError.class);
+        Object paramValue = getParamValue(parameters, callbackError, methodSignature, point);
+        return convertToChannelMessage(paramValue);
+    }
 
+    /**
+     * Retrieves the parameter value based on the CallbackError annotation.
+     *
+     * @param parameters      The method parameters.
+     * @param callbackError   The CallbackError annotation.
+     * @param methodSignature The method signature.
+     * @param point           The join point of the method.
+     * @return The parameter value.
+     * @throws CommonRuntimeException If the ChannelMessage argument cannot be detected.
+     */
+    private Object getParamValue(Parameter[] parameters, CallbackError callbackError, MethodSignature methodSignature, JoinPoint point) {
         for (int i = 0; i < parameters.length; i++) {
             Parameter parameter = parameters[i];
             if (parameter.getName().equals(callbackError.value())) {
-                Object paramValue = point.getArgs()[i];
-                if (paramValue instanceof String dto) {
-                    return objectMapper.readValue(dto, ChannelMessage.class);
-                } else if (paramValue instanceof ChannelMessage channelMessage) {
-                    return channelMessage;
-                }
+                return point.getArgs()[i];
             }
         }
         throw new CommonRuntimeException("Cannot detect ChannelMessage arg. Class {}, Method {}",
                 point.getSignature().getDeclaringTypeName(),
                 methodSignature.getMethod().getName());
+    }
+
+    /**
+     * Converts the parameter value to a ChannelMessage object.
+     *
+     * @param paramValue The parameter value.
+     * @return A ChannelMessage object.
+     * @throws JsonProcessingException If there's an issue with JSON processing.
+     * @throws CommonRuntimeException  If the value cannot be converted to a ChannelMessage.
+     */
+    private <USER extends BaseUser, DATA extends ModelType> ChannelMessage<USER, DATA> convertToChannelMessage(Object paramValue) throws JsonProcessingException {
+        if (paramValue instanceof String dto) {
+            return objectMapper.readValue(dto, ChannelMessage.class);
+        } else if (paramValue instanceof ChannelMessage channelMessage) {
+            return channelMessage;
+        }
+        throw new CommonRuntimeException("Cannot convert to ChannelMessage. Value: {}", paramValue);
     }
 
     /**
