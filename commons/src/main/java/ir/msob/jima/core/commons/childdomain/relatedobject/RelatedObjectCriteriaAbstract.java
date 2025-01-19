@@ -18,9 +18,9 @@ import java.io.Serializable;
  * Base class representing the filters that can be applied when searching for related object entities.
  * It implements the BaseFilters interface and provides filters for the related object entity type, ID, role, referring type, status, enabled state, relation date, and expiration date.
  *
- * @param <ID> the type of the related object entity ID, which must be comparable and serializable
+ * @param <ID>  the type of the related object entity ID, which must be comparable and serializable
  * @param <RID> the type of the related ID, which must be comparable and serializable
- * @param <CD> the type of the related object entity
+ * @param <CD>  the type of the related object entity
  */
 @Setter
 @Getter

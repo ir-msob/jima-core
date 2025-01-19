@@ -138,8 +138,8 @@ public interface BaseMongoRepository<ID extends Comparable<ID> & Serializable, U
      */
     @MethodStats
     default Mono<Boolean> updateFirst(QueryBuilder queryBuilder) {
-        return QueryUtil.updateResultBoolean(
-                getReactiveMongoTemplate().updateFirst(queryBuilder.getQuery(), queryBuilder.getUpdate(), getDomainClass()));
+        return getReactiveMongoTemplate().updateFirst(queryBuilder.getQuery(), queryBuilder.getUpdate(), getDomainClass())
+                .map(QueryUtil::updateResultBoolean);
     }
 
     /**
@@ -150,8 +150,8 @@ public interface BaseMongoRepository<ID extends Comparable<ID> & Serializable, U
      */
     @MethodStats
     default Mono<Boolean> upsert(QueryBuilder queryBuilder) {
-        return QueryUtil
-                .updateResultBoolean(getReactiveMongoTemplate().upsert(queryBuilder.getQuery(), queryBuilder.getUpdate(), getDomainClass()));
+        return getReactiveMongoTemplate().upsert(queryBuilder.getQuery(), queryBuilder.getUpdate(), getDomainClass())
+                .map(QueryUtil::updateResultBoolean);
     }
 
     /**
@@ -162,8 +162,8 @@ public interface BaseMongoRepository<ID extends Comparable<ID> & Serializable, U
      */
     @MethodStats
     default Mono<Boolean> updateMulti(QueryBuilder queryBuilder) {
-        return QueryUtil.updateResultBoolean(
-                getReactiveMongoTemplate().updateMulti(queryBuilder.getQuery(), queryBuilder.getUpdate(), getDomainClass()));
+        return getReactiveMongoTemplate().updateMulti(queryBuilder.getQuery(), queryBuilder.getUpdate(), getDomainClass())
+                .map(QueryUtil::updateResultBoolean);
     }
 
     /**
@@ -174,7 +174,8 @@ public interface BaseMongoRepository<ID extends Comparable<ID> & Serializable, U
      */
     @MethodStats
     default Mono<Boolean> delete(QueryBuilder queryBuilder) {
-        return QueryUtil.deleteResultBoolean(getReactiveMongoTemplate().remove(queryBuilder.getQuery(), getDomainClass()));
+        return getReactiveMongoTemplate().remove(queryBuilder.getQuery(), getDomainClass())
+                .map(QueryUtil::deleteResultBoolean);
     }
 
     /**

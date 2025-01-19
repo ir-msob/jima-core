@@ -29,7 +29,7 @@ public abstract class BaseChildDomainAbstract<ID extends Comparable<ID> & Serial
     /**
      * Constructs a new instance with the specified ID and parent ID.
      *
-     * @param id the ID of the entity
+     * @param id       the ID of the entity
      * @param parentId the parent domain ID of the entity
      */
     public BaseChildDomainAbstract(ID id, ID parentId) {
