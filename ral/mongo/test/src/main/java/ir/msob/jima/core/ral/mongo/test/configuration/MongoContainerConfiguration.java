@@ -26,7 +26,6 @@ public class MongoContainerConfiguration {
      * The property includes the URI for the MongoDB container.
      * The JimaProperties object is used to get the Docker image name for the MongoDB container.
      *
-     * @param registry       The DynamicPropertyRegistry used to dynamically register properties for the MongoDB container.
      * @param jimaProperties The JimaProperties object used to get the Docker image name for the MongoDB container.
      * @return The created MongoDBContainer bean.
      */

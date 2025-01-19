@@ -104,7 +104,7 @@ public class ConditionalOnOperationUtil {
      */
     private static boolean checkRelatedOperations(Scope scope, CrudProperties.Domain domain,
                                                   ConditionalOnOperation conditionalOnOperation) {
-        Optional<Element> element = Arrays.stream(conditionalOnOperation.related())
+        Optional<Element> element = Arrays.stream(conditionalOnOperation.children())
                 .filter(e -> e.element().equalsIgnoreCase(scope.element()))
                 .findFirst();
 
