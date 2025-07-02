@@ -12,6 +12,12 @@
     <name>commons</name>
     <description>commons</description>
     <dependencies>
+        <!-- Jima -->
+        <dependency>
+            <groupId>ir.msob.jima.core</groupId>
+            <artifactId>core-processor</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- Apache Commons-->
         <dependency>
             <groupId>org.apache.commons</groupId>

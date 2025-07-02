@@ -15,6 +15,7 @@
     <name>jima-core</name>
     <description>Jima Core Project</description>
     <modules>
+        <module>processor</module>
         <module>commons</module>
         <module>test</module>
         <module>beans</module>

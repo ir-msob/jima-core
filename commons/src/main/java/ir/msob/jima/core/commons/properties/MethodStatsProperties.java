@@ -23,10 +23,14 @@ public class MethodStatsProperties {
     /**
      * A flag to enable or disable info level logging for method execution statistics.
      */
-    private boolean infoLogEnabled = false;
+    private boolean enabled = false;
 
     /**
      * A flag to enable or disable warning level logging for method execution statistics.
      */
-    private boolean warnLogEnabled = false;
+    private LogLevel logLevel = LogLevel.WARN;
+
+    public enum LogLevel {
+        INFO, WARN
+    }
 }

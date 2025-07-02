@@ -3,6 +3,7 @@ package ir.msob.jima.core.beans.annotation.methodstats;
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import ir.msob.jima.core.commons.logger.Logger;
 import ir.msob.jima.core.commons.logger.LoggerFactory;
+import ir.msob.jima.core.commons.properties.MethodStatsProperties;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -34,10 +35,10 @@ public class MethodStatsLogger {
      * @return The result of the method execution.
      * @throws Throwable If an exception occurs during method execution.
      */
-    @Around("@annotation(ir.msob.jima.core.commons.annotation.methodstats.MethodStats)")
+    @Around("@annotation(ir.msob.jima.core.commons.methodstats.MethodStats)")
     public Object log(ProceedingJoinPoint point) throws Throwable {
         // If either warning or info logging is enabled
-        if (properties.getMethodStats().isWarnLogEnabled() || properties.getMethodStats().isInfoLogEnabled()) {
+        if (properties.getMethodStats().isEnabled()) {
             // Record the start time
             long start = System.currentTimeMillis();
 
@@ -55,10 +56,10 @@ public class MethodStatsLogger {
                     , Thread.currentThread().getName());
 
             // If warning logging is enabled and the execution time exceeds the threshold, log a warning
-            if (properties.getMethodStats().isWarnLogEnabled() && dif > properties.getMethodStats().getWarnTime())
+            if (dif > properties.getMethodStats().getWarnTime())
                 log.warn(msg);
                 // If info logging is enabled, log an info message
-            else if (properties.getMethodStats().isInfoLogEnabled())
+            else if (properties.getMethodStats().getLogLevel() == MethodStatsProperties.LogLevel.INFO)
                 log.info(msg);
 
             // Return the result of the method execution
