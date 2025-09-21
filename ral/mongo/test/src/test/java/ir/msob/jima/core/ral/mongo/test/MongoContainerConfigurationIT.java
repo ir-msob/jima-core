@@ -27,13 +27,6 @@ class MongoContainerConfigurationIT {
     @Value("${spring.data.mongodb.uri}")
     private String configUrl;
 
-    @Bean
-    public DynamicPropertyRegistrar dynamicPropertyRegistrar(MongoDBContainer container) {
-        return registry -> {
-            MongoContainerConfiguration.registry(registry, container);
-        };
-    }
-
     @Test
     @DisplayName("Container is running after initialization")
     void containerIsRunningAfterInitialization() {

@@ -36,7 +36,6 @@ public class TestContainerProperties {
     @ToString
     public static class Kafka {
         private String image;
-        private String clusterId;
         private boolean reuse = false;
     }
 

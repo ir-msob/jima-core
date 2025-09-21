@@ -3,7 +3,6 @@ package ir.msob.jima.core.ral.minio.test;
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.testcontainers.containers.MinIOContainer;
@@ -29,12 +28,10 @@ public class MinIOContainerConfiguration {
      * The properties include the URL, access key, and secret key for the MinIO container.
      * The JimaProperties object is used to get the Docker image name, access key, and secret key for the MinIO container.
      *
-     * @param registry       The DynamicPropertyRegistry used to dynamically register properties for the MinIO container.
      * @param jimaProperties The JimaProperties object used to get the Docker image name, access key, and secret key for the MinIO container.
      * @return The created MinIOContainer bean.
      */
     @Bean
-    @ServiceConnection
     public MinIOContainer minIOContainer(JimaProperties jimaProperties) {
         MinIOContainer container = new MinIOContainer(DockerImageName.parse(jimaProperties.getTestContainer().getMinio().getImage()));
         if (Strings.isNotBlank(jimaProperties.getTestContainer().getMinio().getAccessKey()))

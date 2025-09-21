@@ -2,7 +2,6 @@ package ir.msob.jima.core.ral.mongo.test.configuration;
 
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.testcontainers.containers.MongoDBContainer;
@@ -30,7 +29,6 @@ public class MongoContainerConfiguration {
      * @return The created MongoDBContainer bean.
      */
     @Bean
-    @ServiceConnection
     public MongoDBContainer mongoDBContainer(JimaProperties jimaProperties) {
         MongoDBContainer container = new MongoDBContainer(DockerImageName.parse(jimaProperties.getTestContainer().getMongo().getImage()));
         container.withReuse(jimaProperties.getTestContainer().getMongo().isReuse());

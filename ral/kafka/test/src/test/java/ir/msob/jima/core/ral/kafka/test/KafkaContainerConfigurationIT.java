@@ -6,11 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.DynamicPropertyRegistrar;
-import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.kafka.KafkaContainer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -30,18 +28,6 @@ class KafkaContainerConfigurationIT {
     @Value("${spring.kafka.producer.bootstrap-servers}")
     private String producerServers;
 
-    /**
-     * Registers dynamic properties for the Kafka container.
-     *
-     * @param kafkaContainer The Kafka container instance.
-     * @return The DynamicPropertyRegistrar bean.
-     */
-    @Bean
-    public DynamicPropertyRegistrar dynamicPropertyRegistrar(KafkaContainer kafkaContainer) {
-        return registry -> {
-            KafkaContainerConfiguration.registry(registry, kafkaContainer);
-        };
-    }
 
     @Test
     @DisplayName("Container is running after initialization")

@@ -1,12 +1,10 @@
 package ir.msob.jima.core.ral.kafka.test;
 
 import ir.msob.jima.core.beans.properties.JimaProperties;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
-import org.testcontainers.containers.KafkaContainer;
+import org.testcontainers.kafka.KafkaContainer;
 import org.testcontainers.utility.DockerImageName;
 
 /**
@@ -29,12 +27,8 @@ public class KafkaContainerConfiguration {
      * @return The created KafkaContainer bean.
      */
     @Bean
-    @ServiceConnection
     public KafkaContainer kafkaContainer(JimaProperties jimaProperties) {
         KafkaContainer container = new KafkaContainer(DockerImageName.parse(jimaProperties.getTestContainer().getKafka().getImage()));
-        if (Strings.isNotBlank(jimaProperties.getTestContainer().getKafka().getClusterId())) {
-            container.withClusterId(jimaProperties.getTestContainer().getKafka().getClusterId());
-        }
         container.withReuse(jimaProperties.getTestContainer().getKafka().isReuse());
         return container;
     }

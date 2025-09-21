@@ -8,4 +8,4 @@ spring:
 jima:
   test-container:
     redis:
-      image: "redis:7.2.5"
+      image: "redis:8.2.1"

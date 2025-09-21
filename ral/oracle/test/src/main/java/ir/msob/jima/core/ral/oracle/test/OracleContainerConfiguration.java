@@ -3,7 +3,6 @@ package ir.msob.jima.core.ral.oracle.test;
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.testcontainers.containers.OracleContainer;
@@ -32,12 +31,10 @@ public class OracleContainerConfiguration {
      * If the username and password are not blank, they are set to the Oracle container.
      * The @ServiceConnection annotation is used to indicate that this bean is used for establishing a connection to a service.
      *
-     * @param registry       The DynamicPropertyRegistry used to dynamically register properties for the Oracle container.
      * @param jimaProperties The JimaProperties object used to get the Docker image name, username, and password for the Oracle container.
      * @return The created OracleContainer bean.
      */
     @Bean
-    @ServiceConnection
     public OracleContainer kafkaContainer(JimaProperties jimaProperties) {
         OracleContainer container = new OracleContainer(DockerImageName.parse(jimaProperties.getTestContainer().getOracle().getImage()));
         if (Strings.isNotBlank(jimaProperties.getTestContainer().getOracle().getUsername()))

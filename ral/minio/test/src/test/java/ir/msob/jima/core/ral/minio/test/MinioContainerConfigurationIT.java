@@ -30,12 +30,6 @@ class MinioContainerConfigurationIT {
     @Value("${spring.minio.secret-key}")
     private String configSecretKey;
 
-    @Bean
-    public DynamicPropertyRegistrar dynamicPropertyRegistrar(MinIOContainer container) {
-        return registry -> {
-            MinIOContainerConfiguration.registry(registry, container);
-        };
-    }
 
     @Test
     @DisplayName("Container is running after initialization")
