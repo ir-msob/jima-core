@@ -1,3 +1,14 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: test-service
+  profiles:
+    active: test
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: NONE
+
 jima:
   test-container:
     kafka:
@@ -15,3 +26,12 @@ jima:
     keycloak:
       image: "quay.io/keycloak/keycloak:26.3"
       realm: "test-realm"
+
+# Logging
+logging:
+  file:
+    path: log
+  logback:
+    rolling-policy:
+      max-file-size: 5MB
+      max-history: 1
