@@ -1,5 +1,4 @@
 import {BaseErrorHandlerService} from "./base-error-handler.service";
-import {HttpClient} from "@angular/common/http";
 
 /**
  * SampleErrorHandlerService class.

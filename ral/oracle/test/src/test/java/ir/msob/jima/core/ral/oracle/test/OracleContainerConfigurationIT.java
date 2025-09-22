@@ -1,7 +1,6 @@
 package ir.msob.jima.core.ral.oracle.test;
 
 import lombok.extern.apachecommons.CommonsLog;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,11 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(classes = {TestMicroserviceApplication.class, OracleContainerConfiguration.class})
+@SpringBootTest(classes = {TestApplication.class, OracleContainerConfiguration.class})
 @ContextConfiguration
 @Testcontainers
 @CommonsLog
-@Disabled
+//@Disabled
 class OracleContainerConfigurationIT {
 
     @Autowired

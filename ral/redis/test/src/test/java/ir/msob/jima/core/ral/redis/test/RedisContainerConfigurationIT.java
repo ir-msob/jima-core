@@ -13,7 +13,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest(classes = {TestMicroserviceApplication.class, RedisContainerConfiguration.class})
+@SpringBootTest(classes = {TestApplication.class, RedisContainerConfiguration.class})
 @ContextConfiguration
 @Testcontainers
 @CommonsLog

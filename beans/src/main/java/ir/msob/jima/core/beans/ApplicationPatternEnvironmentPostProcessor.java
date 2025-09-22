@@ -25,12 +25,21 @@ import java.util.stream.Collectors;
  */
 public class ApplicationPatternEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
 
-    private final DeferredLog log = new DeferredLog();
-
     // default pattern (without extension)
     private static final String DEFAULT_BASENAME_PATTERN = "classpath*:/META-INF/spring/jima-config-*";
-
     private static final String[] EXTENSIONS = {".yml", ".yaml", ".properties"};
+    private final DeferredLog log = new DeferredLog();
+
+    private static String safeResourceName(Resource r) {
+        try {
+            String fname = r.getFilename();
+            if (fname != null) return fname;
+            // fallback to description
+            return r.getDescription() != null ? r.getDescription() : r.toString();
+        } catch (Exception e) {
+            return r.toString();
+        }
+    }
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
@@ -118,17 +127,6 @@ public class ApplicationPatternEnvironmentPostProcessor implements EnvironmentPo
             // environment might not yet contain all props — ignore safely
         }
         return DEFAULT_BASENAME_PATTERN;
-    }
-
-    private static String safeResourceName(Resource r) {
-        try {
-            String fname = r.getFilename();
-            if (fname != null) return fname;
-            // fallback to description
-            return r.getDescription() != null ? r.getDescription() : r.toString();
-        } catch (Exception e) {
-            return r.toString();
-        }
     }
 
     @Override

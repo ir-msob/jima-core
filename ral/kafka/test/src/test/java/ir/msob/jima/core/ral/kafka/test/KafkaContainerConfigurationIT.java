@@ -13,7 +13,7 @@ import org.testcontainers.kafka.KafkaContainer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(classes = {TestMicroserviceApplication.class, KafkaContainerConfiguration.class})
+@SpringBootTest(classes = {TestApplication.class, KafkaContainerConfiguration.class})
 @ContextConfiguration
 @Testcontainers
 @CommonsLog

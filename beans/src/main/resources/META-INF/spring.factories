@@ -1,5 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   ir.msob.jima.core.beans.MsobAutoConfiguration
-
 org.springframework.boot.env.EnvironmentPostProcessor=\
    ir.msob.jima.core.beans.ApplicationPatternEnvironmentPostProcessor
