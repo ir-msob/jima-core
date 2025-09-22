@@ -1,0 +1,17 @@
+jima:
+  test-container:
+    kafka:
+      image: "apache/kafka:latest"
+    mongo:
+      image: "mongo:8.0.13-noble"
+    minio:
+      image: "minio/minio:RELEASE.2025-09-07T16-13-09Z"
+      access-key: "minioadmin"
+      secret-key: "minioadmin"
+    oracle:
+      image: "gvenzl/oracle-xe:21.3.0-slim-faststart"
+    redis:
+      image: "redis:8.2.1"
+    keycloak:
+      image: "quay.io/keycloak/keycloak:26.3"
+      realm: "test-realm"

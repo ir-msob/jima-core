@@ -4,7 +4,3 @@ spring:
     url: jdbc:oracle:thin:@localhost:1521:xe
     username: system
     password: oracle
-jima:
-  test-container:
-    oracle:
-      image: "gvenzl/oracle-xe:21.3.0-slim-faststart"
