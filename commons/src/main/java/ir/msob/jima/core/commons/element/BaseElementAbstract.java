@@ -1,5 +1,6 @@
 package ir.msob.jima.core.commons.element;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
@@ -36,6 +37,7 @@ public abstract class BaseElementAbstract<ID extends Comparable<ID> & Serializab
      * @return The domain ID field name.
      */
     @Override
+    @JsonIgnore
     public String getIdName() {
         return FN.id.name();
     }

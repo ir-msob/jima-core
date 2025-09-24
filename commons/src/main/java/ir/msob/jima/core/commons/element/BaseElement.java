@@ -1,5 +1,7 @@
 package ir.msob.jima.core.commons.element;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 /**
@@ -35,6 +37,7 @@ public interface BaseElement<ID extends Comparable<ID> & Serializable> extends S
      *
      * @return The domain ID field name.
      */
+    @JsonIgnore
     default String getIdName() {
         return "id";
     }
