@@ -5,6 +5,7 @@ import ir.msob.jima.core.beans.properties.JimaProperties;
 import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.domain.BaseDomain;
 import ir.msob.jima.core.commons.domain.BaseDto;
+import ir.msob.jima.core.commons.domain.BaseDtoTypeReference;
 import ir.msob.jima.core.commons.element.Elements;
 import ir.msob.jima.core.commons.operation.ConditionalOnOperationUtil;
 import ir.msob.jima.core.commons.resource.BaseResource;
@@ -30,7 +31,8 @@ public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
         USER extends BaseUser,
         D extends BaseDomain<ID>,
         DTO extends BaseDto<ID>,
-        C extends BaseCriteria<ID>> {
+        C extends BaseCriteria<ID>>
+        extends BaseDtoTypeReference<ID, DTO, C> {
 
     Logger log = LoggerFactory.getLogger(BaseCoreResourceTest.class);
 

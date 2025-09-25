@@ -19,8 +19,8 @@ public class IdService implements BaseIdService {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public ObjectId newId() {
-        return new ObjectId();
+    public String newId() {
+        return new ObjectId().toHexString();
     }
 
     /**
@@ -32,7 +32,7 @@ public class IdService implements BaseIdService {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public ObjectId of(String id) {
-        return new ObjectId(id);
+    public String of(String id) {
+        return id;
     }
 }

@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.bson.types.ObjectId;
 
 import java.io.Serial;
 
@@ -16,15 +15,15 @@ import java.io.Serial;
 @Getter
 @ToString(callSuper = true)
 @NoArgsConstructor
-public abstract class ProjectDomainAbstract extends BaseDomainAbstract<ObjectId> implements ProjectDomain {
+public abstract class ProjectDomainAbstract extends BaseDomainAbstract<String> implements ProjectDomain {
     /**
      *
      */
     @Serial
     private static final long serialVersionUID = -6601527731070113825L;
 
-    public ProjectDomainAbstract(ObjectId objectId) {
-        super(objectId);
+    public ProjectDomainAbstract(String id) {
+        super(id);
     }
 
     public enum FN {

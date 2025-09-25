@@ -4,7 +4,6 @@ import ir.msob.jima.core.commons.domain.BaseCriteriaAbstract;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.bson.types.ObjectId;
 
 /**
  * Basic class for domains filter
@@ -14,7 +13,7 @@ import org.bson.types.ObjectId;
 @Setter
 @Getter
 @ToString(callSuper = true)
-public abstract class ProjectCriteriaAbstract extends BaseCriteriaAbstract<ObjectId> implements ProjectCriteria {
+public abstract class ProjectCriteriaAbstract extends BaseCriteriaAbstract<String> implements ProjectCriteria {
     protected ProjectCriteriaAbstract() {
     }
 }

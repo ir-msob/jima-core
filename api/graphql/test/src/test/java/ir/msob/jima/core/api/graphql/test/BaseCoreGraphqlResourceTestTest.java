@@ -7,11 +7,15 @@ import ir.msob.jima.core.commons.domain.SampleDomain;
 import ir.msob.jima.core.commons.domain.SampleDto;
 import ir.msob.jima.core.commons.resource.BaseResource;
 import ir.msob.jima.core.commons.security.BaseUser;
+import ir.msob.jima.core.commons.shared.PageResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.graphql.test.tester.GraphQlTester;
+
+import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -57,6 +61,26 @@ class BaseCoreGraphqlResourceTestTest {
 
             @Override
             public ObjectMapper getObjectMapper() {
+                return null;
+            }
+
+            @Override
+            public ParameterizedTypeReference<Collection<SampleDto<String>>> getDtosTypeReferenceType() {
+                return null;
+            }
+
+            @Override
+            public ParameterizedTypeReference<SampleDto<String>> getDtoReferenceType() {
+                return null;
+            }
+
+            @Override
+            public ParameterizedTypeReference<SampleCriteria<String>> getCriteriaReferenceType() {
+                return null;
+            }
+
+            @Override
+            public ParameterizedTypeReference<PageResponse<SampleDto<String>>> getPageReferenceType() {
                 return null;
             }
 

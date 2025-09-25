@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.bson.types.ObjectId;
 
 
 @Setter
@@ -17,8 +16,8 @@ import org.bson.types.ObjectId;
 public class TestDto extends TestDomain implements ProjectDto {
     private String dtoField;
 
-    public TestDto(ObjectId objectId) {
-        super(objectId);
+    public TestDto(String id) {
+        super(id);
     }
 
     public enum FN {
