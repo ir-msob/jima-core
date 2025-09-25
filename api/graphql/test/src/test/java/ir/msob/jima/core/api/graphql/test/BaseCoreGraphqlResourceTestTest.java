@@ -72,7 +72,7 @@ class BaseCoreGraphqlResourceTestTest {
 
 
             @Override
-            public TypeReference<Collection<String>> getIdsReferenceType() {
+            public TypeReference<Collection<String>> getIdCollectionReferenceType() {
                 return null;
             }
 

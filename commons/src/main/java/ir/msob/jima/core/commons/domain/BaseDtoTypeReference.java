@@ -3,7 +3,6 @@ package ir.msob.jima.core.commons.domain;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.commons.shared.PageResponse;
-import lombok.SneakyThrows;
 import org.springframework.core.ParameterizedTypeReference;
 
 import java.io.Serializable;
@@ -24,8 +23,6 @@ import java.util.Collection;
  *   <li>Access to an {@link ObjectMapper} for JSON serialization and deserialization.</li>
  *   <li>Type-safe {@link ParameterizedTypeReference} instances for DTOs, collections of DTOs,
  *       criteria objects, page responses, and IDs.</li>
- *   <li>A convenience {@link #cast(String, TypeReference)} method to deserialize
- *       a JSON string into a target type.</li>
  * </ul>
  *
  * <p>Implementations of this interface are expected to provide an {@link ObjectMapper}
@@ -63,24 +60,7 @@ public interface BaseDtoTypeReference<
      *
      * @return the type reference for a collection of IDs
      */
-    TypeReference<Collection<ID>> getIdsReferenceType();
-
-    /**
-     * Utility method to deserialize a JSON string into the specified type
-     * using the configured {@link ObjectMapper}.
-     *
-     * <p>This is a generic helper that can be used to map JSON into any
-     * type supported by the application, including DTOs, collections, or paginated responses.</p>
-     *
-     * @param json          the JSON string to deserialize
-     * @param typeReference the type reference describing the target type
-     * @param <T>           the target type
-     * @return the deserialized object of type {@code T}
-     */
-    @SneakyThrows
-    default <T> T cast(String json, TypeReference<T> typeReference) {
-        return getObjectMapper().readValue(json, typeReference);
-    }
+    TypeReference<Collection<ID>> getIdCollectionReferenceType();
 
     default <T> ParameterizedTypeReference<T> toParamTypeRef(TypeReference<T> typeRef) {
         return new ParameterizedTypeReference<>() {
