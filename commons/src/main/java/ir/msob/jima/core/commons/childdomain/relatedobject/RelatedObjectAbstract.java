@@ -5,7 +5,10 @@ import ir.msob.jima.core.commons.childdomain.BaseChildDomainAbstract;
 import ir.msob.jima.core.commons.shared.auditinfo.AuditInfo;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -42,7 +45,6 @@ import java.util.Objects;
 @Setter
 @ToString(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable> extends BaseChildDomainAbstract<ID> implements Comparable<RelatedObjectAbstract<ID, RID>> {
 
@@ -87,6 +89,18 @@ public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializ
      * Represents the audit information associated with the related object.
      */
     private AuditInfo auditInfo;
+
+    public RelatedObjectAbstract(ID id, ID parentId, String name, RID relatedId, String role, String referringType, String status, Boolean enabled, TimePeriod validFor, AuditInfo auditInfo) {
+        super(id, parentId);
+        this.name = name;
+        this.relatedId = relatedId;
+        this.role = role;
+        this.referringType = referringType;
+        this.status = status;
+        this.enabled = enabled;
+        this.validFor = validFor;
+        this.auditInfo = auditInfo;
+    }
 
     /**
      * Compares this related object with the specified related object for order.
