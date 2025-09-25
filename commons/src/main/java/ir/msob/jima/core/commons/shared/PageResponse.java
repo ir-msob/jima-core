@@ -14,7 +14,7 @@ import java.util.List;
  * A wrapper around PageImpl that avoids Jackson2PageModule and
  * handles (de)serialization safely in WebFlux.
  */
-@JsonIgnoreProperties({"pageable"}) // <-- مهم: مانع خطای Pageable
+@JsonIgnoreProperties({"pageable"})
 public class PageResponse<T> extends PageImpl<T> {
 
     private static final long serialVersionUID = 1L;
