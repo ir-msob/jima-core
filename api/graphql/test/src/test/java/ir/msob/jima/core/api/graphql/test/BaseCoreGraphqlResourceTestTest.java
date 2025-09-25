@@ -1,5 +1,6 @@
 package ir.msob.jima.core.api.graphql.test;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import ir.msob.jima.core.commons.domain.SampleCriteria;
@@ -65,22 +66,13 @@ class BaseCoreGraphqlResourceTestTest {
             }
 
             @Override
-            public ParameterizedTypeReference<Collection<SampleDto<String>>> getDtosTypeReferenceType() {
+            public TypeReference<PageResponse<SampleDto<String>>> getPageResponseReferenceType() {
                 return null;
             }
 
-            @Override
-            public ParameterizedTypeReference<SampleDto<String>> getDtoReferenceType() {
-                return null;
-            }
 
             @Override
-            public ParameterizedTypeReference<SampleCriteria<String>> getCriteriaReferenceType() {
-                return null;
-            }
-
-            @Override
-            public ParameterizedTypeReference<PageResponse<SampleDto<String>>> getPageReferenceType() {
+            public TypeReference<Collection<String>> getIdsReferenceType() {
                 return null;
             }
 

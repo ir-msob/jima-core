@@ -5,63 +5,89 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.commons.shared.PageResponse;
 import lombok.SneakyThrows;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.Collection;
 
 /**
- * The 'BaseChannelTypeReference' interface defines the type references for various types of channel messages.
- * It is parameterized with four types 'ID' that extends 'Comparable' and 'Serializable', 'USER' that extends 'BaseUser', 'DTO' that extends 'BaseDto', and 'C' that extends 'BaseCriteria'.
- * The interface includes methods to get the type references for 'ModelType', 'CriteriaMessage', 'PageableMessage', 'JsonPatchMessage', 'DtoMessage', and 'DtosMessage'.
+ * The {@code BaseDtoTypeReference} interface defines reusable type references
+ * and serialization helpers for DTO-related operations. It is parameterized with:
+ * <ul>
+ *   <li>{@code ID} – The identifier type, must be {@link Comparable} and {@link Serializable}.</li>
+ *   <li>{@code DTO} – The Data Transfer Object type, must extend {@link BaseDto}.</li>
+ *   <li>{@code C} – The criteria type used for filtering and queries, must extend {@link BaseCriteria}.</li>
+ * </ul>
  *
- * @param <ID>  The type of ID.
- * @param <DTO> The type of DTO.
- * @param <C>   The type of criteria.
+ * <p>This interface provides:</p>
+ * <ul>
+ *   <li>Access to an {@link ObjectMapper} for JSON serialization and deserialization.</li>
+ *   <li>Type-safe {@link ParameterizedTypeReference} instances for DTOs, collections of DTOs,
+ *       criteria objects, page responses, and IDs.</li>
+ *   <li>A convenience {@link #cast(String, TypeReference)} method to deserialize
+ *       a JSON string into a target type.</li>
+ * </ul>
+ *
+ * <p>Implementations of this interface are expected to provide an {@link ObjectMapper}
+ * properly configured with the application's serialization settings.</p>
+ *
+ * @param <ID>  The type of the entity identifier.
+ * @param <DTO> The Data Transfer Object type representing the entity.
+ * @param <C>   The criteria type used for search and filtering operations.
  */
 public interface BaseDtoTypeReference<
         ID extends Comparable<ID> & Serializable,
         DTO extends BaseDto<ID>,
         C extends BaseCriteria<ID>> {
+
     /**
-     * Get the object mapper for JSON serialization and deserialization.
+     * Provides the {@link ObjectMapper} used for JSON serialization and deserialization.
+     * Implementations should supply a properly configured instance that
+     * includes any custom serializers or deserializers used in the application.
      *
-     * @return The ObjectMapper instance.
+     * @return the configured {@link ObjectMapper}
      */
     ObjectMapper getObjectMapper();
 
     /**
-     * Gets the type reference for 'ModelType'.
+     * Returns a type reference for a paginated response of DTOs.
+     * Useful when deserializing a JSON object into a {@link PageResponse} containing DTOs.
      *
-     * @return The type reference for 'ModelType'.
+     * @return the type reference for a paginated response of DTOs
      */
-    ParameterizedTypeReference<Collection<DTO>> getDtosTypeReferenceType();
+    TypeReference<PageResponse<DTO>> getPageResponseReferenceType();
 
     /**
-     * Gets the type reference for 'CriteriaMessage'.
+     * Returns a type reference for a collection of IDs.
+     * Useful when deserializing a JSON array into a {@code Collection<ID>}.
      *
-     * @return The type reference for 'CriteriaMessage'.
+     * @return the type reference for a collection of IDs
      */
-    ParameterizedTypeReference<DTO> getDtoReferenceType();
+    TypeReference<Collection<ID>> getIdsReferenceType();
 
     /**
-     * Gets the type reference for 'PageableMessage'.
+     * Utility method to deserialize a JSON string into the specified type
+     * using the configured {@link ObjectMapper}.
      *
-     * @return The type reference for 'PageableMessage'.
-     */
-    ParameterizedTypeReference<C> getCriteriaReferenceType();
-
-    /**
-     * Gets the type reference for 'PageMessage'.
+     * <p>This is a generic helper that can be used to map JSON into any
+     * type supported by the application, including DTOs, collections, or paginated responses.</p>
      *
-     * @return The type reference for 'PageMessage'.
+     * @param json          the JSON string to deserialize
+     * @param typeReference the type reference describing the target type
+     * @param <T>           the target type
+     * @return the deserialized object of type {@code T}
      */
-    ParameterizedTypeReference<PageResponse<DTO>> getPageReferenceType();
-
-
     @SneakyThrows
     default <T> T cast(String json, TypeReference<T> typeReference) {
         return getObjectMapper().readValue(json, typeReference);
+    }
+
+    default <T> ParameterizedTypeReference<T> toParamTypeRef(TypeReference<T> typeRef) {
+        return new ParameterizedTypeReference<>() {
+            @Override
+            public Type getType() {
+                return typeRef.getType();
+            }
+        };
     }
 }
