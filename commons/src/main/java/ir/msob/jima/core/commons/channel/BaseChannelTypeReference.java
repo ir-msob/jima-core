@@ -1,118 +1,114 @@
 package ir.msob.jima.core.commons.channel;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.commons.channel.message.*;
 import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.security.BaseUser;
+import ir.msob.jima.core.commons.shared.BaseTypeReference;
 import ir.msob.jima.core.commons.shared.ModelType;
-import lombok.SneakyThrows;
 
 import java.io.Serializable;
 
 /**
- * The 'BaseChannelTypeReference' interface defines the type references for various types of channel messages.
- * It is parameterized with four types 'ID' that extends 'Comparable' and 'Serializable', 'USER' that extends 'BaseUser', 'DTO' that extends 'BaseDto', and 'C' that extends 'BaseCriteria'.
- * The interface includes methods to get the type references for 'ModelType', 'CriteriaMessage', 'PageableMessage', 'JsonPatchMessage', 'DtoMessage', and 'DtosMessage'.
+ * The {@code BaseChannelTypeReference} interface defines type references for various channel message types
+ * used in message-based communication.
+ * <p>
+ * This interface is parameterized with:
+ * </p>
+ * <ul>
+ *   <li>{@code ID} - the type of identifier, must be Comparable and Serializable</li>
+ *   <li>{@code USER} - the type of user, must extend BaseUser</li>
+ *   <li>{@code DTO} - the type of data transfer object, must extend BaseDto</li>
+ *   <li>{@code C} - the type of criteria, must extend BaseCriteria</li>
+ * </ul>
  *
- * @param <ID>   The type of ID.
- * @param <USER> The type of user.
- * @param <DTO>  The type of DTO.
- * @param <C>    The type of criteria.
+ * @param <ID> the type of identifier
+ * @param <USER> the type of user
+ * @param <DTO> the type of data transfer object
+ * @param <C> the type of criteria
  */
 public interface BaseChannelTypeReference<
         ID extends Comparable<ID> & Serializable,
         USER extends BaseUser,
         DTO extends BaseDto<ID>,
-        C extends BaseCriteria<ID>> {
-    /**
-     * Get the object mapper for JSON serialization and deserialization.
-     *
-     * @return The ObjectMapper instance.
-     */
-    ObjectMapper getObjectMapper();
+        C extends BaseCriteria<ID>>
+        extends BaseTypeReference {
 
     /**
-     * Gets the type reference for 'ModelType'.
+     * Gets the TypeReference for ChannelMessage containing ModelType.
      *
-     * @return The type reference for 'ModelType'.
+     * @return TypeReference for ChannelMessage&lt;USER, ModelType&gt;
      */
-    TypeReference<ChannelMessage<USER, ModelType>> getModelTypeReferenceType();
+    TypeReference<ChannelMessage<USER, ModelType>> getChannelMessageModelTypeReferenceType();
 
     /**
-     * Gets the type reference for 'CriteriaMessage'.
+     * Gets the TypeReference for ChannelMessage containing CriteriaMessage.
      *
-     * @return The type reference for 'CriteriaMessage'.
+     * @return TypeReference for ChannelMessage&lt;USER, CriteriaMessage&lt;ID, C&gt;&gt;
      */
-    TypeReference<ChannelMessage<USER, CriteriaMessage<ID, C>>> getCriteriaReferenceType();
+    TypeReference<ChannelMessage<USER, CriteriaMessage<ID, C>>> getChannelMessageCriteriaReferenceType();
 
     /**
-     * Gets the type reference for 'PageableMessage'.
+     * Gets the TypeReference for ChannelMessage containing PageableMessage.
      *
-     * @return The type reference for 'PageableMessage'.
+     * @return TypeReference for ChannelMessage&lt;USER, PageableMessage&lt;ID, C&gt;&gt;
      */
-    TypeReference<ChannelMessage<USER, PageableMessage<ID, C>>> getCriteriaPageReferenceType();
+    TypeReference<ChannelMessage<USER, PageableMessage<ID, C>>> getChannelMessagePageableReferenceType();
 
     /**
-     * Gets the type reference for 'PageMessage'.
+     * Gets the TypeReference for ChannelMessage containing PageMessage.
      *
-     * @return The type reference for 'PageMessage'.
+     * @return TypeReference for ChannelMessage&lt;USER, PageMessage&lt;ID, DTO&gt;&gt;
      */
-    TypeReference<ChannelMessage<USER, PageMessage<ID, DTO>>> getPageReferenceType();
+    TypeReference<ChannelMessage<USER, PageMessage<ID, DTO>>> getChannelMessagePageReferenceType();
 
     /**
-     * Gets the type reference for 'JsonPatchMessage'.
+     * Gets the TypeReference for ChannelMessage containing JsonPatchMessage.
      *
-     * @return The type reference for 'JsonPatchMessage'.
+     * @return TypeReference for ChannelMessage&lt;USER, JsonPatchMessage&lt;ID, C&gt;&gt;
      */
-    TypeReference<ChannelMessage<USER, JsonPatchMessage<ID, C>>> getEditReferenceType();
+    TypeReference<ChannelMessage<USER, JsonPatchMessage<ID, C>>> getChannelMessageJsonPatchReferenceType();
 
     /**
-     * Gets the type reference for 'DtoMessage'.
+     * Gets the TypeReference for ChannelMessage containing DtoMessage.
      *
-     * @return The type reference for 'DtoMessage'.
+     * @return TypeReference for ChannelMessage&lt;USER, DtoMessage&lt;ID, DTO&gt;&gt;
      */
-    TypeReference<ChannelMessage<USER, DtoMessage<ID, DTO>>> getDtoReferenceType();
+    TypeReference<ChannelMessage<USER, DtoMessage<ID, DTO>>> getChannelMessageDtoReferenceType();
 
     /**
-     * Gets the type reference for 'DtosMessage'.
+     * Gets the TypeReference for ChannelMessage containing DtosMessage.
      *
-     * @return The type reference for 'DtosMessage'.
+     * @return TypeReference for ChannelMessage&lt;USER, DtosMessage&lt;ID, DTO&gt;&gt;
      */
-    TypeReference<ChannelMessage<USER, DtosMessage<ID, DTO>>> getDtosReferenceType();
+    TypeReference<ChannelMessage<USER, DtosMessage<ID, DTO>>> getChannelMessageDtosReferenceType();
 
     /**
-     * Gets the type reference for 'IdMessage'.
+     * Gets the TypeReference for ChannelMessage containing IdMessage.
      *
-     * @return The type reference for 'IdMessage'.
+     * @return TypeReference for ChannelMessage&lt;USER, IdMessage&lt;ID&gt;&gt;
      */
-    TypeReference<ChannelMessage<USER, IdMessage<ID>>> getIdReferenceType();
+    TypeReference<ChannelMessage<USER, IdMessage<ID>>> getChannelMessageIdReferenceType();
 
     /**
-     * Gets the type reference for 'IdsMessage'.
+     * Gets the TypeReference for ChannelMessage containing IdsMessage.
      *
-     * @return The type reference for 'IdsMessage'.
+     * @return TypeReference for ChannelMessage&lt;USER, IdsMessage&lt;ID&gt;&gt;
      */
-    TypeReference<ChannelMessage<USER, IdsMessage<ID>>> getIdsReferenceType();
+    TypeReference<ChannelMessage<USER, IdsMessage<ID>>> getChannelMessageIdsReferenceType();
 
     /**
-     * Gets the type reference for 'IdJsonPatchMessage'.
+     * Gets the TypeReference for ChannelMessage containing IdJsonPatchMessage.
      *
-     * @return The type reference for 'IdJsonPatchMessage'.
+     * @return TypeReference for ChannelMessage&lt;USER, IdJsonPatchMessage&lt;ID&gt;&gt;
      */
-    TypeReference<ChannelMessage<USER, IdJsonPatchMessage<ID>>> getIdJsonPatchReferenceType();
+    TypeReference<ChannelMessage<USER, IdJsonPatchMessage<ID>>> getChannelMessageIdJsonPatchReferenceType();
 
     /**
-     * Gets the type reference for 'LongMessage'.
+     * Gets the TypeReference for ChannelMessage containing LongMessage.
      *
-     * @return The type reference for 'LongMessage'.
+     * @return TypeReference for ChannelMessage&lt;USER, LongMessage&gt;
      */
-    TypeReference<ChannelMessage<USER, LongMessage>> getLongReferenceType();
-
-
-    @SneakyThrows
-    default <T> T cast(String json, TypeReference<T> typeReference) {
-        return getObjectMapper().readValue(json, typeReference);
-    }
+    TypeReference<ChannelMessage<USER, LongMessage>> getChannelMessageLongReferenceType();
 }

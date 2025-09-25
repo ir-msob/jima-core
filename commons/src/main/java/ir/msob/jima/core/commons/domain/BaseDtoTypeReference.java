@@ -1,73 +1,71 @@
 package ir.msob.jima.core.commons.domain;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import ir.msob.jima.core.commons.shared.BaseTypeReference;
 import ir.msob.jima.core.commons.shared.PageResponse;
-import org.springframework.core.ParameterizedTypeReference;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.Collection;
 
 /**
- * The {@code BaseDtoTypeReference} interface defines reusable type references
- * and serialization helpers for DTO-related operations. It is parameterized with:
+ * The {@code BaseDtoTypeReference} interface extends {@link BaseTypeReference} and provides
+ * type references specific to DTO (Data Transfer Object) operations.
+ * <p>
+ * This interface is parameterized with:
+ * </p>
  * <ul>
- *   <li>{@code ID} – The identifier type, must be {@link Comparable} and {@link Serializable}.</li>
- *   <li>{@code DTO} – The Data Transfer Object type, must extend {@link BaseDto}.</li>
- *   <li>{@code C} – The criteria type used for filtering and queries, must extend {@link BaseCriteria}.</li>
+ *   <li>{@code ID} - the type of identifier, must be Comparable and Serializable</li>
+ *   <li>{@code DTO} - the type of DTO, must extend BaseDto</li>
+ *   <li>{@code C} - the type of criteria, must extend BaseCriteria</li>
  * </ul>
  *
- * <p>This interface provides:</p>
- * <ul>
- *   <li>Access to an {@link ObjectMapper} for JSON serialization and deserialization.</li>
- *   <li>Type-safe {@link ParameterizedTypeReference} instances for DTOs, collections of DTOs,
- *       criteria objects, page responses, and IDs.</li>
- * </ul>
- *
- * <p>Implementations of this interface are expected to provide an {@link ObjectMapper}
- * properly configured with the application's serialization settings.</p>
- *
- * @param <ID>  The type of the entity identifier.
- * @param <DTO> The Data Transfer Object type representing the entity.
- * @param <C>   The criteria type used for search and filtering operations.
+ * @param <ID> the type of identifier
+ * @param <DTO> the type of data transfer object
+ * @param <C> the type of criteria
  */
 public interface BaseDtoTypeReference<
         ID extends Comparable<ID> & Serializable,
         DTO extends BaseDto<ID>,
-        C extends BaseCriteria<ID>> {
+        C extends BaseCriteria<ID>>
+        extends BaseTypeReference {
 
     /**
-     * Provides the {@link ObjectMapper} used for JSON serialization and deserialization.
-     * Implementations should supply a properly configured instance that
-     * includes any custom serializers or deserializers used in the application.
+     * Returns a TypeReference for a paginated response of DTOs.
+     * <p>
+     * Useful when deserializing JSON into a {@link PageResponse} containing DTOs.
+     * </p>
      *
-     * @return the configured {@link ObjectMapper}
-     */
-    ObjectMapper getObjectMapper();
-
-    /**
-     * Returns a type reference for a paginated response of DTOs.
-     * Useful when deserializing a JSON object into a {@link PageResponse} containing DTOs.
-     *
-     * @return the type reference for a paginated response of DTOs
+     * @return the TypeReference for PageResponse&lt;DTO&gt;
      */
     TypeReference<PageResponse<DTO>> getPageResponseReferenceType();
 
     /**
-     * Returns a type reference for a collection of IDs.
-     * Useful when deserializing a JSON array into a {@code Collection<ID>}.
+     * Returns a TypeReference for a collection of IDs.
+     * <p>
+     * Useful when deserializing JSON arrays into {@code Collection<ID>}.
+     * </p>
      *
-     * @return the type reference for a collection of IDs
+     * @return the TypeReference for Collection&lt;ID&gt;
      */
-    TypeReference<Collection<ID>> getIdCollectionReferenceType();
+    TypeReference<Collection<ID>> getIdsReferenceType();
 
-    default <T> ParameterizedTypeReference<T> toParamTypeRef(TypeReference<T> typeRef) {
-        return new ParameterizedTypeReference<>() {
-            @Override
-            public Type getType() {
-                return typeRef.getType();
-            }
-        };
-    }
+    /**
+     * Returns a TypeReference for the criteria object.
+     * <p>
+     * Useful when deserializing JSON into criteria objects for query operations.
+     * </p>
+     *
+     * @return the TypeReference for criteria type C
+     */
+    TypeReference<C> getCriteriaReferenceType();
+
+    /**
+     * Returns a TypeReference for the DTO object.
+     * <p>
+     * Useful when deserializing JSON into individual DTO instances.
+     * </p>
+     *
+     * @return the TypeReference for DTO type
+     */
+    TypeReference<DTO> getDtoReferenceType();
 }

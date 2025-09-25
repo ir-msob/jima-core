@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.graphql.test.tester.GraphQlTester;
 
 import java.util.Collection;
@@ -70,9 +69,18 @@ class BaseCoreGraphqlResourceTestTest {
                 return null;
             }
 
+            @Override
+            public TypeReference<Collection<String>> getIdsReferenceType() {
+                return null;
+            }
 
             @Override
-            public TypeReference<Collection<String>> getIdCollectionReferenceType() {
+            public TypeReference<SampleCriteria<String>> getCriteriaReferenceType() {
+                return null;
+            }
+
+            @Override
+            public TypeReference<SampleDto<String>> getDtoReferenceType() {
                 return null;
             }
 
