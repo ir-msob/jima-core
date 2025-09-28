@@ -10,59 +10,165 @@ import reactor.util.retry.RetryBackoffSpec;
 import java.time.Duration;
 
 /**
- * The `RetryProperties` class is a simple POJO (Plain Old Java Object) that holds retry properties.
- * It uses Lombok annotations for automatic generation of getters, setters, a no-argument constructor, and a toString method.
- * The `maxAttempts` field is an integer that represents the maximum number of retry attempts.
- * The `backoff` field is an instance of the nested `Backoff` class, which holds backoff properties.
+ * The `RetryProperties` class provides comprehensive retry configuration properties
+ * for both HTTP requests and RSocket connections.
+ * It supports various retry strategies including backoff, fixed delay, and exponential backoff.
  */
 @Setter
 @Getter
 @NoArgsConstructor
 @ToString
 public class RetryProperties {
+
     /**
-     * The `maxAttempts` field is an integer that represents the maximum number of retry attempts.
+     * The maximum number of retry attempts.
      * Default value is 3.
      */
     private int maxAttempts = 3;
 
     /**
-     * The `backoff` field is an instance of the `Backoff` class.
-     * This field holds backoff properties for the retry mechanism.
+     * The minimum backoff duration in milliseconds.
+     * Default value is 1000 ms (1 second).
      */
-    private Backoff backoff = new Backoff();
+    private long minBackoff = 1000;
 
+    /**
+     * The maximum backoff duration in milliseconds.
+     * Default value is 10000 ms (10 seconds).
+     */
+    private long maxBackoff = 10000;
+
+    /**
+     * The jitter factor for randomizing backoff intervals.
+     * Must be between 0.0 and 1.0.
+     * Default value is 0.5.
+     */
+    private double jitter = 0.5;
+
+    /**
+     * The multiplier for exponential backoff calculation.
+     * Default value is 2.0.
+     */
+    private double multiplier = 2.0;
+
+    /**
+     * The fixed delay between retries in milliseconds.
+     * If set, fixed delay strategy will be used instead of backoff.
+     * Default is 0 (disabled).
+     */
+    private long fixedDelay = 0;
+
+    /**
+     * Whether to use exponential backoff strategy.
+     * If false, simple backoff strategy will be used.
+     * Default value is true.
+     */
+    private boolean exponentialBackoff = true;
+
+    /**
+     * Creates a RetryBackoffSpec based on the configured properties.
+     * Validates all parameters and provides sensible defaults for invalid values.
+     *
+     * @return configured RetryBackoffSpec instance
+     */
     public RetryBackoffSpec createRetryBackoffSpec() {
-        return Retry.backoff(this.getMaxAttempts(), Duration.ofMillis(this.getBackoff().getInitialInterval()))
-                .maxBackoff(Duration.ofMillis(this.getBackoff().getMaxInterval()))
-                .jitter(this.getBackoff().getMultiplier());
+        validateAndAdjustParameters();
+
+        RetryBackoffSpec retrySpec = Retry.backoff(
+                this.maxAttempts,
+                Duration.ofMillis(this.minBackoff)
+        );
+
+        retrySpec = retrySpec.maxBackoff(Duration.ofMillis(this.maxBackoff));
+        retrySpec = retrySpec.jitter(this.jitter);
+
+        return retrySpec;
     }
 
     /**
-     * The `Backoff` class is a static nested class inside `RetryProperties`.
-     * It holds backoff properties such as `initialInterval`, `multiplier`, and `maxInterval`.
+     * Creates a retry spec specifically for fixed delay strategy.
+     *
+     * @return RetryBackoffSpec with fixed delay strategy
      */
-    @Setter
-    @Getter
-    @NoArgsConstructor
-    @ToString
-    public static class Backoff {
-        /**
-         * The `initialInterval` field is a long that represents the initial interval for the backoff mechanism.
-         * Default value is 1000 milliseconds.
-         */
-        private long initialInterval = 1000;
+    public RetryBackoffSpec createFixedDelayRetrySpec() {
+        validateAndAdjustParameters();
 
-        /**
-         * The `multiplier` field is a double that represents the multiplier for the backoff mechanism.
-         * Default value is 1.5.
-         */
-        private double multiplier = 1.5;
+        if (this.fixedDelay > 0) {
+            return Retry.fixedDelay(this.maxAttempts, Duration.ofMillis(this.fixedDelay))
+                    .jitter(this.jitter);
+        } else {
+            // Fall back to backoff strategy if fixed delay is not set
+            return createRetryBackoffSpec();
+        }
+    }
 
-        /**
-         * The `maxInterval` field is a long that represents the maximum interval for the backoff mechanism.
-         * Default value is 10000 milliseconds.
-         */
-        private long maxInterval = 10000;
+    /**
+     * Validates all parameters and adjusts them to valid ranges if necessary.
+     */
+    private void validateAndAdjustParameters() {
+        // Validate maxAttempts
+        if (this.maxAttempts < 1) {
+            this.maxAttempts = 3;
+        }
+
+        // Validate minBackoff
+        if (this.minBackoff < 0) {
+            this.minBackoff = 1000;
+        }
+
+        // Validate maxBackoff
+        if (this.maxBackoff < this.minBackoff) {
+            this.maxBackoff = Math.max(this.minBackoff * 2, 10000);
+        }
+
+        // Validate jitter
+        if (this.jitter < 0.0 || this.jitter > 1.0) {
+            this.jitter = 0.5;
+        }
+
+        // Validate multiplier
+        if (this.multiplier < 1.0) {
+            this.multiplier = 2.0;
+        }
+
+        // Validate fixedDelay
+        if (this.fixedDelay < 0) {
+            this.fixedDelay = 0;
+        }
+    }
+
+    /**
+     * Creates a customized retry spec based on specific requirements.
+     * This method provides flexibility for different use cases.
+     *
+     * @param useFixedDelay whether to use fixed delay strategy
+     * @return customized RetryBackoffSpec
+     */
+    public RetryBackoffSpec createCustomRetrySpec(boolean useFixedDelay) {
+        return useFixedDelay ? createFixedDelayRetrySpec() : createRetryBackoffSpec();
+    }
+
+    /**
+     * Checks if retry is enabled based on configuration.
+     *
+     * @return true if retry is enabled (maxAttempts > 1), false otherwise
+     */
+    public boolean isEnabled() {
+        return this.maxAttempts > 1;
+    }
+
+    /**
+     * Returns the effective retry strategy name based on configuration.
+     *
+     * @return strategy name as String
+     */
+    public String getStrategyName() {
+        if (this.fixedDelay > 0) {
+            return "FIXED_DELAY";
+        } else if (this.exponentialBackoff) {
+            return "EXPONENTIAL_BACKOFF";
+        } else {
+            return "BACKOFF";
+        }
     }
 }
