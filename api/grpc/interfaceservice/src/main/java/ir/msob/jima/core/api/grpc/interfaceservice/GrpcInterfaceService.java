@@ -3,9 +3,15 @@ package ir.msob.jima.core.api.grpc.interfaceservice;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.expr.MarkerAnnotationExpr;
+import com.github.javaparser.ast.expr.MethodCallExpr;
+import com.github.javaparser.ast.expr.NameExpr;
+import com.github.javaparser.ast.expr.ThisExpr;
+import com.github.javaparser.ast.stmt.BlockStmt;
+import com.github.javaparser.ast.stmt.ReturnStmt;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -17,152 +23,115 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.Optional;
 
 /**
- * This Mojo (Maven Plugin) generates a gRPC interface service class.
- * <p>
- * This Mojo is annotated as a Maven Plugin and generates a gRPC interface service class during the 'generate-sources' phase.
- * It operates on Java files and modifies the structure of the gRPC interface service based on predefined criteria.
+ * Simple Maven Plugin to add a nested interface CrudServiceI to CrudServiceGrpc.
  */
 @Mojo(name = "interface-service", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
 public class GrpcInterfaceService extends AbstractMojo {
 
-    /**
-     * Directory where the generated sources will be stored.
-     */
     @Parameter(defaultValue = "${project.build.directory}", property = "projectBuildDirectory", required = true)
     private String projectBuildDirectory;
 
-    /**
-     * Package name of the gRPC service.
-     */
     @Parameter(property = "packageName", required = true)
     private String packageName;
 
-    /**
-     * Name of the gRPC service.
-     */
     @Parameter(property = "serviceName", required = true)
     private String serviceName;
 
-    /**
-     * Executes the Mojo to generate and modify the gRPC interface service class.
-     * <p>
-     * This method reads the generated gRPC class file, parses its content, modifies its structure,
-     * and writes the updated content back to the file.
-     *
-     * @throws MojoExecutionException If an error occurs during reading, creating, or editing the Java class.
-     */
+    @Override
     public void execute() throws MojoExecutionException {
-        String outputDirectory = projectBuildDirectory + "/generated-sources/protobuf/java/" + packageName.replace(".", "/");
+        System.out.println("Starting GrpcInterfaceService plugin execution...");
+
+        String outputDirectory = projectBuildDirectory + "/generated-sources/protobuf/" + packageName.replace(".", "/");
         File outputDirectoryFile = new File(outputDirectory);
-        String grpcClassName = "Reactor" + serviceName + "Grpc";
-        String grpcClassFileName = grpcClassName + ".java";
-        String serviceInterfaceName = serviceName + "ImplBase";
+        System.out.println("Resolved output directory: " + outputDirectoryFile.getAbsolutePath());
 
-        logInfo("Output Directory: " + outputDirectoryFile.getAbsolutePath());
-
+        String grpcClassFileName = serviceName + "Grpc.java";
         File inputFile = new File(outputDirectoryFile, grpcClassFileName);
+        System.out.println("Looking for gRPC Java file: " + inputFile.getAbsolutePath());
+
+        if (!inputFile.exists()) {
+            throw new MojoExecutionException("gRPC Java file not found: " + inputFile.getAbsolutePath());
+        }
+
         try {
             String inputContent = FileUtils.readFileToString(inputFile, StandardCharsets.UTF_8);
-            CompilationUnit compilationUnit = parseJavaFileContent(inputContent);
+            System.out.println("Successfully read gRPC Java file, length: " + inputContent.length());
 
-            modifyGrpcServiceClass(compilationUnit, serviceInterfaceName);
+            CompilationUnit compilationUnit = parseJavaFileContent(inputContent);
+            System.out.println("Parsed CompilationUnit successfully.");
+
+            // Add CrudServiceI interface
+            addCrudServiceInterface(compilationUnit, "CrudServiceI");
 
             File outputFile = new File(outputDirectoryFile, grpcClassFileName);
-            Files.delete(outputFile.toPath());
+            Files.deleteIfExists(outputFile.toPath());
+            FileUtils.writeStringToFile(outputFile, compilationUnit.toString(), StandardCharsets.UTF_8);
 
-            writeContentToFile(outputFile, compilationUnit.toString());
+            System.out.println("Successfully added CrudServiceI interface to " + grpcClassFileName);
 
-            logInfo("Generated Java class: " + outputFile.getAbsolutePath());
         } catch (IOException e) {
-            throw new MojoExecutionException("Error reading/creating/editing the Java class", e);
+            getLog().error("IOException occurred while processing the gRPC Java file", e);
+            throw new MojoExecutionException("Error processing file: " + grpcClassFileName, e);
+        } catch (RuntimeException e) {
+            getLog().error("RuntimeException occurred during parsing or interface addition", e);
+            throw new MojoExecutionException("Error modifying file: " + grpcClassFileName, e);
         }
     }
 
-    /**
-     * Logs an informational message.
-     *
-     * @param message The message to be logged.
-     */
-    private void logInfo(String message) {
-        getLog().info(message);
-    }
-
-    /**
-     * Parses the content of a Java file and returns the CompilationUnit.
-     *
-     * @param content The content of the Java file as a string.
-     * @return The parsed CompilationUnit representing the Java file content.
-     * @throws RuntimeException If the code cannot be parsed.
-     */
     private CompilationUnit parseJavaFileContent(String content) {
+        System.out.println("Parsing Java file content...");
         ParseResult<CompilationUnit> parseResult = new JavaParser().parse(content);
-        return parseResult.getResult().orElseThrow(() -> new RuntimeException("Unable to parse code."));
+        return parseResult.getResult()
+                .orElseThrow(() -> new RuntimeException("Unable to parse Java file content."));
     }
 
-    /**
-     * Modifies the gRPC service class based on the specified service interface name.
-     * <p>
-     * This method locates the specified service interface in the parsed Java file
-     * and updates its structure and method attributes.
-     *
-     * @param compilationUnit      The CompilationUnit representing the parsed Java file.
-     * @param serviceInterfaceName The name of the service interface to be modified.
-     */
-    private void modifyGrpcServiceClass(CompilationUnit compilationUnit, String serviceInterfaceName) {
-        compilationUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classOrInterface -> {
-            if (classOrInterface.getNameAsString().equals(serviceInterfaceName)) {
-                updateClassOrInterface(classOrInterface);
-                updateMethods(classOrInterface);
-            }
-        });
-    }
+    private void addCrudServiceInterface(CompilationUnit compilationUnit, String interfaceName) {
+        System.out.println("Attempting to add interface: " + interfaceName);
 
-    /**
-     * Updates the characteristics of the specified class or interface.
-     * <p>
-     * This method modifies the attributes of the provided ClassOrInterfaceDeclaration instance to achieve specific changes:
-     * - Sets the class as non-abstract.
-     * - Sets the class as an interface.
-     * - Resets the extended types to match the implemented types.
-     * - Removes all implemented types.
-     *
-     * @param classOrInterface The ClassOrInterfaceDeclaration to be updated.
-     */
-    private void updateClassOrInterface(ClassOrInterfaceDeclaration classOrInterface) {
-        classOrInterface.setAbstract(false);
-        classOrInterface.setInterface(true);
-        classOrInterface.setExtendedTypes(classOrInterface.getImplementedTypes());
-        classOrInterface.setImplementedTypes(new NodeList<>());
-    }
+        Optional<ClassOrInterfaceDeclaration> outerClassOpt = compilationUnit.findFirst(ClassOrInterfaceDeclaration.class);
+        if (outerClassOpt.isEmpty()) {
+            getLog().warn("No outer class found in compilation unit.");
+            return;
+        }
 
-    /**
-     * Updates the attributes of methods in the given class or interface.
-     * <p>
-     * This method modifies the method attributes to make them non-final, non-public, non-protected, and default access.
-     *
-     * @param classOrInterface The class or interface whose methods are to be updated.
-     */
-    private void updateMethods(ClassOrInterfaceDeclaration classOrInterface) {
-        classOrInterface.findAll(MethodDeclaration.class).forEach(method -> {
-            method.setFinal(false);
-            method.setPublic(false);
-            method.setProtected(false);
-            method.setDefault(true);
-        });
-    }
+        ClassOrInterfaceDeclaration outerClass = outerClassOpt.get();
+        System.out.println("Found outer class: " + outerClass.getNameAsString());
 
-    /**
-     * Writes content to a file.
-     * <p>
-     * This method writes the updated content of the Java file to the specified file.
-     *
-     * @param file    The file to write the content to.
-     * @param content The content to be written to the file.
-     * @throws IOException If an I/O error occurs while writing to the file.
-     */
-    private void writeContentToFile(File file, String content) throws IOException {
-        FileUtils.writeStringToFile(file, content, StandardCharsets.UTF_8);
+        boolean exists = outerClass.getMembers().stream()
+                .anyMatch(m -> m instanceof ClassOrInterfaceDeclaration &&
+                        ((ClassOrInterfaceDeclaration) m).getNameAsString().equals(interfaceName));
+        if (exists) {
+            System.out.println(interfaceName + " already exists in the outer class. Skipping addition.");
+            return;
+        }
+
+        ClassOrInterfaceDeclaration iface = new ClassOrInterfaceDeclaration();
+        iface.setName(interfaceName);
+        iface.setInterface(true);
+        iface.setPublic(true);
+        iface.addModifier(Modifier.Keyword.STATIC);
+        iface.addExtendedType("io.grpc.BindableService");
+        iface.addExtendedType("AsyncService");
+
+        MethodDeclaration bindMethod = new MethodDeclaration();
+        bindMethod.addAnnotation(new MarkerAnnotationExpr("Override"));
+        bindMethod.setName("bindService");
+        bindMethod.setType("io.grpc.ServerServiceDefinition");
+        bindMethod.setDefault(true);
+        bindMethod.setPublic(true);
+
+        BlockStmt body = new BlockStmt();
+        MethodCallExpr call = new MethodCallExpr(new NameExpr(outerClass.getNameAsString()), "bindService",
+                com.github.javaparser.ast.NodeList.nodeList(new ThisExpr()));
+        body.addStatement(new ReturnStmt(call));
+        bindMethod.setBody(body);
+
+        iface.addMember(bindMethod);
+        outerClass.addMember(iface);
+
+        System.out.println("Interface " + interfaceName + " added successfully.");
     }
 }
