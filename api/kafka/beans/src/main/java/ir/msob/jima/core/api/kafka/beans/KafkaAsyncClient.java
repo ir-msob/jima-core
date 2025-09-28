@@ -65,6 +65,7 @@ public class KafkaAsyncClient implements BaseAsyncClient {
     private void sendMessage(Object message, String channel) throws JsonProcessingException {
         // Serialize the Map to JSON and send it to the Kafka channel.
         String msg = objectMapper.writeValueAsString(message);
-        kafkaTemplate.executeInTransaction(ops -> ops.send(channel, msg));
+        kafkaTemplate.send(channel, msg);
+//        kafkaTemplate.executeInTransaction(ops -> ops.send(channel, msg));
     }
 }

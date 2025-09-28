@@ -1,6 +1,8 @@
 package ir.msob.jima.core.commons.channel;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.msob.jima.core.commons.exception.ExceptionResponseAbstract;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.shared.BaseType;
@@ -36,6 +38,25 @@ import java.util.Map;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ChannelMessage<USER extends BaseUser, DATA extends ModelType> implements BaseType {
+
+    @JsonCreator
+    public ChannelMessage(
+            @JsonProperty("metadata") Map<String, Serializable> metadata,
+            @JsonProperty("user") USER user,
+            @JsonProperty("data") DATA data,
+            @JsonProperty("status") Integer status,
+            @JsonProperty("channel") String channel,
+            @JsonProperty("callbacks") List<ChannelMessage<USER, ? extends ModelType>> callbacks,
+            @JsonProperty("errorCallbacks") List<ChannelMessage<USER, ? extends ExceptionResponseAbstract>> errorCallbacks) {
+        this.metadata = metadata != null ? metadata : new HashMap<>();
+        this.user = user;
+        this.data = data;
+        this.status = status;
+        this.channel = channel;
+        this.callbacks = callbacks;
+        this.errorCallbacks = errorCallbacks;
+    }
+
     /**
      * The metadata of the channel information.
      * This map can hold additional information related to the channel message.
