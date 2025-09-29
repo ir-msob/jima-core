@@ -7,7 +7,7 @@ import com.github.fge.jackson.jsonpointer.JsonPointerException;
 import com.github.fge.jsonpatch.JsonPatchOperation;
 import com.github.fge.jsonpatch.ReplaceOperation;
 import ir.msob.jima.core.commons.childdomain.characteristic.Characteristic;
-import ir.msob.jima.core.commons.childdomain.relatedobject.RelatedObjectAbstract;
+import ir.msob.jima.core.commons.childdomain.relatedobject.BaseRelatedObjectAbstract;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -52,10 +52,10 @@ public class CoreTestJsonPatch {
      */
     public static <ID extends Comparable<ID> & Serializable> List<JsonPatchOperation> RELATED_DOMAINS_JSON_PATCH_OPERATION(ID id) throws JsonPointerException {
         List<JsonPatchOperation> operations = new ArrayList<>();
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedObjectAbstract.FN.name)), TextNode.valueOf(UPDATED_STRING)));
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedObjectAbstract.FN.relatedId)), TextNode.valueOf(id.toString())));
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedObjectAbstract.FN.role)), TextNode.valueOf(UPDATED_STRING)));
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, RelatedObjectAbstract.FN.referringType)), TextNode.valueOf(UPDATED_STRING)));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, BaseRelatedObjectAbstract.FN.name)), TextNode.valueOf(UPDATED_STRING)));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, BaseRelatedObjectAbstract.FN.relatedId)), TextNode.valueOf(id.toString())));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, BaseRelatedObjectAbstract.FN.role)), TextNode.valueOf(UPDATED_STRING)));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_DOMAINS_PATH, BaseRelatedObjectAbstract.FN.referringType)), TextNode.valueOf(UPDATED_STRING)));
         return operations;
     }
 
@@ -69,10 +69,10 @@ public class CoreTestJsonPatch {
      */
     public static <ID extends Comparable<ID> & Serializable> List<JsonPatchOperation> RELATED_PARTIES_JSON_PATCH_OPERATION(ID id) throws JsonPointerException {
         List<JsonPatchOperation> operations = new ArrayList<>();
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedObjectAbstract.FN.name)), TextNode.valueOf(UPDATED_STRING)));
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedObjectAbstract.FN.relatedId)), TextNode.valueOf(id.toString())));
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedObjectAbstract.FN.role)), TextNode.valueOf(UPDATED_STRING)));
-        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, RelatedObjectAbstract.FN.referringType)), TextNode.valueOf(UPDATED_STRING)));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, BaseRelatedObjectAbstract.FN.name)), TextNode.valueOf(UPDATED_STRING)));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, BaseRelatedObjectAbstract.FN.relatedId)), TextNode.valueOf(id.toString())));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, BaseRelatedObjectAbstract.FN.role)), TextNode.valueOf(UPDATED_STRING)));
+        operations.add(new ReplaceOperation(new JsonPointer(String.format(RELATED_PARTIES_PATH, BaseRelatedObjectAbstract.FN.referringType)), TextNode.valueOf(UPDATED_STRING)));
         return operations;
     }
 }

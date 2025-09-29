@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.childdomain.relatedobject.relateddomain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.childdomain.relatedobject.RelatedObjectAbstract;
+import ir.msob.jima.core.commons.childdomain.relatedobject.BaseRelatedObjectAbstract;
 import ir.msob.jima.core.commons.shared.auditinfo.AuditInfo;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import lombok.*;
@@ -19,7 +19,7 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedDomainAbstract<ID extends Comparable<ID> & Serializable> extends RelatedObjectAbstract<ID, ID> {
+public abstract class RelatedDomainAbstract<ID extends Comparable<ID> & Serializable> extends BaseRelatedObjectAbstract<ID, ID> {
     public RelatedDomainAbstract(ID id, ID parentId, String name, ID relatedId, String role, String referringType, String status, Boolean enabled, TimePeriod validFor, AuditInfo auditInfo) {
         super(id, parentId, name, relatedId, role, referringType, status, enabled, validFor, auditInfo);
     }

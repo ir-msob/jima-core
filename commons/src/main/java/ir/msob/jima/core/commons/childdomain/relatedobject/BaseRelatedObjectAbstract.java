@@ -46,7 +46,7 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable> extends BaseChildDomainAbstract<ID> implements Comparable<RelatedObjectAbstract<ID, RID>> {
+public abstract class BaseRelatedObjectAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable> extends BaseChildDomainAbstract<ID> implements BaseRelatedObject<ID, RID> {
 
     /**
      * The name of the related object.
@@ -90,7 +90,7 @@ public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializ
      */
     private AuditInfo auditInfo;
 
-    public RelatedObjectAbstract(ID id, ID parentId, String name, RID relatedId, String role, String referringType, String status, Boolean enabled, TimePeriod validFor, AuditInfo auditInfo) {
+    public BaseRelatedObjectAbstract(ID id, ID parentId, String name, RID relatedId, String role, String referringType, String status, Boolean enabled, TimePeriod validFor, AuditInfo auditInfo) {
         super(id, parentId);
         this.name = name;
         this.relatedId = relatedId;
@@ -100,36 +100,6 @@ public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializ
         this.enabled = enabled;
         this.validFor = validFor;
         this.auditInfo = auditInfo;
-    }
-
-    /**
-     * Compares this related object with the specified related object for order.
-     *
-     * @param other the related object to be compared
-     * @return a negative integer, zero, or a positive integer as this related object is less than, equal to, or greater than the specified related object
-     */
-    @Override
-    public int compareTo(RelatedObjectAbstract<ID, RID> other) {
-        if (this == other) {
-            return 0;
-        }
-
-        int idComparison = Objects.compare(this.getRelatedId(), other.getRelatedId(), Comparable::compareTo);
-        if (idComparison != 0) {
-            return idComparison;
-        }
-
-        int nameComparison = Objects.compare(this.getName(), other.getName(), String::compareTo);
-        if (nameComparison != 0) {
-            return nameComparison;
-        }
-
-        int roleComparison = Objects.compare(this.getRole(), other.getRole(), String::compareTo);
-        if (roleComparison != 0) {
-            return roleComparison;
-        }
-
-        return Objects.compare(this.getReferringType(), other.getReferringType(), String::compareTo);
     }
 
     /**
@@ -143,7 +113,7 @@ public abstract class RelatedObjectAbstract<ID extends Comparable<ID> & Serializ
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        RelatedObjectAbstract<?, ?> that = (RelatedObjectAbstract<?, ?>) obj;
+        BaseRelatedObjectAbstract<?, ?> that = (BaseRelatedObjectAbstract<?, ?>) obj;
         return Objects.equals(relatedId, that.relatedId) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(role, that.role) &&

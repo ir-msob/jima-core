@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.childdomain.relatedobject.relatedintegration;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.childdomain.relatedobject.RelatedObjectAbstract;
+import ir.msob.jima.core.commons.childdomain.relatedobject.BaseRelatedObjectAbstract;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,5 +18,5 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedIntegrationAbstract<ID extends Comparable<ID> & Serializable> extends RelatedObjectAbstract<ID, String> {
+public abstract class RelatedIntegrationAbstract<ID extends Comparable<ID> & Serializable> extends BaseRelatedObjectAbstract<ID, String> {
 }

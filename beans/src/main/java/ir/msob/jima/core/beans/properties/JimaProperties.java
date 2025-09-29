@@ -84,4 +84,9 @@ public class JimaProperties {
      * Configuration properties childdomain to CRUD operations.
      */
     private CrudProperties crud = new CrudProperties();
+
+    /**
+     * Configuration properties related to microservice name mappings.
+     */
+    private ServiceNameProperties services = new ServiceNameProperties();
 }

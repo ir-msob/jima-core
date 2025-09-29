@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.childdomain.relatedobject.relatedparty;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.childdomain.relatedobject.RelatedObjectCriteriaAbstract;
+import ir.msob.jima.core.commons.childdomain.relatedobject.BaseRelatedObjectCriteriaAbstract;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +18,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedPartyCriteriaAbstract<ID extends Comparable<ID> & Serializable, RM extends RelatedPartyAbstract<ID>> extends RelatedObjectCriteriaAbstract<ID, String, RM> {
+public abstract class RelatedPartyCriteriaAbstract<ID extends Comparable<ID> & Serializable, RM extends RelatedPartyAbstract<ID>> extends BaseRelatedObjectCriteriaAbstract<ID, String, RM> {
 
 }

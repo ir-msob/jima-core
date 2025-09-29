@@ -27,7 +27,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedObjectCriteriaAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable, CD extends RelatedObjectAbstract<ID, RID>> extends BaseChildCriteriaAbstract<ID, CD> implements BaseChildCriteriaRelatedId<ID, RID, CD>, BaseFilters {
+public abstract class BaseRelatedObjectCriteriaAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable, CD extends BaseRelatedObjectAbstract<ID, RID>> extends BaseChildCriteriaAbstract<ID, CD> implements BaseChildCriteriaRelatedId<ID, RID, CD>, BaseFilters {
 
     /**
      * Filter for the name of the related object.
