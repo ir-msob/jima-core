@@ -89,4 +89,9 @@ public class JimaProperties {
      * Configuration properties related to microservice name mappings.
      */
     private ServiceNameProperties services = new ServiceNameProperties();
+
+    /**
+     * Configuration properties for storage.
+     */
+    private StorageProperties storage = new StorageProperties();
 }
