@@ -1,6 +1,7 @@
 package ir.msob.jima.core.commons.shared.auditinfo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,7 @@ import java.time.Instant;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AuditInfo {
+
     /**
      * The timestamp when the entity was created.
      * This field is automatically set to the current time when an instance is created.
@@ -30,4 +32,17 @@ public class AuditInfo {
      * This field can be set to null if the entity has not been updated.
      */
     private Instant updatedAt;
+
+    /**
+     * The user who created the entity.
+     * Can be set to null if unknown.
+     */
+    @NotBlank
+    private String createdBy;
+
+    /**
+     * The user who last updated the entity.
+     * Can be set to null if entity has not been updated.
+     */
+    private String updatedBy;
 }

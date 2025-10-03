@@ -35,7 +35,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class ObjectValidationAbstract<ID extends Comparable<ID> & Serializable> extends BaseChildDomainAbstract<ID> implements Comparable<ObjectValidationAbstract<ID>> {
+public class ObjectValidationAbstract<ID extends Comparable<ID> & Serializable> extends BaseChildDomainAbstract<ID> implements Comparable<ObjectValidationAbstract<ID>> {
 
     @NotBlank
     private String name;

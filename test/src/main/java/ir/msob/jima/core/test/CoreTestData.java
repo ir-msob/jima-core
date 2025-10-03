@@ -3,9 +3,13 @@ package ir.msob.jima.core.test;
 import com.google.common.collect.Sets;
 import ir.msob.jima.core.commons.childdomain.auditdomain.AuditDomainActionType;
 import ir.msob.jima.core.commons.childdomain.characteristic.Characteristic;
+import ir.msob.jima.core.commons.childdomain.contactmedium.ContactMediumAbstract;
+import ir.msob.jima.core.commons.childdomain.objectvalidation.ObjectValidationAbstract;
+import ir.msob.jima.core.commons.childdomain.relatedaction.RelatedActionAbstract;
 import ir.msob.jima.core.commons.childdomain.relatedobject.relateddomain.RelatedDomainAbstract;
 import ir.msob.jima.core.commons.childdomain.relatedobject.relatedparty.RelatedPartyAbstract;
 import ir.msob.jima.core.commons.shared.DataType;
+import ir.msob.jima.core.commons.shared.auditinfo.AuditInfo;
 import ir.msob.jima.core.commons.shared.keyvalue.KeyValue;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 
@@ -64,6 +68,12 @@ public class CoreTestData {
     public static final Collection<Instant> DEFAULT_INSTANTS = Collections.singleton(DEFAULT_INSTANT);
     public static final Collection<Instant> UPDATED_INSTANTS = Collections.singleton(UPDATED_INSTANT);
 
+    // AuditInfo constants
+    public static final AuditInfo DEFAULT_REQUIRED_AUDIT_INFO = AuditInfo.builder().createdAt(DEFAULT_INSTANT).createdBy(DEFAULT_STRING).build();
+    public static final AuditInfo UPDATED_REQUIRED_AUDIT_INFO = AuditInfo.builder().createdAt(UPDATED_INSTANT).createdBy(UPDATED_STRING).build();
+    public static final AuditInfo DEFAULT_AUDIT_INFO = AuditInfo.builder().createdAt(DEFAULT_INSTANT).createdBy(DEFAULT_STRING).updatedAt(DEFAULT_INSTANT).updatedBy(DEFAULT_STRING).build();
+    public static final AuditInfo UPDATED_AUDIT_INFO = AuditInfo.builder().createdAt(UPDATED_INSTANT).createdBy(UPDATED_STRING).updatedAt(UPDATED_INSTANT).updatedBy(UPDATED_STRING).build();
+
     // AuditDomainActionType constants
     public static final AuditDomainActionType DEFAULT_AUDIT_DOMAIN_ACTION_TYPE = AuditDomainActionType.CREATE;
     public static final AuditDomainActionType UPDATED_AUDIT_DOMAIN_ACTION_TYPE = AuditDomainActionType.UPDATE;
@@ -75,6 +85,33 @@ public class CoreTestData {
     public static final SortedSet<Characteristic<?>> DEFAULT_REQUIRED_CHARACTERISTICS = Sets.newTreeSet(Collections.singleton(DEFAULT_REQUIRED_CHARACTERISTIC));
     public static final Characteristic<?> DEFAULT_CHARACTERISTIC = initDefaultCharacteristic();
     public static final SortedSet<Characteristic<?>> DEFAULT_CHARACTERISTICS = Sets.newTreeSet(Collections.singleton(DEFAULT_CHARACTERISTIC));
+
+    public static final Characteristic<?> UPDATED_REQUIRED_CHARACTERISTIC = initUpdatedRequiredCharacteristic();
+    public static final SortedSet<Characteristic<?>> UPDATED_REQUIRED_CHARACTERISTICS = Sets.newTreeSet(Collections.singleton(UPDATED_REQUIRED_CHARACTERISTIC));
+    public static final Characteristic<?> UPDATED_CHARACTERISTIC = initUpdatedCharacteristic();
+    public static final SortedSet<Characteristic<?>> UPDATED_CHARACTERISTICS = Sets.newTreeSet(Collections.singleton(DEFAULT_CHARACTERISTIC));
+
+    // ContactMedium constants
+    public static final ContactMediumAbstract<?> DEFAULT_REQUIRED_CONTACT_MEDIUM = initDefaultRequiredContactMediumAbstract();
+    public static final ContactMediumAbstract<?> DEFAULT_CONTACT_MEDIUM = initDefaultContactMediumAbstract();
+
+    public static final ContactMediumAbstract<?> UPDATED_REQUIRED_CONTACT_MEDIUM = initUpdatedRequiredContactMediumAbstract();
+    public static final ContactMediumAbstract<?> UPDATED_CONTACT_MEDIUM = initUpdatedContactMediumAbstract();
+
+    // ObjectValidation constants
+    public static final ObjectValidationAbstract<?> DEFAULT_REQUIRED_OBJECT_VALIDATION = initDefaultRequiredObjectValidationAbstract();
+    public static final ObjectValidationAbstract<?> DEFAULT_OBJECT_VALIDATION = initDefaultObjectValidationAbstract();
+
+    public static final ObjectValidationAbstract<?> UPDATED_REQUIRED_OBJECT_VALIDATION = initUpdatedRequiredObjectValidationAbstract();
+    public static final ObjectValidationAbstract<?> UPDATED_OBJECT_VALIDATION = initUpdatedObjectValidationAbstract();
+
+    // RelatedAction constants
+    public static final RelatedActionAbstract<?> DEFAULT_REQUIRED_RELATED_ACTION = initDefaultRequiredRelatedActionAbstract();
+    public static final RelatedActionAbstract<?> DEFAULT_RELATED_ACTION = initDefaultRelatedActionAbstract();
+
+    public static final RelatedActionAbstract<?> UPDATED_REQUIRED_RELATED_ACTION = initUpdatedRequiredRelatedActionAbstract();
+    public static final RelatedActionAbstract<?> UPDATED_RELATED_ACTION = initUpdatedRelatedActionAbstract();
+
 
     // KeyValue constants
     public static final KeyValue<String, String> DEFAULT_STRING_KEY_VALUE = new KeyValue<>(DEFAULT_STRING, DEFAULT_STRING);
@@ -294,6 +331,189 @@ public class CoreTestData {
     }
 
     /**
+     * Initializes the default required contact medium.
+     *
+     * @return the initialized default required contact medium
+     */
+    public static <ID extends Comparable<ID> & Serializable> ContactMediumAbstract<ID> initDefaultRequiredContactMediumAbstract() {
+        ContactMediumAbstract<ID> contactMediumAbstract = new ContactMediumAbstract<>();
+        contactMediumAbstract.setName(DEFAULT_STRING);
+        contactMediumAbstract.setType(DEFAULT_STRING);
+        contactMediumAbstract.setValue(DEFAULT_STRING);
+        return contactMediumAbstract;
+    }
+
+    /**
+     * Initializes the default  contact medium.
+     *
+     * @return the initialized default  contact medium
+     */
+    public static <ID extends Comparable<ID> & Serializable> ContactMediumAbstract<ID> initDefaultContactMediumAbstract() {
+        ContactMediumAbstract<ID> contactMediumAbstract = new ContactMediumAbstract<>();
+        contactMediumAbstract.setName(DEFAULT_STRING);
+        contactMediumAbstract.setType(DEFAULT_STRING);
+        contactMediumAbstract.setValue(DEFAULT_STRING);
+        contactMediumAbstract.setOrder(DEFAULT_INTEGER);
+        contactMediumAbstract.setValidFor(DEFAULT_TIME_PERIOD);
+        return contactMediumAbstract;
+    }
+
+    /**
+     * Initializes the updated required contact medium.
+     *
+     * @return the initialized updated required contact medium
+     */
+    public static <ID extends Comparable<ID> & Serializable> ContactMediumAbstract<ID> initUpdatedRequiredContactMediumAbstract() {
+        ContactMediumAbstract<ID> contactMediumAbstract = new ContactMediumAbstract<>();
+        contactMediumAbstract.setName(UPDATED_STRING);
+        contactMediumAbstract.setType(UPDATED_STRING);
+        contactMediumAbstract.setValue(UPDATED_STRING);
+        return contactMediumAbstract;
+    }
+
+    /**
+     * Initializes the updated  contact medium.
+     *
+     * @return the initialized updated  contact medium
+     */
+    public static <ID extends Comparable<ID> & Serializable> ContactMediumAbstract<ID> initUpdatedContactMediumAbstract() {
+        ContactMediumAbstract<ID> contactMediumAbstract = new ContactMediumAbstract<>();
+        contactMediumAbstract.setName(UPDATED_STRING);
+        contactMediumAbstract.setType(UPDATED_STRING);
+        contactMediumAbstract.setValue(UPDATED_STRING);
+        contactMediumAbstract.setOrder(UPDATED_INTEGER);
+        contactMediumAbstract.setValidFor(UPDATED_TIME_PERIOD);
+        return contactMediumAbstract;
+    }
+
+    /**
+     * Initializes the default required object validation.
+     *
+     * @return the initialized default required object validation
+     */
+    public static <ID extends Comparable<ID> & Serializable> RelatedActionAbstract<ID> initDefaultRequiredRelatedActionAbstract() {
+        RelatedActionAbstract<ID> result = new RelatedActionAbstract<>() {
+        };
+        result.setName(DEFAULT_STRING);
+        result.setStatus(DEFAULT_STRING);
+        return result;
+    }
+
+    /**
+     * Initializes the default  object validation.
+     *
+     * @return the initialized default  object validation
+     */
+    public static <ID extends Comparable<ID> & Serializable> RelatedActionAbstract<ID> initDefaultRelatedActionAbstract() {
+        RelatedActionAbstract<ID> result = new RelatedActionAbstract<>() {
+        };
+        result.setName(DEFAULT_STRING);
+        result.setStatus(DEFAULT_STRING);
+        result.setMandatory(DEFAULT_BOOLEAN);
+        result.setValidFor(DEFAULT_TIME_PERIOD);
+        result.setAuditInfo(DEFAULT_AUDIT_INFO);
+        return result;
+    }
+
+    /**
+     * Initializes the updated required object validation.
+     *
+     * @return the initialized updated required object validation
+     */
+    public static <ID extends Comparable<ID> & Serializable> RelatedActionAbstract<ID> initUpdatedRequiredRelatedActionAbstract() {
+        RelatedActionAbstract<ID> result = new RelatedActionAbstract<>() {
+        };
+        result.setName(UPDATED_STRING);
+        result.setStatus(UPDATED_STRING);
+        return result;
+    }
+
+    /**
+     * Initializes the updated  object validation.
+     *
+     * @return the initialized updated  object validation
+     */
+    public static <ID extends Comparable<ID> & Serializable> RelatedActionAbstract<ID> initUpdatedRelatedActionAbstract() {
+        RelatedActionAbstract<ID> result = new RelatedActionAbstract<>() {
+        };
+        result.setName(UPDATED_STRING);
+        result.setStatus(UPDATED_STRING);
+        result.setMandatory(UPDATED_BOOLEAN);
+        result.setValidFor(UPDATED_TIME_PERIOD);
+        result.setAuditInfo(UPDATED_AUDIT_INFO);
+        return result;
+    }
+
+    /**
+     * Initializes the default required object validation.
+     *
+     * @return the initialized default required object validation
+     */
+    public static <ID extends Comparable<ID> & Serializable> ObjectValidationAbstract<ID> initDefaultRequiredObjectValidationAbstract() {
+        ObjectValidationAbstract<ID> result = new ObjectValidationAbstract<>() {
+        };
+        result.setName(DEFAULT_STRING);
+        result.setStatus(DEFAULT_STRING);
+        return result;
+    }
+
+    /**
+     * Initializes the default  object validation.
+     *
+     * @return the initialized default  object validation
+     */
+    public static <ID extends Comparable<ID> & Serializable> ObjectValidationAbstract<ID> initDefaultObjectValidationAbstract() {
+        ObjectValidationAbstract<ID> result = new ObjectValidationAbstract<>() {
+        };
+        result.setName(DEFAULT_STRING);
+        result.setStatus(DEFAULT_STRING);
+        result.setEnabled(DEFAULT_BOOLEAN);
+        result.setValidFor(DEFAULT_TIME_PERIOD);
+        return result;
+    }
+
+    /**
+     * Initializes the updated required object validation.
+     *
+     * @return the initialized updated required object validation
+     */
+    public static <ID extends Comparable<ID> & Serializable> ObjectValidationAbstract<ID> initUpdatedRequiredObjectValidationAbstract() {
+        ObjectValidationAbstract<ID> result = new ObjectValidationAbstract<>() {
+        };
+        result.setName(UPDATED_STRING);
+        result.setStatus(UPDATED_STRING);
+        return result;
+    }
+
+    /**
+     * Initializes the updated  object validation.
+     *
+     * @return the initialized updated  object validation
+     */
+    public static <ID extends Comparable<ID> & Serializable> ObjectValidationAbstract<ID> initUpdatedObjectValidationAbstract() {
+        ObjectValidationAbstract<ID> result = new ObjectValidationAbstract<>() {
+        };
+        result.setName(UPDATED_STRING);
+        result.setStatus(UPDATED_STRING);
+        result.setEnabled(UPDATED_BOOLEAN);
+        result.setValidFor(UPDATED_TIME_PERIOD);
+        return result;
+    }
+
+    /**
+     * Initializes the updated  characteristic.
+     *
+     * @return the initialized updated required characteristic
+     */
+    public static <ID extends Comparable<ID> & Serializable> Characteristic<ID> initUpdatedRequiredCharacteristic() {
+        Characteristic<ID> characteristic = new Characteristic<>();
+        characteristic.setKey(UPDATED_STRING);
+        characteristic.setValue(UPDATED_STRING);
+        characteristic.setDataType(UPDATED_DATA_TYPE.name());
+        return characteristic;
+    }
+
+    /**
      * Updates the provided mandatory characteristic with updated values.
      *
      * @param characteristic the mandatory characteristic to update
@@ -320,6 +540,17 @@ public class CoreTestData {
     public static <ID extends Comparable<ID> & Serializable> Characteristic<ID> initDefaultCharacteristic() {
         Characteristic<ID> characteristic = initDefaultRequiredCharacteristic();
         characteristic.setValue(DEFAULT_STRING);
+        return characteristic;
+    }
+
+    /**
+     * Initializes the updated characteristic.
+     *
+     * @return the initialized updated characteristic
+     */
+    public static <ID extends Comparable<ID> & Serializable> Characteristic<ID> initUpdatedCharacteristic() {
+        Characteristic<ID> characteristic = initUpdatedRequiredCharacteristic();
+        characteristic.setValue(UPDATED_STRING);
         return characteristic;
     }
 

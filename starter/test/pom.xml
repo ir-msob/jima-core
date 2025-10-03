@@ -8,14 +8,14 @@
         <version>${jima-commons.version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>core-starter-commons</artifactId>
-    <name>commons</name>
-    <description>commons</description>
+    <artifactId>core-starter-test</artifactId>
+    <name>test</name>
+    <description>test</description>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>ir.msob.jima.core</groupId>
-            <artifactId>core-commons</artifactId>
+            <artifactId>core-test</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
