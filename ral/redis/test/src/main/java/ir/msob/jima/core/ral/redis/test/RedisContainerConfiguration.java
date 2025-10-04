@@ -1,11 +1,17 @@
 package ir.msob.jima.core.ral.redis.test;
 
+import com.github.dockerjava.api.model.ExposedPort;
+import com.github.dockerjava.api.model.PortBinding;
+import com.github.dockerjava.api.model.Ports;
 import com.redis.testcontainers.RedisContainer;
 import ir.msob.jima.core.beans.properties.JimaProperties;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.testcontainers.utility.DockerImageName;
+
+import java.util.Objects;
 
 /**
  * This class provides the configuration for setting up a Redis container for testing purposes.
@@ -35,6 +41,21 @@ public class RedisContainerConfiguration {
     public RedisContainer redisContainer(JimaProperties jimaProperties) {
         RedisContainer container = new RedisContainer(DockerImageName.parse(jimaProperties.getTestContainer().getRedis().getImage()));
         container.withReuse(jimaProperties.getTestContainer().getRedis().isReuse());
+
+        if (Strings.isNotBlank(jimaProperties.getTestContainer().getRedis().getContainer())
+                && jimaProperties.getTestContainer().getRedis().getHostPort() != null
+                && jimaProperties.getTestContainer().getRedis().getContainerPort() != null) {
+
+            container.withCreateContainerCmdModifier(cmd -> {
+                cmd.withName(jimaProperties.getTestContainer().getRedis().getContainer());
+                Objects.requireNonNull(cmd.getHostConfig()).withPortBindings(
+                        new PortBinding(
+                                Ports.Binding.bindPort(jimaProperties.getTestContainer().getRedis().getHostPort()),
+                                new ExposedPort(jimaProperties.getTestContainer().getRedis().getContainerPort())
+                        )
+                );
+            });
+        }
         return container;
     }
 }

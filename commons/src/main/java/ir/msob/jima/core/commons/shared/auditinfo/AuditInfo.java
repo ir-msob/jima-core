@@ -1,11 +1,9 @@
 package ir.msob.jima.core.commons.shared.auditinfo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.shared.BaseModel;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.Instant;
 
@@ -17,8 +15,10 @@ import java.time.Instant;
 @Setter
 @ToString(callSuper = true)
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AuditInfo {
+public class AuditInfo implements BaseModel {
 
     /**
      * The timestamp when the entity was created.

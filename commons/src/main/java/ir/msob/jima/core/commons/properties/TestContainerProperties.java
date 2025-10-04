@@ -34,9 +34,7 @@ public class TestContainerProperties {
     @Getter
     @NoArgsConstructor
     @ToString
-    public static class Kafka {
-        private String image;
-        private boolean reuse = false;
+    public static class Kafka extends BaseTestContainer {
     }
 
     /**
@@ -47,11 +45,9 @@ public class TestContainerProperties {
     @Getter
     @NoArgsConstructor
     @ToString
-    public static class Minio {
-        private String image;
+    public static class Minio extends BaseTestContainer {
         private String accessKey;
         private String secretKey;
-        private boolean reuse = false;
     }
 
     /**
@@ -62,9 +58,7 @@ public class TestContainerProperties {
     @Getter
     @NoArgsConstructor
     @ToString
-    public static class Mongo {
-        private String image;
-        private boolean reuse = false;
+    public static class Mongo extends BaseTestContainer {
     }
 
     /**
@@ -75,11 +69,9 @@ public class TestContainerProperties {
     @Getter
     @NoArgsConstructor
     @ToString
-    public static class Oracle {
-        private String image;
+    public static class Oracle extends BaseTestContainer {
         private String username;
         private String password;
-        private boolean reuse = false;
     }
 
     /**
@@ -90,9 +82,7 @@ public class TestContainerProperties {
     @Getter
     @NoArgsConstructor
     @ToString
-    public static class Redis {
-        private String image;
-        private boolean reuse = false;
+    public static class Redis extends BaseTestContainer {
     }
 
     /**
@@ -103,10 +93,20 @@ public class TestContainerProperties {
     @Getter
     @NoArgsConstructor
     @ToString
-    public static class Keycloak {
-        private String image;
+    public static class Keycloak extends BaseTestContainer {
         private String realm = "master";
         private String realmJsonFile = "keycloak/realm.json";
+    }
+
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    @ToString
+    public static class BaseTestContainer {
+        private String image;
         private boolean reuse = false;
+        private String container;
+        private Integer hostPort;
+        private Integer containerPort;
     }
 }

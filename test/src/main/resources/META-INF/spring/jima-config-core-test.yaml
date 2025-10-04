@@ -12,24 +12,42 @@ jima:
     kafka:
       image: "apache/kafka:latest"
       reuse: true
+      container: "jima-kafka"
+      host-port: 19092
+      container-port: 9092
     mongo:
       image: "mongo:8.0.13-noble"
       reuse: true
+      container: "jima-mongo"
+      host-port: 12717
+      container-port: 27017
     minio:
       image: "minio/minio:RELEASE.2025-09-07T16-13-09Z"
       access-key: "minioadmin"
       secret-key: "minioadmin"
       reuse: true
+      container: "jima-minio"
+      host-port: 19000
+      container-port: 9000
     oracle:
       image: "gvenzl/oracle-xe:21.3.0-slim-faststart"
       reuse: true
+      container: "jima-oracle"
+      host-port: 11521
+      container-port: 1521
     redis:
       image: "redis:8.2.1"
       reuse: true
+      container: "jima-redis"
+      host-port: 16379
+      container-port: 6379
     keycloak:
       image: "quay.io/keycloak/keycloak:26.3"
       realm: "test-realm"
       reuse: true
+      container: "jima-keycloak"
+      host-port: 18080
+      container-port: 8080
 
 # Logging
 logging:

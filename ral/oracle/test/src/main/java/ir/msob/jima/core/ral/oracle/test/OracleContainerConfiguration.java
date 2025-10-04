@@ -1,5 +1,8 @@
 package ir.msob.jima.core.ral.oracle.test;
 
+import com.github.dockerjava.api.model.ExposedPort;
+import com.github.dockerjava.api.model.PortBinding;
+import com.github.dockerjava.api.model.Ports;
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -7,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.testcontainers.containers.OracleContainer;
 import org.testcontainers.utility.DockerImageName;
+
+import java.util.Objects;
 
 /**
  * This class provides the configuration for setting up an OracleDB container for testing purposes.
@@ -43,6 +48,22 @@ public class OracleContainerConfiguration {
             container.withPassword(jimaProperties.getTestContainer().getOracle().getPassword());
 
         container.withReuse(jimaProperties.getTestContainer().getOracle().isReuse());
+
+        if (Strings.isNotBlank(jimaProperties.getTestContainer().getOracle().getContainer())
+                && jimaProperties.getTestContainer().getOracle().getHostPort() != null
+                && jimaProperties.getTestContainer().getOracle().getContainerPort() != null) {
+
+            container.withCreateContainerCmdModifier(cmd -> {
+                cmd.withName(jimaProperties.getTestContainer().getOracle().getContainer());
+                Objects.requireNonNull(cmd.getHostConfig()).withPortBindings(
+                        new PortBinding(
+                                Ports.Binding.bindPort(jimaProperties.getTestContainer().getOracle().getHostPort()),
+                                new ExposedPort(jimaProperties.getTestContainer().getOracle().getContainerPort())
+                        )
+                );
+            });
+        }
+
         return container;
     }
 }
