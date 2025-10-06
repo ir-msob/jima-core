@@ -94,4 +94,14 @@ public class JimaProperties {
      * Configuration properties for storage.
      */
     private StorageProperties storage = new StorageProperties();
+
+    /**
+     * Configuration properties for feature.
+     */
+    private FeatureProperties feature = new FeatureProperties();
+
+    /**
+     * Configuration properties for tests.
+     */
+    private TestProperties test = new TestProperties();
 }

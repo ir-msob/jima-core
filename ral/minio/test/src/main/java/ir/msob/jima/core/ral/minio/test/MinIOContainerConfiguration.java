@@ -1,8 +1,5 @@
 package ir.msob.jima.core.ral.minio.test;
 
-import com.github.dockerjava.api.model.ExposedPort;
-import com.github.dockerjava.api.model.PortBinding;
-import com.github.dockerjava.api.model.Ports;
 import ir.msob.jima.core.beans.properties.JimaProperties;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -10,8 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.testcontainers.containers.MinIOContainer;
 import org.testcontainers.utility.DockerImageName;
-
-import java.util.Objects;
 
 /**
  * This class provides the configuration for setting up a MinIO container for testing purposes.
@@ -46,21 +41,6 @@ public class MinIOContainerConfiguration {
             container.withPassword(jimaProperties.getTestContainer().getMinio().getSecretKey());
 
         container.withReuse(jimaProperties.getTestContainer().getMinio().isReuse());
-
-        if (Strings.isNotBlank(jimaProperties.getTestContainer().getMinio().getContainer())
-                && jimaProperties.getTestContainer().getMinio().getHostPort() != null
-                && jimaProperties.getTestContainer().getMinio().getContainerPort() != null) {
-
-            container.withCreateContainerCmdModifier(cmd -> {
-                cmd.withName(jimaProperties.getTestContainer().getMinio().getContainer());
-                Objects.requireNonNull(cmd.getHostConfig()).withPortBindings(
-                        new PortBinding(
-                                Ports.Binding.bindPort(jimaProperties.getTestContainer().getMinio().getHostPort()),
-                                new ExposedPort(jimaProperties.getTestContainer().getMinio().getContainerPort())
-                        )
-                );
-            });
-        }
         return container;
     }
 }

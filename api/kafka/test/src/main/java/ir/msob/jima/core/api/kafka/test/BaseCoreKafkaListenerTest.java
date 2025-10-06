@@ -47,13 +47,6 @@ public interface BaseCoreKafkaListenerTest<ID extends Comparable<ID> & Serializa
     String getGroupId();
 
     /**
-     * Gets the sleep duration for the listener.
-     *
-     * @return the sleep duration
-     */
-    Duration getSleepDuration();
-
-    /**
      * Gets the consumer factory for creating Kafka consumers.
      *
      * @return the consumer factory
@@ -76,7 +69,7 @@ public interface BaseCoreKafkaListenerTest<ID extends Comparable<ID> & Serializa
         container.setBeanName(channel);
         container.start();
         try {
-            Thread.sleep(getSleepDuration());
+            Thread.sleep(getJimaProperties().getTest().getKafka().getMessageWaitDuration());
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         } finally {

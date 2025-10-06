@@ -1,17 +1,11 @@
 package ir.msob.jima.core.ral.mongo.test.configuration;
 
-import com.github.dockerjava.api.model.ExposedPort;
-import com.github.dockerjava.api.model.PortBinding;
-import com.github.dockerjava.api.model.Ports;
 import ir.msob.jima.core.beans.properties.JimaProperties;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.utility.DockerImageName;
-
-import java.util.Objects;
 
 /**
  * This class provides the configuration for setting up a MongoDB container for testing purposes.
@@ -38,22 +32,6 @@ public class MongoContainerConfiguration {
     public MongoDBContainer mongoDBContainer(JimaProperties jimaProperties) {
         MongoDBContainer container = new MongoDBContainer(DockerImageName.parse(jimaProperties.getTestContainer().getMongo().getImage()));
         container.withReuse(jimaProperties.getTestContainer().getMongo().isReuse());
-
-        if (Strings.isNotBlank(jimaProperties.getTestContainer().getMongo().getContainer())
-                && jimaProperties.getTestContainer().getMongo().getHostPort() != null
-                && jimaProperties.getTestContainer().getMongo().getContainerPort() != null) {
-
-            container.withCreateContainerCmdModifier(cmd -> {
-                cmd.withName(jimaProperties.getTestContainer().getMongo().getContainer());
-                Objects.requireNonNull(cmd.getHostConfig()).withPortBindings(
-                        new PortBinding(
-                                Ports.Binding.bindPort(jimaProperties.getTestContainer().getMongo().getHostPort()),
-                                new ExposedPort(jimaProperties.getTestContainer().getMongo().getContainerPort())
-                        )
-                );
-            });
-        }
-
         return container;
     }
 }
