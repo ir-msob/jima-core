@@ -13,7 +13,7 @@ import java.time.Duration;
 @ToString
 public class TestProperties {
 
-    private Kafka kafka;
+    private Kafka kafka = new Kafka();
 
     @Setter
     @Getter
