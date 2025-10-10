@@ -2,10 +2,6 @@ package ir.msob.jima.core.test;
 
 import com.google.common.collect.Sets;
 import ir.msob.jima.core.commons.childdomain.auditdomain.AuditDomainActionType;
-import ir.msob.jima.core.commons.childdomain.characteristic.Characteristic;
-import ir.msob.jima.core.commons.childdomain.contactmedium.ContactMediumAbstract;
-import ir.msob.jima.core.commons.childdomain.objectvalidation.ObjectValidationAbstract;
-import ir.msob.jima.core.commons.childdomain.relatedaction.RelatedActionAbstract;
 import ir.msob.jima.core.commons.childdomain.relatedobject.relateddomain.RelatedDomainAbstract;
 import ir.msob.jima.core.commons.childdomain.relatedobject.relatedparty.RelatedPartyAbstract;
 import ir.msob.jima.core.commons.shared.DataType;

@@ -66,6 +66,5 @@ public class KafkaAsyncClient implements BaseAsyncClient {
         // Serialize the Map to JSON and send it to the Kafka channel.
         String msg = objectMapper.writeValueAsString(message);
         kafkaTemplate.send(channel, msg);
-//        kafkaTemplate.executeInTransaction(ops -> ops.send(channel, msg));
     }
 }

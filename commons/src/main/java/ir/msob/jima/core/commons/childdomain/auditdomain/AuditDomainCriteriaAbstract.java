@@ -45,10 +45,8 @@ public abstract class AuditDomainCriteriaAbstract<ID extends Comparable<ID> & Se
         if (!super.isMatching(relatedModel)) {
             return false;
         }
-        if (this.getRelatedParty() != null) {
-            if (!this.getRelatedParty().isMatching(relatedModel.getRelatedParty())) {
-                return false;
-            }
+        if (this.getRelatedParty() != null && !this.getRelatedParty().isMatching(relatedModel.getRelatedParty())) {
+            return false;
         }
         if (Filter.isMatching(this.getActionDate(), relatedModel.getActionDate())) {
             return false;

@@ -12,7 +12,7 @@ class BaseResourceTest {
     private ConcreteBaseResource resource;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         resource = new ConcreteBaseResource();
     }
 

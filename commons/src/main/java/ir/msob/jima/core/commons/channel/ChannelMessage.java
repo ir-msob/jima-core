@@ -39,6 +39,45 @@ import java.util.Map;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ChannelMessage<USER extends BaseUser, DATA extends ModelType> implements BaseType {
 
+    /**
+     * The metadata of the channel information.
+     * This map can hold additional information related to the channel message.
+     */
+    @Builder.Default
+    private Map<String, Serializable> metadata = new HashMap<>();
+    /**
+     * The user of the channel information.
+     * This field represents the user associated with the channel message.
+     */
+    private USER user;
+    /**
+     * The data of the channel message.
+     * This field contains the actual data being sent in the channel message.
+     */
+    private DATA data;
+    /**
+     * The status of the channel message.
+     * This field indicates the current status of the message (e.g., sent, received, read).
+     */
+    private Integer status;
+    /**
+     * The channel of the callback.
+     * This field specifies the channel through which the callback will be sent.
+     */
+    private String channel;
+    /**
+     * A list of callbacks associated with the channel message.
+     * This list can hold multiple ChannelMessage instances that are callbacks.
+     */
+    @Singular
+    private List<ChannelMessage<USER, ? extends ModelType>> callbacks;
+    /**
+     * A list of error callbacks associated with the channel message.
+     * This list can hold multiple ChannelMessage instances that represent error callbacks.
+     */
+    @Singular
+    private List<ChannelMessage<USER, ? extends ExceptionResponseAbstract>> errorCallbacks;
+
     @JsonCreator
     public ChannelMessage(
             @JsonProperty("metadata") Map<String, Serializable> metadata,
@@ -56,51 +95,6 @@ public class ChannelMessage<USER extends BaseUser, DATA extends ModelType> imple
         this.callbacks = callbacks;
         this.errorCallbacks = errorCallbacks;
     }
-
-    /**
-     * The metadata of the channel information.
-     * This map can hold additional information related to the channel message.
-     */
-    @Builder.Default
-    private Map<String, Serializable> metadata = new HashMap<>();
-
-    /**
-     * The user of the channel information.
-     * This field represents the user associated with the channel message.
-     */
-    private USER user;
-
-    /**
-     * The data of the channel message.
-     * This field contains the actual data being sent in the channel message.
-     */
-    private DATA data;
-
-    /**
-     * The status of the channel message.
-     * This field indicates the current status of the message (e.g., sent, received, read).
-     */
-    private Integer status;
-
-    /**
-     * The channel of the callback.
-     * This field specifies the channel through which the callback will be sent.
-     */
-    private String channel;
-
-    /**
-     * A list of callbacks associated with the channel message.
-     * This list can hold multiple ChannelMessage instances that are callbacks.
-     */
-    @Singular
-    private List<ChannelMessage<USER, ? extends ModelType>> callbacks;
-
-    /**
-     * A list of error callbacks associated with the channel message.
-     * This list can hold multiple ChannelMessage instances that represent error callbacks.
-     */
-    @Singular
-    private List<ChannelMessage<USER, ? extends ExceptionResponseAbstract>> errorCallbacks;
 
     /**
      * The 'FN' enum represents the field names of the class.

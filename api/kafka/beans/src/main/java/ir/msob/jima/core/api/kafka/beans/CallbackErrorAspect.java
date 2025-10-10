@@ -1,6 +1,7 @@
 package ir.msob.jima.core.api.kafka.beans;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.commons.callback.CallbackError;
 import ir.msob.jima.core.commons.channel.ChannelMessage;
@@ -117,9 +118,13 @@ public class CallbackErrorAspect {
      */
     private <USER extends BaseUser, DATA extends ModelType> ChannelMessage<USER, DATA> convertToChannelMessage(Object paramValue) throws JsonProcessingException {
         if (paramValue instanceof String dto) {
-            return objectMapper.readValue(dto, ChannelMessage.class);
-        } else if (paramValue instanceof ChannelMessage channelMessage) {
-            return channelMessage;
+            TypeReference<ChannelMessage<USER, DATA>> typeRef = new TypeReference<>() {
+            };
+            return objectMapper.readValue(dto, typeRef);
+        } else if (paramValue instanceof ChannelMessage<?, ?> channelMessage) {
+            @SuppressWarnings("unchecked")
+            ChannelMessage<USER, DATA> result = (ChannelMessage<USER, DATA>) channelMessage;
+            return result;
         }
         throw new CommonRuntimeException("Cannot convert to ChannelMessage. Value: {}", paramValue);
     }
@@ -141,16 +146,15 @@ public class CallbackErrorAspect {
 
         return channelMessageReq.getErrorCallbacks()
                 .stream()
-                .map(channelMessage -> {
-                    // Clone the channelMessage to avoid modifying the original
-                    return ChannelMessage.
-                            <USER, ER>builder()
-                            .data(er)
-                            .status(er.getStatus())
-                            .channel(channelMessage.getChannel())
-                            .metadata(channelMessage.getMetadata())
-                            .build();
-                })
+                .map(channelMessage ->
+                        // Clone the channelMessage to avoid modifying the original
+                        ChannelMessage.
+                                <USER, ER>builder()
+                                .data(er)
+                                .status(er.getStatus())
+                                .channel(channelMessage.getChannel())
+                                .metadata(channelMessage.getMetadata())
+                                .build())
                 .toList();
     }
 }

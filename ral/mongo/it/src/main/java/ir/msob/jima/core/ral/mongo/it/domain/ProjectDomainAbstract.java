@@ -22,7 +22,7 @@ public abstract class ProjectDomainAbstract extends BaseDomainAbstract<String> i
     @Serial
     private static final long serialVersionUID = -6601527731070113825L;
 
-    public ProjectDomainAbstract(String id) {
+    protected ProjectDomainAbstract(String id) {
         super(id);
     }
 

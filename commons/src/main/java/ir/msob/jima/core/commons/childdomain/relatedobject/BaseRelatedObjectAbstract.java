@@ -90,7 +90,7 @@ public abstract class BaseRelatedObjectAbstract<ID extends Comparable<ID> & Seri
      */
     private AuditInfo auditInfo;
 
-    public BaseRelatedObjectAbstract(ID id, ID parentId, String name, RID relatedId, String role, String referringType, String status, Boolean enabled, TimePeriod validFor, AuditInfo auditInfo) {
+    protected BaseRelatedObjectAbstract(ID id, ID parentId, String name, RID relatedId, String role, String referringType, String status, Boolean enabled, TimePeriod validFor, AuditInfo auditInfo) {
         super(id, parentId);
         this.name = name;
         this.relatedId = relatedId;

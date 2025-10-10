@@ -13,7 +13,6 @@ import org.springframework.kafka.listener.KafkaMessageListenerContainer;
 import org.springframework.kafka.listener.MessageListener;
 
 import java.io.Serializable;
-import java.time.Duration;
 
 /**
  * Base interface for Kafka listener tests.

@@ -30,7 +30,7 @@ class PatchUtilTest {
     private static ObjectMapper objectMapper;
 
     @BeforeAll
-    public static void setup() {
+    static void setup() {
         objectMapper = new ObjectMapper();
         patchUtil = new PatchUtil(objectMapper);
     }

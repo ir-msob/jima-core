@@ -23,10 +23,10 @@ import java.io.Serializable;
  *   <li>{@code C} - the type of criteria, must extend BaseCriteria</li>
  * </ul>
  *
- * @param <ID> the type of identifier
+ * @param <ID>   the type of identifier
  * @param <USER> the type of user
- * @param <DTO> the type of data transfer object
- * @param <C> the type of criteria
+ * @param <DTO>  the type of data transfer object
+ * @param <C>    the type of criteria
  */
 public interface BaseChannelTypeReference<
         ID extends Comparable<ID> & Serializable,

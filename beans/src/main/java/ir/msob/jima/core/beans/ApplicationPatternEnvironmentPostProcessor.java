@@ -13,7 +13,6 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Improved EnvironmentPostProcessor:
@@ -25,113 +24,168 @@ import java.util.stream.Collectors;
  */
 public class ApplicationPatternEnvironmentPostProcessor implements EnvironmentPostProcessor, Ordered {
 
-    // default pattern (without extension)
     private static final String DEFAULT_BASENAME_PATTERN = "classpath*:/META-INF/spring/jima-config-*";
     private static final String[] EXTENSIONS = {".yml", ".yaml", ".properties"};
-    private final DeferredLog log = new DeferredLog();
+    private static final String CONFIG_PATTERN_PROPERTY = "jima.config.pattern";
 
-    private static String safeResourceName(Resource r) {
-        try {
-            String fname = r.getFilename();
-            if (fname != null) return fname;
-            // fallback to description
-            return r.getDescription() != null ? r.getDescription() : r.toString();
-        } catch (Exception e) {
-            return r.toString();
-        }
-    }
+    private final DeferredLog log = new DeferredLog();
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
-        // allow override from system property or existing environment property (if present)
-        String basePattern = getConfiguredBasePattern(environment);
-
-        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        YamlPropertySourceLoader yamlLoader = new YamlPropertySourceLoader();
-        PropertiesPropertySourceLoader propertiesLoader = new PropertiesPropertySourceLoader();
-
         try {
-            List<Resource> allResources = new ArrayList<>();
-
-            // load non-profile resources
-            for (String ext : EXTENSIONS) {
-                Resource[] resources = resolver.getResources(basePattern + ext);
-                allResources.addAll(Arrays.asList(resources));
-            }
-
-            // also attempt to load profile-specific resources for active profiles
-            String[] activeProfiles = environment.getActiveProfiles();
-            if (activeProfiles != null && activeProfiles.length > 0) {
-                for (String profile : activeProfiles) {
-                    for (String ext : EXTENSIONS) {
-                        Resource[] resources = resolver.getResources(basePattern + "-" + profile + ext);
-                        allResources.addAll(Arrays.asList(resources));
-                    }
-                }
-            }
-
-            // filter existing and sort deterministically by filename+description
-            List<Resource> existing = allResources.stream()
-                    .filter(Objects::nonNull)
-                    .filter(Resource::exists)
-                    .distinct()
-                    .sorted(Comparator.comparing(r -> safeResourceName(r)))
-                    .collect(Collectors.toList());
-
-            if (existing.isEmpty()) {
-                log.debug("No jima-config resources found for pattern: " + basePattern);
-                return;
-            }
-
-            for (Resource resource : existing) {
-                try {
-                    String filename = safeResourceName(resource);
-                    if (filename.endsWith(".yml") || filename.endsWith(".yaml")) {
-                        List<PropertySource<?>> sources = yamlLoader.load("jima:" + filename, resource);
-                        registerSources(environment, sources, resource);
-                    } else if (filename.endsWith(".properties")) {
-                        List<PropertySource<?>> sources = propertiesLoader.load("jima:" + filename, resource);
-                        registerSources(environment, sources, resource);
-                    } else {
-                        log.warn("Unknown extension, skipping resource: " + resource.getDescription());
-                    }
-                } catch (Exception ex) {
-                    log.warn("Failed to load resource: " + resource.getDescription(), ex);
-                }
-            }
-        } catch (IOException e) {
-            log.warn("Failed to resolve resources for pattern", e);
+            processConfigurationResources(environment);
         } finally {
-            // flush deferred logs into real logger
             log.replayTo(ApplicationPatternEnvironmentPostProcessor.class);
         }
     }
 
-    private void registerSources(ConfigurableEnvironment environment, List<PropertySource<?>> sources, Resource resource) {
-        if (sources == null || sources.isEmpty()) return;
-        for (PropertySource<?> src : sources) {
-            // addLast -> lowest precedence (application and env override)
-            environment.getPropertySources().addLast(src);
-            log.info("Loaded jima config: " + resource.getDescription() + " -> propertySource=" + src.getName());
+    private void processConfigurationResources(ConfigurableEnvironment environment) {
+        String basePattern = getConfiguredBasePattern(environment);
+        List<Resource> resources = findAllConfigurationResources(basePattern, environment);
+
+        if (resources.isEmpty()) {
+            log.debug("No jima-config resources found for pattern: " + basePattern);
+            return;
+        }
+
+        loadAndRegisterPropertySources(environment, resources);
+    }
+
+    private List<Resource> findAllConfigurationResources(String basePattern, ConfigurableEnvironment environment) {
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        List<Resource> allResources = new ArrayList<>();
+
+        try {
+            // Load non-profile specific resources
+            loadResourcesByExtensions(resolver, basePattern, allResources);
+
+            // Load profile-specific resources for active profiles
+            loadProfileSpecificResources(resolver, basePattern, environment.getActiveProfiles(), allResources);
+
+        } catch (IOException e) {
+            log.warn("Failed to resolve resources for pattern: " + basePattern, e);
+        }
+
+        return filterAndSortResources(allResources);
+    }
+
+    private void loadResourcesByExtensions(PathMatchingResourcePatternResolver resolver,
+                                           String basePattern,
+                                           List<Resource> targetList) throws IOException {
+        for (String extension : EXTENSIONS) {
+            Resource[] resources = resolver.getResources(basePattern + extension);
+            targetList.addAll(Arrays.asList(resources));
         }
     }
 
-    private String getConfiguredBasePattern(ConfigurableEnvironment env) {
-        // 1) system property, 2) environment property, 3) default
-        String sys = System.getProperty("jima.config.pattern");
-        if (sys != null && !sys.isBlank()) return sys;
-        try {
-            String envProp = env.getProperty("jima.config.pattern");
-            if (envProp != null && !envProp.isBlank()) return envProp;
-        } catch (Exception ignored) {
-            // environment might not yet contain all props — ignore safely
+    private void loadProfileSpecificResources(PathMatchingResourcePatternResolver resolver,
+                                              String basePattern,
+                                              String[] activeProfiles,
+                                              List<Resource> targetList) throws IOException {
+        for (String profile : activeProfiles) {
+            for (String extension : EXTENSIONS) {
+                Resource[] resources = resolver.getResources(basePattern + "-" + profile + extension);
+                targetList.addAll(Arrays.asList(resources));
+            }
         }
+    }
+
+    private List<Resource> filterAndSortResources(List<Resource> resources) {
+        return resources.stream()
+                .filter(Objects::nonNull)
+                .filter(Resource::exists)
+                .distinct()
+                .sorted(Comparator.comparing(this::safeResourceName))
+                .toList();
+    }
+
+    private void loadAndRegisterPropertySources(ConfigurableEnvironment environment, List<Resource> resources) {
+        YamlPropertySourceLoader yamlLoader = new YamlPropertySourceLoader();
+        PropertiesPropertySourceLoader propertiesLoader = new PropertiesPropertySourceLoader();
+
+        for (Resource resource : resources) {
+            loadAndRegisterPropertySource(environment, resource, yamlLoader, propertiesLoader);
+        }
+    }
+
+    private void loadAndRegisterPropertySource(ConfigurableEnvironment environment,
+                                               Resource resource,
+                                               YamlPropertySourceLoader yamlLoader,
+                                               PropertiesPropertySourceLoader propertiesLoader) {
+        try {
+            String filename = safeResourceName(resource);
+            List<PropertySource<?>> propertySources = loadPropertySources(resource, filename, yamlLoader, propertiesLoader);
+            registerPropertySources(environment, propertySources, resource);
+
+        } catch (Exception ex) {
+            log.warn("Failed to load resource: " + resource.getDescription(), ex);
+        }
+    }
+
+    private List<PropertySource<?>> loadPropertySources(Resource resource,
+                                                        String filename,
+                                                        YamlPropertySourceLoader yamlLoader,
+                                                        PropertiesPropertySourceLoader propertiesLoader) throws IOException {
+        if (filename.endsWith(".yml") || filename.endsWith(".yaml")) {
+            return yamlLoader.load("jima:" + filename, resource);
+        } else if (filename.endsWith(".properties")) {
+            return propertiesLoader.load("jima:" + filename, resource);
+        } else {
+            log.warn("Unknown extension, skipping resource: " + resource.getDescription());
+            return Collections.emptyList();
+        }
+    }
+
+    private void registerPropertySources(ConfigurableEnvironment environment,
+                                         List<PropertySource<?>> propertySources,
+                                         Resource resource) {
+        if (propertySources == null || propertySources.isEmpty()) {
+            return;
+        }
+
+        for (PropertySource<?> propertySource : propertySources) {
+            environment.getPropertySources().addLast(propertySource);
+            log.info("Loaded jima config: " + resource.getDescription() + " -> propertySource=" + propertySource.getName());
+        }
+    }
+
+    private String safeResourceName(Resource resource) {
+        try {
+            String filename = resource.getFilename();
+            return filename != null ? filename : resource.getDescription();
+        } catch (Exception e) {
+            return resource.toString();
+        }
+    }
+
+    private String getConfiguredBasePattern(ConfigurableEnvironment environment) {
+        // Try system property first
+        String systemPattern = System.getProperty(CONFIG_PATTERN_PROPERTY);
+        if (isValidPattern(systemPattern)) {
+            return systemPattern;
+        }
+
+        // Try environment property
+        try {
+            String envPattern = environment.getProperty(CONFIG_PATTERN_PROPERTY);
+            if (isValidPattern(envPattern)) {
+                return envPattern;
+            }
+        } catch (Exception ignored) {
+            // Environment might not yet contain all properties — ignore safely
+        }
+
+        // Return default pattern
         return DEFAULT_BASENAME_PATTERN;
+    }
+
+    private boolean isValidPattern(String pattern) {
+        return pattern != null && !pattern.isBlank();
     }
 
     @Override
     public int getOrder() {
-        // low precedence so application-level config and env vars can override
+        // Low precedence so application-level config and env vars can override
         return Ordered.LOWEST_PRECEDENCE;
     }
 }

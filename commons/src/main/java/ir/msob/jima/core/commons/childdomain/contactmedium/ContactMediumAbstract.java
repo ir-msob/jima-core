@@ -52,6 +52,11 @@ public class ContactMediumAbstract<ID extends Comparable<ID> & Serializable> ext
     }
 
     @Override
+    public int hashCode() {
+        return java.util.Objects.hash(name, type);
+    }
+
+    @Override
     public int compareTo(ContactMediumAbstract<ID> o) {
         int nameComparison = this.name.compareTo(o.name);
         if (nameComparison != 0) {

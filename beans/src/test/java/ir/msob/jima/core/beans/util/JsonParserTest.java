@@ -17,7 +17,7 @@ class JsonParserTest {
     private JsonParser jsonParser;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         // Initialize ObjectMapper and JsonParser
         // ObjectMapper for JSON serialization/deserialization
         ObjectMapper objectMapper = new ObjectMapper();

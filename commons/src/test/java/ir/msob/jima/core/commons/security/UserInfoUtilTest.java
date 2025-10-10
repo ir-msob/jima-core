@@ -19,7 +19,7 @@ class UserInfoUtilTest {
     private ConcreteBaseUser testUser;
 
     @BeforeEach
-    public void setUp() {
+    void setup() {
         objectMapper = new ObjectMapper();
         objectMapper.registerSubtypes(ConcreteBaseUser.class);
         testUser = new ConcreteBaseUser("ID", "SESSION_ID", "NAME", "USERNAME", new TreeSet<>(List.of("ROLE")), "WEB");

@@ -15,7 +15,7 @@ class ImageFileTest {
     private File tempDir;
 
     @BeforeEach
-    public void setUp(@TempDir Path tempDir) {
+    void setUp(@TempDir Path tempDir) {
         this.tempDir = tempDir.toFile();
     }
 

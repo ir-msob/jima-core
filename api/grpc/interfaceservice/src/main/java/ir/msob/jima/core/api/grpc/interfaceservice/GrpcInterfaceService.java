@@ -15,6 +15,7 @@ import com.github.javaparser.ast.stmt.ReturnStmt;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -42,15 +43,16 @@ public class GrpcInterfaceService extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException {
-        System.out.println("Starting GrpcInterfaceService plugin execution...");
+        Log log = getLog();
+        log.info("Starting GrpcInterfaceService plugin execution...");
 
         String outputDirectory = projectBuildDirectory + "/generated-sources/protobuf/" + packageName.replace(".", "/");
         File outputDirectoryFile = new File(outputDirectory);
-        System.out.println("Resolved output directory: " + outputDirectoryFile.getAbsolutePath());
+        log.debug("Resolved output directory: " + outputDirectoryFile.getAbsolutePath());
 
         String grpcClassFileName = serviceName + "Grpc.java";
         File inputFile = new File(outputDirectoryFile, grpcClassFileName);
-        System.out.println("Looking for gRPC Java file: " + inputFile.getAbsolutePath());
+        log.debug("Looking for gRPC Java file: " + inputFile.getAbsolutePath());
 
         if (!inputFile.exists()) {
             throw new MojoExecutionException("gRPC Java file not found: " + inputFile.getAbsolutePath());
@@ -58,10 +60,10 @@ public class GrpcInterfaceService extends AbstractMojo {
 
         try {
             String inputContent = FileUtils.readFileToString(inputFile, StandardCharsets.UTF_8);
-            System.out.println("Successfully read gRPC Java file, length: " + inputContent.length());
+            log.info("Successfully read gRPC Java file, length: " + inputContent.length());
 
             CompilationUnit compilationUnit = parseJavaFileContent(inputContent);
-            System.out.println("Parsed CompilationUnit successfully.");
+            log.debug("Parsed CompilationUnit successfully.");
 
             // Add CrudServiceI interface
             addCrudServiceInterface(compilationUnit, "CrudServiceI");
@@ -70,41 +72,42 @@ public class GrpcInterfaceService extends AbstractMojo {
             Files.deleteIfExists(outputFile.toPath());
             FileUtils.writeStringToFile(outputFile, compilationUnit.toString(), StandardCharsets.UTF_8);
 
-            System.out.println("Successfully added CrudServiceI interface to " + grpcClassFileName);
+            log.info("Successfully added CrudServiceI interface to " + grpcClassFileName);
 
         } catch (IOException e) {
-            getLog().error("IOException occurred while processing the gRPC Java file", e);
+            log.error("IOException occurred while processing the gRPC Java file", e);
             throw new MojoExecutionException("Error processing file: " + grpcClassFileName, e);
         } catch (RuntimeException e) {
-            getLog().error("RuntimeException occurred during parsing or interface addition", e);
+            log.error("RuntimeException occurred during parsing or interface addition", e);
             throw new MojoExecutionException("Error modifying file: " + grpcClassFileName, e);
         }
     }
 
     private CompilationUnit parseJavaFileContent(String content) {
-        System.out.println("Parsing Java file content...");
+        getLog().debug("Parsing Java file content...");
         ParseResult<CompilationUnit> parseResult = new JavaParser().parse(content);
         return parseResult.getResult()
                 .orElseThrow(() -> new RuntimeException("Unable to parse Java file content."));
     }
 
     private void addCrudServiceInterface(CompilationUnit compilationUnit, String interfaceName) {
-        System.out.println("Attempting to add interface: " + interfaceName);
+        Log log = getLog();
+        log.debug("Attempting to add interface: " + interfaceName);
 
         Optional<ClassOrInterfaceDeclaration> outerClassOpt = compilationUnit.findFirst(ClassOrInterfaceDeclaration.class);
         if (outerClassOpt.isEmpty()) {
-            getLog().warn("No outer class found in compilation unit.");
+            log.warn("No outer class found in compilation unit.");
             return;
         }
 
         ClassOrInterfaceDeclaration outerClass = outerClassOpt.get();
-        System.out.println("Found outer class: " + outerClass.getNameAsString());
+        log.debug("Found outer class: " + outerClass.getNameAsString());
 
         boolean exists = outerClass.getMembers().stream()
-                .anyMatch(m -> m instanceof ClassOrInterfaceDeclaration &&
-                        ((ClassOrInterfaceDeclaration) m).getNameAsString().equals(interfaceName));
+                .anyMatch(m -> m instanceof ClassOrInterfaceDeclaration ci &&
+                        ci.getNameAsString().equals(interfaceName));
         if (exists) {
-            System.out.println(interfaceName + " already exists in the outer class. Skipping addition.");
+            log.info(interfaceName + " already exists in the outer class. Skipping addition.");
             return;
         }
 
@@ -132,6 +135,6 @@ public class GrpcInterfaceService extends AbstractMojo {
         iface.addMember(bindMethod);
         outerClass.addMember(iface);
 
-        System.out.println("Interface " + interfaceName + " added successfully.");
+        log.info("Interface " + interfaceName + " added successfully.");
     }
 }

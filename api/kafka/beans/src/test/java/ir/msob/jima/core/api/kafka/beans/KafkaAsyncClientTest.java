@@ -56,7 +56,7 @@ class KafkaAsyncClientTest {
         kafkaAsyncClient.send(channelMessage, channel, new BaseUser());
 
         // Verify that the KafkaTemplate's send method is called with the expected arguments
-        Mockito.verify(kafkaTemplate).executeInTransaction(Mockito.any());
+        Mockito.verify(kafkaTemplate).send(Mockito.any(), Mockito.any());
     }
 
     /**
@@ -79,6 +79,6 @@ class KafkaAsyncClientTest {
         kafkaAsyncClient.send(channelMessage, channel, new BaseUser());
 
         // Verify that the KafkaTemplate's send method is called with the expected arguments
-        Mockito.verify(kafkaTemplate).executeInTransaction(Mockito.any());
+        Mockito.verify(kafkaTemplate).send(Mockito.any(), Mockito.any());
     }
 }

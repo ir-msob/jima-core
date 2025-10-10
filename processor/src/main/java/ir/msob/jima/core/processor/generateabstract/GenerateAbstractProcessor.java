@@ -10,6 +10,7 @@ import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -67,31 +68,54 @@ public class GenerateAbstractProcessor extends AbstractProcessor {
         TypeMirror abstractClassTypeMirror = GenerateAbstractProcessorUtils.getAbstractClassTypeMirror(annotation);
         String abstractSuperClass = GenerateAbstractProcessorUtils.getAbstractSuperClassName(abstractClassTypeMirror);
 
-        if (interfaceElement.getKind() == ElementKind.INTERFACE) {
-            if (abstractClassTypeMirror != null && !abstractClassTypeMirror.toString().equals("java.lang.Object")) { // A value is set in the annotation
-                TypeElement domainElement = (TypeElement) ((DeclaredType) abstractClassTypeMirror).asElement();
-                String expectedAbstractClassName = domainElement.getSimpleName().toString();
-                TypeElement abstractClassElement = processingEnv.getElementUtils().getTypeElement(packageName + "." + expectedAbstractClassName);
-                if (abstractClassElement != null && abstractClassElement.getKind() == ElementKind.CLASS && abstractClassElement.getModifiers().contains(Modifier.ABSTRACT)) {
-                    abstractSuperClass = abstractClassElement.getQualifiedName().toString();
-                    abstractClassTypeMirror = abstractClassElement.asType();
-                } else if (abstractClassElement != null && abstractClassElement.getKind() == ElementKind.INTERFACE) {
-                    abstractSuperClass = abstractClassElement.getQualifiedName().toString() + "Abstract";
-                    abstractClassTypeMirror = abstractClassElement.asType();
-                } else {
-                    processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "No valid abstract class " + expectedAbstractClassName + " found in the same package for interface " + domainElement.getSimpleName());
-                    return;
-                }
+        if (interfaceElement.getKind() == ElementKind.INTERFACE
+                && abstractClassTypeMirror != null
+                && !abstractClassTypeMirror.toString().equals("java.lang.Object")) {
+
+            // A value is set in the annotation
+            TypeElement domainElement = (TypeElement) ((DeclaredType) abstractClassTypeMirror).asElement();
+            String expectedAbstractClassName = domainElement.getSimpleName().toString();
+            TypeElement abstractClassElement =
+                    processingEnv.getElementUtils().getTypeElement(packageName + "." + expectedAbstractClassName);
+
+            if (abstractClassElement != null
+                    && abstractClassElement.getKind() == ElementKind.CLASS
+                    && abstractClassElement.getModifiers().contains(Modifier.ABSTRACT)) {
+                abstractSuperClass = abstractClassElement.getQualifiedName().toString();
+
+            } else if (abstractClassElement != null
+                    && abstractClassElement.getKind() == ElementKind.INTERFACE) {
+                abstractSuperClass = abstractClassElement.getQualifiedName().toString() + "Abstract";
+
+            } else {
+                processingEnv.getMessager().printMessage(
+                        Diagnostic.Kind.ERROR,
+                        "No valid abstract class " + expectedAbstractClassName +
+                                " found in the same package for interface " + domainElement.getSimpleName());
+                return;
             }
         }
 
-        Map<String, TypeParameterElement> abstractClassTypeParamsMap = GenerateAbstractProcessorUtils.extractGenericTypes(processingEnv, annotation);
+        Map<String, TypeParameterElement> abstractClassTypeParamsMap =
+                GenerateAbstractProcessorUtils.extractGenericTypes(processingEnv, annotation);
         List<? extends TypeParameterElement> interfaceTypeParameters = interfaceElement.getTypeParameters();
 
-        String classContent = generateClassContent(packageName, className, interfaceElement, abstractSuperClass, abstractClassTypeParamsMap, interfaceTypeParameters);
+        String classContent = generateClassContent(
+                packageName,
+                className,
+                interfaceElement,
+                abstractSuperClass,
+                abstractClassTypeParamsMap,
+                interfaceTypeParameters
+        );
 
-        processingEnv.getFiler().createSourceFile(packageName + "." + className).openWriter().append(classContent).close();
+        try (Writer writer = processingEnv.getFiler()
+                .createSourceFile(packageName + "." + className)
+                .openWriter()) {
+            writer.append(classContent);
+        }
     }
+
 
     /**
      * Generates the content of the abstract class.
@@ -132,7 +156,7 @@ public class GenerateAbstractProcessor extends AbstractProcessor {
         classContent.append(GenerateAbstractProcessorUtils.generateImports(imports)).append(classDeclaration);
 
         classContent.append(generateFields(interfaceElement, imports));
-        classContent.append(generateGetterSetterMethods(interfaceElement, imports));
+        classContent.append(generateGetterSetterMethods(interfaceElement));
 
         classContent.append("}\n");
         return classContent.toString();
@@ -170,10 +194,9 @@ public class GenerateAbstractProcessor extends AbstractProcessor {
      * Generates the getter and setter methods for the abstract class based on the interface methods.
      *
      * @param interfaceElement The interface element.
-     * @param imports          The set of imports.
      * @return The generated getter and setter methods as a string.
      */
-    private String generateGetterSetterMethods(TypeElement interfaceElement, Set<String> imports) {
+    private String generateGetterSetterMethods(TypeElement interfaceElement) {
         StringBuilder methodsContent = new StringBuilder();
         for (Element member : interfaceElement.getEnclosedElements()) {
             if (member.getKind() == ElementKind.METHOD) {
@@ -188,7 +211,7 @@ public class GenerateAbstractProcessor extends AbstractProcessor {
                             .append(" return this.").append(fieldName).append(";\n }\n");
                 } else if (methodName.startsWith("set") && method.getParameters().size() == 1) {
                     String fieldName = GenerateAbstractProcessorUtils.decapitalize(methodName.substring(3));
-                    VariableElement param = method.getParameters().get(0);
+                    VariableElement param = method.getParameters().getFirst();
                     TypeMirror paramTypeMirror = param.asType();
                     String paramType = paramTypeMirror.toString();
 

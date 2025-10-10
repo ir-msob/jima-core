@@ -13,14 +13,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-public class JsonMaskTest {
+class JsonMaskTest {
 
     private static JsonMask jsonMask;
     private static ObjectMapper objectMapper;
 
     // Initialize the necessary objects before running tests.
     @BeforeAll
-    public static void setup() {
+    static void setup() {
         objectMapper = new ObjectMapper();
         PatchUtil patchUtil = new PatchUtil(objectMapper);
         jsonMask = new JsonMask(objectMapper, patchUtil);

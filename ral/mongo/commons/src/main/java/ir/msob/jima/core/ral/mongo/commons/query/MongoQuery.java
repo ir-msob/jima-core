@@ -1,15 +1,11 @@
 package ir.msob.jima.core.ral.mongo.commons.query;
 
 import ir.msob.jima.core.commons.repository.BaseQuery;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.data.mongodb.core.query.Update.Position;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,21 +15,16 @@ import java.util.Optional;
  * An abstract base class for building MongoDB queries.
  * This class provides methods to construct MongoDB queries and updates.
  *
- * @param <T> The concrete query class extending this base class.
  */
 @Getter
 @Setter
-public abstract class MongoQuery<T> implements BaseQuery {
-    protected Query query = new Query();
-    protected Update update = new Update();
-    protected Pageable pageable = null;
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class MongoQuery implements BaseQuery {
+    private Query query;
+    private Pageable pageable;
 
-    /**
-     * Subclasses must implement this method to return an instance of the concrete query class.
-     *
-     * @return An instance of the concrete query class.
-     */
-    protected abstract T build();
 
     /**
      * Add pagination into query.
@@ -41,9 +32,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param pageable
      * @return
      */
-    public T with(Pageable pageable) {
+    public MongoQuery with(Pageable pageable) {
         this.query.with(pageable);
-        return build();
+        return this;
     }
 
     /**
@@ -52,9 +43,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param pageable
      * @return
      */
-    public T add(Pageable pageable) {
+    public MongoQuery add(Pageable pageable) {
         this.pageable = pageable;
-        return build();
+        return this;
     }
 
     /**
@@ -62,9 +53,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param direction: direction of sorting.
      * @return
      */
-    public T withSort(Object field, Direction direction) {
-        this.query.with(Sort.by(direction, field.toString()));
-        return build();
+    public MongoQuery withSort(String field, Sort.Direction direction) {
+        this.query.with(Sort.by(direction, field));
+        return this;
     }
 
     /**
@@ -73,9 +64,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param sort
      * @return
      */
-    public T withSort(Sort sort) {
+    public MongoQuery withSort(Sort sort) {
         this.query.with(sort);
-        return build();
+        return this;
     }
 
     /**
@@ -84,9 +75,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param limit
      * @return
      */
-    public T limit(Integer limit) {
+    public MongoQuery limit(Integer limit) {
         query.limit(limit);
-        return build();
+        return this;
     }
 
     /**
@@ -96,9 +87,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param value: value of query.
      * @return
      */
-    public T regex(Object field, Object value) {
-        query.addCriteria(Criteria.where(field.toString()).regex(value.toString()));
-        return build();
+    public MongoQuery regex(String field, Object value) {
+        query.addCriteria(Criteria.where(field).regex(value.toString()));
+        return this;
     }
 
     /**
@@ -108,9 +99,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param value: value of query.
      * @return
      */
-    public T is(Object field, Object value) {
-        query.addCriteria(Criteria.where(field.toString()).is(value));
-        return build();
+    public MongoQuery is(String field, Object value) {
+        query.addCriteria(Criteria.where(field).is(value));
+        return this;
     }
 
     /**
@@ -118,9 +109,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param value
      * @return
      */
-    public T gte(Object field, Object value) {
-        query.addCriteria(Criteria.where(field.toString()).gte(value));
-        return build();
+    public MongoQuery gte(String field, Object value) {
+        query.addCriteria(Criteria.where(field).gte(value));
+        return this;
     }
 
     /**
@@ -128,9 +119,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param value
      * @return
      */
-    public T gt(Object field, Object value) {
-        query.addCriteria(Criteria.where(field.toString()).gt(value));
-        return build();
+    public MongoQuery gt(String field, Object value) {
+        query.addCriteria(Criteria.where(field).gt(value));
+        return this;
     }
 
     /**
@@ -138,9 +129,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param value
      * @return
      */
-    public T lt(Object field, Object value) {
-        query.addCriteria(Criteria.where(field.toString()).lt(value));
-        return build();
+    public MongoQuery lt(String field, Object value) {
+        query.addCriteria(Criteria.where(field).lt(value));
+        return this;
     }
 
     /**
@@ -148,9 +139,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param value
      * @return
      */
-    public T lte(Object field, Object value) {
-        query.addCriteria(Criteria.where(field.toString()).lte(value));
-        return build();
+    public MongoQuery lte(String field, Object value) {
+        query.addCriteria(Criteria.where(field).lte(value));
+        return this;
     }
 
     /**
@@ -160,9 +151,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param value
      * @return
      */
-    public T exists(Object field, Boolean value) {
-        query.addCriteria(Criteria.where(field.toString()).exists(value));
-        return build();
+    public MongoQuery exists(String field, Boolean value) {
+        query.addCriteria(Criteria.where(field).exists(value));
+        return this;
     }
 
     /**
@@ -170,9 +161,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param value
      * @return
      */
-    public T ne(Object field, Object value) {
-        query.addCriteria(Criteria.where(field.toString()).ne(value));
-        return build();
+    public MongoQuery ne(String field, Object value) {
+        query.addCriteria(Criteria.where(field).ne(value));
+        return this;
     }
 
     /**
@@ -180,9 +171,9 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param value
      * @return
      */
-    public T in(Object field, Collection<?> value) {
-        query.addCriteria(Criteria.where(field.toString()).in(value));
-        return build();
+    public MongoQuery in(String field, Collection<?> value) {
+        query.addCriteria(Criteria.where(field).in(value));
+        return this;
     }
 
     /**
@@ -190,188 +181,63 @@ public abstract class MongoQuery<T> implements BaseQuery {
      * @param value
      * @return
      */
-    public T nin(Object field, Collection<?> value) {
-        query.addCriteria(Criteria.where(field.toString()).nin(value));
-        return build();
+    public MongoQuery nin(String field, Collection<?> value) {
+        query.addCriteria(Criteria.where(field).nin(value));
+        return this;
     }
 
-    public T not() {
-        return build();
-    }
-
-    /**
-     * @param field
-     * @param value
-     * @return
-     */
-    public T set(Object field, Object value) {
-        update.set(field.toString(), value);
-        return build();
-    }
-
-    /**
-     * @param field
-     * @return
-     */
-    public T unset(Object field) {
-        update.unset(field.toString());
-        return build();
-    }
-
-    /**
-     * @param field
-     * @param inc
-     * @return
-     */
-    public T inc(Object field, Number inc) {
-        update.inc(field.toString(), inc);
-        return build();
-    }
-
-    /**
-     * @param field
-     * @param value
-     * @return
-     */
-    public T pull(Object field, Object value) {
-        update.pull(field.toString(), value);
-        return build();
-    }
-
-    /**
-     * @param field
-     * @param position
-     * @return
-     */
-    public T pop(Object field, Position position) {
-        update.pop(field.toString(), position);
-        return build();
-    }
-
-    /**
-     * @param field
-     * @param valueList
-     * @return
-     */
-    public T pullAll(Object field, Collection<?> valueList) {
-        update.pullAll(field.toString(), valueList.toArray());
-        return build();
-    }
-
-    /**
-     * @param field
-     * @param value
-     * @return
-     */
-    public T push(Object field, Object value) {
-        update.push(field.toString()).each(value);
-        return build();
-    }
-
-    /**
-     * @param field
-     * @param value
-     * @param slice
-     * @return
-     */
-    public T push(Object field, Object value, Integer slice) {
-        update.push(field.toString()).slice(slice).each(value);
-        return build();
-    }
-
-    /**
-     * @param field
-     * @param values
-     * @return
-     */
-    public T pushAll(Object field, Collection<?> values) {
-        update.push(field.toString()).each(values);
-        return build();
-    }
-
-    /**
-     * @param field
-     * @param values
-     * @param slice
-     * @return
-     */
-    public T pushAll(Object field, Collection<?> values, Integer slice) {
-        update.push(field.toString()).slice(slice).each(values);
-        return build();
-    }
-
-    /**
-     * @param field
-     * @param value
-     * @return
-     */
-    public T addToSet(Object field, Object value) {
-        update.addToSet(field.toString()).each(value);
-        return build();
-    }
-
-    /**
-     * @param field
-     * @param values
-     * @return
-     */
-    public T addToSetAll(Object field, Collection<?> values) {
-        update.addToSet(field.toString()).each(values);
-        return build();
-    }
 
     /**
      * @param fieldList
      * @return
      */
-    public T include(Collection<String> fieldList) {
+    public MongoQuery include(Collection<String> fieldList) {
         fieldList.forEach(field -> query.fields().include(field));
-        return build();
+        return this;
     }
 
     /**
      * @param field
      * @return
      */
-    public T include(String field) {
+    public MongoQuery include(String field) {
         query.fields().include(field);
-        return build();
+        return this;
     }
 
     /**
      * @param fieldList
      * @return
      */
-    public T exclude(Object... fieldList) {
-        Optional.ofNullable(Arrays.asList(fieldList)).ifPresent(l -> l.forEach(field -> query.fields().exclude(field.toString())));
-        return build();
+    public MongoQuery exclude(String... fieldList) {
+        Optional.of(Arrays.asList(fieldList)).ifPresent(l -> l.forEach(field -> query.fields().exclude(field)));
+        return this;
     }
 
     /**
      * @param criteriaList
      * @return
      */
-    public T orOperator(Criteria... criteriaList) {
+    public MongoQuery orOperator(Criteria... criteriaList) {
         if (criteriaList == null || criteriaList.length <= 0)
-            return build();
-
+            return this;
         Criteria criteria = new Criteria();
         criteria.orOperator(criteriaList);
         query.addCriteria(criteria);
-        return build();
+        return this;
     }
 
     /**
-     * @param criterias
+     * @param criteriaList
      * @return
      */
-    public T orOperator(Collection<Criteria> criterias) {
-        if (criterias == null || criterias.isEmpty())
-            return build();
-
+    public MongoQuery orOperator(Collection<Criteria> criteriaList) {
+        if (criteriaList == null || criteriaList.isEmpty())
+            return this;
         Criteria criteria = new Criteria();
-        criteria.orOperator(criterias.toArray(new Criteria[criterias.size()]));
+        criteria.orOperator(criteriaList.toArray(new Criteria[criteriaList.size()]));
         query.addCriteria(criteria);
-        return build();
+        return this;
     }
+
 }

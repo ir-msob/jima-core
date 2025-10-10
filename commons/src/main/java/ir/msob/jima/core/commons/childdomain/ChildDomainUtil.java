@@ -2,6 +2,7 @@ package ir.msob.jima.core.commons.childdomain;
 
 import ir.msob.jima.core.commons.childdomain.criteria.BaseChildCriteria;
 import ir.msob.jima.core.commons.domain.BaseDto;
+import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
 import ir.msob.jima.core.commons.util.ReflectionUtil;
 import reactor.util.function.Tuple2;
 
@@ -15,6 +16,8 @@ import java.util.function.Function;
  * Utility class for handling child domain operations.
  */
 public class ChildDomainUtil {
+    private ChildDomainUtil() {
+    }
 
     /**
      * Checks if the specified child domain class is assignable from the class specified in the child domain annotation.
@@ -46,9 +49,17 @@ public class ChildDomainUtil {
             if (tuple2.getT2().cdClass().isAssignableFrom(cdClass)) {
                 return dto -> {
                     try {
-                        return (SortedSet<CD>) tuple2.getT1().invoke(dto);
+                        Object value = tuple2.getT1().invoke(dto);
+                        if (value instanceof SortedSet<?> objects) {
+                            return (SortedSet<CD>) objects;
+                        } else {
+                            throw new CommonRuntimeException(
+                                    "Expected SortedSet<" + cdClass.getSimpleName() + "> but got " +
+                                            (value == null ? "null" : value.getClass().getName())
+                            );
+                        }
                     } catch (IllegalAccessException | InvocationTargetException e) {
-                        throw new RuntimeException("Error invoking getter method: " + tuple2.getT1().getName(), e);
+                        throw new CommonRuntimeException("Error invoking getter method: " + tuple2.getT1().getName(), e);
                     }
                 };
             }

@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.repository;
 
+import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.domain.BaseDomain;
-import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.util.GenericTypeUtil;
 
 import java.io.Serializable;
@@ -10,11 +10,10 @@ import java.io.Serializable;
  * The 'BaseRepository' interface defines a set of default methods for retrieving class types childdomain to data access and domain objects in the context of a Spring Data repository.
  * It serves as a generic interface for repositories that work with domain entities and are typically used for data access in Spring-based applications.
  *
- * @param <ID>   The type of the identifier (usually an entity's primary key) which is both comparable and serializable.
- * @param <USER> The type representing a user, typically derived from 'BaseUser'.
- * @param <D>    The type representing a domain entity, typically derived from 'BaseDomain'.
+ * @param <ID> The type of the identifier (usually an entity's primary key) which is both comparable and serializable.
+ * @param <D>  The type representing a domain entity, typically derived from 'BaseDomain'.
  */
-public interface BaseRepository<ID extends Comparable<ID> & Serializable, USER extends BaseUser, D extends BaseDomain<ID>> {
+public interface BaseRepository<ID extends Comparable<ID> & Serializable, D extends BaseDomain<ID>> {
 
     /**
      * Get the class type for the identifier (usually the primary key) used in domain entities.
@@ -29,18 +28,6 @@ public interface BaseRepository<ID extends Comparable<ID> & Serializable, USER e
     }
 
     /**
-     * Get the class type representing a user, typically derived from 'BaseUser'.
-     * This method uses 'GenericTypeUtil' to resolve the actual type argument for the user.
-     *
-     * @return The class type for the user.
-     */
-    default Class<USER> getUserClass() {
-        @SuppressWarnings("unchecked")
-        Class<USER> userClass = (Class<USER>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseRepository.class, 1);
-        return userClass;
-    }
-
-    /**
      * Get the class type representing a domain entity, typically derived from 'BaseDomain'.
      * This method uses 'GenericTypeUtil' to resolve the actual type argument for the domain entity.
      *
@@ -48,7 +35,19 @@ public interface BaseRepository<ID extends Comparable<ID> & Serializable, USER e
      */
     default Class<D> getDomainClass() {
         @SuppressWarnings("unchecked")
-        Class<D> domainClass = (Class<D>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseRepository.class, 2);
+        Class<D> domainClass = (Class<D>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseRepository.class, 1);
         return domainClass;
+    }
+
+    BaseQueryBuilder getQueryBuilder();
+
+    /**
+     * Provide default criteria for a query.
+     *
+     * @param criteria The criteria object used for extending the query.
+     * @return The extended query with criteria.
+     */
+    default <C extends BaseCriteria<ID>> BaseQuery criteria(C criteria) {
+        return getQueryBuilder().build(criteria);
     }
 }

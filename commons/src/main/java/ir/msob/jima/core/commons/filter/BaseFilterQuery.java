@@ -82,17 +82,35 @@ public class BaseFilterQuery<TYPE extends Comparable<TYPE> & Serializable> imple
     private Set<TYPE> nin;
 
     public boolean isMatching(TYPE value) {
+        return checkEqualityConditions(value)
+                && checkComparisonConditions(value)
+                && checkExistenceConditions(value)
+                && checkCollectionConditions(value);
+    }
+
+    private boolean checkEqualityConditions(TYPE value) {
         if (this.getEq() != null && !this.getEq().equals(value)) return false;
         if (this.getNe() != null && this.getNe().equals(value)) return false;
-        if (this.getRegex() != null && !String.valueOf(value).matches(this.getRegex())) return false;
+        return this.getRegex() == null || String.valueOf(value).matches(this.getRegex());
+    }
+
+    private boolean checkComparisonConditions(TYPE value) {
         if (this.getGte() != null && this.getGte().compareTo(value) >= 0) return false;
         if (this.getGt() != null && this.getGt().compareTo(value) > 0) return false;
         if (this.getLte() != null && this.getLte().compareTo(value) <= 0) return false;
-        if (this.getLt() != null && this.getLt().compareTo(value) < 0) return false;
-        if (this.getExists() != null && ((this.getExists() && value == null) ||
-                (!this.getExists() && value != null))) return false;
-        if (this.getIn() != null && !this.getIn().contains(value)) return false;
+        return this.getLt() == null || this.getLt().compareTo(value) >= 0;
+    }
 
+    private boolean checkExistenceConditions(TYPE value) {
+        if (this.getExists() != null) {
+            boolean valueExists = value != null;
+            return (!this.getExists() || valueExists) && (this.getExists() || !valueExists);
+        }
+        return true;
+    }
+
+    private boolean checkCollectionConditions(TYPE value) {
+        if (this.getIn() != null && !this.getIn().contains(value)) return false;
         return this.getNin() == null || !this.getNin().contains(value);
     }
 

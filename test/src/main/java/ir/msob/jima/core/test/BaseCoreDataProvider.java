@@ -28,8 +28,8 @@ public interface BaseCoreDataProvider<ID extends Comparable<ID> & Serializable,
         D extends BaseDomain<ID>,
         DTO extends BaseDto<ID>,
         C extends BaseCriteria<ID>,
-        R extends BaseRepository<ID, USER, D>,
-        S extends BaseService<ID, USER, D, R>> {
+        R extends BaseRepository<ID, D>,
+        S extends BaseService<ID, USER, D, DTO, C, R>> {
 
     /**
      * Get the class representing the unique identifier for data entities.

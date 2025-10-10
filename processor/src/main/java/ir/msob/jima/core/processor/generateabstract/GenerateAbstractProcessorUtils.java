@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
  * Utility class for the annotation processor.
  */
 public class GenerateAbstractProcessorUtils {
+    private GenerateAbstractProcessorUtils() {
+    }
 
     /**
      * Extracts generic type parameters from the abstract superclass specified in the annotation.

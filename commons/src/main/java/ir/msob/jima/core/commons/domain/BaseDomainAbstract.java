@@ -24,7 +24,7 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 public abstract class BaseDomainAbstract<ID extends Comparable<ID> & Serializable> extends BaseElementAbstract<ID> implements BaseDomain<ID> {
 
-    public BaseDomainAbstract(ID id) {
+    protected BaseDomainAbstract(ID id) {
         super(id);
     }
 }

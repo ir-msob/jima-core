@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.childdomain.relatedobject.BaseRelatedObjectAbstract;
 import ir.msob.jima.core.commons.shared.auditinfo.AuditInfo;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 

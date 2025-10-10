@@ -73,7 +73,7 @@ public interface BaseRestResource<ID extends Comparable<ID> & Serializable, USER
      */
     default @NotNull String getToken(@NotNull ServerWebExchange serverWebExchange) {
         String token = serverWebExchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-        if (Strings.isBlank(token))
+        if (token == null || Strings.isBlank(token))
             throw new BadRequestException("Authorization header is missing or empty. Please provide a valid token.");
         return token;
     }

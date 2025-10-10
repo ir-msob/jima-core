@@ -53,10 +53,8 @@ public class CharacteristicCriteria<ID extends Comparable<ID> & Serializable, CD
         if (Filter.isMatching(this.getKey(), childDomain.getKey())) {
             return false;
         }
-        if (this.getValue() != null) {
-            if (!this.getValue().isMatchingSerializable(childDomain.getValue())) {
-                return false;
-            }
+        if (this.getValue() != null && !this.getValue().isMatchingSerializable(childDomain.getValue())) {
+            return false;
         }
         return !Filter.isMatching(this.getDataType(), childDomain.getDataType());
     }

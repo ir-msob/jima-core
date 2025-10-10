@@ -1,7 +1,8 @@
 package ir.msob.jima.core.ral.mongo.sequence;
 
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
-import ir.msob.jima.core.ral.mongo.commons.query.QueryBuilder;
+import ir.msob.jima.core.ral.mongo.commons.query.MongoQuery;
+import ir.msob.jima.core.ral.mongo.commons.query.MongoUpdate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
@@ -39,10 +40,12 @@ public class SequenceRepository {
         if (inc < 1)
             throw new CommonRuntimeException("inc param must be greater than zero.");
         return this.findAndModify(
-                        QueryBuilder.builder()
-                                .is(Sequence.FN.id, key)
-                                .inc(Sequence.FN.value, inc)
-                        , new FindAndModifyOptions()
+                        MongoQuery.builder()
+                                .build()
+                                .is(Sequence.FN.id.name(), key),
+                        MongoUpdate.builder().build()
+                                .inc(Sequence.FN.value.name(), inc),
+                        new FindAndModifyOptions()
                                 .returnNew(true)
                                 .upsert(true))
                 .map(Sequence::getValue);
@@ -51,15 +54,15 @@ public class SequenceRepository {
     /**
      * Find and modify a sequence document based on the provided query and options.
      *
-     * @param queryBuilder The query builder containing the search criteria.
-     * @param options      The FindAndModifyOptions for the update operation.
+     * @param mongoQuery The query builder containing the search criteria.
+     * @param options    The FindAndModifyOptions for the update operation.
      * @return A Mono that emits the modified sequence document.
      */
-    private Mono<Sequence> findAndModify(QueryBuilder queryBuilder, FindAndModifyOptions options) {
+    private Mono<Sequence> findAndModify(MongoQuery mongoQuery, MongoUpdate mongoUpdate, FindAndModifyOptions options) {
         return reactiveMongoTemplate
                 .findAndModify(
-                        queryBuilder.getQuery()
-                        , queryBuilder.getUpdate()
+                        mongoQuery.getQuery()
+                        , mongoUpdate.getUpdate()
                         , options
                         , Sequence.class);
     }

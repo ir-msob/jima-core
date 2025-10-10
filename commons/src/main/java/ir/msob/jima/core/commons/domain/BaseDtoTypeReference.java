@@ -19,9 +19,9 @@ import java.util.Collection;
  *   <li>{@code C} - the type of criteria, must extend BaseCriteria</li>
  * </ul>
  *
- * @param <ID> the type of identifier
+ * @param <ID>  the type of identifier
  * @param <DTO> the type of data transfer object
- * @param <C> the type of criteria
+ * @param <C>   the type of criteria
  */
 public interface BaseDtoTypeReference<
         ID extends Comparable<ID> & Serializable,

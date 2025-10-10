@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class ContainerUtil {
+    private ContainerUtil() {
+    }
 
     /**
      * Ensure container is running or create a new one.

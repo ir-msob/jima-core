@@ -14,7 +14,7 @@ class BaseServiceTest {
     private ConcreteBaseService service;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         service = new ConcreteBaseService();
     }
 
