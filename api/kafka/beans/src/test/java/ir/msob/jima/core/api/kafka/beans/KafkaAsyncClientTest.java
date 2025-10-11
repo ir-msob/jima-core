@@ -53,7 +53,7 @@ class KafkaAsyncClientTest {
         Mockito.when(objectMapper.writeValueAsString(Mockito.any())).thenReturn("serializedMessage");
 
         // Call the method under test
-        kafkaAsyncClient.send(channelMessage, channel, new BaseUser());
+        kafkaAsyncClient.send(channel, channelMessage, new BaseUser());
 
         // Verify that the KafkaTemplate's send method is called with the expected arguments
         Mockito.verify(kafkaTemplate).send(Mockito.any(), Mockito.any());
@@ -76,7 +76,7 @@ class KafkaAsyncClientTest {
         Mockito.when(objectMapper.writeValueAsString(Mockito.any())).thenReturn("serializedMessage");
 
         // Call the method under test
-        kafkaAsyncClient.send(channelMessage, channel, new BaseUser());
+        kafkaAsyncClient.send( channel, channelMessage,new BaseUser());
 
         // Verify that the KafkaTemplate's send method is called with the expected arguments
         Mockito.verify(kafkaTemplate).send(Mockito.any(), Mockito.any());

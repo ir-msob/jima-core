@@ -22,7 +22,7 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MongoQuery implements BaseQuery {
-    private Query query;
+    private Query query = new Query();
     private Pageable pageable;
 
 

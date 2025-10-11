@@ -21,12 +21,12 @@ public interface BaseAsyncClient {
      *
      * @param <USER>         The user type
      * @param <DATA>         The data type
-     * @param channelMessage The channel message
      * @param channel        The channel name
+     * @param channelMessage The channel message
      * @param user           Optional: the destination user
      */
     @MethodStats
-    <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel, USER user);
+    <USER extends BaseUser, DATA extends ModelType> void send(String channel, ChannelMessage<USER, DATA> channelMessage, USER user);
 
     /**
      * This method sends a generic channel message.
@@ -34,22 +34,22 @@ public interface BaseAsyncClient {
      *
      * @param <USER>         The user type
      * @param <DATA>         The data type
-     * @param channelMessage The channel message
      * @param channel        The channel name
+     * @param channelMessage The channel message
      */
     @MethodStats
-    <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel) throws JsonProcessingException;
+    <USER extends BaseUser, DATA extends ModelType> void send(String channel, ChannelMessage<USER, DATA> channelMessage) throws JsonProcessingException;
 
     /**
      * This method sends a channel message of type Map.
      * It is annotated with '@MethodStats', which means that statistics will be collected for this method.
      *
      * @param <USER>         The user type
-     * @param channelMessage The channel message as a Map
      * @param channel        The channel name
+     * @param channelMessage The channel message as a Map
      * @param user           Optional: the destination user
      */
     @MethodStats
-    <USER extends BaseUser> void send(Map<String, Object> channelMessage, String channel, USER user);
+    <USER extends BaseUser> void send(String channel, Map<String, Object> channelMessage, USER user);
 
 }

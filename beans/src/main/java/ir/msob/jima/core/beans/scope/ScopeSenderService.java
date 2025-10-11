@@ -31,7 +31,7 @@ public class ScopeSenderService {
     public void send() throws JsonProcessingException {
         logger.info("Starting ScopeSenderService...");
         ChannelMessage<?, ServiceDto> channelMessage = prepareChannelMessage();
-        asyncClient.send(channelMessage, jimaProperties.getScope().getChannel());
+        asyncClient.send(jimaProperties.getScope().getChannel(), channelMessage);
         logger.info("ScopeSenderService started successfully.");
     }
 

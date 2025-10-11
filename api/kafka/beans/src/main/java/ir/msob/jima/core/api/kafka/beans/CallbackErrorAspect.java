@@ -66,7 +66,8 @@ public class CallbackErrorAspect {
         List<? extends ChannelMessage<USER, ? extends ExceptionResponseAbstract>> errorChannelMessages = prepareErrorChannelMessage(message, e);
         if (!message.getErrorCallbacks().isEmpty()) {
             for (ChannelMessage<USER, ? extends ExceptionResponseAbstract> errorChannelMessage : errorChannelMessages) {
-                asyncClient.send(errorChannelMessage, errorChannelMessage.getChannel(), user);
+
+                asyncClient.send(errorChannelMessage.getChannel(), errorChannelMessage, user);
             }
         }
     }
@@ -150,9 +151,11 @@ public class CallbackErrorAspect {
                         // Clone the channelMessage to avoid modifying the original
                         ChannelMessage.
                                 <USER, ER>builder()
+                                .key(channelMessage.getKey())
                                 .data(er)
                                 .status(er.getStatus())
                                 .channel(channelMessage.getChannel())
+                                .callbacks(channelMessage.getCallbacks())
                                 .metadata(channelMessage.getMetadata())
                                 .build())
                 .toList();

@@ -9,6 +9,7 @@ import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.shared.ModelType;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -26,45 +27,51 @@ public class KafkaAsyncClient implements BaseAsyncClient {
     /**
      * Send a ChannelMessage to a Kafka channel.
      *
-     * @param channelMessage The ChannelMessage to be sent.
      * @param channel        The Kafka channel to which the message should be sent.
+     * @param channelMessage The ChannelMessage to be sent.
      * @param user           An optional user associated with the message.
      */
     @MethodStats
     @SneakyThrows
     @Override
-    public <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel, USER user) {
+    public <USER extends BaseUser, DATA extends ModelType> void send(String channel, ChannelMessage<USER, DATA> channelMessage, USER user) {
         // Set the user information in the ChannelMessage.
         if (channelMessage.getUser() == null)
             channelMessage.setUser(user);
 
-        sendMessage(channelMessage, channel);
+        sendMessage(channel, channelMessage.getKey(), channelMessage);
     }
 
     @Override
-    public <USER extends BaseUser, DATA extends ModelType> void send(ChannelMessage<USER, DATA> channelMessage, String channel) throws JsonProcessingException {
-        sendMessage(channelMessage, channel);
+    public <USER extends BaseUser, DATA extends ModelType> void send(String channel, ChannelMessage<USER, DATA> channelMessage) throws JsonProcessingException {
+        sendMessage(channel, channelMessage.getKey(), channelMessage);
     }
 
     /**
      * Send a Map of channelMessage to a Kafka channel.
      *
-     * @param channelMessage The Map representing the message data.
      * @param channel        The Kafka channel to which the message should be sent.
+     * @param channelMessage The Map representing the message data.
      * @param user           An optional user associated with the message.
      */
     @MethodStats
     @SneakyThrows
     @Override
-    public <USER extends BaseUser> void send(Map<String, Object> channelMessage, String channel, USER user) {
+    public <USER extends BaseUser> void send(String channel, Map<String, Object> channelMessage, USER user) {
         // Set the user information in the ChannelMessage.
         channelMessage.putIfAbsent(ChannelMessage.FN.user.name(), user);
-        sendMessage(channelMessage, channel);
+        String key = channelMessage.get("key") == null ? null : String.valueOf(channelMessage.get("key"));
+        sendMessage(channel, key, channelMessage);
     }
 
-    private void sendMessage(Object message, String channel) throws JsonProcessingException {
+    private void sendMessage(String channel, String key, Object message) throws JsonProcessingException {
         // Serialize the Map to JSON and send it to the Kafka channel.
         String msg = objectMapper.writeValueAsString(message);
-        kafkaTemplate.send(channel, msg);
+        if (Strings.isNotBlank(key)) {
+            kafkaTemplate.send(channel, key, msg);
+        } else {
+            kafkaTemplate.send(channel, msg);
+        }
     }
+
 }

@@ -40,6 +40,11 @@ import java.util.Map;
 public class ChannelMessage<USER extends BaseUser, DATA extends ModelType> implements BaseType {
 
     /**
+     *
+     */
+    private String key;
+
+    /**
      * The metadata of the channel information.
      * This map can hold additional information related to the channel message.
      */
@@ -80,6 +85,7 @@ public class ChannelMessage<USER extends BaseUser, DATA extends ModelType> imple
 
     @JsonCreator
     public ChannelMessage(
+            @JsonProperty("key") String key,
             @JsonProperty("metadata") Map<String, Serializable> metadata,
             @JsonProperty("user") USER user,
             @JsonProperty("data") DATA data,
@@ -87,6 +93,7 @@ public class ChannelMessage<USER extends BaseUser, DATA extends ModelType> imple
             @JsonProperty("channel") String channel,
             @JsonProperty("callbacks") List<ChannelMessage<USER, ? extends ModelType>> callbacks,
             @JsonProperty("errorCallbacks") List<ChannelMessage<USER, ? extends ExceptionResponseAbstract>> errorCallbacks) {
+        this.key = key;
         this.metadata = metadata != null ? metadata : new HashMap<>();
         this.user = user;
         this.data = data;
@@ -101,6 +108,6 @@ public class ChannelMessage<USER extends BaseUser, DATA extends ModelType> imple
      * This enum can be used to reference the fields in a type-safe manner.
      */
     public enum FN {
-        data, status, metadata, user, channel, callbacks, errorCallbacks
+        key, data, status, metadata, user, channel, callbacks, errorCallbacks
     }
 }
