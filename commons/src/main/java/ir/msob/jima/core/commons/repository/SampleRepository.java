@@ -18,14 +18,13 @@ public class SampleRepository<ID extends Comparable<ID> & Serializable, D extend
     @Override
     public BaseQueryBuilder getQueryBuilder() {
         return new BaseQueryBuilder() {
-
             @Override
-            public <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>> BaseQuery build(C criteria) {
+            public <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>, Q extends BaseQuery> Q build(C criteria) {
                 return null;
             }
 
             @Override
-            public <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>> BaseQuery build(C criteria, Pageable pageable) {
+            public <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>, Q extends BaseQuery> Q build(C criteria, Pageable pageable) {
                 return null;
             }
         };
