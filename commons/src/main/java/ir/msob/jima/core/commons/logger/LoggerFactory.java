@@ -22,7 +22,7 @@ public class LoggerFactory {
      * @param clazz The class for which the logger is obtained.
      * @return A logger instance for the specified class.
      */
-    public static Logger getLog(Class<?> clazz) {
+    public static Logger getLogger(Class<?> clazz) {
         return new Logger(LogFactory.getLog(clazz));
     }
 
@@ -33,7 +33,7 @@ public class LoggerFactory {
      * @param name The name of the logger.
      * @return A logger instance with the specified name.
      */
-    public static Logger getLog(String name) {
+    public static Logger getLogger(String name) {
         return new Logger(LogFactory.getLog(name));
     }
 }

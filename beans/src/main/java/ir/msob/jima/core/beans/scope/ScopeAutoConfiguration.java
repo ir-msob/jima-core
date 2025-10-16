@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnProperty(name = "jima.scope.enabled", havingValue = "true")
 public class ScopeAutoConfiguration {
-    private static final Logger logger = LoggerFactory.getLog(ScopeAutoConfiguration.class);
+    private static final Logger logger = LoggerFactory.getLogger(ScopeAutoConfiguration.class);
 
     @Value("${spring.application.name}")
     private String applicationName;

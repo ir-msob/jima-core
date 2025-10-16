@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Duration;
+
 /**
  * ClientProperties configuration for HTTP client and RSocket connections.
  * Provides separate retry configurations for requests and connections.
@@ -26,16 +28,16 @@ public class ClientProperties {
     private RetryProperties retryConnection = new RetryProperties();
 
     /**
-     * Connection timeout in milliseconds.
+     * Connection timeout.
      * Default value is 30000 ms (30 seconds).
      */
-    private long connectionTimeout = 30000;
+    private Duration connectionTimeout = Duration.ofSeconds(30);
 
     /**
-     * Response timeout in milliseconds.
-     * Default value is 60000 ms (60 seconds).
+     * Request timeout.
+     * Default value is 30000 ms (30 seconds).
      */
-    private long responseTimeout = 60000;
+    private Duration requestTimeout = Duration.ofSeconds(30);
 
     /**
      * Maximum number of connections in pool.
@@ -50,8 +52,9 @@ public class ClientProperties {
     private boolean keepAlive = true;
 
     /**
-     * Keep-alive duration in milliseconds.
+     * Keep-alive duration.
      * Default value is 300000 ms (5 minutes).
      */
-    private long keepAliveDuration = 300000;
+    private Duration keepAliveDuration = Duration.ofSeconds(30);
+
 }

@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public class ScopeSenderService {
-    private static final Logger logger = LoggerFactory.getLog(ScopeSenderService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ScopeSenderService.class);
 
     private final ScopeScannerService scopeScannerService;
     private final BaseAsyncClient asyncClient;

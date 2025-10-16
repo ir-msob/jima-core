@@ -27,7 +27,7 @@ public class Logger {
      * Log a debug message.
      *
      * @param message The message to log.
-     * @param params  Optional parameters to format the message.
+     * @param params Optional parameters to format the message.
      */
     public void debug(String message, Object... params) {
         log.debug(MessageUtil.prepareMessage(message, params));
@@ -36,11 +36,11 @@ public class Logger {
     /**
      * Log a debug message with an associated exception.
      *
-     * @param message The message to log.
      * @param t       The associated exception.
+     * @param message The message to log.
      * @param params  Optional parameters to format the message.
      */
-    public void debug(String message, Throwable t, Object... params) {
+    public void debug(Throwable t, String message, Object... params) {
         log.debug(MessageUtil.prepareMessage(message, params), t);
     }
 
@@ -57,11 +57,11 @@ public class Logger {
     /**
      * Log an error message with an associated exception.
      *
-     * @param message The message to log.
      * @param t       The associated exception.
+     * @param message The message to log.
      * @param params  Optional parameters to format the message.
      */
-    public void error(String message, Throwable t, Object... params) {
+    public void error(Throwable t, String message, Object... params) {
         log.error(MessageUtil.prepareMessage(message, params), t);
     }
 
@@ -108,11 +108,11 @@ public class Logger {
     /**
      * Log an info message with an associated exception.
      *
-     * @param message The message to log.
      * @param t       The associated exception.
+     * @param message The message to log.
      * @param params  Optional parameters to format the message.
      */
-    public void info(String message, Throwable t, Object... params) {
+    public void info(Throwable t, String message, Object... params) {
         log.info(MessageUtil.prepareMessage(message, params), t);
     }
 
@@ -129,11 +129,11 @@ public class Logger {
     /**
      * Log a trace message with an associated exception.
      *
-     * @param message The message to log.
      * @param t       The associated exception.
+     * @param message The message to log.
      * @param params  Optional parameters to format the message.
      */
-    public void trace(String message, Throwable t, Object... params) {
+    public void trace(Throwable t, String message, Object... params) {
         log.trace(MessageUtil.prepareMessage(message, params), t);
     }
 
@@ -150,11 +150,11 @@ public class Logger {
     /**
      * Log a warning message with an associated exception.
      *
-     * @param message The message to log.
      * @param t       The associated exception.
+     * @param message The message to log.
      * @param params  Optional parameters to format the message.
      */
-    public void warn(String message, Throwable t, Object... params) {
+    public void warn(Throwable t, String message, Object... params) {
         log.warn(MessageUtil.prepareMessage(message, params), t);
     }
 }

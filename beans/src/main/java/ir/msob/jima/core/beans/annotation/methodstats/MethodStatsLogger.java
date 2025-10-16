@@ -22,7 +22,7 @@ public class MethodStatsLogger {
     /**
      * Logger instance for logging method execution statistics.
      */
-    private static final Logger log = LoggerFactory.getLog(MethodStatsLogger.class);
+    private static final Logger log = LoggerFactory.getLogger(MethodStatsLogger.class);
 
     // Core configuration properties instance
     private final JimaProperties properties;

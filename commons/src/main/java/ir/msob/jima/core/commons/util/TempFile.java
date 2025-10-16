@@ -20,7 +20,7 @@ import java.util.List;
 @Getter
 public class TempFile {
     public static final String PATH_SEPRATOR = "/";
-    private static final Logger log = LoggerFactory.getLog(TempFile.class);
+    private static final Logger log = LoggerFactory.getLogger(TempFile.class);
     // List to keep track of created temporary files.
     private final List<File> files = new ArrayList<>();
 

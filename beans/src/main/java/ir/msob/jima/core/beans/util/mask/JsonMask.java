@@ -28,7 +28,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class JsonMask {
-    private static final Logger log = LoggerFactory.getLog(JsonMask.class);
+    private static final Logger log = LoggerFactory.getLogger(JsonMask.class);
     private final ObjectMapper objectMapper;
     private final PatchUtil patchUtil;
 
