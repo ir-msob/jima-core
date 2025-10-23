@@ -71,6 +71,11 @@ public abstract class BaseRelatedObjectAbstract<ID extends Comparable<ID> & Seri
     private String referringType;
 
     /**
+     * The type of the object that referred to this related object.
+     */
+    private String referringId;
+
+    /**
      * The status of the related object.
      */
     private String status;
@@ -90,12 +95,13 @@ public abstract class BaseRelatedObjectAbstract<ID extends Comparable<ID> & Seri
      */
     private AuditInfo auditInfo;
 
-    protected BaseRelatedObjectAbstract(ID id, ID parentId, String name, RID relatedId, String role, String referringType, String status, Boolean enabled, TimePeriod validFor, AuditInfo auditInfo) {
+    protected BaseRelatedObjectAbstract(ID id, ID parentId, String name, RID relatedId, String role, String referringType, String referringId, String status, Boolean enabled, TimePeriod validFor, AuditInfo auditInfo) {
         super(id, parentId);
         this.name = name;
         this.relatedId = relatedId;
         this.role = role;
         this.referringType = referringType;
+        this.referringId = referringId;
         this.status = status;
         this.enabled = enabled;
         this.validFor = validFor;
@@ -117,7 +123,8 @@ public abstract class BaseRelatedObjectAbstract<ID extends Comparable<ID> & Seri
         return Objects.equals(relatedId, that.relatedId) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(role, that.role) &&
-                Objects.equals(referringType, that.referringType);
+                Objects.equals(referringType, that.referringType) &&
+                Objects.equals(referringId, that.referringId);
     }
 
     /**
@@ -127,13 +134,13 @@ public abstract class BaseRelatedObjectAbstract<ID extends Comparable<ID> & Seri
      */
     @Override
     public int hashCode() {
-        return Objects.hash(name, relatedId, role, referringType, status, enabled, validFor, auditInfo);
+        return Objects.hash(name, relatedId, role, referringType, referringId, status, enabled, validFor, auditInfo);
     }
 
     /**
      * Enum representing the field names of the RelatedObjectAbstract class.
      */
     public enum FN {
-        name, relatedId, role, referringType, status, enabled, validFor, auditInfo
+        name, relatedId, role, referringType, referringId, status, enabled, validFor, auditInfo
     }
 }

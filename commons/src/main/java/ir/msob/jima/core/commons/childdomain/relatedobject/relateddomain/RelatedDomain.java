@@ -22,7 +22,7 @@ public class RelatedDomain<ID extends Comparable<ID> & Serializable> extends Rel
 
 
     @Builder
-    public RelatedDomain(ID id, ID parentId, String name, ID relatedId, String role, String referringType, String status, Boolean enabled, TimePeriod validFor, AuditInfo auditInfo) {
-        super(id, parentId, name, relatedId, role, referringType, status, enabled, validFor, auditInfo);
+    public RelatedDomain(ID id, ID parentId, String name, ID relatedId, String role, String referringType, String referringId, String status, Boolean enabled, TimePeriod validFor, AuditInfo auditInfo) {
+        super(id, parentId, name, relatedId, role, referringType, referringId, status, enabled, validFor, auditInfo);
     }
 }
