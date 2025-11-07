@@ -18,9 +18,9 @@ class ClassAnnotationInfoTest {
     }
 
     @Test
-    void testHasAnnotation_WhenAnnotationIsPresent_ShouldReturnTrue() {
+    void hasAnnotation_ShouldReturnTrue_WhenAnnotationIsPresent() {
         // Arrange
-        @DomainInfo(serviceName = "value", version = "value", domainName = "value")
+        @DomainInfo(domainName = "testDomain", parentDomainName = "parentDomain")
         class AnnotatedClass {
         }
 
@@ -28,11 +28,11 @@ class ClassAnnotationInfoTest {
         boolean hasAnnotation = annotationInfo.hasAnnotation(AnnotatedClass.class);
 
         // Assert
-        assertTrue(hasAnnotation, "AnnotatedClass should have MyAnnotation");
+        assertTrue(hasAnnotation, "AnnotatedClass should have DomainInfo annotation");
     }
 
     @Test
-    void testHasAnnotation_WhenAnnotationIsAbsent_ShouldReturnFalse() {
+    void hasAnnotation_ShouldReturnFalse_WhenAnnotationIsAbsent() {
         // Arrange
         class NonAnnotatedClass {
         }
@@ -41,13 +41,13 @@ class ClassAnnotationInfoTest {
         boolean hasAnnotation = annotationInfo.hasAnnotation(NonAnnotatedClass.class);
 
         // Assert
-        assertFalse(hasAnnotation, "NonAnnotatedClass should not have MyAnnotation");
+        assertFalse(hasAnnotation, "NonAnnotatedClass should not have DomainInfo annotation");
     }
 
     @Test
-    void testGetAnnotation_WhenAnnotationIsPresent_ShouldReturnAnnotation() {
+    void getAnnotation_ShouldReturnAnnotation_WhenAnnotationIsPresent() {
         // Arrange
-        @DomainInfo(serviceName = "value", version = "value", domainName = "value")
+        @DomainInfo(domainName = "testDomain", parentDomainName = "parentDomain")
         class AnnotatedClass {
         }
 
@@ -55,12 +55,13 @@ class ClassAnnotationInfoTest {
         DomainInfo annotation = annotationInfo.getAnnotation(AnnotatedClass.class);
 
         // Assert
-        assertNotNull(annotation, "AnnotatedClass should have MyAnnotation");
-        assertEquals("value", annotation.serviceName(), "Annotation value should match");
+        assertNotNull(annotation, "AnnotatedClass should have DomainInfo annotation");
+        assertEquals("testDomain", annotation.domainName(), "Domain name should match");
+        assertEquals("parentDomain", annotation.parentDomainName(), "Parent domain name should match");
     }
 
     @Test
-    void testGetAnnotation_WhenAnnotationIsAbsent_ShouldReturnNull() {
+    void getAnnotation_ShouldReturnNull_WhenAnnotationIsAbsent() {
         // Arrange
         class NonAnnotatedClass {
         }
@@ -69,13 +70,12 @@ class ClassAnnotationInfoTest {
         DomainInfo annotation = annotationInfo.getAnnotation(NonAnnotatedClass.class);
 
         // Assert
-        assertNull(annotation, "NonAnnotatedClass should not have MyAnnotation");
+        assertNull(annotation, "NonAnnotatedClass should not have DomainInfo annotation");
     }
 
     @Test
-    void testGetAnnotation_WhenClassIsNull_ShouldThrowException() {
-        // Act and Assert
+    void getAnnotation_ShouldThrowException_WhenClassIsNull() {
+        // Act & Assert
         assertThrows(CommonRuntimeException.class, () -> annotationInfo.getAnnotation(null), "Should throw CommonRuntimeException for null class");
     }
-
 }

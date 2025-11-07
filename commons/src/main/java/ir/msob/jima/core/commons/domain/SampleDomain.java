@@ -24,7 +24,7 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@DomainInfo(serviceName = "sample-service", version = "v1", domainName = "sample-domain")
+@DomainInfo(domainName = "sample-domain")
 public class SampleDomain<ID extends Comparable<ID> & Serializable> extends BaseDomainAbstract<ID> {
 
     public SampleDomain(ID id) {

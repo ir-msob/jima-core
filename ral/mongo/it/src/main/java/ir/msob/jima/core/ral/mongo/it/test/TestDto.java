@@ -1,6 +1,8 @@
 package ir.msob.jima.core.ral.mongo.it.test;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.domain.DtoInfo;
+import ir.msob.jima.core.ral.mongo.it.Microservices;
 import ir.msob.jima.core.ral.mongo.it.dto.ProjectDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +15,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@DtoInfo(serviceName = Microservices.TEST_MICROSERVICE, version = Microservices.VERSION)
 public class TestDto extends TestDomain implements ProjectDto {
     private String dtoField;
 

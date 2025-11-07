@@ -19,7 +19,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Document(collection = TestDomain.DOMAIN_NAME)
-@DomainInfo(serviceName = Microservices.TEST_MICROSERVICE, version = Microservices.VERSION, domainName = TestDomain.DOMAIN_URI)
+@DomainInfo( domainName = TestDomain.DOMAIN_URI)
 public class TestDomain extends ProjectDomainAbstract {
     @Transient
     public static final String DOMAIN_NAME = "TestDomain";

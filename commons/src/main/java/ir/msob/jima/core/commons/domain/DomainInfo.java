@@ -8,10 +8,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is used to mark classes that represent domain services
- * within a microservice architecture. It is retained at runtime and can
- * be applied to types only. The annotation includes elements to specify
- * the microservice name, version, domain name, and optional parent domain name.
+ * Marks a class as representing a domain within a microservice architecture.
+ * <p>
+ * This annotation is retained at runtime and can only be applied to classes or interfaces.
+ * It provides metadata about the domain, including its name and optionally its parent domain name.
+ * </p>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
@@ -19,32 +20,19 @@ public @interface DomainInfo {
     ClassAnnotationInfo<DomainInfo> info = new ClassAnnotationInfo<>(DomainInfo.class);
 
     /**
-     * This method is used to set the name of the microservice.
+     * Returns the name of the domain.
      *
-     * @return A string that represents the name of the microservice.
-     */
-    String serviceName();
-
-    /**
-     * This method is used to set the version of the domain API.
-     *
-     * @return A string that represents the version of the domain API.
-     */
-    String version();
-
-    /**
-     * This method is used to set the name of the domain.
-     *
-     * @return A string that represents the name of the domain.
+     * @return the domain name as a String
      */
     String domainName();
 
     /**
-     * This method is used to set the name of the parent domain.
-     * It is optional and defaults to an empty string if not provided.
+     * Returns the name of the parent domain, if any.
+     * <p>
+     * This is optional and defaults to an empty string if not specified.
+     * </p>
      *
-     * @return A string that represents the name of the parent domain.
+     * @return the parent domain name as a String, or an empty string if none
      */
     String parentDomainName() default "";
-
 }
