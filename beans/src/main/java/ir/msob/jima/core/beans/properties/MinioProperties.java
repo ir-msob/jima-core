@@ -48,4 +48,6 @@ public class MinioProperties {
      * The read timeout in milliseconds for Minio client.
      */
     private Long readTimeout = 30000L;
+
+    private String region = "us-east-1";
 }

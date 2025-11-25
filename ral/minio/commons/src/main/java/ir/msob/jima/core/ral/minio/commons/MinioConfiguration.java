@@ -5,7 +5,16 @@ import ir.msob.jima.core.beans.properties.MinioProperties;
 import okhttp3.OkHttpClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.http.async.SdkAsyncHttpClient;
+import software.amazon.awssdk.http.nio.netty.NettyNioAsyncHttpClient;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3AsyncClient;
+import software.amazon.awssdk.services.s3.S3Configuration;
 
+import java.net.URI;
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -34,6 +43,30 @@ public class MinioConfiguration {
                 .endpoint(minioProperties.getUrl())
                 .httpClient(httpClient)
                 .credentials(minioProperties.getAccessKey(), minioProperties.getSecretKey())
+                .build();
+    }
+
+    @Bean
+    public S3AsyncClient s3AsyncClient(MinioProperties minioProperties) {
+
+        SdkAsyncHttpClient nettyClient = NettyNioAsyncHttpClient.builder()
+                .connectionTimeout(Duration.ofMillis(minioProperties.getConnectTimeout()))
+                .readTimeout(Duration.ofMillis(minioProperties.getReadTimeout()))
+                .writeTimeout(Duration.ofMillis(minioProperties.getWriteTimeout()))
+                .build();
+
+        var credentialsProvider = StaticCredentialsProvider.create(
+                AwsBasicCredentials.create(minioProperties.getAccessKey(), minioProperties.getSecretKey())
+        );
+
+        return S3AsyncClient.builder()
+                .endpointOverride(URI.create(minioProperties.getUrl()))
+                .region(Region.of(minioProperties.getRegion()))
+                .credentialsProvider(credentialsProvider)
+                .serviceConfiguration(S3Configuration.builder()
+                        .pathStyleAccessEnabled(true)
+                        .build())
+                .httpClient(nettyClient)
                 .build();
     }
 }
