@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Document(collection = TestDomain.DOMAIN_NAME)
-@DomainInfo( domainName = TestDomain.DOMAIN_URI)
+@DomainInfo(domainName = TestDomain.DOMAIN_URI)
 public class TestDomain extends ProjectDomainAbstract {
     @Transient
     public static final String DOMAIN_NAME = "TestDomain";

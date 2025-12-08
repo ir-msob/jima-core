@@ -27,7 +27,7 @@ public class Logger {
      * Log a debug message.
      *
      * @param message The message to log.
-     * @param params Optional parameters to format the message.
+     * @param params  Optional parameters to format the message.
      */
     public void debug(String message, Object... params) {
         log.debug(MessageUtil.prepareMessage(message, params));

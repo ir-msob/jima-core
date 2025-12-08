@@ -50,7 +50,7 @@ public class CallbackErrorAspect {
     @AfterThrowing(value = "@annotation(ir.msob.jima.core.commons.callback.CallbackError)", throwing = "throwing")
     public void afterThrowing(JoinPoint point, Throwable throwing) throws JsonProcessingException {
         callback(point, throwing);
-        log.error(throwing.getMessage(),throwing);
+        log.error(throwing.getMessage(), throwing);
     }
 
     /**

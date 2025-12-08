@@ -3,7 +3,6 @@ package ir.msob.jima.core.ral.sql.commons;
 import ir.msob.jima.core.commons.domain.BaseDomain;
 import ir.msob.jima.core.commons.methodstats.MethodStats;
 import ir.msob.jima.core.commons.repository.BaseRepository;
-import ir.msob.jima.core.commons.util.GenericTypeUtil;
 import ir.msob.jima.core.ral.sql.commons.query.SqlQuery;
 import ir.msob.jima.core.ral.sql.commons.query.SqlUpdate;
 import lombok.SneakyThrows;
