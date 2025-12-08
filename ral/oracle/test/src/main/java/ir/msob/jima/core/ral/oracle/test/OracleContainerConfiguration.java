@@ -35,7 +35,7 @@ public class OracleContainerConfiguration {
      * @return The created OracleContainer bean.
      */
     @Bean
-    public OracleContainer kafkaContainer(JimaProperties jimaProperties) {
+    public OracleContainer oracleContainer(JimaProperties jimaProperties) {
         OracleContainer container = new OracleContainer(DockerImageName.parse(jimaProperties.getTestContainer().getOracle().getImage()));
         if (Strings.isNotBlank(jimaProperties.getTestContainer().getOracle().getUsername()))
             container.withUsername(jimaProperties.getTestContainer().getOracle().getUsername());

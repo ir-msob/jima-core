@@ -1,4 +1,4 @@
-package ir.msob.jima.core.ral.mongo.it.test;
+package ir.msob.jima.core.ral.sql.it.test;
 
 import ir.msob.jima.core.commons.filter.Filter;
 import ir.msob.jima.core.it.criteria.ProjectCriteriaAbstract;

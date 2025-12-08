@@ -1,4 +1,4 @@
-package ir.msob.jima.core.ral.mongo.it.test;
+package ir.msob.jima.core.ral.sql.it.test;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.domain.DtoInfo;

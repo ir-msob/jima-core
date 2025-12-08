@@ -23,6 +23,7 @@ public class TestContainerProperties {
     private Minio minio = new Minio();
     private Kafka kafka = new Kafka();
     private Oracle oracle = new Oracle();
+    private PostgreSQL postgreSQL = new PostgreSQL();
     private Redis redis = new Redis();
     private Keycloak keycloak = new Keycloak();
 
@@ -70,6 +71,19 @@ public class TestContainerProperties {
     @NoArgsConstructor
     @ToString
     public static class Oracle extends BaseTestContainer {
+        private String username;
+        private String password;
+    }
+
+    /**
+     * This nested static class represents the properties of an PostgreSQL test container.
+     * It includes the Docker image name, username, and password.
+     */
+    @Setter
+    @Getter
+    @NoArgsConstructor
+    @ToString
+    public static class PostgreSQL extends BaseTestContainer {
         private String username;
         private String password;
     }

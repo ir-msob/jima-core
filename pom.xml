@@ -17,6 +17,7 @@
     <modules>
         <module>processor</module>
         <module>commons</module>
+        <module>it</module>
         <module>test</module>
         <module>beans</module>
         <module>ral</module>

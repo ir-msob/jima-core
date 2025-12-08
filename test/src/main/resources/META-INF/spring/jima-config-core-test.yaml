@@ -35,6 +35,12 @@ jima:
       container: "jima-oracle"
       host-port: 11521
       container-port: 1521
+    postgreSQL:
+      image: "postgres:17-alpine"
+      reuse: true
+      container: "jima-oracle"
+      host-port: 15432
+      container-port: 5432
     redis:
       image: "redis:8.2.1"
       reuse: true
