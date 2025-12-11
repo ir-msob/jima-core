@@ -3,14 +3,14 @@ package ir.msob.jima.core.ral.sql.it.test;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.domain.DomainInfo;
 import ir.msob.jima.core.it.domain.ProjectDomainAbstract;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.relational.core.mapping.Table;
 
 @Setter
 @Getter

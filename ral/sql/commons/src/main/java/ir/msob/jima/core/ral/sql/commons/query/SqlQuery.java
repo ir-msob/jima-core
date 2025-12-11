@@ -1,153 +1,93 @@
 package ir.msob.jima.core.ral.sql.commons.query;
 
 import ir.msob.jima.core.commons.repository.BaseQuery;
-import lombok.*;
+import lombok.Getter;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.relational.core.query.Criteria;
 import org.springframework.data.relational.core.query.Query;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
- * SqlQuery — wrapper for relational Criteria and other SQL-ish options.
+ * SqlQuery: lightweight holder for a Spring Data R2DBC Criteria + pagination/sort/include/exclude info.
  */
 @Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class SqlQuery implements BaseQuery {
-    private final List<Criteria> criteriaList = new ArrayList<>();
+public class SqlQuery<T> implements BaseQuery {
+
     private final Set<String> includes = new LinkedHashSet<>();
     private final Set<String> excludes = new LinkedHashSet<>();
+    private Criteria criteria;
     private Pageable pageable;
     private Sort sort;
     private Integer limit;
 
-    public Query getQuery() {
-        Query query;
-        if (criteriaList.isEmpty()) {
-            query = Query.empty();
-        } else {
-            Criteria combined = criteriaList.get(0);
-            for (int i = 1; i < criteriaList.size(); i++) {
-                combined = combined.and(criteriaList.get(i));
-            }
-            query = Query.query(combined);
-        }
-
-        if (pageable != null) query = query.with(pageable);
-        else if (limit != null) query = query.limit(limit);
-
-        if (sort != null) query = query.sort(sort);
-
-        return query;
+    public SqlQuery() {
     }
 
-    public SqlQuery with(Pageable pageable) {
+    public SqlQuery<T> where(Criteria c) {
+        if (c == null) return this;
+        if (this.criteria == null) this.criteria = c;
+        else this.criteria = this.criteria.and(c);
+        return this;
+    }
+
+    public SqlQuery<T> with(Pageable pageable) {
         this.pageable = pageable;
         return this;
     }
 
-    public SqlQuery add(Pageable pageable) {
-        this.pageable = pageable;
-        return this;
+    public SqlQuery<T> add(Pageable pageable) {
+        return with(pageable);
     }
 
-    public SqlQuery withSort(String field, Sort.Direction direction) {
+    public SqlQuery<T> withSort(String field, Sort.Direction direction) {
         this.sort = Sort.by(direction, field);
         return this;
     }
 
-    public SqlQuery withSort(Sort sort) {
+    public SqlQuery<T> withSort(Sort sort) {
         this.sort = sort;
         return this;
     }
 
-    public SqlQuery limit(Integer limit) {
+    public SqlQuery<T> limit(Integer limit) {
         this.limit = limit;
         return this;
     }
 
-    /* SQL-style criteria helpers */
-    public SqlQuery is(String field, Object value) {
-        this.criteriaList.add(Criteria.where(field).is(value));
+    public SqlQuery<T> include(Collection<String> fields) {
+        if (fields != null) this.includes.addAll(fields);
         return this;
     }
 
-    public SqlQuery gt(String field, Object value) {
-        this.criteriaList.add(Criteria.where(field).greaterThan(value));
+    public SqlQuery<T> include(String field) {
+        if (field != null) this.includes.add(field);
         return this;
     }
 
-    public SqlQuery gte(String field, Object value) {
-        this.criteriaList.add(Criteria.where(field).greaterThanOrEquals(value));
-        return this;
-    }
-
-    public SqlQuery lt(String field, Object value) {
-        this.criteriaList.add(Criteria.where(field).lessThan(value));
-        return this;
-    }
-
-    public SqlQuery lte(String field, Object value) {
-        this.criteriaList.add(Criteria.where(field).lessThanOrEquals(value));
-        return this;
-    }
-
-    public SqlQuery ne(String field, Object value) {
-        this.criteriaList.add(Criteria.where(field).not(value));
-        return this;
-    }
-
-    public SqlQuery exists(String field, Boolean value) {
-        if (Boolean.TRUE.equals(value)) this.criteriaList.add(Criteria.where(field).isNotNull());
-        else this.criteriaList.add(Criteria.where(field).isNull());
-        return this;
-    }
-
-    public SqlQuery in(String field, Collection<?> values) {
-        this.criteriaList.add(Criteria.where(field).in(values));
-        return this;
-    }
-
-    public SqlQuery nin(String field, Collection<?> values) {
-        this.criteriaList.add(Criteria.where(field).notIn(values));
+    public SqlQuery<T> exclude(String... fields) {
+        if (fields != null) {
+            Collections.addAll(this.excludes, fields);
+        }
         return this;
     }
 
     /**
-     * For relational DBs regex is typically LIKE; caller should provide pattern (e.g. "%foo%").
+     * Build a Spring Data Query from the held Criteria/sort/page/limit.
      */
-    public SqlQuery regex(String field, Object value) {
-        this.criteriaList.add(Criteria.where(field).like(value.toString()));
-        return this;
-    }
-
-    public SqlQuery include(Collection<String> fieldList) {
-        this.includes.addAll(fieldList);
-        return this;
-    }
-
-    public SqlQuery include(String field) {
-        this.includes.add(field);
-        return this;
-    }
-
-    public SqlQuery exclude(String... fields) {
-        Collections.addAll(this.excludes, fields);
-        return this;
-    }
-
-    public SqlQuery orOperator(Collection<Criteria> orList) {
-        if (orList == null || orList.isEmpty()) return this;
-        Iterator<Criteria> it = orList.iterator();
-        Criteria orCombined = it.next();
-        while (it.hasNext()) {
-            orCombined = orCombined.or(it.next());
+    public Query toQuery() {
+        Query q = (criteria != null) ? Query.query(criteria) : Query.empty();
+        if (sort != null) q = q.sort(sort);
+        if (pageable != null) {
+            if (pageable.getOffset() >= 0) q = q.offset(pageable.getOffset());
+            if (pageable.getPageSize() > 0) q = q.limit(pageable.getPageSize());
+        } else if (limit != null) {
+            q = q.limit(limit);
         }
-        this.criteriaList.add(orCombined);
-        return this;
+        return q;
     }
 }

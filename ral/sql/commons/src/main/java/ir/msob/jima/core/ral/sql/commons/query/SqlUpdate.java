@@ -1,133 +1,110 @@
 package ir.msob.jima.core.ral.sql.commons.query;
 
 import ir.msob.jima.core.commons.repository.BaseUpdate;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.relational.core.query.Update;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
- * SqlUpdate: operations that make sense for relational DBs.
- * <p>
- * - set(field, value): SET column = value
- * - unset(field): SET column = NULL
- * - inc(field, amount): a logical representation of increment; note: org.springframework Update
- * does NOT have arithmetic expressions; to apply inc you should override repository method
- * and execute DB-specific SQL (e.g., "col = col + :inc") or use DatabaseClient.
- * <p>
- * This class can be converted to Spring's Update for the simple cases (set / null).
- * For advanced operations (inc / raw expressions) repository must override and implement DB-specific SQL.
+ * SqlUpdate: small wrapper around org.springframework.data.relational.core.query.Update
+ * It offers convenience helpers like set/unset/inc. Collection-array style helpers (push/pull) are
+ * not supported for relational databases and intentionally throw UnsupportedOperationException.
  */
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-public class SqlUpdate implements BaseUpdate {
-    // plain sets
-    private final Map<String, Object> set = new LinkedHashMap<>();
-    // fields to set to null
-    private final Set<String> unset = new LinkedHashSet<>();
-    // increments (logical; repository should handle)
-    private final Map<String, Number> inc = new LinkedHashMap<>();
-    // raw expressions (DB-specific) — key: column, value: expression (e.g. "col = col + 1")
-    private final Map<String, String> rawExpressions = new LinkedHashMap<>();
+public class SqlUpdate<T> implements BaseUpdate {
 
-    public SqlUpdate set(String field, Object value) {
-        this.set.put(field, value);
+    private final Update update = Update.from(Collections.emptyMap());
+    private final Map<String, Object> sqlParams = new LinkedHashMap<>();
+    private String customSql = null; // optional raw SQL path (if you want to execute raw SQL)
+
+    public SqlUpdate() {
+    }
+
+    public SqlUpdate<T> set(String field, Object value) {
+        if (field == null) return this;
+        update.set(field, value);
         return this;
     }
 
-    /**
-     * Mark a field to be set to NULL.
-     */
-    public SqlUpdate unset(String field) {
-        this.unset.add(field);
+    public SqlUpdate<T> unset(String field) {
+        if (field == null) return this;
+        update.set(field, null);
         return this;
     }
 
-    /**
-     * Logical increment. NOTE: default conversion to Update is not possible for inc
-     * (Update doesn't support arithmetic expression directly). Please override repository
-     * methods (updateFirst/updateMulti) to apply increments with DB-specific SQL.
-     */
-    public SqlUpdate inc(String field, Number amount) {
-        this.inc.put(field, amount);
+    public SqlUpdate<T> inc(String field, Number amount) {
+        // R2DBC Update does not have arithmetic helpers — implement using raw SQL path or use db-specific expression
+        // We'll store a hint that repository implementation can interpret and build SQL/Expression.
+        throw new UnsupportedOperationException("inc is database-specific in R2DBC; use custom SQL or implement in repository");
+    }
+
+    // Raw SQL helpers (optional)
+    public SqlUpdate<T> sql(String sql) {
+        this.customSql = sql;
         return this;
     }
 
-    @Override
-    public BaseUpdate pull(String field, Object value) {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public BaseUpdate pullAll(String field, Collection<?> valueList) {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public BaseUpdate push(String field, Object value) {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public BaseUpdate push(String field, Object value, Integer slice) {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public BaseUpdate pushAll(String field, Collection<?> values) {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public BaseUpdate pushAll(String field, Collection<?> values, Integer slice) {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public BaseUpdate addToSet(String field, Object value) {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public BaseUpdate addToSetAll(String field, Collection<?> values) {
-        throw new RuntimeException("not implemented");
-    }
-
-    /**
-     * Add a raw DB expression to be applied in SET part. Repository must safely inject parameters.
-     * Example usage: addRaw("counter", "counter = counter + 1")
-     */
-    public SqlUpdate addRawExpression(String column, String expression) {
-        this.rawExpressions.put(column, expression);
+    public SqlUpdate<T> param(String name, Object value) {
+        if (name != null) this.sqlParams.put(name, value);
         return this;
     }
 
-    /**
-     * Convert simple set/unset to Spring Data Update object.
-     * WARNING: inc and rawExpressions are NOT converted here and must be handled by repository.
-     */
-    public Update toUpdate() {
-        Update update = new SqlUpdateBuilder().build().toUpdate();
-        for (Map.Entry<String, Object> e : set.entrySet()) {
-            update = update.set(e.getKey(), e.getValue());
-        }
-        for (String f : unset) {
-            update = update.set(f, null);
-        }
-        // inc/rawExpressions intentionally NOT applied here.
+    public Update getUpdate() {
         return update;
     }
 
-    public boolean hasIncrements() {
-        return !inc.isEmpty();
+    public boolean hasRawSql() {
+        return customSql != null && !customSql.isBlank();
     }
 
-    public boolean hasRawExpressions() {
-        return !rawExpressions.isEmpty();
+    public String getRawSql() {
+        return customSql;
+    }
+
+    public Map<String, Object> getSqlParams() {
+        return sqlParams;
+    }
+
+    // unsupported array-style operations for relational DBs
+    @Override
+    public SqlUpdate<T> pull(String field, Object value) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public SqlUpdate<T> pullAll(String field, Collection<?> valueList) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public SqlUpdate<T> push(String field, Object value) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public SqlUpdate<T> push(String field, Object value, Integer slice) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public SqlUpdate<T> pushAll(String field, Collection<?> values) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public SqlUpdate<T> pushAll(String field, Collection<?> values, Integer slice) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public SqlUpdate<T> addToSet(String field, Object value) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public SqlUpdate<T> addToSetAll(String field, Collection<?> values) {
+        throw new UnsupportedOperationException();
     }
 }

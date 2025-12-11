@@ -16,33 +16,11 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * SqlQueryBuilder: translate BaseCriteria + Filter fields into SqlQuery (relational Criteria).
+ * Converts BaseCriteria (Filter fields) into SqlQuery (Criteria + Query).
+ * This intentionally mirrors the JPA builder but produces Criteria for R2DBC.
  */
 @Component
-public class SqlQueryBuilder implements BaseQueryBuilder {
-
-    private static void prepareOrOperation(BaseQuery baseQuery, Collection<Criteria> orOperatorList) {
-        if (orOperatorList != null && !orOperatorList.isEmpty() && baseQuery instanceof SqlQuery sqlQuery) {
-            sqlQuery.orOperator(orOperatorList);
-        }
-    }
-
-    private static void setOrConditions(Collection<Criteria> orOperatorList, Field field, Filter<?> fieldFilter) {
-        if (fieldFilter.getOr() == null) return;
-        var f = fieldFilter.getOr();
-        if (f.getEq() != null) orOperatorList.add(Criteria.where(field.getName()).is(f.getEq()));
-        else if (f.getExists() != null) orOperatorList.add(f.getExists() ?
-                Criteria.where(field.getName()).isNotNull() : Criteria.where(field.getName()).isNull());
-        else if (f.getGt() != null) orOperatorList.add(Criteria.where(field.getName()).greaterThan(f.getGt()));
-        else if (f.getGte() != null)
-            orOperatorList.add(Criteria.where(field.getName()).greaterThanOrEquals(f.getGte()));
-        else if (f.getLt() != null) orOperatorList.add(Criteria.where(field.getName()).lessThan(f.getLt()));
-        else if (f.getLte() != null) orOperatorList.add(Criteria.where(field.getName()).lessThanOrEquals(f.getLte()));
-        else if (f.getNe() != null) orOperatorList.add(Criteria.where(field.getName()).not(f.getNe()));
-        else if (f.getRegex() != null) orOperatorList.add(Criteria.where(field.getName()).like(f.getRegex()));
-        else if (f.getIn() != null) orOperatorList.add(Criteria.where(field.getName()).in(f.getIn()));
-        else if (f.getNin() != null) orOperatorList.add(Criteria.where(field.getName()).notIn(f.getNin()));
-    }
+class SqlQueryBuilder implements BaseQueryBuilder {
 
     @Override
     public <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>, Q extends BaseQuery> Q build(C criteria) {
@@ -52,51 +30,123 @@ public class SqlQueryBuilder implements BaseQueryBuilder {
     @SuppressWarnings("unchecked")
     @Override
     public <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>, Q extends BaseQuery> Q build(C criteria, Pageable pageable) {
-        SqlQuery sqlQuery = new SqlQuery();
-        List<Criteria> orOperatorList = new ArrayList<>();
+        SqlQuery<Object> sqlQuery = new SqlQuery<>();
+        if (criteria == null) return (Q) sqlQuery;
 
         Collection<Field> fields = getFields(criteria);
-        setFieldsCondition(criteria, sqlQuery, orOperatorList, fields);
-        prepareOrOperation(sqlQuery, orOperatorList);
-        prepareIncludes(criteria, sqlQuery);
-        preparePagination(pageable, sqlQuery);
-
-        return (Q) sqlQuery;
-    }
-
-    private <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>> void setFieldsCondition(
-            C criteria, SqlQuery sqlQuery, Collection<Criteria> orOperatorList, Collection<Field> fields) {
-
         for (Field field : fields) {
             field.setAccessible(true);
-            if (field.getType() == Filter.class) {
+            if (Filter.class.isAssignableFrom(field.getType())) {
                 try {
-                    Filter<?> fieldFilter = (Filter<?>) field.get(criteria);
-                    if (fieldFilter != null) {
-                        setConditions(sqlQuery, orOperatorList, field, fieldFilter);
+                    var filter = (Filter<?>) field.get(criteria);
+                    if (filter != null) {
+                        Criteria c = toCriteria(field.getName(), filter);
+                        if (c != null) sqlQuery.where(c);
                     }
                 } catch (IllegalAccessException ignored) {
                 }
             }
         }
-    }
 
-    private <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>> void prepareIncludes(C criteria, SqlQuery sqlQuery) {
-        if (criteria == null) return;
+        // includes
         if (criteria.getIncludesLimitation() != null && !criteria.getIncludesLimitation().isEmpty()) {
             if (criteria.getIncludes() != null && !criteria.getIncludes().isEmpty()) {
-                criteria.getIncludes().forEach(inc1 -> criteria.getIncludesLimitation()
-                        .stream().map(Object::toString).filter(inc1::equals).forEach(sqlQuery::include));
+                criteria.getIncludes().forEach(inc1 ->
+                        criteria.getIncludesLimitation().stream()
+                                .map(Object::toString).filter(inc1::equals)
+                                .forEach(sqlQuery::include));
             } else {
-                sqlQuery.include(criteria.getIncludesLimitation().stream().map(Object::toString).toList());
+                criteria.getIncludesLimitation().forEach(sqlQuery::include);
             }
         } else if (criteria.getIncludes() != null && !criteria.getIncludes().isEmpty()) {
-            sqlQuery.include(criteria.getIncludes().stream().map(Object::toString).toList());
+            criteria.getIncludes().forEach(sqlQuery::include);
         }
+
+        if (pageable != null) sqlQuery.add(pageable);
+
+        return (Q) sqlQuery;
     }
 
-    private void preparePagination(Pageable pageable, SqlQuery sqlQuery) {
-        if (pageable != null) sqlQuery.add(pageable);
+    private Criteria toCriteria(String fieldName, Filter<?> filter) {
+        if (filter == null) return null;
+
+        // OR group
+        if (filter.getOr() != null) {
+            var f = filter.getOr();
+            List<Criteria> orList = new ArrayList<>();
+            if (f.getEq() != null) orList.add(equalsCriteria(fieldName, f.getEq()));
+            if (f.getExists() != null) orList.add(existsCriteria(fieldName, f.getExists()));
+            if (f.getGt() != null) orList.add(gtCriteria(fieldName, f.getGt()));
+            if (f.getGte() != null) orList.add(gteCriteria(fieldName, f.getGte()));
+            if (f.getLt() != null) orList.add(ltCriteria(fieldName, f.getLt()));
+            if (f.getLte() != null) orList.add(lteCriteria(fieldName, f.getLte()));
+            if (f.getNe() != null) orList.add(neCriteria(fieldName, f.getNe()));
+            if (f.getRegex() != null) orList.add(likeCriteria(fieldName, f.getRegex()));
+            if (f.getIn() != null) orList.add(inCriteria(fieldName, f.getIn()));
+            if (f.getNin() != null) orList.add(ninCriteria(fieldName, f.getNin()));
+
+            if (orList.isEmpty()) return null;
+            Criteria combined = orList.getFirst();
+            for (int i = 1; i < orList.size(); i++) combined = combined.or(orList.get(i));
+            return combined;
+        }
+
+        if (filter.getEq() != null) return equalsCriteria(fieldName, filter.getEq());
+        if (filter.getExists() != null) return existsCriteria(fieldName, filter.getExists());
+        if (filter.getGt() != null) return gtCriteria(fieldName, filter.getGt());
+        if (filter.getGte() != null) return gteCriteria(fieldName, filter.getGte());
+        if (filter.getLt() != null) return ltCriteria(fieldName, filter.getLt());
+        if (filter.getLte() != null) return lteCriteria(fieldName, filter.getLte());
+        if (filter.getNe() != null) return neCriteria(fieldName, filter.getNe());
+        if (filter.getRegex() != null) return likeCriteria(fieldName, filter.getRegex());
+        if (filter.getIn() != null) return inCriteria(fieldName, filter.getIn());
+        if (filter.getNin() != null) return ninCriteria(fieldName, filter.getNin());
+
+        return null;
+    }
+
+    private Criteria equalsCriteria(String field, Object value) {
+        return Criteria.where(field).is(value);
+    }
+
+    private Criteria neCriteria(String field, Object value) {
+        return Criteria.where(field).not(value);
+    }
+
+    private Criteria inCriteria(String field, Object collection) {
+        if (!(collection instanceof Collection<?>)) return Criteria.empty();
+        return Criteria.where(field).in((Collection<?>) collection);
+    }
+
+    private Criteria ninCriteria(String field, Object collection) {
+        if (!(collection instanceof Collection<?>)) return Criteria.empty();
+        return Criteria.where(field).notIn((Collection<?>) collection);
+    }
+
+    private Criteria likeCriteria(String field, Object pattern) {
+        // R2DBC Criteria supports matching via like in many drivers; this uses SQL LIKE semantics
+        return Criteria.where(field).like(pattern.toString());
+    }
+
+    private Criteria existsCriteria(String field, Object value) {
+        Boolean v = (Boolean) value;
+        return v ? Criteria.where(field).isNotNull() : Criteria.where(field).isNull();
+    }
+
+    private Criteria gtCriteria(String field, Object value) {
+        return Criteria.where(field).greaterThan(value);
+    }
+
+    private Criteria gteCriteria(String field, Object value) {
+        return Criteria.where(field).greaterThanOrEquals(value);
+    }
+
+    private Criteria ltCriteria(String field, Object value) {
+        return Criteria.where(field).lessThan(value);
+    }
+
+    private Criteria lteCriteria(String field, Object value) {
+        return Criteria.where(field).lessThanOrEquals(value);
     }
 
     private <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>> Collection<Field> getFields(C criteria) {
@@ -109,19 +159,5 @@ public class SqlQueryBuilder implements BaseQueryBuilder {
             }
         }
         return fields;
-    }
-
-    private void setConditions(SqlQuery sqlQuery, Collection<Criteria> orOperatorList, Field field, Filter<?> fieldFilter) {
-        if (fieldFilter.getEq() != null) sqlQuery.is(field.getName(), fieldFilter.getEq());
-        else if (fieldFilter.getExists() != null) sqlQuery.exists(field.getName(), fieldFilter.getExists());
-        else if (fieldFilter.getGt() != null) sqlQuery.gt(field.getName(), fieldFilter.getGt());
-        else if (fieldFilter.getGte() != null) sqlQuery.gte(field.getName(), fieldFilter.getGte());
-        else if (fieldFilter.getLt() != null) sqlQuery.lt(field.getName(), fieldFilter.getLt());
-        else if (fieldFilter.getLte() != null) sqlQuery.lte(field.getName(), fieldFilter.getLte());
-        else if (fieldFilter.getNe() != null) sqlQuery.ne(field.getName(), fieldFilter.getNe());
-        else if (fieldFilter.getRegex() != null) sqlQuery.regex(field.getName(), fieldFilter.getRegex());
-        else if (fieldFilter.getIn() != null) sqlQuery.in(field.getName(), fieldFilter.getIn());
-        else if (fieldFilter.getNin() != null) sqlQuery.nin(field.getName(), fieldFilter.getNin());
-        else if (fieldFilter.getOr() != null) setOrConditions(orOperatorList, field, fieldFilter);
     }
 }
