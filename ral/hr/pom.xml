@@ -4,25 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ir.msob.jima.core</groupId>
-        <artifactId>jima-core</artifactId>
+        <artifactId>core-ral</artifactId>
         <version>${jima-commons.version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>core-ral</artifactId>
-    <name>ral</name>
-    <description>ral</description>
+    <artifactId>core-ral-hr</artifactId>
+    <name>hr</name>
+    <description>hr</description>
     <packaging>pom</packaging>
     <modules>
-        <module>minio</module>
-        <module>kafka</module>
-        <module>quartz</module>
-        <module>redis</module>
-        <module>redisson</module>
-        <module>mongo</module>
-        <module>r2dbc</module>
-        <module>hr</module>
-        <module>jpa</module>
-        <module>oracle</module>
-        <module>postgre</module>
+        <module>commons</module>
+        <module>it</module>
     </modules>
 </project>
