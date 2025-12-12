@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ir.msob.jima.core</groupId>
+        <artifactId>core-ral-r2dbc</artifactId>
+        <version>${jima-commons.version}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <artifactId>core-ral-r2dbc-it</artifactId>
+    <name>it</name>
+    <description>it</description>
+    <packaging>jar</packaging>
+    <dependencies>
+        <!-- MSob-->
+        <dependency>
+            <groupId>ir.msob.jima.core</groupId>
+            <artifactId>core-it</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-relational</artifactId>
+        </dependency>
+    </dependencies>
+</project>
