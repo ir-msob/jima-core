@@ -19,7 +19,8 @@
         <module>redis</module>
         <module>redisson</module>
         <module>mongo</module>
-        <module>sql</module>
+        <module>r2dbc</module>
+        <module>jpa</module>
         <module>oracle</module>
         <module>postgre</module>
     </modules>
