@@ -1,9 +1,12 @@
 package ir.msob.jima.core.commons.util;
 
+import java.util.regex.Matcher;
+
 /**
  * Utility class for preparing messages with placeholders and parameters.
  */
-public class MessageUtil {
+public final class MessageUtil {
+
     private MessageUtil() {
     }
 
@@ -15,13 +18,22 @@ public class MessageUtil {
      * @return The formatted message with replaced placeholders.
      */
     public static String prepareMessage(String message, Object... params) {
-        if (params == null)
+        if (message == null || params == null) {
             return message;
-        for (Object param : params) {
-            if (param == null)
-                param = "null";
-            message = message.replaceFirst("\\{\\}", String.valueOf(param));
         }
+
+        for (Object param : params) {
+            String value = (param == null) ? "null" : String.valueOf(param);
+
+            // IMPORTANT:
+            // quoteReplacement prevents IllegalArgumentException
+            // when value contains '$' or '\'
+            message = message.replaceFirst(
+                    "\\{\\}",
+                    Matcher.quoteReplacement(value)
+            );
+        }
+
         return message;
     }
 }
