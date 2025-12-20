@@ -3,7 +3,7 @@ package ir.msob.jima.core.beans.objectmapper;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.springframework.boot.jackson.JsonComponent;
+import org.springframework.boot.jackson.JacksonComponent;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -13,7 +13,7 @@ import java.time.Instant;
  * This serializer converts an {@link Instant} object to its string representation
  * when serializing to JSON using Jackson.
  */
-@JsonComponent
+@JacksonComponent
 public class InstantSerializer extends JsonSerializer<Instant> {
 
     /**

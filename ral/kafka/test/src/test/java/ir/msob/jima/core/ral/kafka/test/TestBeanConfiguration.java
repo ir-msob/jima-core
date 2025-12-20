@@ -1,5 +1,6 @@
 package ir.msob.jima.core.ral.kafka.test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistrar;
@@ -18,5 +19,10 @@ public class TestBeanConfiguration {
         return registry -> {
             KafkaContainerConfiguration.registry(registry, kafkaContainer);
         };
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 }

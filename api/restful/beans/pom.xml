@@ -5,7 +5,7 @@
     <parent>
         <groupId>ir.msob.jima.core</groupId>
         <artifactId>core-api-restful</artifactId>
-        <version>${jima-commons.version}</version>
+        <version>${jima-core.version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>core-api-restful-beans</artifactId>
@@ -28,31 +28,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
-        </dependency>
-        <!-- Swagger -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-core</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-spi</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-spring-web</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.swagger</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
         </dependency>
 
         <!-- Test -->

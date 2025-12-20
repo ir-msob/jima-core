@@ -1,5 +1,6 @@
 package ir.msob.jima.core.ral.redis.test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.redis.testcontainers.RedisContainer;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -12,5 +13,10 @@ public class TestBeanConfiguration {
         return registry -> {
             RedisContainerConfiguration.registry(registry, container);
         };
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 }

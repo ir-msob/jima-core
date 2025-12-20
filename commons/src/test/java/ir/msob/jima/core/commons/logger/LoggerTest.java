@@ -34,7 +34,7 @@ class LoggerTest {
         String message = "Debug message with exception";
         Exception exception = new RuntimeException("Test Exception");
 
-        logger.debug(message, exception);
+        logger.debug(exception, message);
 
         // Verify that the debug method of the underlying log is called with the formatted message and exception
         verify(log).debug(message, exception);
@@ -55,7 +55,7 @@ class LoggerTest {
         String message = "Error message with exception";
         Exception exception = new RuntimeException("Test Exception");
 
-        logger.error(message, exception);
+        logger.error(exception, message);
 
         verify(log).error(message, exception);
     }

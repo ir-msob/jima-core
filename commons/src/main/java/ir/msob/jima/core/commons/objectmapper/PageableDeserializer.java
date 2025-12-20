@@ -6,16 +6,16 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import ir.msob.jima.core.commons.util.PaginationUtil;
-import org.springframework.boot.jackson.JsonComponent;
+import org.springframework.boot.jackson.JacksonComponent;
 import org.springframework.data.domain.Pageable;
 
 import java.io.IOException;
 
 /**
  * Custom JSON deserializer for deserializing a JSON representation of a Spring Data {@link Pageable} object.
- * This class is annotated with {@link JsonComponent} to be automatically discovered by Spring Boot.
+ * This class is annotated with {@link JacksonComponent} to be automatically discovered by Spring Boot.
  */
-@JsonComponent
+@JacksonComponent
 public class PageableDeserializer extends JsonDeserializer<Pageable> {
 
     /**

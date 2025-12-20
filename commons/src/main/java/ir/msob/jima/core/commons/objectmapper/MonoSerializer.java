@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import lombok.SneakyThrows;
-import org.springframework.boot.jackson.JsonComponent;
+import org.springframework.boot.jackson.JacksonComponent;
 import reactor.core.publisher.Mono;
 
 /**
@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
  * <p>
  * This serializer converts Mono objects to their resolved values and writes them as JSON using Jackson's JsonGenerator.
  */
-@JsonComponent
+@JacksonComponent
 public class MonoSerializer extends JsonSerializer<Mono<?>> {
 
     /**

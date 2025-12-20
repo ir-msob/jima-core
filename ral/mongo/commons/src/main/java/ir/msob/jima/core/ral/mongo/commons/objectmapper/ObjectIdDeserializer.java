@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import org.apache.logging.log4j.util.Strings;
 import org.bson.types.ObjectId;
-import org.springframework.boot.jackson.JsonComponent;
+import org.springframework.boot.jackson.JacksonComponent;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ import java.io.IOException;
  * This deserializer is used to handle the conversion of JSON data to ObjectId
  * when working with MongoDB in a Spring Boot application.
  */
-@JsonComponent
+@JacksonComponent
 public class ObjectIdDeserializer extends JsonDeserializer<ObjectId> {
 
     /**

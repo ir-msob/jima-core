@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.bson.types.ObjectId;
-import org.springframework.boot.jackson.JsonComponent;
+import org.springframework.boot.jackson.JacksonComponent;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import java.io.IOException;
  * This serializer is used to handle the conversion of ObjectId to JSON data
  * when working with MongoDB in a Spring Boot application.
  */
-@JsonComponent
+@JacksonComponent
 public class ObjectIdSerializer extends JsonSerializer<ObjectId> {
 
     /**

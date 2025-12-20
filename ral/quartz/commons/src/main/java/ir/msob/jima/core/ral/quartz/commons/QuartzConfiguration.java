@@ -3,7 +3,7 @@ package ir.msob.jima.core.ral.quartz.commons;
 import ir.msob.jima.core.commons.logger.Logger;
 import ir.msob.jima.core.commons.logger.LoggerFactory;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.quartz.QuartzProperties;
+import org.springframework.boot.quartz.autoconfigure.QuartzProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

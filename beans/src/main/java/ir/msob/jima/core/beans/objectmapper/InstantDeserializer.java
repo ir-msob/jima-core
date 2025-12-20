@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.boot.jackson.JsonComponent;
+import org.springframework.boot.jackson.JacksonComponent;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -15,14 +15,14 @@ import java.time.Instant;
  *
  * <p>This deserializer is used to handle JSON data that represents
  * an instant in time, converting it into a Java {@link Instant} object.
- * It is annotated with {@link JsonComponent} to be automatically
+ * It is annotated with {@link JacksonComponent} to be automatically
  * registered with Spring Boot's Jackson configuration.</p>
  *
  * <p>If the JSON string is blank, this deserializer will return
  * {@code null}. Otherwise, it will parse the string into an
  * {@link Instant} using {@link Instant#parse(CharSequence)}.</p>
  */
-@JsonComponent
+@JacksonComponent
 public class InstantDeserializer extends JsonDeserializer<Instant> {
 
     /**

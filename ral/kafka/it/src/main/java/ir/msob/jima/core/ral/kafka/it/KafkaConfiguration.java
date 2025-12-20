@@ -7,7 +7,7 @@ import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+import org.springframework.boot.kafka.autoconfigure.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -51,7 +51,7 @@ public class KafkaConfiguration {
      * @return Map of Kafka consumer properties.
      */
     public Map<String, Object> kafkaConsumerProperties() {
-        Map<String, Object> properties = kafkaProperties.getConsumer().buildProperties(null);
+        Map<String, Object> properties = kafkaProperties.getConsumer().buildProperties();
 
         // Set additional Kafka consumer properties
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
@@ -70,7 +70,7 @@ public class KafkaConfiguration {
      * @return Map of Kafka producer properties.
      */
     public Map<String, Object> kafkaProducerProperties() {
-        Map<String, Object> properties = kafkaProperties.getProducer().buildProperties(null);
+        Map<String, Object> properties = kafkaProperties.getProducer().buildProperties();
 
         // Set additional Kafka producer properties
         properties.put(ProducerConfig.ACKS_CONFIG, "all");

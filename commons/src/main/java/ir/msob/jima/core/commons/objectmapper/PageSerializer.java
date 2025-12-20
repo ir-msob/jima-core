@@ -2,16 +2,16 @@ package ir.msob.jima.core.commons.objectmapper;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.springframework.boot.jackson.JsonComponent;
+import org.springframework.boot.jackson.JacksonComponent;
 import org.springframework.data.domain.Page;
 
 import java.io.IOException;
 
 /**
  * Custom JSON serializer for serializing a Spring Data {@link Page} object.
- * This class is annotated with {@link JsonComponent} to be automatically discovered by Spring Boot.
+ * This class is annotated with {@link JacksonComponent} to be automatically discovered by Spring Boot.
  */
-@JsonComponent
+@JacksonComponent
 public class PageSerializer extends BasePageableSerializer<Page<?>> {
 
     /**

@@ -5,7 +5,7 @@
     <parent>
         <groupId>ir.msob.jima.core</groupId>
         <artifactId>core-ral-mongo</artifactId>
-        <version>${jima-commons.version}</version>
+        <version>${jima-core.version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>core-ral-mongo-test</artifactId>

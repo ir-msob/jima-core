@@ -5,7 +5,7 @@
     <parent>
         <groupId>ir.msob.jima.core</groupId>
         <artifactId>core-ral-kafka</artifactId>
-        <version>${jima-commons.version}</version>
+        <version>${jima-core.version}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>core-ral-kafka-it</artifactId>
@@ -15,13 +15,8 @@
     <dependencies>
         <!-- Kafka -->
         <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
+            <artifactId>spring-boot-starter-kafka</artifactId>
         </dependency>
     </dependencies>
 </project>

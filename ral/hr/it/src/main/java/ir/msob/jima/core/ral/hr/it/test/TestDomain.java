@@ -51,7 +51,7 @@ public class TestDomain implements ProjectDomain {
     private List<Child> children = new ArrayList<>();
 
     // --- ManyToMany tags via join table ---
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name = "test_domain_tag",
             joinColumns = @JoinColumn(name = "domain_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
@@ -137,6 +137,7 @@ public class TestDomain implements ProjectDomain {
             if (!(o instanceof Tag tag)) return false;
             return Objects.equals(name, tag.name);
         }
+
         @Override
         public int hashCode() {
             return Objects.hash(name);
