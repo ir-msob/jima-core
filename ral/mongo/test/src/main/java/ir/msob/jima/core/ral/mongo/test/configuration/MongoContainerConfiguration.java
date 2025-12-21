@@ -16,7 +16,7 @@ import org.testcontainers.utility.DockerImageName;
 public class MongoContainerConfiguration {
 
     public static void registry(DynamicPropertyRegistry registry, MongoDBContainer container) {
-        registry.add("spring.data.mongodb.uri", container::getReplicaSetUrl);
+        registry.add("spring.mongodb.uri", container::getReplicaSetUrl);
     }
 
     /**

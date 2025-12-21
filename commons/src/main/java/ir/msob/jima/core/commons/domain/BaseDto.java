@@ -1,8 +1,6 @@
 package ir.msob.jima.core.commons.domain;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import ir.msob.jima.core.commons.Constants;
+import ir.msob.jima.core.commons.shared.BaseType;
 
 import java.io.Serializable;
 
@@ -16,16 +14,6 @@ import java.io.Serializable;
  *
  * @param <ID> The type of the ID of the DTO.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = Constants.TYPE_PROPERTY_NAME)
-public interface BaseDto<ID extends Comparable<ID> & Serializable> extends BaseDomain<ID> {
+public interface BaseDto<ID extends Comparable<ID> & Serializable> extends BaseDomain<ID>, BaseType {
 
-    /**
-     * Returns the simple name of the class of the DTO.
-     *
-     * @return The simple name of the class.
-     */
-    @JsonProperty(Constants.TYPE_PROPERTY_NAME)
-    default String getClassType() {
-        return this.getClass().getSimpleName();
-    }
 }

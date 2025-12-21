@@ -1,5 +1,6 @@
 package ir.msob.jima.core.commons.shared;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import ir.msob.jima.core.commons.Constants;
@@ -13,6 +14,7 @@ import ir.msob.jima.core.commons.Constants;
  * The '@JsonTypeInfo' annotation is set to use 'JsonTypeInfo.Id.NONE', which means that no type information will be included in the JSON output.
  * The 'getClassType' method is annotated with '@JsonProperty', which means that the returned value will be included in the JSON output with the property name specified in 'Constants.TYPE_PROPERTY_NAME'.
  */
+@JsonIgnoreProperties(value = {Constants.TYPE_PROPERTY_NAME}, allowGetters = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NONE, property = Constants.TYPE_PROPERTY_NAME)
 public interface BaseType extends BaseModel {
 
