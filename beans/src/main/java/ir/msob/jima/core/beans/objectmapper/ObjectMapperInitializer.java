@@ -3,8 +3,10 @@ package ir.msob.jima.core.beans.objectmapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import ir.msob.jima.core.commons.Constants;
+import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.methodstats.MethodStats;
 import ir.msob.jima.core.commons.shared.BaseType;
+import ir.msob.jima.core.commons.shared.ModelType;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.reflections.Reflections;
@@ -50,6 +52,12 @@ public class ObjectMapperInitializer {
 
             Set<Class<? extends BaseType>> baseTypeClasses = reflections.getSubTypesOf(BaseType.class);
             baseTypeClasses.forEach(objectMapper::registerSubtypes);
+
+            Set<Class<? extends BaseDto>> baseDtoClasses = reflections.getSubTypesOf(BaseDto.class);
+            baseDtoClasses.forEach(objectMapper::registerSubtypes);
+
+            Set<Class<? extends ModelType>> modelTypeClasses = reflections.getSubTypesOf(ModelType.class);
+            modelTypeClasses.forEach(objectMapper::registerSubtypes);
         });
     }
 

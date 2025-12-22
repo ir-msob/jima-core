@@ -2,7 +2,7 @@ package ir.msob.jima.core.commons.domain;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import ir.msob.jima.core.commons.shared.BaseTypeReference;
-import ir.msob.jima.core.commons.shared.PageResponse;
+import ir.msob.jima.core.commons.shared.PageDto;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -32,12 +32,12 @@ public interface BaseDtoTypeReference<
     /**
      * Returns a TypeReference for a paginated response of DTOs.
      * <p>
-     * Useful when deserializing JSON into a {@link PageResponse} containing DTOs.
+     * Useful when deserializing JSON into a {@link PageDto} containing DTOs.
      * </p>
      *
-     * @return the TypeReference for PageResponse&lt;DTO&gt;
+     * @return the TypeReference for PageDto&lt;DTO&gt;
      */
-    TypeReference<PageResponse<DTO>> getPageResponseReferenceType();
+    TypeReference<PageDto<DTO>> getPageDtoReferenceType();
 
     /**
      * Returns a TypeReference for a collection of IDs.

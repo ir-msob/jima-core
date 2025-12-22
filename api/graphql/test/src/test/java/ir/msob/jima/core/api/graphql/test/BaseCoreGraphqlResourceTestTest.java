@@ -8,7 +8,7 @@ import ir.msob.jima.core.commons.domain.SampleDomain;
 import ir.msob.jima.core.commons.domain.SampleDto;
 import ir.msob.jima.core.commons.resource.BaseResource;
 import ir.msob.jima.core.commons.security.BaseUser;
-import ir.msob.jima.core.commons.shared.PageResponse;
+import ir.msob.jima.core.commons.shared.PageDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,7 +65,7 @@ class BaseCoreGraphqlResourceTestTest {
             }
 
             @Override
-            public TypeReference<PageResponse<SampleDto<String>>> getPageResponseReferenceType() {
+            public TypeReference<PageDto<SampleDto<String>>> getPageDtoReferenceType() {
                 return null;
             }
 

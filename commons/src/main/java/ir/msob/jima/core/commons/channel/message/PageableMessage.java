@@ -3,6 +3,7 @@ package ir.msob.jima.core.commons.channel.message;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.shared.ModelType;
+import ir.msob.jima.core.commons.shared.PageableDto;
 import lombok.*;
 import org.springframework.data.domain.Pageable;
 
@@ -33,5 +34,5 @@ public class PageableMessage<ID extends Comparable<ID> & Serializable, C extends
     /**
      * The 'Pageable' object of the message.
      */
-    private Pageable pageable;
+    private PageableDto pageable;
 }

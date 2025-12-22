@@ -3,8 +3,8 @@ package ir.msob.jima.core.commons.channel.message;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.shared.ModelType;
+import ir.msob.jima.core.commons.shared.PageDto;
 import lombok.*;
-import org.springframework.data.domain.Page;
 
 import java.io.Serializable;
 
@@ -29,5 +29,5 @@ public class PageMessage<ID extends Comparable<ID> & Serializable, DTO extends B
     /**
      * The 'Page' object of the message.
      */
-    private Page<DTO> page;
+    private PageDto<DTO> page;
 }
