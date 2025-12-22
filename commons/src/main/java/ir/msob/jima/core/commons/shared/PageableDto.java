@@ -153,30 +153,30 @@ public class PageableDto implements Pageable {
     /**
      * @param direction "ASC" | "DESC"
      */ // --- simple DTO for sort orders ---
-        @JsonIgnoreProperties(ignoreUnknown = true)
-        public record OrderDto(String property, String direction) {
-            @JsonCreator
-            public OrderDto(@JsonProperty("property") String property,
-                            @JsonProperty("direction") String direction) {
-                this.property = property;
-                this.direction = direction == null ? "ASC" : direction;
-            }
-
-            public Sort.Order toOrder() {
-                Sort.Direction dir = Sort.Direction.fromString(direction);
-                return new Sort.Order(dir, property);
-            }
-
-            @Override
-            @JsonProperty("property")
-            public String property() {
-                return property;
-            }
-
-            @Override
-            @JsonProperty("direction")
-            public String direction() {
-                return direction;
-            }
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public record OrderDto(String property, String direction) {
+        @JsonCreator
+        public OrderDto(@JsonProperty("property") String property,
+                        @JsonProperty("direction") String direction) {
+            this.property = property;
+            this.direction = direction == null ? "ASC" : direction;
         }
+
+        public Sort.Order toOrder() {
+            Sort.Direction dir = Sort.Direction.fromString(direction);
+            return new Sort.Order(dir, property);
+        }
+
+        @Override
+        @JsonProperty("property")
+        public String property() {
+            return property;
+        }
+
+        @Override
+        @JsonProperty("direction")
+        public String direction() {
+            return direction;
+        }
+    }
 }

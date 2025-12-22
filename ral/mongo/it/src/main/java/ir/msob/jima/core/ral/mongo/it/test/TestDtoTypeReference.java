@@ -115,6 +115,7 @@ public interface TestDtoTypeReference
             }
         };
     }
+
     @Override
     default TypeReference<ChannelMessage<ProjectUser, ModelType>> getChannelMessageModelTypeReferenceType() {
         return new TypeReference<ChannelMessage<ProjectUser, ModelType>>() {

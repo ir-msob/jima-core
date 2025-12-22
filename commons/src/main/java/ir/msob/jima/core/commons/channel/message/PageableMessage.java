@@ -5,7 +5,6 @@ import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.shared.ModelType;
 import ir.msob.jima.core.commons.shared.PageableDto;
 import lombok.*;
-import org.springframework.data.domain.Pageable;
 
 import java.io.Serializable;
 
