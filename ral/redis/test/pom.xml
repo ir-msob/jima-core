@@ -27,7 +27,7 @@
 
         <!-- Test -->
         <dependency>
-            <groupId>com.redis.testcontainers</groupId>
+            <groupId>com.redis</groupId>
             <artifactId>testcontainers-redis</artifactId>
         </dependency>
         <dependency>

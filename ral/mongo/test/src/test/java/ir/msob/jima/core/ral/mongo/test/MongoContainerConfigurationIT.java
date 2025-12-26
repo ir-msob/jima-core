@@ -22,7 +22,7 @@ class MongoContainerConfigurationIT {
 
     @Autowired
     MongoDBContainer container;
-    @Value("${spring.data.mongodb.uri}")
+    @Value("${spring.mongodb.uri}")
     private String configUrl;
 
     @Test
