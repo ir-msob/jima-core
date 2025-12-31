@@ -1,6 +1,6 @@
 {
   "name": "@ir-msob/jima-core",
-  "version": "$jima-commons.version",
+  "version": "$jima-core.version",
   "scripts": {
     "update-version": "node update-version.js",
     "restore-backup": "node restore-backup.js",

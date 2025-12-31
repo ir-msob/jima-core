@@ -1,6 +1,6 @@
 {
   "name": "@ir-msob/jima-core-commons",
-  "version": "$jima-commons.version",
+  "version": "$jima-core.version",
   "peerDependencies": {
     "@angular/common": "^18.0.0",
     "@angular/core": "^18.0.0"
