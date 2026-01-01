@@ -1,7 +1,7 @@
 package ir.msob.jima.core.api.kafka.commons;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import ir.msob.jima.core.commons.logger.Logger;
+import ir.msob.jima.core.commons.logger.LoggerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.listener.KafkaMessageListenerContainer;
@@ -75,11 +75,7 @@ public final class KafkaListenerUtil {
         // Attach message listener
         containerProperties.setMessageListener((MessageListener<String, String>) record -> {
             log.debug("Received message from channel '{}': {}", channel, record.value());
-            try {
-                messageHandler.accept(record.value());
-            } catch (Exception e) {
-                log.error("Error handling message from channel '{}'", channel, e);
-            }
+            messageHandler.accept(record.value());
         });
 
         startContainer(kafkaConsumerFactory, containerProperties, channel);
