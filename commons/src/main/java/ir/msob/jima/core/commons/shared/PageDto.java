@@ -94,7 +94,7 @@ public class PageDto<T> implements Page<T> {
 
     /**
      * Convert this PageDto into a Spring Data Page (PageImpl).
-     * Useful when you need to call repository/service APIs that expect Page<T>.
+     * Useful when you need to call repository/service APIs that expect {@code Page<T>}.
      */
     public Page<T> toPage() {
         Pageable pg = (this.pageable == null || this.pageable.isUnpaged()) ? Pageable.unpaged() : this.pageable.toPageable();
