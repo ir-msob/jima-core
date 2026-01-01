@@ -4,11 +4,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.validation.constraints.NotNull;
 import org.apache.logging.log4j.util.Strings;
+import org.jspecify.annotations.Nullable;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.lang.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -109,7 +109,7 @@ public class PaginationUtil {
      * @param orderJsonNode The JSON representation of the sort order.
      * @return A {@link Sort.Order} instance.
      */
-    public static Sort.Order prepareOrder(Sort.NullHandling nullHandling, @Nullable Sort.Direction direction, @NotNull JsonNode orderJsonNode) {
+    public static Sort.Order prepareOrder(Sort.NullHandling nullHandling, Sort.@Nullable Direction direction, @NotNull JsonNode orderJsonNode) {
         String property = asString(orderJsonNode.get("property"));
         boolean ignoreCase = asBoolean(orderJsonNode.get("ignoreCase"));
         return new Sort.Order(direction, property, ignoreCase, nullHandling);

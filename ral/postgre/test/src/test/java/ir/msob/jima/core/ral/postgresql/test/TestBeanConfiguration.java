@@ -4,12 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistrar;
-import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.postgresql.PostgreSQLContainer;
 
 @TestConfiguration
 public class TestBeanConfiguration {
     @Bean
-    public DynamicPropertyRegistrar dynamicPropertyRegistrar(PostgreSQLContainer<?> container) {
+    public DynamicPropertyRegistrar dynamicPropertyRegistrar(PostgreSQLContainer container) {
         return registry -> {
             PostgreSQLContainerConfiguration.registry(registry, container);
         };

@@ -33,7 +33,7 @@ public class MethodStatsLogger {
      *
      * @param point The method execution join point.
      * @return The result of the method execution.
-     * @throws Throwable If an exception occurs during method execution.
+     * @throws java.lang.Throwable If an exception occurs during method execution.
      */
     @Around("@annotation(ir.msob.jima.core.commons.methodstats.MethodStats)")
     public Object log(ProceedingJoinPoint point) throws Throwable {

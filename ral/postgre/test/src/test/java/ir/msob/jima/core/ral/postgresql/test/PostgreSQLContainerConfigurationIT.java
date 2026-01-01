@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.postgresql.PostgreSQLContainer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class PostgreSQLContainerConfigurationIT {
 
     @Autowired
-    PostgreSQLContainer<?> container;
+    PostgreSQLContainer container;
 
     @Value("${spring.datasource.driverClassName}")
     private String configDriverClassName;

@@ -20,21 +20,18 @@ public class LockRedisDatasourceProperties {
     /**
      * Get the host of the Redis server.
      *
-     * @return The Redis server host.
      */
     private String host;
 
     /**
      * Get the port of the Redis server.
      *
-     * @return The Redis server port.
      */
     private int port;
 
     /**
      * Get the URL of the Redis server.
      *
-     * @return The Redis server URL.
      */
     private String url;
 }

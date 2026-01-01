@@ -17,7 +17,7 @@ public class HrefProperties {
 
     /**
      * The base URL used in the application.
-     * Default value is "http://localhost:8080".
+     * Default value is "<a href="http://localhost:8080">...</a>".
      */
     private String baseUrl = "http://localhost:8080";
 }

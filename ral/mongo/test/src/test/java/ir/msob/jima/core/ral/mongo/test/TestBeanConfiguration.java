@@ -5,7 +5,7 @@ import ir.msob.jima.core.ral.mongo.test.configuration.MongoContainerConfiguratio
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistrar;
-import org.testcontainers.containers.MongoDBContainer;
+import org.testcontainers.mongodb.MongoDBContainer;
 
 @TestConfiguration
 public class TestBeanConfiguration {

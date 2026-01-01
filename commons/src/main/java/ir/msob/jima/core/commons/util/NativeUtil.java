@@ -59,18 +59,10 @@ public class NativeUtil {
 
         // Register the class for various member categories using hints
         hints.reflection().registerType(clazz,
-                MemberCategory.PUBLIC_FIELDS,
-                MemberCategory.DECLARED_FIELDS,
-                MemberCategory.INTROSPECT_PUBLIC_CONSTRUCTORS,
-                MemberCategory.INTROSPECT_DECLARED_CONSTRUCTORS,
                 MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS,
                 MemberCategory.INVOKE_DECLARED_CONSTRUCTORS,
-                MemberCategory.INTROSPECT_PUBLIC_METHODS,
-                MemberCategory.INTROSPECT_DECLARED_METHODS,
                 MemberCategory.INVOKE_PUBLIC_METHODS,
-                MemberCategory.INVOKE_DECLARED_METHODS,
-                MemberCategory.PUBLIC_CLASSES,
-                MemberCategory.DECLARED_CLASSES
+                MemberCategory.INVOKE_DECLARED_METHODS
         );
     }
 }
