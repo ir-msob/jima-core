@@ -45,7 +45,6 @@ public @interface ConditionalOnOperation {
      * The 'ClassAnnotationInfo' object for the 'ConditionalOnOperation' annotation.
      * This object holds metadata about the annotation itself.
      *
-     * @return The ClassAnnotationInfo for this annotation.
      */
     ClassAnnotationInfo<ConditionalOnOperation> info = new ClassAnnotationInfo<>(ConditionalOnOperation.class);
 
