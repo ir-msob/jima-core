@@ -20,7 +20,7 @@ import java.io.Serializable;
  * - validFor: An optional 'TimePeriod' indicating the validity duration of the contact medium.
  * <p>
  * Methods:
- * - compareTo(ContactMediumAbstract<ID> o): Compares this contact medium with another based on their keys.
+ * * - {@code compareTo(ContactMediumAbstract<ID> o)}: Compares this contact medium with another based on their keys.
  * <p>
  * Enum:
  * - ContactMediumType: Represents various types of contact mediums such as PHONE, EMAIL, FAX, etc.
