@@ -6,6 +6,7 @@ import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.kafka.autoconfigure.KafkaProperties;
 import org.springframework.context.annotation.Bean;
@@ -88,7 +89,7 @@ public class KafkaConfiguration {
      * @return Kafka consumer factory.
      */
     @Bean
-    public ConsumerFactory<String, String> kafkaConsumerFactory() {
+    public ConsumerFactory<@NonNull String, @NonNull String> kafkaConsumerFactory() {
         return new DefaultKafkaConsumerFactory<>(kafkaConsumerProperties(), new StringDeserializer(), new StringDeserializer());
     }
 
@@ -98,7 +99,7 @@ public class KafkaConfiguration {
      * @return Kafka producer factory.
      */
     @Bean
-    public ProducerFactory<String, String> kafkaProducerFactory() {
+    public ProducerFactory<@NonNull String, @NonNull String> kafkaProducerFactory() {
         return new DefaultKafkaProducerFactory<>(kafkaProducerProperties());
     }
 
@@ -111,11 +112,11 @@ public class KafkaConfiguration {
      * @return Kafka listener container factory.
      */
     @Bean
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaListenerContainerFactory(
-            ConsumerFactory<String, String> consumerFactory,
-            KafkaTemplate<String, String> kafkaTemplate,
-            KafkaTransactionManager<String, String> kafkaTransactionManager) {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public KafkaListenerContainerFactory<@NonNull ConcurrentMessageListenerContainer<@NonNull String, @NonNull String>> kafkaListenerContainerFactory(
+            ConsumerFactory<@NonNull String, @NonNull String> consumerFactory,
+            KafkaTemplate<@NonNull String, @NonNull String> kafkaTemplate,
+            KafkaTransactionManager<@NonNull String, @NonNull String> kafkaTransactionManager) {
+        ConcurrentKafkaListenerContainerFactory<@NonNull String, @NonNull String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory);
         factory.setReplyTemplate(kafkaTemplate);
         factory.getContainerProperties().setKafkaAwareTransactionManager(kafkaTransactionManager);
@@ -137,8 +138,8 @@ public class KafkaConfiguration {
      * @return Kafka transaction manager.
      */
     @Bean
-    public KafkaTransactionManager<String, String> kafkaTransactionManager(ProducerFactory<String, String> producerFactory) {
-        KafkaTransactionManager<String, String> kafkaTransactionManager = new KafkaTransactionManager<>(producerFactory);
+    public KafkaTransactionManager<@NonNull String, @NonNull String> kafkaTransactionManager(ProducerFactory<@NonNull String, @NonNull String> producerFactory) {
+        KafkaTransactionManager<@NonNull String, @NonNull String> kafkaTransactionManager = new KafkaTransactionManager<>(producerFactory);
         kafkaTransactionManager.setTransactionSynchronization(AbstractPlatformTransactionManager.SYNCHRONIZATION_ON_ACTUAL_TRANSACTION);
         return kafkaTransactionManager;
     }
@@ -151,7 +152,7 @@ public class KafkaConfiguration {
      */
     @Bean
     @Primary
-    public KafkaTemplate<String, String> kafkaTemplate(ProducerFactory<String, String> kafkaProducerFactory) {
+    public KafkaTemplate<@NonNull String, @NonNull String> kafkaTemplate(ProducerFactory<@NonNull String, @NonNull String> kafkaProducerFactory) {
         return new KafkaTemplate<>(kafkaProducerFactory);
     }
 }

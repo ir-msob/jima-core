@@ -6,6 +6,7 @@ import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.test.Assertable;
 import ir.msob.jima.core.test.BaseCoreResourceTest;
+import org.jspecify.annotations.NonNull;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.ContainerProperties;
@@ -36,7 +37,7 @@ public interface BaseCoreKafkaListenerTest<ID extends Comparable<ID> & Serializa
      *
      * @return the Kafka template
      */
-    KafkaTemplate<String, String> getKafkaTemplate();
+    KafkaTemplate<@NonNull String, @NonNull String> getKafkaTemplate();
 
     /**
      * Gets the group ID for the Kafka consumer.
@@ -50,7 +51,7 @@ public interface BaseCoreKafkaListenerTest<ID extends Comparable<ID> & Serializa
      *
      * @return the consumer factory
      */
-    ConsumerFactory<String, String> getConsumerFactory();
+    ConsumerFactory<@NonNull String, @NonNull String> getConsumerFactory();
 
     /**
      * Starts a Kafka message listener on the specified channel.
@@ -62,9 +63,9 @@ public interface BaseCoreKafkaListenerTest<ID extends Comparable<ID> & Serializa
         ContainerProperties containerProperties = new ContainerProperties(channel);
         containerProperties.setGroupId(getGroupId());
 
-        containerProperties.setMessageListener((MessageListener<String, String>) dto -> assertable.assertThan(dto.value()));
+        containerProperties.setMessageListener((MessageListener<@NonNull String, @NonNull String>) dto -> assertable.assertThan(dto.value()));
 
-        KafkaMessageListenerContainer<String, String> container = new KafkaMessageListenerContainer<>(getConsumerFactory(), containerProperties);
+        KafkaMessageListenerContainer<@NonNull String, @NonNull String> container = new KafkaMessageListenerContainer<>(getConsumerFactory(), containerProperties);
         container.setBeanName(channel);
         container.start();
         try {

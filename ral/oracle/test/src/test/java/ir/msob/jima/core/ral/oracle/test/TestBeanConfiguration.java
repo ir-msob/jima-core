@@ -10,9 +10,7 @@ import org.testcontainers.containers.OracleContainer;
 public class TestBeanConfiguration {
     @Bean
     public DynamicPropertyRegistrar dynamicPropertyRegistrar(OracleContainer container) {
-        return registry -> {
-            OracleContainerConfiguration.registry(registry, container);
-        };
+        return registry -> OracleContainerConfiguration.registry(registry, container);
     }
 
     @Bean

@@ -3,6 +3,7 @@ package ir.msob.jima.core.commons.childdomain.relatedobject;
 import ir.msob.jima.core.commons.childdomain.BaseChildDomain;
 import ir.msob.jima.core.commons.shared.auditinfo.AuditInfo;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
+import org.jspecify.annotations.NonNull;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -58,7 +59,7 @@ public interface BaseRelatedObject<ID extends Comparable<ID> & Serializable,
      * @return a negative integer, zero, or a positive integer as this related object is less than, equal to, or greater than the specified related object
      */
     @Override
-    default int compareTo(BaseRelatedObject<ID, RID> other) {
+    default int compareTo(@NonNull BaseRelatedObject<ID, RID> other) {
         if (this == other) {
             return 0;
         }

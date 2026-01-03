@@ -10,6 +10,7 @@ import ir.msob.jima.core.commons.shared.ModelType;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.logging.log4j.util.Strings;
+import org.jspecify.annotations.NonNull;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class KafkaAsyncClient implements BaseAsyncClient {
-    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<@NonNull String, @NonNull String> kafkaTemplate;
     private final ObjectMapper objectMapper;
 
     /**

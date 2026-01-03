@@ -10,9 +10,7 @@ import org.springframework.test.context.DynamicPropertyRegistrar;
 public class TestBeanConfiguration {
     @Bean
     public DynamicPropertyRegistrar dynamicPropertyRegistrar(RedisContainer container) {
-        return registry -> {
-            RedisContainerConfiguration.registry(registry, container);
-        };
+        return registry -> RedisContainerConfiguration.registry(registry, container);
     }
 
     @Bean

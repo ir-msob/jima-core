@@ -1,5 +1,6 @@
 package ir.msob.jima.core.beans;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.boot.EnvironmentPostProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.env.PropertiesPropertySourceLoader;
@@ -31,7 +32,7 @@ public class ApplicationPatternEnvironmentPostProcessor implements EnvironmentPo
     private final DeferredLog log = new DeferredLog();
 
     @Override
-    public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
+    public void postProcessEnvironment(@Nullable ConfigurableEnvironment environment, @Nullable SpringApplication application) {
         try {
             processConfigurationResources(environment);
         } finally {

@@ -9,10 +9,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * A JSON-friendly implementation of org.springframework.data.domain.Pageable
@@ -21,7 +20,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PageableDto implements Pageable {
+public class PageableDto implements Pageable, Serializable {
 
     private final int pageNumber;
     private final int pageSize;
@@ -45,14 +44,14 @@ public class PageableDto implements Pageable {
         this.pageNumber = pageNumber == null ? 0 : Math.max(0, pageNumber);
         this.pageSize = pageSize == null ? 20 : Math.max(0, pageSize);
         this.paged = paged == null || paged;
-        this.orders = orders == null ? Collections.emptyList() : Collections.unmodifiableList(new ArrayList<>(orders));
+        this.orders = orders == null ? Collections.emptyList() : List.copyOf(orders);
     }
 
     public static PageableDto of(int pageNumber, int pageSize, Sort sort) {
         List<OrderDto> orders = sort == null ? Collections.emptyList() :
                 sort.stream()
                         .map(o -> new OrderDto(o.getProperty(), o.getDirection().name()))
-                        .collect(Collectors.toList());
+                        .toList();
         return new PageableDto(pageNumber, pageSize, true, orders);
     }
 
@@ -99,7 +98,7 @@ public class PageableDto implements Pageable {
         if (orders.isEmpty()) return Sort.unsorted();
         List<Sort.Order> list = orders.stream()
                 .map(OrderDto::toOrder)
-                .collect(Collectors.toList());
+                .toList();
         return Sort.by(list);
     }
 
@@ -152,7 +151,7 @@ public class PageableDto implements Pageable {
 
     /**
      * @param direction "ASC" | "DESC"
-     */ // --- simple DTO for sort orders ---
+     */
     @JsonIgnoreProperties(ignoreUnknown = true)
     public record OrderDto(String property, String direction) {
         @JsonCreator
@@ -165,18 +164,6 @@ public class PageableDto implements Pageable {
         public Sort.Order toOrder() {
             Sort.Direction dir = Sort.Direction.fromString(direction);
             return new Sort.Order(dir, property);
-        }
-
-        @Override
-        @JsonProperty("property")
-        public String property() {
-            return property;
-        }
-
-        @Override
-        @JsonProperty("direction")
-        public String direction() {
-            return direction;
         }
     }
 }

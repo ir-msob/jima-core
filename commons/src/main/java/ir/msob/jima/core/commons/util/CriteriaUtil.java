@@ -92,6 +92,7 @@ public class CriteriaUtil {
      * @param <C>           The type of BaseCriteria.
      * @return The criteria object with the ID filter.
      */
+    @SafeVarargs
     @SneakyThrows
     public static <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>> C idCriteria(Class<C> criteriaClass, ID... ids) {
         C criteria = criteriaClass.getDeclaredConstructor().newInstance();

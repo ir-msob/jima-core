@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.msob.jima.core.commons.channel.ChannelMessage;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.shared.ModelType;
+import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -21,7 +22,7 @@ import java.util.Map;
 class KafkaAsyncClientTest {
 
     @Mock
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<@NonNull String, @NonNull String> kafkaTemplate;
 
     @Mock
     private ObjectMapper objectMapper;

@@ -5,12 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.jspecify.annotations.NonNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PageDto<T> implements Page<T> {
+public class PageDto<T> implements Page<@NonNull T>, Serializable {
 
     private final List<T> content;
     private final PageableDto pageable;
@@ -45,7 +46,7 @@ public class PageDto<T> implements Page<T> {
             @JsonProperty("totalElements") Long totalElements,
             @JsonProperty("totalPages") Integer totalPages
     ) {
-        this.content = content == null ? Collections.emptyList() : Collections.unmodifiableList(new ArrayList<>(content));
+        this.content = content == null ? Collections.emptyList() : List.copyOf(content);
         this.pageable = pageable == null ? PageableDto.unpaged() : pageable;
         this.totalElements = totalElements == null ? 0L : Math.max(0L, totalElements);
 
@@ -55,7 +56,7 @@ public class PageDto<T> implements Page<T> {
             this.totalPages = this.totalElements > 0 ? 1 : 0;
         } else {
             int size = Math.max(1, this.pageable.getPageSize());
-            this.totalPages = (int) ((this.totalElements + size - 1) / (long) size);
+            this.totalPages = (int) ((this.totalElements + size - 1) / size);
         }
     }
 
@@ -69,7 +70,7 @@ public class PageDto<T> implements Page<T> {
     /**
      * Build PageDto from a Spring Data Page
      */
-    public static <T> PageDto<T> from(Page<T> page) {
+    public static <T> PageDto<T> from(Page<@NonNull T> page) {
         if (page == null) {
             return PageDto.empty();
         }

@@ -2,6 +2,7 @@ package ir.msob.jima.core.commons.shared.keyvalue;
 
 import ir.msob.jima.core.commons.shared.BaseModel;
 import lombok.*;
+import org.jspecify.annotations.NonNull;
 
 import java.io.Serializable;
 import java.util.Comparator;
@@ -54,12 +55,12 @@ public class KeyValue<K extends Comparable<K> & Serializable, V extends Serializ
      * @return A negative integer, zero, or a positive integer as this key-value pair is less than, equal to, or greater than the specified key-value pair.
      */
     @Override
-    public int compareTo(KeyValue<K, V> o) {
+    public int compareTo(@NonNull KeyValue<K, V> o) {
         if (this == o) {
             return 0;
         }
 
-        if (o != null && (this.getKey() != null && o.getKey() != null)) {
+        if (this.getKey() != null && o.getKey() != null) {
             return this.getKey().compareTo(o.getKey());
 
         }

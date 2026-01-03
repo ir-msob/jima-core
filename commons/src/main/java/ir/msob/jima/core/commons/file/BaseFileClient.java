@@ -1,6 +1,7 @@
 package ir.msob.jima.core.commons.file;
 
 import ir.msob.jima.core.commons.security.BaseUser;
+import org.jspecify.annotations.NonNull;
 import reactor.core.publisher.Mono;
 
 import java.io.File;
@@ -20,7 +21,7 @@ public interface BaseFileClient {
      * @param <USER>   the type of the user
      * @return a Mono emitting the InputStream of the file
      */
-    <USER extends BaseUser> Mono<InputStream> get(String filePath, USER user);
+    <USER extends BaseUser> Mono<@NonNull InputStream> get(String filePath, USER user);
 
     /**
      * Stores a file from a string content at the specified file path.
@@ -31,7 +32,7 @@ public interface BaseFileClient {
      * @param <USER>   the type of the user
      * @return a Mono emitting the path of the stored file
      */
-    <USER extends BaseUser> Mono<String> store(String filePath, String file, USER user);
+    <USER extends BaseUser> Mono<@NonNull String> store(String filePath, String file, USER user);
 
     /**
      * Stores a file from a File object at the specified file path.
@@ -42,7 +43,7 @@ public interface BaseFileClient {
      * @param <USER>   the type of the user
      * @return a Mono emitting the path of the stored file
      */
-    <USER extends BaseUser> Mono<String> store(String filePath, File file, USER user);
+    <USER extends BaseUser> Mono<@NonNull String> store(String filePath, File file, USER user);
 
     /**
      * Stores a file from an InputStream at the specified file path.
@@ -53,7 +54,7 @@ public interface BaseFileClient {
      * @param <USER>      the type of the user
      * @return a Mono emitting the path of the stored file
      */
-    <USER extends BaseUser> Mono<String> store(String filePath, InputStream inputStream, USER user);
+    <USER extends BaseUser> Mono<@NonNull String> store(String filePath, InputStream inputStream, USER user);
 
     /**
      * Deletes a file at the specified file path.
@@ -63,5 +64,5 @@ public interface BaseFileClient {
      * @param <USER>   the type of the user
      * @return a Mono emitting a boolean indicating whether the deletion was successful
      */
-    <USER extends BaseUser> Mono<Boolean> delete(String filePath, USER user);
+    <USER extends BaseUser> Mono<@NonNull Boolean> delete(String filePath, USER user);
 }

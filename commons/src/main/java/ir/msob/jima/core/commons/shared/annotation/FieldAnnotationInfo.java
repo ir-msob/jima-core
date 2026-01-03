@@ -1,6 +1,7 @@
 package ir.msob.jima.core.commons.shared.annotation;
 
 import ir.msob.jima.core.commons.util.ReflectionUtil;
+import org.jspecify.annotations.NonNull;
 import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
 
@@ -14,21 +15,10 @@ import java.util.Collection;
  * The {@code FieldAnnotationInfo} class provides utility methods to work with annotations on fields.
  * It allows checking for the presence of a specific annotation on fields and methods within a class.
  *
- * @param <A> The type of annotation to check for.
+ * @param <A>             The type of annotation to check for.
+ * @param annotationClass The type of annotation to check for
  */
-public class FieldAnnotationInfo<A extends Annotation> {
-
-    // The type of annotation to check for
-    private final Class<A> annotationClass;
-
-    /**
-     * Constructs a new {@code FieldAnnotationInfo} instance.
-     *
-     * @param annotationClass The type of annotation to be checked.
-     */
-    public FieldAnnotationInfo(Class<A> annotationClass) {
-        this.annotationClass = annotationClass;
-    }
+public record FieldAnnotationInfo<A extends Annotation>(Class<A> annotationClass) {
 
     /**
      * Retrieves a collection of getter methods that have the specified annotation.
@@ -36,8 +26,8 @@ public class FieldAnnotationInfo<A extends Annotation> {
      * @param clazz The class to check for annotated getter methods.
      * @return A collection of tuples containing the getter method and the annotation.
      */
-    public Collection<Tuple2<Method, A>> getGetterMethodHasAnnotation(Class<?> clazz) {
-        Collection<Tuple2<Method, A>> result = new ArrayList<>();
+    public Collection<Tuple2<@NonNull Method, @NonNull A>> getGetterMethodHasAnnotation(Class<?> clazz) {
+        Collection<Tuple2<@NonNull Method, @NonNull A>> result = new ArrayList<>();
         // Iterate through all declared fields of the current class
         for (var field : ReflectionUtil.getFields(clazz)) {
             // Check if the field is annotated with the specified annotation
@@ -54,8 +44,8 @@ public class FieldAnnotationInfo<A extends Annotation> {
      * @param clazz The class to check for annotated fields.
      * @return A collection of tuples containing the field and the annotation.
      */
-    public Collection<Tuple2<Field, A>> getFieldsHasAnnotation(Class<?> clazz) {
-        Collection<Tuple2<Field, A>> result = new ArrayList<>();
+    public Collection<Tuple2<@NonNull Field, @NonNull A>> getFieldsHasAnnotation(Class<?> clazz) {
+        Collection<Tuple2<@NonNull Field, @NonNull A>> result = new ArrayList<>();
         // Iterate through all declared fields of the current class
         for (var field : ReflectionUtil.getFields(clazz)) {
             // Check if the field is annotated with the specified annotation

@@ -16,9 +16,7 @@ public class TestBeanConfiguration {
      */
     @Bean
     public DynamicPropertyRegistrar dynamicPropertyRegistrar(KafkaContainer kafkaContainer) {
-        return registry -> {
-            KafkaContainerConfiguration.registry(registry, kafkaContainer);
-        };
+        return registry -> KafkaContainerConfiguration.registry(registry, kafkaContainer);
     }
 
     @Bean

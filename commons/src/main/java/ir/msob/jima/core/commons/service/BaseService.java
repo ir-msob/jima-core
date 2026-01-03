@@ -7,6 +7,7 @@ import ir.msob.jima.core.commons.repository.BaseRepository;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.util.GenericTypeUtil;
 import lombok.SneakyThrows;
+import org.jspecify.annotations.NonNull;
 import reactor.core.publisher.Mono;
 
 import java.io.Serializable;
@@ -130,7 +131,7 @@ public interface BaseService<
      * @param user     A user associated with the operation.
      * @return A Mono indicating the completion of the pre-get operation.
      */
-    default Mono<Void> preGet(C criteria, USER user) {
+    default Mono<@NonNull Void> preGet(C criteria, USER user) {
         return Mono.empty();
     }
 
@@ -144,7 +145,7 @@ public interface BaseService<
      * @param user     A user associated with the operation.
      * @return A Mono indicating the completion of the post-get operation.
      */
-    default Mono<Void> postGet(Collection<ID> ids, Collection<DTO> dtos, C criteria, USER user) {
+    default Mono<@NonNull Void> postGet(Collection<ID> ids, Collection<DTO> dtos, C criteria, USER user) {
         return Mono.empty();
     }
 
@@ -155,7 +156,7 @@ public interface BaseService<
      * @param user A user object.
      * @return A Mono that emits void.
      */
-    default Mono<Void> preSave(DTO dto, USER user) {
+    default Mono<@NonNull Void> preSave(DTO dto, USER user) {
         return Mono.empty();
     }
 
@@ -167,7 +168,7 @@ public interface BaseService<
      * @param user        A user object.
      * @return A Mono that emits void.
      */
-    default Mono<Void> postSave(DTO dto, D savedDomain, USER user) {
+    default Mono<@NonNull Void> postSave(DTO dto, D savedDomain, USER user) {
         return Mono.empty();
     }
 
@@ -178,7 +179,7 @@ public interface BaseService<
      * @param user A user object.
      * @return A Mono that emits void.
      */
-    default Mono<Void> preUpdate(DTO dto, USER user) {
+    default Mono<@NonNull Void> preUpdate(DTO dto, USER user) {
         return Mono.empty();
     }
 
@@ -190,7 +191,7 @@ public interface BaseService<
      * @param user          A user object.
      * @return A Mono that emits void.
      */
-    default Mono<Void> postUpdate(DTO dto, D updatedDomain, USER user) {
+    default Mono<@NonNull Void> postUpdate(DTO dto, D updatedDomain, USER user) {
         return Mono.empty();
     }
 
@@ -201,7 +202,7 @@ public interface BaseService<
      * @param user     A user object.
      * @return A Mono that emits void.
      */
-    default Mono<Void> preDelete(C criteria, USER user) {
+    default Mono<@NonNull Void> preDelete(C criteria, USER user) {
         return Mono.empty();
     }
 
@@ -213,7 +214,7 @@ public interface BaseService<
      * @param user     A user object.
      * @return A Mono that emits void.
      */
-    default Mono<Void> postDelete(DTO dto, C criteria, USER user) {
+    default Mono<@NonNull Void> postDelete(DTO dto, C criteria, USER user) {
         return Mono.empty();
     }
 }

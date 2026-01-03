@@ -7,21 +7,10 @@ import org.apache.commons.logging.Log;
  * The 'Logger' class provides logging functionality and wraps an underlying Log implementation.
  * It includes methods for logging debug, error, fatal, info, trace, and warning messages, with optional parameters for formatting the message and an associated exception.
  * The class also includes a constructor for creating an instance of the logger with a specified Log implementation.
+ *
+ * @param log The underlying Log implementation.
  */
-public class Logger {
-    /**
-     * The underlying Log implementation.
-     */
-    private final Log log;
-
-    /**
-     * Constructor for the 'Logger' class that takes a Log implementation as a parameter.
-     *
-     * @param log The Log implementation to use for logging.
-     */
-    public Logger(Log log) {
-        this.log = log;
-    }
+public record Logger(Log log) {
 
     /**
      * Log a debug message.

@@ -60,9 +60,8 @@ class UserInfoUtilTest {
     @Test
     void testDecodeUserWithEmptyEncodedUser() {
         String encodedUser = ""; // Empty encoded user
-        assertThrows(IllegalArgumentException.class, () -> {
-            UserInfoUtil.decodeUser(objectMapper, encodedUser, ConcreteBaseUser.class);
-        });
+        assertThrows(IllegalArgumentException.class,
+                () -> UserInfoUtil.decodeUser(objectMapper, encodedUser, ConcreteBaseUser.class));
     }
 
     @Test

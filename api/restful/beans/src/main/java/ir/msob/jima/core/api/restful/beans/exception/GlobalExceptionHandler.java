@@ -5,6 +5,7 @@ import ir.msob.jima.core.commons.exception.BaseRuntimeException;
 import ir.msob.jima.core.commons.exception.ExceptionResponseAbstract;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.apachecommons.CommonsLog;
+import org.jspecify.annotations.NonNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -30,7 +31,7 @@ public class GlobalExceptionHandler {
      * @return a {@link ResponseEntity} containing the exception response
      */
     @ExceptionHandler(BaseRuntimeException.class)
-    public <ER extends ExceptionResponseAbstract, E extends BaseRuntimeException> ResponseEntity<ER> baseRuntimeExceptionHandler(E ex) {
+    public <ER extends ExceptionResponseAbstract, E extends BaseRuntimeException> ResponseEntity<@NonNull ER> baseRuntimeExceptionHandler(E ex) {
         ER response = exceptionMapper.getExceptionResponse(ex);
         if (response != null) {
             HttpStatus httpStatus = HttpStatus.resolve(response.getStatus());

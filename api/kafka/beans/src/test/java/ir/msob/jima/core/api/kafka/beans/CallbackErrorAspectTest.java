@@ -60,6 +60,6 @@ class CallbackErrorAspectTest {
         List<ChannelMessage<BaseUser, ExceptionResponseAbstract>> result = callbackErrorAspect.prepareErrorChannelMessage(channelMessageReq, exception);
 
         assertEquals(1, result.size());
-        assertEquals(response, result.get(0).getData());
+        assertEquals(response, result.getFirst().getData());
     }
 }

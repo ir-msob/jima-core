@@ -2,6 +2,7 @@ package ir.msob.jima.core.api.kafka.commons;
 
 import ir.msob.jima.core.commons.resource.listener.BaseListener;
 import ir.msob.jima.core.commons.security.BaseUser;
+import org.jspecify.annotations.NonNull;
 import org.springframework.kafka.core.ConsumerFactory;
 
 import java.io.Serializable;
@@ -29,6 +30,6 @@ public interface BaseKafkaListener<ID extends Comparable<ID> & Serializable, USE
      *
      * @return The Kafka ConsumerFactory.
      */
-    ConsumerFactory<String, String> getKafkaConsumerFactory();
+    ConsumerFactory<@NonNull String, @NonNull String> getKafkaConsumerFactory();
 
 }

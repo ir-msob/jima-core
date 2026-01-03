@@ -3,6 +3,8 @@ package ir.msob.jima.core.commons.shared;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 import org.springframework.core.ParameterizedTypeReference;
 
 import java.lang.reflect.Type;
@@ -30,9 +32,10 @@ public interface BaseTypeReference {
      * @param typeRef the Jackson TypeReference to convert
      * @return a Spring ParameterizedTypeReference with the same type information
      */
-    default <T> ParameterizedTypeReference<T> cast(TypeReference<T> typeRef) {
+    default <T> ParameterizedTypeReference<@NonNull T> cast(TypeReference<T> typeRef) {
         return new ParameterizedTypeReference<>() {
             @Override
+            @NullMarked
             public Type getType() {
                 return typeRef.getType();
             }

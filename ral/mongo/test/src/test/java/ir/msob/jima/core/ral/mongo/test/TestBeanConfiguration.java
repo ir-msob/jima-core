@@ -11,9 +11,7 @@ import org.testcontainers.mongodb.MongoDBContainer;
 public class TestBeanConfiguration {
     @Bean
     public DynamicPropertyRegistrar dynamicPropertyRegistrar(MongoDBContainer container) {
-        return registry -> {
-            MongoContainerConfiguration.registry(registry, container);
-        };
+        return registry -> MongoContainerConfiguration.registry(registry, container);
     }
 
     @Bean

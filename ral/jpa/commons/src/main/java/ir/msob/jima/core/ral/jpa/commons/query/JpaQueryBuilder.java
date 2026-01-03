@@ -4,6 +4,7 @@ import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.filter.Filter;
 import ir.msob.jima.core.commons.repository.BaseQuery;
 import ir.msob.jima.core.commons.repository.BaseQueryBuilder;
+import org.jspecify.annotations.NonNull;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
@@ -43,7 +44,7 @@ public class JpaQueryBuilder implements BaseQueryBuilder {
                 try {
                     var filter = (Filter<?>) field.get(criteria);
                     if (filter != null) {
-                        Specification<Object> spec = toSpecification(field.getName(), filter);
+                        Specification<@NonNull Object> spec = toSpecification(field.getName(), filter);
                         if (spec != null) jpaQuery.where(spec);
                     }
                 } catch (IllegalAccessException ignored) {
@@ -74,13 +75,13 @@ public class JpaQueryBuilder implements BaseQueryBuilder {
      * Convert a single Filter for a field into a Specification.
      * Returns null if no content in filter.
      */
-    private Specification<Object> toSpecification(String fieldName, Filter<?> filter) {
+    private Specification<@NonNull Object> toSpecification(String fieldName, Filter<?> filter) {
         if (filter == null) return null;
 
         // If OR exists, we produce a specification that ORs sub-conditions.
         if (filter.getOr() != null) {
             var f = filter.getOr();
-            List<Specification<Object>> orSpecs = new ArrayList<>();
+            List<Specification<@NonNull Object>> orSpecs = new ArrayList<>();
             if (f.getEq() != null) orSpecs.add(equalsSpec(fieldName, f.getEq()));
             if (f.getExists() != null) orSpecs.add(existsSpec(fieldName, f.getExists()));
             if (f.getGt() != null) orSpecs.add(gtSpec(fieldName, f.getGt()));
@@ -93,7 +94,7 @@ public class JpaQueryBuilder implements BaseQueryBuilder {
             if (f.getNin() != null) orSpecs.add(ninSpec(fieldName, f.getNin()));
 
             if (orSpecs.isEmpty()) return null;
-            Specification<Object> combined = orSpecs.get(0);
+            Specification<@NonNull Object> combined = orSpecs.getFirst();
             for (int i = 1; i < orSpecs.size(); i++) combined = combined.or(orSpecs.get(i));
             return combined;
         }
@@ -115,29 +116,29 @@ public class JpaQueryBuilder implements BaseQueryBuilder {
 
     /* ------------------- Specification helpers ------------------- */
 
-    private Specification<Object> equalsSpec(String field, Object value) {
+    private Specification<@NonNull Object> equalsSpec(String field, Object value) {
         return (root, cq, cb) -> cb.equal(root.get(field), value);
     }
 
-    private Specification<Object> neSpec(String field, Object value) {
+    private Specification<@NonNull Object> neSpec(String field, Object value) {
         return (root, cq, cb) -> cb.notEqual(root.get(field), value);
     }
 
     @SuppressWarnings("unchecked")
-    private Specification<Object> inSpec(String field, Object collection) {
+    private Specification<@NonNull Object> inSpec(String field, Object collection) {
         return (root, cq, cb) -> root.get(field).in((Collection<?>) collection);
     }
 
     @SuppressWarnings("unchecked")
-    private Specification<Object> ninSpec(String field, Object collection) {
+    private Specification<@NonNull Object> ninSpec(String field, Object collection) {
         return (root, cq, cb) -> cb.not(root.get(field).in((Collection<?>) collection));
     }
 
-    private Specification<Object> likeSpec(String field, Object pattern) {
+    private Specification<@NonNull Object> likeSpec(String field, Object pattern) {
         return (root, cq, cb) -> cb.like(root.get(field), pattern.toString());
     }
 
-    private Specification<Object> existsSpec(String field, Object value) {
+    private Specification<@NonNull Object> existsSpec(String field, Object value) {
         return (root, cq, cb) -> {
             Boolean v = (Boolean) value;
             return v ? cb.isNotNull(root.get(field)) : cb.isNull(root.get(field));
@@ -145,22 +146,22 @@ public class JpaQueryBuilder implements BaseQueryBuilder {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    private Specification<Object> gtSpec(String field, Object value) {
+    private Specification<@NonNull Object> gtSpec(String field, Object value) {
         return (root, cq, cb) -> cb.greaterThan(root.get(field), (Comparable) value);
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    private Specification<Object> gteSpec(String field, Object value) {
+    private Specification<@NonNull Object> gteSpec(String field, Object value) {
         return (root, cq, cb) -> cb.greaterThanOrEqualTo(root.get(field), (Comparable) value);
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    private Specification<Object> ltSpec(String field, Object value) {
+    private Specification<@NonNull Object> ltSpec(String field, Object value) {
         return (root, cq, cb) -> cb.lessThan(root.get(field), (Comparable) value);
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    private Specification<Object> lteSpec(String field, Object value) {
+    private Specification<@NonNull Object> lteSpec(String field, Object value) {
         return (root, cq, cb) -> cb.lessThanOrEqualTo(root.get(field), (Comparable) value);
     }
 

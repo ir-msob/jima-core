@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.jspecify.annotations.NonNull;
 
 import java.io.Serializable;
 import java.util.Comparator;
@@ -99,12 +100,12 @@ public class Characteristic<ID extends Comparable<ID> & Serializable> extends Ba
      * equal to, or greater than the specified characteristic.
      */
     @Override
-    public int compareTo(Characteristic<ID> o) {
+    public int compareTo(@NonNull Characteristic<ID> o) {
         if (this == o) {
             return 0;
         }
 
-        if (o != null && (this.getKey() != null && o.getKey() != null)) {
+        if (this.getKey() != null && o.getKey() != null) {
             return this.getKey().compareTo(o.getKey());
 
         }

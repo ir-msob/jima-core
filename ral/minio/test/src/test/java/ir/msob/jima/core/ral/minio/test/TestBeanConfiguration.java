@@ -10,9 +10,7 @@ import org.testcontainers.containers.MinIOContainer;
 public class TestBeanConfiguration {
     @Bean
     public DynamicPropertyRegistrar dynamicPropertyRegistrar(MinIOContainer container) {
-        return registry -> {
-            MinIOContainerConfiguration.registry(registry, container);
-        };
+        return registry -> MinIOContainerConfiguration.registry(registry, container);
     }
 
     @Bean

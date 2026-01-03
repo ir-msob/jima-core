@@ -43,22 +43,34 @@ public interface BaseExceptionMapper {
     @SuppressWarnings("unchecked")
     private <ER extends ExceptionResponseAbstract, E extends BaseRuntimeException> ER castException(E ex) {
         if (ex != null) {
-            if (ex instanceof BadRequestException exception) {
-                return (ER) new BadRequestResponse(exception.getMessage(), exception.getFieldName(), exception.getValue());
-            } else if (ex instanceof ConflictException exception) {
-                return (ER) new ConflictResponse(exception.getMessage());
-            } else if (ex instanceof DataNotFoundException exception) {
-                return (ER) new DataNotFoundResponse(exception.getEntity(), exception.getEntityId(), exception.getEntityClass());
-            } else if (ex instanceof DomainNotFoundException exception) {
-                return (ER) new DomainNotFoundResponse(exception.getDomainId(), exception.getDomainClass());
-            } else if (ex instanceof CommonRuntimeException exception) {
-                return (ER) new CommonRuntimeResponse(exception.getMessage());
-            } else if (ex instanceof ValidationException exception) {
-                return (ER) new ValidationResponse(exception.getMessage(), exception.getInvalidData());
-            } else if (ex instanceof DuplicateException exception) {
-                return (ER) new DuplicateResponse(exception.getKey(), exception.getValue(), exception.getMessage());
-            } else if (ex instanceof ResourceNotFoundException exception) {
-                return (ER) new ResourceNotFoundResponse(exception.getMessage(), exception.getResource());
+            switch (ex) {
+                case BadRequestException exception -> {
+                    return (ER) new BadRequestResponse(exception.getMessage(), exception.getFieldName(), exception.getValue());
+                }
+                case ConflictException exception -> {
+                    return (ER) new ConflictResponse(exception.getMessage());
+                }
+                case DataNotFoundException exception -> {
+                    return (ER) new DataNotFoundResponse(exception.getEntity(), exception.getEntityId(), exception.getEntityClass());
+                }
+                case DomainNotFoundException exception -> {
+                    return (ER) new DomainNotFoundResponse(exception.getDomainId(), exception.getDomainClass());
+                }
+                case CommonRuntimeException exception -> {
+                    return (ER) new CommonRuntimeResponse(exception.getMessage());
+                }
+                case ValidationException exception -> {
+                    return (ER) new ValidationResponse(exception.getMessage(), exception.getInvalidData());
+                }
+                case DuplicateException exception -> {
+                    return (ER) new DuplicateResponse(exception.getKey(), exception.getValue(), exception.getMessage());
+                }
+                case ResourceNotFoundException exception -> {
+                    return (ER) new ResourceNotFoundResponse(exception.getMessage(), exception.getResource());
+                }
+                default -> {
+                    return (ER) new CommonRuntimeResponse(ex.getMessage());
+                }
             }
         }
         return null;

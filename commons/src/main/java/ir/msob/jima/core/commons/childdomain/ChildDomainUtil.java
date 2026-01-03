@@ -4,6 +4,7 @@ import ir.msob.jima.core.commons.childdomain.criteria.BaseChildCriteria;
 import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
 import ir.msob.jima.core.commons.util.ReflectionUtil;
+import org.jspecify.annotations.NonNull;
 import reactor.util.function.Tuple2;
 
 import java.io.Serializable;
@@ -45,7 +46,7 @@ public class ChildDomainUtil {
      * @return A function that gets the sorted set of child domains from the DTO.
      */
     public static <ID extends Comparable<ID> & Serializable, DTO extends BaseDto<ID>, CD extends BaseChildDomain<ID>> Function<DTO, SortedSet<CD>> getFunction(Class<CD> cdClass, Class<DTO> dtoClass) {
-        for (Tuple2<Method, ChildDomain> tuple2 : ChildDomain.info.getGetterMethodHasAnnotation(dtoClass)) {
+        for (Tuple2<@NonNull Method, @NonNull ChildDomain> tuple2 : ChildDomain.info.getGetterMethodHasAnnotation(dtoClass)) {
             if (tuple2.getT2().cdClass().isAssignableFrom(cdClass)) {
                 return dto -> {
                     try {

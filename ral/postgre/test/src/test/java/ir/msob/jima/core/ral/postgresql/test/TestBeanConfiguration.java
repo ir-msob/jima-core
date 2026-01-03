@@ -10,9 +10,7 @@ import org.testcontainers.postgresql.PostgreSQLContainer;
 public class TestBeanConfiguration {
     @Bean
     public DynamicPropertyRegistrar dynamicPropertyRegistrar(PostgreSQLContainer container) {
-        return registry -> {
-            PostgreSQLContainerConfiguration.registry(registry, container);
-        };
+        return registry -> PostgreSQLContainerConfiguration.registry(registry, container);
     }
 
     @Bean

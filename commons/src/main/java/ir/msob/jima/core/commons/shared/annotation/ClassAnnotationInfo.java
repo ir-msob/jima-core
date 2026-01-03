@@ -9,21 +9,11 @@ import java.lang.annotation.Annotation;
  * It provides functionality to search for annotations existing on a class, including its parent classes and ancestors.
  * <p>
  * This class is parameterized with the type of annotation to be checked.
+ *
+ * @param annotationClass The type of annotation to check for
  */
 
-public class ClassAnnotationInfo<A extends Annotation> {
-    // The type of annotation to check for
-    private final Class<A> annotationClass;
-
-    /**
-     * Constructs a new ClassAnnotationInfo instance.
-     *
-     * @param annotationClass The type of annotation to be checked.
-     */
-    public ClassAnnotationInfo(Class<A> annotationClass) {
-        this.annotationClass = annotationClass;
-    }
-
+public record ClassAnnotationInfo<A extends Annotation>(Class<A> annotationClass) {
     /**
      * Checks if the specified class has the annotation.
      *

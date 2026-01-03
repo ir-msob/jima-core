@@ -2,6 +2,7 @@ package ir.msob.jima.core.api.kafka.commons;
 
 import ir.msob.jima.core.commons.logger.Logger;
 import ir.msob.jima.core.commons.logger.LoggerFactory;
+import org.jspecify.annotations.NonNull;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.listener.KafkaMessageListenerContainer;
@@ -44,11 +45,11 @@ public final class KafkaListenerUtil {
      * @param containerProperties  The container properties to configure the listener.
      * @param channel              The Kafka channel to listen to.
      */
-    private static void startContainer(ConsumerFactory<String, String> kafkaConsumerFactory,
+    private static void startContainer(ConsumerFactory<@NonNull String, @NonNull String> kafkaConsumerFactory,
                                        ContainerProperties containerProperties,
                                        String channel) {
         log.info("Starting Kafka listener container for channel '{}'", channel);
-        KafkaMessageListenerContainer<String, String> container =
+        KafkaMessageListenerContainer<@NonNull String, @NonNull String> container =
                 new KafkaMessageListenerContainer<>(kafkaConsumerFactory, containerProperties);
         container.setBeanName(channel);
         container.start();
@@ -63,7 +64,7 @@ public final class KafkaListenerUtil {
      * @param groupId              The consumer group ID for this listener.
      * @param messageHandler       The callback to handle incoming messages.
      */
-    public static void startListener(ConsumerFactory<String, String> kafkaConsumerFactory,
+    public static void startListener(ConsumerFactory<@NonNull String, @NonNull String> kafkaConsumerFactory,
                                      String channel,
                                      String groupId,
                                      Consumer<String> messageHandler) {
@@ -73,9 +74,9 @@ public final class KafkaListenerUtil {
         ContainerProperties containerProperties = createContainerProperties(channel, groupId);
 
         // Attach message listener
-        containerProperties.setMessageListener((MessageListener<String, String>) record -> {
-            log.debug("Received message from channel '{}': {}", channel, record.value());
-            messageHandler.accept(record.value());
+        containerProperties.setMessageListener((MessageListener<@NonNull String, @NonNull String>) consumerRecord -> {
+            log.debug("Received message from channel '{}': {}", channel, consumerRecord.value());
+            messageHandler.accept(consumerRecord.value());
         });
 
         startContainer(kafkaConsumerFactory, containerProperties, channel);

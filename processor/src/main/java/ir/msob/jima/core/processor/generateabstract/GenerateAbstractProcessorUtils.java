@@ -87,7 +87,7 @@ public class GenerateAbstractProcessorUtils {
             String typeParam = tp.toString();
             if (!tp.getBounds().isEmpty()) {
                 List<? extends TypeMirror> bounds = tp.getBounds();
-                if (bounds.size() == 1 && bounds.get(0).toString().equals("java.lang.Object")) {
+                if (bounds.size() == 1 && bounds.getFirst().toString().equals("java.lang.Object")) {
                     // Don't add "extends Object"
                 } else {
                     typeParam += " extends " + bounds.stream().map(bound -> getSimpleName(bound.toString())).collect(Collectors.joining(" & "));

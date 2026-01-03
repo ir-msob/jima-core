@@ -7,6 +7,7 @@ import ir.msob.jima.core.commons.Constants;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Component;
 import reactor.util.function.Tuple3;
 import reactor.util.function.Tuples;
@@ -29,7 +30,7 @@ public class JsonParser {
      * @return A map containing the differences between the two JSON objects.
      * @throws JsonProcessingException if there is an issue with JSON processing.
      */
-    public Map<String, Tuple3<Operation, Optional<Object>, Optional<Object>>> diff(Object object1, Object object2) throws JsonProcessingException {
+    public Map<String, Tuple3<@NonNull Operation, @NonNull Optional<Object>, @NonNull Optional<Object>>> diff(Object object1, Object object2) throws JsonProcessingException {
         Map<String, Object> data1 = getJsonPaths(object1);
         Map<String, Object> data2 = getJsonPaths(object2);
         return getDiff(data1, data2);
@@ -43,18 +44,18 @@ public class JsonParser {
      * @return A map containing the differences between the two JSON objects.
      * @throws JsonProcessingException if there is an issue with JSON processing.
      */
-    private Map<String, Tuple3<Operation, Optional<Object>, Optional<Object>>> getDiff(Map<String, Object> data1, Map<String, Object> data2) throws JsonProcessingException {
-        Map<String, Tuple3<Operation, Optional<Object>, Optional<Object>>> result = new TreeMap<>();
+    private Map<String, Tuple3<@NonNull Operation, @NonNull Optional<Object>, @NonNull Optional<Object>>> getDiff(Map<String, Object> data1, Map<String, Object> data2) throws JsonProcessingException {
+        Map<String, Tuple3<@NonNull Operation, @NonNull Optional<Object>, @NonNull Optional<Object>>> result = new TreeMap<>();
         for (Map.Entry<String, Object> entry1 : data1.entrySet()) {
             Object value1 = entry1.getValue();
             Object value2 = data2.get(entry1.getKey());
             data2.remove(entry1.getKey());
-            Tuple3<Operation, Optional<Object>, Optional<Object>> tuple3 = Tuples.of(compare(value1, value2), Optional.ofNullable(value1), Optional.ofNullable(value2));
+            Tuple3<@NonNull Operation, @NonNull Optional<Object>, @NonNull Optional<Object>> tuple3 = Tuples.of(compare(value1, value2), Optional.ofNullable(value1), Optional.ofNullable(value2));
             result.put(entry1.getKey(), tuple3);
         }
 
         for (Map.Entry<String, Object> entry2 : data2.entrySet()) {
-            Tuple3<Operation, Optional<Object>, Optional<Object>> tuple3 = Tuples.of(Operation.ADDED, Optional.empty(), Optional.ofNullable(entry2.getValue()));
+            Tuple3<@NonNull Operation, @NonNull Optional<Object>, @NonNull Optional<Object>> tuple3 = Tuples.of(Operation.ADDED, Optional.empty(), Optional.ofNullable(entry2.getValue()));
             result.put(entry2.getKey(), tuple3);
         }
         return result;

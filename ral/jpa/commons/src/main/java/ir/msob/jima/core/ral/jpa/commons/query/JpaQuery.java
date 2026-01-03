@@ -2,6 +2,7 @@ package ir.msob.jima.core.ral.jpa.commons.query;
 
 import ir.msob.jima.core.commons.repository.BaseQuery;
 import lombok.Getter;
+import org.jspecify.annotations.NonNull;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -20,7 +21,7 @@ public class JpaQuery<T> implements BaseQuery {
 
     private final Set<String> includes = new LinkedHashSet<>();
     private final Set<String> excludes = new LinkedHashSet<>();
-    private Specification<T> specification;
+    private Specification<@NonNull T> specification;
     private Pageable pageable;
     private Sort sort;
     private Integer limit;
@@ -28,7 +29,7 @@ public class JpaQuery<T> implements BaseQuery {
     public JpaQuery() {
     }
 
-    public JpaQuery<T> where(Specification<T> spec) {
+    public JpaQuery<T> where(Specification<@NonNull T> spec) {
         if (spec == null) return this;
         if (this.specification == null) this.specification = spec;
         else this.specification = this.specification.and(spec);

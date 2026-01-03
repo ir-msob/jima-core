@@ -1,5 +1,7 @@
 package ir.msob.jima.core.commons.util;
 
+import lombok.Getter;
+import org.jspecify.annotations.NonNull;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -15,16 +17,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class BeanUtil implements ApplicationContextAware {
 
+    @Getter
     private static ApplicationContext applicationContext;
-
-    /**
-     * Gets the application context.
-     *
-     * @return The Spring application context.
-     */
-    public static ApplicationContext getApplicationContext() {
-        return applicationContext;
-    }
 
     /**
      * Sets the application context.
@@ -32,7 +26,7 @@ public class BeanUtil implements ApplicationContextAware {
      * @param applicationContext The Spring application context to set.
      * @throws BeansException If an error occurs while setting the application context.
      */
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
         BeanUtil.applicationContext = applicationContext;
     }
 
