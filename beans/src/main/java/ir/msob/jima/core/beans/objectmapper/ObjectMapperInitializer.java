@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * The 'ObjectMapperInitializer' class is a component responsible for initializing an instance of the Jackson ObjectMapper with custom settings in a Spring-based application.
@@ -53,7 +54,11 @@ public class ObjectMapperInitializer {
             Set<Class<? extends BaseType>> baseTypeClasses = reflections.getSubTypesOf(BaseType.class);
             baseTypeClasses.forEach(objectMapper::registerSubtypes);
 
-            Set<Class<? extends BaseDto>> baseDtoClasses = reflections.getSubTypesOf(BaseDto.class);
+            @SuppressWarnings("unchecked")
+            Set<Class<? extends BaseDto<?>>> baseDtoClasses = reflections.getSubTypesOf(BaseDto.class)
+                    .stream()
+                    .map(clazz -> (Class<? extends BaseDto<?>>) clazz)
+                    .collect(Collectors.toSet());
             baseDtoClasses.forEach(objectMapper::registerSubtypes);
 
             Set<Class<? extends ModelType>> modelTypeClasses = reflections.getSubTypesOf(ModelType.class);
