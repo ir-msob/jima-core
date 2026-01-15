@@ -1,5 +1,6 @@
 package ir.msob.jima.core.ral.r2dbc.commons;
 
+import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.domain.BaseDomain;
 import ir.msob.jima.core.commons.methodstats.MethodStats;
 import ir.msob.jima.core.commons.repository.BaseRepository;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
  * BaseR2dbcSqlRepository: default repository utilities for R2DBC using R2dbcEntityTemplate.
  * Concrete repositories should implement getR2dbcEntityTemplate() and getDomainClass().
  */
-public interface BaseR2dbcRepository<ID extends Comparable<ID> & Serializable, D extends BaseDomain<ID>> extends BaseRepository<ID, D> {
+public interface BaseR2dbcRepository<ID extends Comparable<ID> & Serializable, D extends BaseDomain<ID>, C extends BaseCriteria<ID>> extends BaseRepository<ID, D, C> {
 
     R2dbcEntityTemplate getR2dbcEntityTemplate();
 

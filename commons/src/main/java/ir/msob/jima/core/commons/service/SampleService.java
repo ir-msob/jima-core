@@ -22,7 +22,7 @@ import java.io.Serializable;
  * @param <R>    the type of the repository, which must extend BaseRepository
  */
 public class SampleService<ID extends Comparable<ID> & Serializable, USER extends BaseUser, D extends BaseDomain<ID>, DTO extends BaseDto<ID>,
-        C extends BaseCriteria<ID>, R extends BaseRepository<ID, D>> implements BaseService<ID, USER, D, DTO, C, R> {
+        C extends BaseCriteria<ID>, R extends BaseRepository<ID, D, C>> implements BaseService<ID, USER, D, DTO, C, R> {
     @Override
     public R getRepository() {
         return null;

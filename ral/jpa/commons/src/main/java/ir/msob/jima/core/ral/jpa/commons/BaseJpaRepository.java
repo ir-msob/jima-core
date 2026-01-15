@@ -1,5 +1,6 @@
 package ir.msob.jima.core.ral.jpa.commons;
 
+import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.domain.BaseDomain;
 import ir.msob.jima.core.commons.methodstats.MethodStats;
 import ir.msob.jima.core.commons.repository.BaseRepository;
@@ -27,8 +28,8 @@ import java.util.Map;
  * Base repository interface for JPA-backed domain objects.
  * All blocking JPA calls are wrapped in boundedElastic scheduler.
  */
-public interface BaseJpaRepository<ID extends Comparable<ID> & Serializable, D extends BaseDomain<ID>>
-        extends BaseRepository<ID, D> {
+public interface BaseJpaRepository<ID extends Comparable<ID> & Serializable, D extends BaseDomain<ID>, C extends BaseCriteria<ID>>
+        extends BaseRepository<ID, D, C> {
 
     EntityManager getEntityManager();
 

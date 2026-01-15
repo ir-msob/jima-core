@@ -38,7 +38,7 @@ jima:
     postgreSQL:
       image: "postgres:17-alpine"
       reuse: true
-      container: "jima-oracle"
+      container: "jima-postgresql"
       host-port: 15432
       container-port: 5432
     redis:

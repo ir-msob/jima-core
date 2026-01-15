@@ -1,7 +1,8 @@
 package ir.msob.jima.core.commons;
 
+import ir.msob.jima.core.commons.domain.SampleCriteria;
 import ir.msob.jima.core.commons.domain.SampleDomain;
 import ir.msob.jima.core.commons.repository.SampleRepository;
 
-public class ConcreteBaseRepository extends SampleRepository<String, SampleDomain<String>> {
+public class ConcreteBaseRepository extends SampleRepository<String, SampleDomain<String>, SampleCriteria<String>> {
 }

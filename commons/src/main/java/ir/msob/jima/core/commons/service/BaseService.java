@@ -28,7 +28,7 @@ public interface BaseService<
         D extends BaseDomain<ID>,
         DTO extends BaseDto<ID>,
         C extends BaseCriteria<ID>,
-        R extends BaseRepository<ID, D>> {
+        R extends BaseRepository<ID, D, C>> {
 
     /**
      * Get the class type for the identifier (e.g., entity primary key) used in domain entities.

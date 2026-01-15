@@ -14,7 +14,7 @@ import java.io.Serializable;
  * @param <ID> The type of the identifier (usually an entity's primary key) which is both comparable and serializable.
  * @param <D>  The type representing a domain entity, typically derived from 'BaseDomain'.
  */
-public class SampleRepository<ID extends Comparable<ID> & Serializable, D extends BaseDomain<ID>> implements BaseRepository<ID, D> {
+public class SampleRepository<ID extends Comparable<ID> & Serializable, D extends BaseDomain<ID>, C extends BaseCriteria<ID>> implements BaseRepository<ID, D, C> {
     @Override
     public BaseQueryBuilder getQueryBuilder() {
         return new BaseQueryBuilder() {
