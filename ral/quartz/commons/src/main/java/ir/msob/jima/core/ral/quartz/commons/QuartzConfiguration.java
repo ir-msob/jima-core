@@ -21,7 +21,7 @@ import java.util.Properties;
 public class QuartzConfiguration {
 
     private final DataSource dataSource;
-    Logger log = LoggerFactory.getLogger(QuartzConfiguration.class);
+    Logger logger = LoggerFactory.getLogger(QuartzConfiguration.class);
 
     /**
      * Create and configure the SchedulerFactoryBean.
@@ -32,7 +32,7 @@ public class QuartzConfiguration {
      */
     @Bean
     public SchedulerFactoryBean schedulerFactoryBean(ApplicationContext applicationContext, QuartzProperties quartzProperties) {
-        log.info("Initializing SchedulerFactoryBean...");
+        logger.info("Initializing SchedulerFactoryBean...");
         SpringBeanJobFactory jobFactory = new SpringBeanJobFactory();
         jobFactory.setApplicationContext(applicationContext);
 

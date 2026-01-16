@@ -18,7 +18,7 @@ import java.util.Set;
  */
 public class NativeUtil {
     // Logger for logging registration and other messages
-    private static final Logger log = LoggerFactory.getLogger(NativeUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(NativeUtil.class);
 
     private NativeUtil() {
         // Private constructor to prevent instantiation; this class is meant to be used statically.
@@ -55,7 +55,7 @@ public class NativeUtil {
     @SneakyThrows
     public static void register(RuntimeHints hints, Class<?> clazz) {
         // Log the registration of the class
-        log.info("Register class of {}", clazz.toString());
+        logger.info("Register class of {}", clazz.toString());
 
         // Register the class for various member categories using hints
         hints.reflection().registerType(clazz,

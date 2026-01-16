@@ -22,7 +22,7 @@ public class MethodStatsLogger {
     /**
      * Logger instance for logging method execution statistics.
      */
-    private static final Logger log = LoggerFactory.getLogger(MethodStatsLogger.class);
+    private static final Logger logger = LoggerFactory.getLogger(MethodStatsLogger.class);
 
     // Core configuration properties instance
     private final JimaProperties properties;
@@ -57,10 +57,10 @@ public class MethodStatsLogger {
 
             // If warning logging is enabled and the execution time exceeds the threshold, log a warning
             if (dif > properties.getMethodStats().getWarnTime())
-                log.warn(msg);
+                logger.warn(msg);
                 // If info logging is enabled, log an info message
             else if (properties.getMethodStats().getLogLevel() == MethodStatsProperties.LogLevel.INFO)
-                log.info(msg);
+                logger.info(msg);
 
             // Return the result of the method execution
             return result;

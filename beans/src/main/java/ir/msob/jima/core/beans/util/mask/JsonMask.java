@@ -28,7 +28,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class JsonMask {
-    private static final Logger log = LoggerFactory.getLogger(JsonMask.class);
+    private static final Logger logger = LoggerFactory.getLogger(JsonMask.class);
     private final ObjectMapper objectMapper;
     private final PatchUtil patchUtil;
 
@@ -45,7 +45,7 @@ public class JsonMask {
         try {
             return JsonPath.read(o, fieldPath);
         } catch (PathNotFoundException e) {
-            log.error(e.getMessage(), e);
+            logger.error(e.getMessage(), e);
         }
         return null;
     }

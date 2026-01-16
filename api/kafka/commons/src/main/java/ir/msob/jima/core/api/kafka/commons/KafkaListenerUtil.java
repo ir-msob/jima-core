@@ -18,7 +18,7 @@ import java.util.function.Consumer;
  */
 public final class KafkaListenerUtil {
 
-    private static final Logger log = LoggerFactory.getLogger(KafkaListenerUtil.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaListenerUtil.class);
 
     private KafkaListenerUtil() {
         // Prevent instantiation
@@ -32,7 +32,7 @@ public final class KafkaListenerUtil {
      * @return Configured ContainerProperties.
      */
     private static ContainerProperties createContainerProperties(String channel, String groupId) {
-        log.debug("Creating ContainerProperties for channel '{}' with groupId '{}'", channel, groupId);
+        logger.debug("Creating ContainerProperties for channel '{}' with groupId '{}'", channel, groupId);
         ContainerProperties containerProperties = new ContainerProperties(channel);
         containerProperties.setGroupId(groupId);
         return containerProperties;
@@ -48,12 +48,12 @@ public final class KafkaListenerUtil {
     private static void startContainer(ConsumerFactory<@NonNull String, @NonNull String> kafkaConsumerFactory,
                                        ContainerProperties containerProperties,
                                        String channel) {
-        log.info("Starting Kafka listener container for channel '{}'", channel);
+        logger.info("Starting Kafka listener container for channel '{}'", channel);
         KafkaMessageListenerContainer<@NonNull String, @NonNull String> container =
                 new KafkaMessageListenerContainer<>(kafkaConsumerFactory, containerProperties);
         container.setBeanName(channel);
         container.start();
-        log.info("Kafka listener container for channel '{}' started successfully", channel);
+        logger.info("Kafka listener container for channel '{}' started successfully", channel);
     }
 
     /**
@@ -69,13 +69,13 @@ public final class KafkaListenerUtil {
                                      String groupId,
                                      Consumer<String> messageHandler) {
 
-        log.info("Initializing Kafka listener for channel '{}', groupId '{}'", channel, groupId);
+        logger.info("Initializing Kafka listener for channel '{}', groupId '{}'", channel, groupId);
 
         ContainerProperties containerProperties = createContainerProperties(channel, groupId);
 
         // Attach message listener
         containerProperties.setMessageListener((MessageListener<@NonNull String, @NonNull String>) consumerRecord -> {
-            log.debug("Received message from channel '{}': {}", channel, consumerRecord.value());
+            logger.debug("Received message from channel '{}': {}", channel, consumerRecord.value());
             messageHandler.accept(consumerRecord.value());
         });
 

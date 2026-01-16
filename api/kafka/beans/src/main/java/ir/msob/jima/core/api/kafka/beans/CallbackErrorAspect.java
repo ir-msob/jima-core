@@ -34,7 +34,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class CallbackErrorAspect {
-    private static final Logger log = LoggerFactory.getLogger(CallbackErrorAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(CallbackErrorAspect.class);
     private final BaseAsyncClient asyncClient;
     private final ObjectMapper objectMapper;
     private final BaseExceptionMapper exceptionMapper;
@@ -49,7 +49,7 @@ public class CallbackErrorAspect {
     @AfterThrowing(value = "@annotation(ir.msob.jima.core.commons.callback.CallbackError)", throwing = "throwing")
     public void afterThrowing(JoinPoint point, Throwable throwing) throws JsonProcessingException {
         callback(point, throwing);
-        log.error(throwing.getMessage(), throwing);
+        logger.error(throwing.getMessage(), throwing);
     }
 
     /**

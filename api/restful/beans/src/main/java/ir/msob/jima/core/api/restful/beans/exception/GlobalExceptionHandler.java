@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
     private final BaseExceptionMapper exceptionMapper;
-    private final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
      * Handles exceptions of type {@link BaseRuntimeException}.

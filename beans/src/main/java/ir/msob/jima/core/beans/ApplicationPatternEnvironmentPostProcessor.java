@@ -29,14 +29,14 @@ public class ApplicationPatternEnvironmentPostProcessor implements EnvironmentPo
     private static final String[] EXTENSIONS = {".yml", ".yaml", ".properties"};
     private static final String CONFIG_PATTERN_PROPERTY = "jima.config.pattern";
 
-    private final DeferredLog log = new DeferredLog();
+    private final DeferredLog logger = new DeferredLog();
 
     @Override
     public void postProcessEnvironment(@Nullable ConfigurableEnvironment environment, @Nullable SpringApplication application) {
         try {
             processConfigurationResources(environment);
         } finally {
-            log.replayTo(ApplicationPatternEnvironmentPostProcessor.class);
+            logger.replayTo(ApplicationPatternEnvironmentPostProcessor.class);
         }
     }
 
@@ -45,7 +45,7 @@ public class ApplicationPatternEnvironmentPostProcessor implements EnvironmentPo
         List<Resource> resources = findAllConfigurationResources(basePattern, environment);
 
         if (resources.isEmpty()) {
-            log.debug("No jima-config resources found for pattern: " + basePattern);
+            logger.debug("No jima-config resources found for pattern: " + basePattern);
             return;
         }
 
@@ -64,7 +64,7 @@ public class ApplicationPatternEnvironmentPostProcessor implements EnvironmentPo
             loadProfileSpecificResources(resolver, basePattern, environment.getActiveProfiles(), allResources);
 
         } catch (IOException e) {
-            log.warn("Failed to resolve resources for pattern: " + basePattern, e);
+            logger.warn("Failed to resolve resources for pattern: " + basePattern, e);
         }
 
         return filterAndSortResources(allResources);
@@ -119,7 +119,7 @@ public class ApplicationPatternEnvironmentPostProcessor implements EnvironmentPo
             registerPropertySources(environment, propertySources, resource);
 
         } catch (Exception ex) {
-            log.warn("Failed to load resource: " + resource.getDescription(), ex);
+            logger.warn("Failed to load resource: " + resource.getDescription(), ex);
         }
     }
 
@@ -132,7 +132,7 @@ public class ApplicationPatternEnvironmentPostProcessor implements EnvironmentPo
         } else if (filename.endsWith(".properties")) {
             return propertiesLoader.load("jima:" + filename, resource);
         } else {
-            log.warn("Unknown extension, skipping resource: " + resource.getDescription());
+            logger.warn("Unknown extension, skipping resource: " + resource.getDescription());
             return Collections.emptyList();
         }
     }
@@ -146,7 +146,7 @@ public class ApplicationPatternEnvironmentPostProcessor implements EnvironmentPo
 
         for (PropertySource<?> propertySource : propertySources) {
             environment.getPropertySources().addLast(propertySource);
-            log.info("Loaded jima config: " + resource.getDescription() + " -> propertySource=" + propertySource.getName());
+            logger.info("Loaded jima config: " + resource.getDescription() + " -> propertySource=" + propertySource.getName());
         }
     }
 
