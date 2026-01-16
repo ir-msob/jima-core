@@ -4,9 +4,12 @@ import com.google.common.collect.Sets;
 import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.domain.BaseCriteriaAbstract;
 import ir.msob.jima.core.commons.filter.Filter;
+import ir.msob.jima.core.commons.safemodify.UniqueField;
 import lombok.SneakyThrows;
+import org.springframework.util.Assert;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.Collection;
 
 /**
@@ -97,6 +100,15 @@ public class CriteriaUtil {
     public static <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>> C idCriteria(Class<C> criteriaClass, ID... ids) {
         C criteria = criteriaClass.getDeclaredConstructor().newInstance();
         criteria.setId(Filter.in(Sets.newHashSet(ids)));
+        return criteria;
+    }
+
+    @SneakyThrows
+    public static <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>> C uniqueCriteria(Class<C> criteriaClass, String uniqueField) {
+        C criteria = criteriaClass.getDeclaredConstructor().newInstance();
+        Field field = UniqueField.info.getFirstFieldHasAnnotation(criteria.getClass());
+        Assert.notNull(field, "Unique Field Not Found in Criteria");
+        field.set(criteria, Filter.eq(uniqueField));
         return criteria;
     }
 }

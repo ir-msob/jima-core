@@ -42,7 +42,8 @@ public abstract class AuditDomainAbstract<ID extends Comparable<ID> & Serializab
     /**
      * The version of the audit domain.
      */
-    private Long version = 0L;
+    @NotBlank
+    private String version;
 
     /**
      * Compares this audit domain with the specified audit domain for order.
@@ -55,7 +56,7 @@ public abstract class AuditDomainAbstract<ID extends Comparable<ID> & Serializab
         if (this == o) {
             return 0;
         }
-        int compare = Objects.compare(this.getVersion(), o.getVersion(), Long::compareTo);
+        int compare = Objects.compare(this.getVersion(), o.getVersion(), String::compareTo);
         if (compare != 0) {
             return compare;
         }

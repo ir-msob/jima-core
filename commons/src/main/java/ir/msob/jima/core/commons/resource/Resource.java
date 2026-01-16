@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.resource;
 
 import ir.msob.jima.core.commons.shared.ResourceType;
-import ir.msob.jima.core.commons.shared.annotation.ClassAnnotationInfo;
+import ir.msob.jima.core.commons.util.ClassAnnotationInfo;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

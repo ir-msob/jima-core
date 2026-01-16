@@ -1,7 +1,7 @@
 package ir.msob.jima.core.commons.childdomain;
 
 import ir.msob.jima.core.commons.childdomain.criteria.BaseChildCriteria;
-import ir.msob.jima.core.commons.shared.annotation.FieldAnnotationInfo;
+import ir.msob.jima.core.commons.util.FieldAnnotationInfo;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

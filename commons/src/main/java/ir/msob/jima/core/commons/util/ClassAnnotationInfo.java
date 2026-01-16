@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.shared.annotation;
+package ir.msob.jima.core.commons.util;
 
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
 

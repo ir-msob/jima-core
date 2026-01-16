@@ -40,6 +40,11 @@ public abstract class AuditDomainCriteriaAbstract<ID extends Comparable<ID> & Se
      */
     private Filter<String> actionType;
 
+    /**
+     * Filter for the action type.
+     */
+    private Filter<String> version;
+
     @Override
     public boolean isMatching(RM relatedModel) {
         if (!super.isMatching(relatedModel)) {
@@ -51,6 +56,9 @@ public abstract class AuditDomainCriteriaAbstract<ID extends Comparable<ID> & Se
         if (Filter.isMatching(this.getActionDate(), relatedModel.getActionDate())) {
             return false;
         }
-        return !Filter.isMatching(this.getActionType(), relatedModel.getActionType());
+        if (Filter.isMatching(this.getActionType(), relatedModel.getActionType())) {
+            return false;
+        }
+        return !Filter.isMatching(this.getVersion(), relatedModel.getVersion());
     }
 }
