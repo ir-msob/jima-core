@@ -21,16 +21,6 @@ public class BeanUtil implements ApplicationContextAware {
     private static ApplicationContext applicationContext;
 
     /**
-     * Sets the application context.
-     *
-     * @param applicationContext The Spring application context to set.
-     * @throws BeansException If an error occurs while setting the application context.
-     */
-    public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
-        BeanUtil.applicationContext = applicationContext;
-    }
-
-    /**
      * Get a bean by its class type.
      *
      * @param beanClass The class type of the bean to retrieve.
@@ -39,5 +29,15 @@ public class BeanUtil implements ApplicationContextAware {
      */
     public static <T> T getBean(Class<T> beanClass) {
         return applicationContext.getBean(beanClass);
+    }
+
+    /**
+     * Sets the application context.
+     *
+     * @param applicationContext The Spring application context to set.
+     * @throws BeansException If an error occurs while setting the application context.
+     */
+    public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
+        BeanUtil.applicationContext = applicationContext;
     }
 }
