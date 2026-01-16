@@ -108,7 +108,7 @@ public class CriteriaUtil {
         C criteria = criteriaClass.getDeclaredConstructor().newInstance();
         Field field = UniqueField.info.getFirstFieldHasAnnotation(criteria.getClass());
         Assert.notNull(field, "Unique Field Not Found in Criteria");
-        field.set(criteria, Filter.eq(uniqueField));
+        criteria.getClass().getDeclaredField(field.getName()).set(criteria, Filter.eq(uniqueField));
         return criteria;
     }
 }

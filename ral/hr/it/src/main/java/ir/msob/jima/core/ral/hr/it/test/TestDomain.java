@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.*;
 
 @Setter
@@ -71,7 +72,7 @@ public class TestDomain implements ProjectDomain {
     @NoArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Embeddable
-    public static class AddressInfo {
+    public static class AddressInfo implements Serializable {
         @Column(name = "addr_street")
         private String street;
 
@@ -89,7 +90,7 @@ public class TestDomain implements ProjectDomain {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Entity
     @Table(name = "owner")
-    public static class Owner {
+    public static class Owner implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.UUID)
         private String id;
@@ -103,7 +104,7 @@ public class TestDomain implements ProjectDomain {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Entity
     @Table(name = "child")
-    public static class Child {
+    public static class Child implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.UUID)
         private String id;
@@ -122,7 +123,7 @@ public class TestDomain implements ProjectDomain {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Entity
     @Table(name = "tag")
-    public static class Tag {
+    public static class Tag implements Serializable {
         @Id
         @GeneratedValue(strategy = GenerationType.UUID)
         private String id;
