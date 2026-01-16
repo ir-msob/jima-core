@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.jspecify.annotations.NonNull;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -94,7 +95,7 @@ public class PageableDto implements Pageable, Serializable {
     }
 
     @Override
-    public Sort getSort() {
+    public @NonNull Sort getSort() {
         if (orders.isEmpty()) return Sort.unsorted();
         List<Sort.Order> list = orders.stream()
                 .map(OrderDto::toOrder)
@@ -108,23 +109,23 @@ public class PageableDto implements Pageable, Serializable {
     }
 
     @Override
-    public Pageable next() {
+    public @NonNull Pageable next() {
         return new PageableDto(this.pageNumber + 1, this.pageSize, this.paged, this.orders);
     }
 
     @Override
-    public Pageable previousOrFirst() {
+    public @NonNull Pageable previousOrFirst() {
         int prev = this.pageNumber > 0 ? this.pageNumber - 1 : 0;
         return new PageableDto(prev, this.pageSize, this.paged, this.orders);
     }
 
     @Override
-    public Pageable first() {
+    public @NonNull Pageable first() {
         return new PageableDto(0, this.pageSize, this.paged, this.orders);
     }
 
     @Override
-    public Pageable withPage(int pageNumber) {
+    public @NonNull Pageable withPage(int pageNumber) {
         return new PageableDto(pageNumber, this.pageSize, this.paged, this.orders);
     }
 

@@ -41,7 +41,7 @@ class RedisContainerConfigurationIT {
     void testContainerProperties() {
         String url = container.getRedisURI();
         String host = container.getHost();
-        Integer port = container.getExposedPorts().stream().findFirst().get();
+        Integer port = container.getExposedPorts().stream().findFirst().orElse(null);
         assertEquals(url, configUrl);
         assertEquals(host, configHost);
         assertEquals(port, configPort);

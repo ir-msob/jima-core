@@ -52,12 +52,12 @@ public interface BaseR2dbcRepository<ID extends Comparable<ID> & Serializable, D
 
         return getR2dbcEntityTemplate().count(countQuery, getDomainClass())
                 .flatMap(total -> {
+                    Pageable p = (r2dbcQuery != null) ? r2dbcQuery.getPageable() : Pageable.unpaged();
                     if (total < 1) {
-                        Pageable p = (r2dbcQuery != null) ? r2dbcQuery.getPageable() : Pageable.unpaged();
                         return Mono.just(new PageImpl<>(new ArrayList<>(), p, 0L));
                     }
                     return getR2dbcEntityTemplate().select(q, getDomainClass()).collectList()
-                            .map(list -> (Page<@NonNull D>) new PageImpl<>(list, r2dbcQuery.getPageable(), total));
+                            .map(list -> (Page<@NonNull D>) new PageImpl<>(list, p, total));
                 });
     }
 
@@ -77,12 +77,12 @@ public interface BaseR2dbcRepository<ID extends Comparable<ID> & Serializable, D
         }
 
         Query q = (r2dbcQuery == null) ? Query.empty() : r2dbcQuery.toQuery();
-        return getR2dbcEntityTemplate().update(q, update.getUpdate(), getDomainClass()).map(i -> i != null && i > 0);
+        return getR2dbcEntityTemplate().update(q, update.getUpdate(), getDomainClass()).map(i -> i > 0);
     }
 
     @MethodStats
     default Mono<@NonNull Boolean> delete(R2dbcQuery<D> r2dbcQuery) {
         Query q = (r2dbcQuery == null) ? Query.empty() : r2dbcQuery.toQuery();
-        return getR2dbcEntityTemplate().delete(q, getDomainClass()).map(i -> i != null && i > 0);
+        return getR2dbcEntityTemplate().delete(q, getDomainClass()).map(i -> i > 0);
     }
 }

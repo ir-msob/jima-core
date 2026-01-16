@@ -54,7 +54,6 @@ public class ScopeScannerService {
         return applicationContext.getBeansWithAnnotation(Resource.class)
                 .values()
                 .stream()
-                .filter(Objects::nonNull)
                 .map(bean -> getResource(bean).map(resource -> {
                     resource.setScopes(getScopes(bean));
                     return resource;

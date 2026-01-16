@@ -10,7 +10,6 @@ import ir.msob.jima.core.commons.exception.BaseExceptionMapper;
 import ir.msob.jima.core.commons.exception.BaseRuntimeException;
 import ir.msob.jima.core.commons.exception.ExceptionResponseAbstract;
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
-import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeResponse;
 import ir.msob.jima.core.commons.logger.Logger;
 import ir.msob.jima.core.commons.logger.LoggerFactory;
 import ir.msob.jima.core.commons.security.BaseUser;
@@ -142,7 +141,7 @@ public class CallbackErrorAspect {
         if (throwable instanceof BaseRuntimeException e) {
             er = exceptionMapper.getExceptionResponse(e);
         } else {
-            er = (ER) new CommonRuntimeResponse(throwable.getMessage());
+            er = exceptionMapper.getExceptionResponse(new CommonRuntimeException(throwable.getMessage()));
         }
 
         return channelMessageReq.getErrorCallbacks()

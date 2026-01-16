@@ -21,7 +21,7 @@ public class GenericTypeUtil {
      */
     public static Class<?> resolveTypeArguments(Class<?> clazz, Class<?> genericIfc, int index) {
         Class<?>[] classes = GenericTypeResolver.resolveTypeArguments(clazz, genericIfc);
-        if (classes == null || classes.length <= index) {
+        if (classes.length <= index) {
             throw new CommonRuntimeException("Can not detect generic type {} in class {} at index {}", genericIfc, clazz, index);
         }
         return classes[index];

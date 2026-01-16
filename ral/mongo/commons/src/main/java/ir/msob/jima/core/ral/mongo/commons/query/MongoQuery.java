@@ -250,7 +250,7 @@ public class MongoQuery implements BaseQuery {
      * @return this {@code MongoQuery} instance
      */
     public MongoQuery orOperator(Criteria... criteriaList) {
-        if (criteriaList == null || criteriaList.length <= 0)
+        if (criteriaList == null || criteriaList.length == 0)
             return this;
         Criteria criteria = new Criteria().orOperator(criteriaList);
         query.addCriteria(criteria);

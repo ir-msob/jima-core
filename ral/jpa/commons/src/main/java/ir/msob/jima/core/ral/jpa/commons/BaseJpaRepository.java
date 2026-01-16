@@ -70,7 +70,7 @@ public interface BaseJpaRepository<ID extends Comparable<ID> & Serializable, D e
 
     @Transactional(readOnly = true)
     @MethodStats
-    default Flux<D> find(JpaQuery<D> jpaQuery) {
+    default Flux<@NonNull D> find(JpaQuery<D> jpaQuery) {
         return Mono.fromCallable(() -> {
             CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
             CriteriaQuery<D> cq = cb.createQuery(getDomainClass());

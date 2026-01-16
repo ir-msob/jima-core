@@ -3,6 +3,7 @@ package ir.msob.jima.core.commons.scope;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.shared.BaseType;
 import lombok.*;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Comparator;
 import java.util.Objects;
@@ -67,13 +68,9 @@ public class ScopeDto implements BaseType, Comparable<ScopeDto> {
      * equal to, or greater than the specified object
      */
     @Override
-    public int compareTo(ScopeDto o) {
+    public int compareTo(@NonNull ScopeDto o) {
         if (this == o) {
             return 0;
-        }
-
-        if (o == null) {
-            return 1;
         }
 
         // Compare by element

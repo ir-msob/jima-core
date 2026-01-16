@@ -4,6 +4,7 @@ import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
 import ir.msob.jima.core.ral.mongo.commons.query.MongoQuery;
 import ir.msob.jima.core.ral.mongo.commons.query.MongoUpdate;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NonNull;
 import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.stereotype.Repository;
@@ -24,7 +25,7 @@ public class SequenceRepository {
      * @param key The key for which to retrieve the sequence.
      * @return A Mono that emits the next sequence value.
      */
-    public Mono<Long> getSequence(String key) {
+    public Mono<@NonNull Long> getSequence(String key) {
         return getSequence(key, 1);
     }
 
@@ -36,7 +37,7 @@ public class SequenceRepository {
      * @return A Mono that emits the next sequence value.
      * @throws CommonRuntimeException if 'inc' is less than 1.
      */
-    public Mono<Long> getSequence(String key, long inc) {
+    public Mono<@NonNull Long> getSequence(String key, long inc) {
         if (inc < 1)
             throw new CommonRuntimeException("inc param must be greater than zero.");
         return this.findAndModify(
@@ -58,7 +59,7 @@ public class SequenceRepository {
      * @param options    The FindAndModifyOptions for the update operation.
      * @return A Mono that emits the modified sequence document.
      */
-    private Mono<Sequence> findAndModify(MongoQuery mongoQuery, MongoUpdate mongoUpdate, FindAndModifyOptions options) {
+    private Mono<@NonNull Sequence> findAndModify(MongoQuery mongoQuery, MongoUpdate mongoUpdate, FindAndModifyOptions options) {
         return reactiveMongoTemplate
                 .findAndModify(
                         mongoQuery.getQuery()

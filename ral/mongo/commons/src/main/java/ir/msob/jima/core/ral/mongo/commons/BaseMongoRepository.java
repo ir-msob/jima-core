@@ -89,7 +89,7 @@ public interface BaseMongoRepository<ID extends Comparable<ID> & Serializable, D
      * @return A Flux that emits the found entities.
      */
     @MethodStats
-    default Flux<D> find(C criteria) {
+    default Flux<@NonNull D> find(C criteria) {
         MongoQuery mongoQuery = this.getQueryBuilder().build(criteria);
         return getReactiveMongoTemplate().find(mongoQuery.getQuery(), getDomainClass());
     }
@@ -101,10 +101,10 @@ public interface BaseMongoRepository<ID extends Comparable<ID> & Serializable, D
      * @return A Mono that emits a Page of found entities.
      */
     @MethodStats
-    default Mono<@NonNull Page<D>> findPage(C criteria) {
+    default Mono<@NonNull Page<@NonNull D>> findPage(C criteria) {
         MongoQuery mongoQuery = this.getQueryBuilder().build(criteria);
         return getReactiveMongoTemplate().count(mongoQuery.getQuery(), getDomainClass()).flatMap(count -> {
-            if (count == null || count < 1L) {
+            if (count < 1L) {
                 return Mono.just(new PageImpl<>(new ArrayList<>(), mongoQuery.getPageable(), 0L));
             } else {
                 mongoQuery.getQuery().with(mongoQuery.getPageable());

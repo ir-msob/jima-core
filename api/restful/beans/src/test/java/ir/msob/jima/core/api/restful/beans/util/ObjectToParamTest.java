@@ -2,6 +2,7 @@ package ir.msob.jima.core.api.restful.beans.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import ir.msob.jima.core.beans.util.JsonParser;
+import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -58,7 +59,7 @@ class ObjectToParamTest {
         Mockito.when(jsonParser.getJsonPaths(expectedResult)).thenReturn(jsonParserResult);
 
         // Act
-        MultiValueMap<String, String> result = objectToParam.convert(expectedResult);
+        MultiValueMap<@NonNull String, String> result = objectToParam.convert(expectedResult);
 
         // Assert
         assertEquals(expectedResult, result);
@@ -72,12 +73,11 @@ class ObjectToParamTest {
     void testShouldIncludeProperty() {
         // Prepare test data
         Object validValue = "valid";
-        Object nullValue = null;
         Object emptyValue = "";
 
         // Act and Assert
         assertTrue(objectToParam.shouldIncludeProperty(validValue));
-        assertFalse(objectToParam.shouldIncludeProperty(nullValue));
+        assertFalse(objectToParam.shouldIncludeProperty(null));
         assertFalse(objectToParam.shouldIncludeProperty(emptyValue));
     }
 }

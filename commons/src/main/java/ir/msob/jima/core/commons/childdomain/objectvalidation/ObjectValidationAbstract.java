@@ -6,6 +6,7 @@ import ir.msob.jima.core.commons.element.BaseElementAbstract;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.jspecify.annotations.NonNull;
 
 import java.io.Serializable;
 import java.util.Comparator;
@@ -76,7 +77,7 @@ public class ObjectValidationAbstract<ID extends Comparable<ID> & Serializable> 
     }
 
     @Override
-    public int compareTo(ObjectValidationAbstract<ID> o) {
+    public int compareTo(@NonNull ObjectValidationAbstract<ID> o) {
         if (this == o) {
             return 0;
         }

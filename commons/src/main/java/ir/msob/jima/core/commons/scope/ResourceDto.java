@@ -5,6 +5,7 @@ import ir.msob.jima.core.commons.resource.Resource;
 import ir.msob.jima.core.commons.shared.BaseType;
 import ir.msob.jima.core.commons.shared.ResourceType;
 import lombok.*;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Comparator;
 import java.util.Objects;
@@ -49,7 +50,7 @@ public class ResourceDto implements BaseType, Comparable<ResourceDto> {
      * @return a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object
      */
     @Override
-    public int compareTo(ResourceDto o) {
+    public int compareTo(@NonNull ResourceDto o) {
         if (this == o) {
             return 0;
         }

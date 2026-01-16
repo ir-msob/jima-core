@@ -45,7 +45,7 @@ class JsonParserTest {
 
         Tuple3<JsonParser.@NonNull Operation, @NonNull Optional<Object>, @NonNull Optional<Object>> diff = result.get("$.key1");
         assertEquals(JsonParser.Operation.REMOVED, diff.getT1());
-        Assertions.assertEquals("value1", diff.getT2().get());
+        Assertions.assertEquals("value1", diff.getT2().orElse(null));
         Assertions.assertFalse(diff.getT3().isPresent());
     }
 
@@ -54,15 +54,15 @@ class JsonParserTest {
         Map<String, Object> object2 = new HashMap<>();
         object2.put("key1", "value1");
 
-        Map<String, Tuple3<JsonParser.@NonNull Operation, Optional<Object>, Optional<Object>>> result = jsonParser.diff(null, object2);
+        Map<String, Tuple3<JsonParser.@NonNull Operation, @NonNull Optional<Object>, @NonNull Optional<Object>>> result = jsonParser.diff(null, object2);
 
         Assertions.assertEquals(1, result.size());
         Assertions.assertTrue(result.containsKey("$.key1"));
 
-        Tuple3<JsonParser.@NonNull Operation, Optional<Object>, Optional<Object>> diff = result.get("$.key1");
+        Tuple3<JsonParser.@NonNull Operation, @NonNull Optional<Object>, @NonNull Optional<Object>> diff = result.get("$.key1");
         assertEquals(JsonParser.Operation.ADDED, diff.getT1());
         Assertions.assertFalse(diff.getT2().isPresent());
-        Assertions.assertEquals("value1", diff.getT3().get());
+        Assertions.assertEquals("value1", diff.getT3().orElse(null));
     }
 
     @Test
@@ -93,13 +93,13 @@ class JsonParserTest {
 
         Tuple3<JsonParser.@NonNull Operation, @NonNull Optional<Object>, @NonNull Optional<Object>> diff1 = result.get("$.key1");
         assertEquals(JsonParser.Operation.SAME, diff1.getT1());
-        Assertions.assertEquals("value1", diff1.getT2().get());
-        Assertions.assertEquals("value1", diff1.getT3().get());
+        Assertions.assertEquals("value1", diff1.getT2().orElse(null));
+        Assertions.assertEquals("value1", diff1.getT3().orElse(null));
 
         Tuple3<JsonParser.@NonNull Operation, @NonNull Optional<Object>, @NonNull Optional<Object>> diff2 = result.get("$.key2");
         assertEquals(JsonParser.Operation.SAME, diff2.getT1());
-        Assertions.assertEquals("value2", diff2.getT2().get());
-        Assertions.assertEquals("value2", diff2.getT3().get());
+        Assertions.assertEquals("value2", diff2.getT2().orElse(null));
+        Assertions.assertEquals("value2", diff2.getT3().orElse(null));
     }
 
     @Test
@@ -121,18 +121,18 @@ class JsonParserTest {
 
         Tuple3<JsonParser.@NonNull Operation, @NonNull Optional<Object>, @NonNull Optional<Object>> diff1 = result.get("$.key1");
         assertEquals(JsonParser.Operation.UPDATED, diff1.getT1());
-        Assertions.assertEquals("value1", diff1.getT2().get());
-        Assertions.assertEquals("value1_updated", diff1.getT3().get());
+        Assertions.assertEquals("value1", diff1.getT2().orElse(null));
+        Assertions.assertEquals("value1_updated", diff1.getT3().orElse(null));
 
         Tuple3<JsonParser.@NonNull Operation, @NonNull Optional<Object>, @NonNull Optional<Object>> diff2 = result.get("$.key2");
         assertEquals(JsonParser.Operation.REMOVED, diff2.getT1());
-        Assertions.assertEquals("value2", diff2.getT2().get());
+        Assertions.assertEquals("value2", diff2.getT2().orElse(null));
         Assertions.assertFalse(diff2.getT3().isPresent());
 
         Tuple3<JsonParser.@NonNull Operation, @NonNull Optional<Object>, @NonNull Optional<Object>> diff3 = result.get("$.key3");
         assertEquals(JsonParser.Operation.ADDED, diff3.getT1());
         Assertions.assertFalse(diff3.getT2().isPresent());
-        Assertions.assertEquals("value3", diff3.getT3().get());
+        Assertions.assertEquals("value3", diff3.getT3().orElse(null));
     }
 
     @Test

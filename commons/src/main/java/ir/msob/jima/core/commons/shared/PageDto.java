@@ -97,13 +97,13 @@ public class PageDto<T> implements Page<@NonNull T>, Serializable {
      * Convert this PageDto into a Spring Data Page (PageImpl).
      * Useful when you need to call repository/service APIs that expect {@code Page<T>}.
      */
-    public Page<T> toPage() {
+    public Page<@NonNull T> toPage() {
         Pageable pg = (this.pageable == null || this.pageable.isUnpaged()) ? Pageable.unpaged() : this.pageable.toPageable();
         return new PageImpl<>(this.content, pg, this.totalElements);
     }
 
     @Override
-    public <U> Page<U> map(Function<? super T, ? extends U> converter) {
+    public <U> @NonNull Page<@NonNull U> map(@NonNull Function<? super T, ? extends U> converter) {
         List<U> mapped = this.content.stream().map(converter).collect(Collectors.toList());
         return new PageDto<>(mapped, this.pageable, this.totalElements, this.totalPages);
     }
@@ -129,7 +129,7 @@ public class PageDto<T> implements Page<@NonNull T>, Serializable {
     }
 
     @Override
-    public Sort getSort() {
+    public @NonNull Sort getSort() {
         return pageable == null ? Sort.unsorted() : pageable.getSort();
     }
 
@@ -158,19 +158,19 @@ public class PageDto<T> implements Page<@NonNull T>, Serializable {
     }
 
     @Override
-    public Pageable nextPageable() {
-        return pageable == null || pageable.isUnpaged() ? null : pageable.next();
+    public @NonNull Pageable nextPageable() {
+        return pageable == null || pageable.isUnpaged() ? PageableDto.unpaged() : pageable.next();
     }
 
     @Override
-    public Pageable previousPageable() {
-        return pageable == null || pageable.isUnpaged() ? null : pageable.previousOrFirst();
+    public @NonNull Pageable previousPageable() {
+        return pageable == null || pageable.isUnpaged() ? PageableDto.unpaged() : pageable.previousOrFirst();
     }
 
     // ---------- JSON getters / convenience getters ----------
 
     @Override
-    public Iterator<T> iterator() {
+    public @NonNull Iterator<T> iterator() {
         return content.iterator();
     }
 

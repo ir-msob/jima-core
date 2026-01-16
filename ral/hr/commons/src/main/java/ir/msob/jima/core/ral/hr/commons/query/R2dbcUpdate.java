@@ -1,6 +1,7 @@
 package ir.msob.jima.core.ral.hr.commons.query;
 
 import ir.msob.jima.core.commons.repository.BaseUpdate;
+import lombok.Getter;
 import org.springframework.data.relational.core.query.Update;
 
 import java.util.Collection;
@@ -13,6 +14,7 @@ import java.util.Map;
  * It offers convenience helpers like set/unset/inc. Collection-array style helpers (push/pull) are
  * not supported for relational databases and intentionally throw UnsupportedOperationException.
  */
+@Getter
 public class R2dbcUpdate<T> implements BaseUpdate {
 
     private final Update update = Update.from(Collections.emptyMap());
@@ -51,20 +53,12 @@ public class R2dbcUpdate<T> implements BaseUpdate {
         return this;
     }
 
-    public Update getUpdate() {
-        return update;
-    }
-
     public boolean hasRawSql() {
         return customSql != null && !customSql.isBlank();
     }
 
     public String getRawSql() {
         return customSql;
-    }
-
-    public Map<String, Object> getSqlParams() {
-        return sqlParams;
     }
 
     // unsupported array-style operations for relational DBs

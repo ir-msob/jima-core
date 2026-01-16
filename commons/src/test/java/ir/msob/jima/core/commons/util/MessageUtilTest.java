@@ -58,9 +58,8 @@ class MessageUtilTest {
     void testPrepareMessageWithNullParameters() {
         // Test when parameters include null values.
         String message = "Hello, {}!";
-        String name = null;
         String expected = "Hello, null!";
-        String formattedMessage = MessageUtil.prepareMessage(message, name);
+        String formattedMessage = MessageUtil.prepareMessage(message, (Object) null);
         assertEquals(expected, formattedMessage);
     }
 }

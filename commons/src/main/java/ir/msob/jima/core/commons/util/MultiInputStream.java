@@ -1,6 +1,7 @@
 package ir.msob.jima.core.commons.util;
 
 import ir.msob.jima.core.commons.exception.runtime.CommonRuntimeException;
+import jakarta.annotation.Nonnull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,7 +72,7 @@ public class MultiInputStream extends InputStream {
      * @throws IOException If an I/O error occurs.
      */
     @Override
-    public int read(byte[] b, int off, int len) throws IOException {
+    public int read(@Nonnull byte[] b, int off, int len) throws IOException {
         int result = -1;
         while (!streams.isEmpty()
                 && (result = streams.getFirst().read(b, off, len)) == -1) {

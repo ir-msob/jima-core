@@ -42,6 +42,8 @@ class PaginationUtilTest {
         String jsonString = "{\"number\":0,\"size\":10}";
         JsonNode jsonNode = createJsonNode(jsonString);
 
+        assertNotNull(jsonNode);
+
         // Act
         Pageable pageable = PaginationUtil.preparePageableFromPage(jsonNode);
 
@@ -56,6 +58,8 @@ class PaginationUtilTest {
         // Arrange
         String jsonString = "{\"sort\":[{\"direction\":\"ASC\",\"property\":\"name\"}],\"pageNumber\":0,\"pageSize\":10}";
         JsonNode jsonNode = createJsonNode(jsonString);
+
+        assertNotNull(jsonNode);
 
         // Act
         Pageable pageable = PaginationUtil.preparePageable(jsonNode);
@@ -92,6 +96,8 @@ class PaginationUtilTest {
         String jsonString = "[{\"direction\":\"ASC\",\"property\":\"name\"},{\"direction\":\"DESC\",\"property\":\"date\"}]";
         JsonNode jsonNode = createJsonNode(jsonString);
 
+        assertNotNull(jsonNode);
+
         // Act
         var orders = PaginationUtil.prepareOrders(jsonNode);
 
@@ -109,6 +115,8 @@ class PaginationUtilTest {
         // Arrange
         String jsonString = "{\"direction\":\"ASC\",\"property\":\"name\",\"ignoreCase\":true,\"nullHandling\":\"NULLS_FIRST\"}";
         JsonNode jsonNode = createJsonNode(jsonString);
+
+        assertNotNull(jsonNode);
 
         // Act
         var order = PaginationUtil.prepareOrder(Sort.NullHandling.NULLS_FIRST, Sort.Direction.ASC, jsonNode);

@@ -5,7 +5,7 @@ import ir.msob.jima.core.commons.childdomain.relatedobject.relatedparty.RelatedP
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -52,7 +52,7 @@ public abstract class AuditDomainAbstract<ID extends Comparable<ID> & Serializab
      * @return A negative integer, zero, or a positive integer as this audit domain is less than, equal to, or greater than the specified audit domain.
      */
     @Override
-    public int compareTo(@Nullable AuditDomainAbstract<ID, RP> o) {
+    public int compareTo(@NonNull AuditDomainAbstract<ID, RP> o) {
         if (this == o) {
             return 0;
         }

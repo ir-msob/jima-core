@@ -4,6 +4,7 @@ import ir.msob.jima.core.commons.repository.BaseUpdate;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaUpdate;
 import jakarta.persistence.criteria.Root;
+import lombok.Getter;
 
 import java.util.*;
 
@@ -16,7 +17,7 @@ import java.util.*;
  * inside Method that has CriteriaBuilder/EntityManager.
  */
 
-
+@Getter
 public class JpaUpdate<T> implements BaseUpdate {
 
     private final Map<String, Object> jpqlParams = new LinkedHashMap<>();
@@ -37,14 +38,6 @@ public class JpaUpdate<T> implements BaseUpdate {
     public JpaUpdate<T> param(String name, Object value) {
         if (name != null) this.jpqlParams.put(name, value);
         return this;
-    }
-
-    public String getJpqlUpdate() {
-        return jpqlUpdate;
-    }
-
-    public Map<String, Object> getJpqlParams() {
-        return jpqlParams;
     }
 
     public boolean hasJpql() {
@@ -129,10 +122,6 @@ public class JpaUpdate<T> implements BaseUpdate {
      */
     public JpaUpdate<T> addRawApplier(UpdateApplier<T> applier) {
         return withApplier(applier);
-    }
-
-    public List<UpdateApplier<T>> getAppliers() {
-        return appliers;
     }
 
     public boolean hasAppliers() {

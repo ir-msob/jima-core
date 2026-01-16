@@ -3,6 +3,7 @@ package ir.msob.jima.core.api.restful.beans.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import ir.msob.jima.core.beans.util.JsonParser;
 import lombok.RequiredArgsConstructor;
+import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -26,7 +27,7 @@ public class ObjectToParam {
      * @param value  The value (property value).
      * @param result The MultiValueMap to which the key-value pair should be added.
      */
-    private static void addResult(String key, String value, MultiValueMap<String, String> result) {
+    private static void addResult(String key, String value, MultiValueMap<@NonNull String, String> result) {
         if (key.endsWith("]")) {
             key = key.substring(0, key.length() - 3);
         }
@@ -41,8 +42,8 @@ public class ObjectToParam {
      * @return A MultiValueMap containing the properties and values extracted from the objects.
      * @throws JsonProcessingException If there is an issue with processing JSON data from the objects.
      */
-    public MultiValueMap<String, String> convert(Object... objects) throws JsonProcessingException {
-        MultiValueMap<String, String> result = new LinkedMultiValueMap<>();
+    public MultiValueMap<@NonNull String, String> convert(Object... objects) throws JsonProcessingException {
+        MultiValueMap<@NonNull String, String> result = new LinkedMultiValueMap<>();
         for (Object o : objects) {
             Map<String, Object> propertyMap = jsonParser.getJsonPaths(o);
             propertyMap.entrySet()

@@ -7,6 +7,7 @@ import ir.msob.jima.core.commons.shared.auditinfo.AuditInfo;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.jspecify.annotations.NonNull;
 
 import java.io.Serializable;
 import java.util.Comparator;
@@ -82,12 +83,12 @@ public abstract class RelatedActionAbstract<ID extends Comparable<ID> & Serializ
     }
 
     @Override
-    public int compareTo(RelatedActionAbstract<ID> o) {
+    public int compareTo(@NonNull RelatedActionAbstract<ID> o) {
         if (this == o) {
             return 0;
         }
 
-        if (o != null && (this.getName() != null && o.getName() != null)) {
+        if (this.getName() != null && o.getName() != null) {
             return this.getName().compareTo(o.getName());
 
         }

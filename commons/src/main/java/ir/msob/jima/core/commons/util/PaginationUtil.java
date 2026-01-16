@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.validation.constraints.NotNull;
 import org.apache.logging.log4j.util.Strings;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -56,7 +57,7 @@ public class PaginationUtil {
      * @param jsonNode The JSON representation of the page.
      * @return A {@link Pageable} instance.
      */
-    public static Pageable preparePageable(JsonNode jsonNode) {
+    public static Pageable preparePageable(@NonNull JsonNode jsonNode) {
         List<Sort.Order> orderList = prepareOrders(jsonNode.get("sort"));
         Integer pageNumber = asInteger(jsonNode.get("pageNumber"));
         Integer pageSize = asInteger(jsonNode.get("pageSize"));
