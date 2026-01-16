@@ -2,7 +2,7 @@ package ir.msob.jima.core.commons.security;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.logging.log4j.util.Strings;
+import ir.msob.jima.core.commons.util.Strings;
 
 import java.util.Base64;
 

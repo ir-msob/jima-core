@@ -1,7 +1,6 @@
 package ir.msob.jima.core.ral.redis.test;
 
 import com.redis.testcontainers.RedisContainer;
-import lombok.extern.apachecommons.CommonsLog;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest(classes = {TestApplication.class, RedisContainerConfiguration.class})
 @ContextConfiguration
 @Testcontainers
-@CommonsLog
 class RedisContainerConfigurationIT {
 
     @Autowired

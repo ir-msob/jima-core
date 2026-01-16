@@ -1,7 +1,6 @@
 package ir.msob.jima.core.ral.mongo.test;
 
 import ir.msob.jima.core.ral.mongo.test.configuration.MongoContainerConfiguration;
-import lombok.extern.apachecommons.CommonsLog;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(classes = {TestApplication.class, MongoContainerConfiguration.class})
 @ContextConfiguration
 @Testcontainers
-@CommonsLog
 class MongoContainerConfigurationIT {
 
     @Autowired

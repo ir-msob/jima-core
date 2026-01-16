@@ -7,13 +7,13 @@ import ir.msob.jima.core.commons.domain.BaseDomain;
 import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.domain.BaseDtoTypeReference;
 import ir.msob.jima.core.commons.element.Elements;
+import ir.msob.jima.core.commons.logger.Logger;
+import ir.msob.jima.core.commons.logger.LoggerFactory;
 import ir.msob.jima.core.commons.operation.ConditionalOnOperationUtil;
 import ir.msob.jima.core.commons.resource.BaseResource;
 import ir.msob.jima.core.commons.scope.Scope;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.util.GenericTypeUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
@@ -34,7 +34,7 @@ public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
         C extends BaseCriteria<ID>>
         extends BaseDtoTypeReference<ID, DTO, C> {
 
-    Logger log = LoggerFactory.getLogger(BaseCoreResourceTest.class);
+    Logger logger = LoggerFactory.getLogger(BaseCoreResourceTest.class);
 
     /**
      * Get the class representing the unique identifier for resources.
@@ -116,7 +116,7 @@ public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
     default boolean ignoreTest(Scope scope) {
         boolean result = !ConditionalOnOperationUtil.hasOperation(scope, getJimaProperties().getCrud(), getResourceClass());
         if (result) {
-            log.info("Perform {}/{} test for {} is ignored.", scope.element(), scope.operation(), getResourceClass().getSimpleName());
+            logger.info("Perform {}/{} test for {} is ignored.", scope.element(), scope.operation(), getResourceClass().getSimpleName());
         }
         return result;
     }

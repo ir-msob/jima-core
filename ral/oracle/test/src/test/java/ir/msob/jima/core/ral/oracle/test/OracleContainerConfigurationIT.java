@@ -1,6 +1,5 @@
 package ir.msob.jima.core.ral.oracle.test;
 
-import lombok.extern.apachecommons.CommonsLog;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(classes = {TestApplication.class, OracleContainerConfiguration.class})
 @ContextConfiguration
 @Testcontainers
-@CommonsLog
 @Disabled
 class OracleContainerConfigurationIT {
 

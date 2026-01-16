@@ -1,7 +1,7 @@
 package ir.msob.jima.core.ral.postgresql.test;
 
 import ir.msob.jima.core.beans.properties.JimaProperties;
-import org.apache.logging.log4j.util.Strings;
+import ir.msob.jima.core.commons.util.Strings;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.DynamicPropertyRegistry;

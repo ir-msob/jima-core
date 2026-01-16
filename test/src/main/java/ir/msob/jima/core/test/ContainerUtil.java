@@ -5,7 +5,7 @@ import com.github.dockerjava.api.model.ExposedPort;
 import com.github.dockerjava.api.model.PortBinding;
 import com.github.dockerjava.api.model.Ports;
 import ir.msob.jima.core.commons.properties.TestContainerProperties;
-import org.apache.logging.log4j.util.Strings;
+import ir.msob.jima.core.commons.util.Strings;
 import org.testcontainers.DockerClientFactory;
 import org.testcontainers.containers.GenericContainer;
 

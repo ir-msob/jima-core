@@ -3,8 +3,9 @@ package ir.msob.jima.core.api.restful.beans.exception;
 import ir.msob.jima.core.commons.exception.BaseExceptionMapper;
 import ir.msob.jima.core.commons.exception.BaseRuntimeException;
 import ir.msob.jima.core.commons.exception.ExceptionResponseAbstract;
+import ir.msob.jima.core.commons.logger.Logger;
+import ir.msob.jima.core.commons.logger.LoggerFactory;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.apachecommons.CommonsLog;
 import org.jspecify.annotations.NonNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  * This class provides centralized exception handling using Spring's {@link ControllerAdvice}.
  */
 @ControllerAdvice
-@CommonsLog
 @RequiredArgsConstructor
 public class GlobalExceptionHandler {
     private final BaseExceptionMapper exceptionMapper;
+    private final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
      * Handles exceptions of type {@link BaseRuntimeException}.
@@ -38,11 +39,11 @@ public class GlobalExceptionHandler {
             if (httpStatus != null) {
                 return ResponseEntity.status(httpStatus).body(response);
             } else {
-                log.error("Invalid HTTP status returned from exception response.");
+                logger.error("Invalid HTTP status returned from exception response.");
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
         } else {
-            log.error("Unhandled exception occurred:", ex);
+            logger.error("Unhandled exception occurred:", ex);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
