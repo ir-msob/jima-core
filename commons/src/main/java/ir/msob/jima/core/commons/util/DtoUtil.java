@@ -14,7 +14,7 @@ public class DtoUtil {
     }
 
     @SneakyThrows
-    public static <ID extends Comparable<ID> & Serializable, DTO extends BaseDto<ID>> String d(Class<DTO> dtoClass, DTO dto) {
+    public static <ID extends Comparable<ID> & Serializable, DTO extends BaseDto<ID>> String uniqueField(Class<DTO> dtoClass, DTO dto) {
         Field field = UniqueField.info.getFirstFieldHasAnnotation(dtoClass);
         Assert.notNull(field, "Unique Field Not Found in DTO");
         Object uniqueFieldValue = field.get(dto);
