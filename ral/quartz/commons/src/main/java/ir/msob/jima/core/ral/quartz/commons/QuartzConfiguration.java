@@ -21,7 +21,7 @@ import java.util.Properties;
 public class QuartzConfiguration {
 
     private final DataSource dataSource;
-    Logger logger = LoggerFactory.getLogger(QuartzConfiguration.class);
+    private static final Logger logger = LoggerFactory.getLogger(QuartzConfiguration.class);
 
     /**
      * Create and configure the SchedulerFactoryBean.

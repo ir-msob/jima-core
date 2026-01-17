@@ -124,12 +124,10 @@ public class JpaQueryBuilder implements BaseQueryBuilder {
         return (root, cq, cb) -> cb.notEqual(root.get(field), value);
     }
 
-    @SuppressWarnings("unchecked")
     private Specification<@NonNull Object> inSpec(String field, Object collection) {
         return (root, cq, cb) -> root.get(field).in((Collection<?>) collection);
     }
 
-    @SuppressWarnings("unchecked")
     private Specification<@NonNull Object> ninSpec(String field, Object collection) {
         return (root, cq, cb) -> cb.not(root.get(field).in((Collection<?>) collection));
     }

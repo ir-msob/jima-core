@@ -82,7 +82,7 @@ public class ObjectValidationAbstract<ID extends Comparable<ID> & Serializable> 
             return 0;
         }
 
-        if (o != null && (this.getName() != null && o.getName() != null)) {
+        if (this.getName() != null && o.getName() != null) {
             return this.getName().compareTo(o.getName());
 
         }
