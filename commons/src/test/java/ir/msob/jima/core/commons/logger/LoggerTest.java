@@ -106,9 +106,8 @@ class LoggerTest {
     @Test
     void testDebugWithNullParams() {
         String message = "Debug message with null parameters: {} and {}";
-        String[] params = {null, null};
 
-        logger.debug(message, (Object) params);
+        logger.debug(message, null, null);
 
         ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
         verify(log).debug(captor.capture());
