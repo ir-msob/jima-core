@@ -62,6 +62,12 @@ public class StorageProperties {
         @ToString
         public static class ValidationRule {
             /**
+             * If true, enforces that the file extension in the request path
+             * matches the extension of the uploaded file name.
+             */
+            private Boolean validatePathExtension;
+
+            /**
              * Ant-style path pattern (e.g., "/images/**" or "/docs/*.pdf").
              */
             private String pathPattern;
