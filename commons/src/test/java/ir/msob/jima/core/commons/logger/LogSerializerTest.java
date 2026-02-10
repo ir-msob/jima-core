@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons.logger;
 
-import org.junit.jupiter.api.Disabled;
+import ir.msob.jima.core.commons.logger.loggable.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;

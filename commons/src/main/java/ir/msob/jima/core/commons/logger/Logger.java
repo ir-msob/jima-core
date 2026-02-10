@@ -1,7 +1,11 @@
 package ir.msob.jima.core.commons.logger;
 
+import ir.msob.jima.core.commons.logger.loggable.LogSerializer;
 import ir.msob.jima.core.commons.util.MessageUtil;
 import org.apache.commons.logging.Log;
+
+import java.time.Instant;
+import java.util.Date;
 
 /**
  * The 'Logger' class provides logging functionality and wraps an underlying Log implementation.
@@ -19,7 +23,7 @@ public record Logger(Log logger) {
      * @param params  Optional parameters to format the message.
      */
     public void debug(String message, Object... params) {
-        prepareParams(params);
+        normalizeForLog(params);
         logger.debug(MessageUtil.prepareMessage(message, params));
     }
 
@@ -31,7 +35,7 @@ public record Logger(Log logger) {
      * @param params  Optional parameters to format the message.
      */
     public void debug(Throwable t, String message, Object... params) {
-        prepareParams(params);
+        normalizeForLog(params);
         logger.debug(MessageUtil.prepareMessage(message, params), t);
     }
 
@@ -42,7 +46,7 @@ public record Logger(Log logger) {
      * @param params  Optional parameters to format the message.
      */
     public void error(String message, Object... params) {
-        prepareParams(params);
+        normalizeForLog(params);
         logger.error(MessageUtil.prepareMessage(message, params));
     }
 
@@ -54,7 +58,7 @@ public record Logger(Log logger) {
      * @param params  Optional parameters to format the message.
      */
     public void error(Throwable t, String message, Object... params) {
-        prepareParams(params);
+        normalizeForLog(params);
         logger.error(MessageUtil.prepareMessage(message, params), t);
     }
 
@@ -74,7 +78,7 @@ public record Logger(Log logger) {
      * @param params  Optional parameters to format the message.
      */
     public void fatal(String message, Object... params) {
-        prepareParams(params);
+        normalizeForLog(params);
         logger.fatal(MessageUtil.prepareMessage(message, params));
     }
 
@@ -86,7 +90,7 @@ public record Logger(Log logger) {
      * @param params  Optional parameters to format the message.
      */
     public void fatal(String message, Throwable t, Object... params) {
-        prepareParams(params);
+        normalizeForLog(params);
         logger.fatal(MessageUtil.prepareMessage(message, params), t);
     }
 
@@ -97,7 +101,7 @@ public record Logger(Log logger) {
      * @param params  Optional parameters to format the message.
      */
     public void info(String message, Object... params) {
-        prepareParams(params);
+        normalizeForLog(params);
         logger.info(MessageUtil.prepareMessage(message, params));
     }
 
@@ -109,7 +113,7 @@ public record Logger(Log logger) {
      * @param params  Optional parameters to format the message.
      */
     public void info(Throwable t, String message, Object... params) {
-        prepareParams(params);
+        normalizeForLog(params);
         logger.info(MessageUtil.prepareMessage(message, params), t);
     }
 
@@ -120,7 +124,7 @@ public record Logger(Log logger) {
      * @param params  Optional parameters to format the message.
      */
     public void trace(String message, Object... params) {
-        prepareParams(params);
+        normalizeForLog(params);
         logger.trace(MessageUtil.prepareMessage(message, params));
     }
 
@@ -132,7 +136,7 @@ public record Logger(Log logger) {
      * @param params  Optional parameters to format the message.
      */
     public void trace(Throwable t, String message, Object... params) {
-        prepareParams(params);
+        normalizeForLog(params);
         logger.trace(MessageUtil.prepareMessage(message, params), t);
     }
 
@@ -143,7 +147,7 @@ public record Logger(Log logger) {
      * @param params  Optional parameters to format the message.
      */
     public void warn(String message, Object... params) {
-        prepareParams(params);
+        normalizeForLog(params);
         logger.warn(MessageUtil.prepareMessage(message, params));
     }
 
@@ -155,11 +159,11 @@ public record Logger(Log logger) {
      * @param params  Optional parameters to format the message.
      */
     public void warn(Throwable t, String message, Object... params) {
-        prepareParams(params);
+        normalizeForLog(params);
         logger.warn(MessageUtil.prepareMessage(message, params), t);
     }
 
-    private void prepareParams(Object... params) {
+    private void normalizeForLog(Object... params) {
         if (params == null || params.length == 0) {
             return;
         }
@@ -170,9 +174,17 @@ public record Logger(Log logger) {
             if (p instanceof String
                     || p instanceof Number
                     || p instanceof Boolean
-                    || p instanceof Enum<?>) {
+                    || p instanceof Enum<?>
+                    || p instanceof Instant
+                    || p instanceof Date) {
                 continue;
             }
+
+            if (p instanceof LoggableObject loggableObject) {
+                params[i] = loggableObject.toLog();
+                continue;
+            }
+
             params[i] = LogSerializer.serialize(p);
         }
     }

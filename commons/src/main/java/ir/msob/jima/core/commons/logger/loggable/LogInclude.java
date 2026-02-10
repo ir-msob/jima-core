@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.logger;
+package ir.msob.jima.core.commons.logger.loggable;
 
 import java.lang.annotation.*;
 

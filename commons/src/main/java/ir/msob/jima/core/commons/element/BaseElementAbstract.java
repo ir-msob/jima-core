@@ -2,8 +2,8 @@ package ir.msob.jima.core.commons.element;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.logger.LogField;
-import ir.msob.jima.core.commons.logger.LogInclude;
+import ir.msob.jima.core.commons.logger.loggable.LogField;
+import ir.msob.jima.core.commons.logger.loggable.LogInclude;
 import lombok.*;
 
 import java.io.Serializable;

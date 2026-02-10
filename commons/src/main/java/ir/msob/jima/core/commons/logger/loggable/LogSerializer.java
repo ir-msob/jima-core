@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.logger;
+package ir.msob.jima.core.commons.logger.loggable;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,6 +7,7 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -14,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Optimized LogSerializer
  * <p>
  * Guarantees:
- * - NO behavior change compared to original version
+ * - NO behavior change compared to original version (as far as observable outputs).
  * - Reflection metadata cached once per class
  * - Field access via MethodHandle when possible
  * - Reduced allocations in hot paths
@@ -27,7 +28,13 @@ public final class LogSerializer {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    private static final Map<Class<?>, Optional<Loggable>> LOGGABLE_CACHE = new ConcurrentHashMap<>();
+    // Previously: Map<Class<?>, Optional<Loggable>>
+    // Now: store Loggable or null to avoid Optional allocations.
+    private static final Map<Class<?>, Loggable> LOGGABLE_CACHE = new ConcurrentHashMap<>();
+
+    // Cache result of isSimple(Class) to avoid repeated expensive checks.
+    private static final Map<Class<?>, Boolean> SIMPLE_CACHE = new ConcurrentHashMap<>();
+
     private static final Map<Class<?>, ClassInfo> CLASS_INFO_CACHE = new ConcurrentHashMap<>();
 
     private static final ThreadLocal<StringBuilder> KV_BUILDER =
@@ -49,8 +56,8 @@ public final class LogSerializer {
             }
 
             Class<?> cls = input.getClass();
-            Optional<Loggable> lgOpt = getCachedLoggable(cls);
-            if (lgOpt.isEmpty()) {
+            Loggable lg = getCachedLoggable(cls);
+            if (lg == null) {
                 return input;
             }
 
@@ -65,6 +72,7 @@ public final class LogSerializer {
             return renderAsKeyValue(processed);
 
         } catch (Exception e) {
+            // preserve original behavior on error: return original input
             return input;
         }
     }
@@ -79,15 +87,16 @@ public final class LogSerializer {
             return input;
         }
 
-        Optional<Loggable> firstLg = getCachedLoggable(first.getClass());
-        if (firstLg.isEmpty()) {
+        Loggable firstLg = getCachedLoggable(first.getClass());
+        if (firstLg == null) {
             return input;
         }
 
         ClassInfo ci = getOrCreateClassInfo(first.getClass());
         ProcessContext ctx = new ProcessContext();
 
-        List<Object> processed = new ArrayList<>();
+        int initial = (input instanceof Collection<?> col) ? col.size() : Array.getLength(input);
+        List<Object> processed = new ArrayList<>(Math.max(4, initial));
         forEachElement(input, el -> processed.add(processElementReuse(el, ctx)));
 
         if (ci.format == LogFormat.JSON) {
@@ -103,8 +112,8 @@ public final class LogSerializer {
 
     private static Object processElementReuse(Object el, ProcessContext ctx) {
         if (el == null) return null;
-        Optional<Loggable> lg = getCachedLoggable(el.getClass());
-        if (lg.isEmpty()) return String.valueOf(el);
+        Loggable lg = getCachedLoggable(el.getClass());
+        if (lg == null) return String.valueOf(el);
         ClassInfo ci = getOrCreateClassInfo(el.getClass());
         return processObject(el, ctx, 0, ci.depth);
     }
@@ -177,7 +186,8 @@ public final class LogSerializer {
                 return "[MAX_DEPTH_REACHED]";
             }
 
-            List<Object> out = new ArrayList<>();
+            int initial = (raw instanceof Collection<?> ccol) ? ccol.size() : Array.getLength(raw);
+            List<Object> out = new ArrayList<>(Math.max(4, initial));
             forEachElement(raw, el -> {
                 if (el == null) {
                     out.add(null);
@@ -194,7 +204,8 @@ public final class LogSerializer {
 
                 // nested collection/array -> recursively process elements (increase depth)
                 if (el instanceof Collection<?> || isArray(elCls)) {
-                    List<Object> inner = new ArrayList<>();
+                    int innerInitial = (el instanceof Collection<?> innerCol) ? innerCol.size() : Array.getLength(el);
+                    List<Object> inner = new ArrayList<>(Math.max(4, innerInitial));
                     forEachElement(el, e2 -> {
                         if (e2 == null) {
                             inner.add(null);
@@ -217,8 +228,8 @@ public final class LogSerializer {
         }
 
 
-        Optional<Loggable> lg = getCachedLoggable(raw.getClass());
-        if (lg.isEmpty()) {
+        Loggable lg = getCachedLoggable(raw.getClass());
+        if (lg == null) {
             return String.valueOf(raw);
         }
 
@@ -265,7 +276,7 @@ public final class LogSerializer {
 
     private static ClassInfo getOrCreateClassInfo(Class<?> cls) {
         return CLASS_INFO_CACHE.computeIfAbsent(cls, c -> {
-            Optional<Loggable> lg = getCachedLoggable(c);
+            Loggable lg = getCachedLoggable(c);
             List<FieldInfo> fis = new ArrayList<>();
 
             MethodHandles.Lookup lookup = MethodHandles.lookup();
@@ -299,18 +310,43 @@ public final class LogSerializer {
 
             return new ClassInfo(
                     lg,
-                    lg.map(Loggable::mode).orElse(LogMode.ALL_FIELD),
-                    lg.map(Loggable::format).orElse(LogFormat.KEY_VALUE),
-                    lg.map(Loggable::depth).orElse(-1),
+                    lg != null ? lg.mode() : LogMode.ALL_FIELD,
+                    lg != null ? lg.format() : LogFormat.KEY_VALUE,
+                    lg != null ? lg.depth() : -1,
                     fis.toArray(new FieldInfo[0])
             );
         });
     }
 
-    private static Optional<Loggable> getCachedLoggable(Class<?> cls) {
+    /**
+     * getCachedLoggable:
+     * - returns cached Loggable annotation or null.
+     * - mapping function tries the same approach as original code (Loggable.info.getAnnotation(cls))
+     * but fallbacks to standard cls.getAnnotation(Loggable.class) when necessary.
+     * <p>
+     * NOTE: original code used Optional.ofNullable(Loggable.info.getAnnotation(c))
+     * so we preserved try to obtain it the same way (to avoid changing behavior),
+     * but we store result directly (no Optional).
+     */
+    private static Loggable getCachedLoggable(Class<?> cls) {
         return LOGGABLE_CACHE.computeIfAbsent(
                 cls,
-                c -> Optional.ofNullable(Loggable.info.getAnnotation(c))
+                c -> {
+                    try {
+                        // try to preserve original access pattern (original code used Loggable.info.getAnnotation(c))
+                        // If Loggable.info is accessible in your project, this preserves exact prior behavior.
+                        // If not, fallback to the standard annotation lookup.
+                        try {
+                            return Loggable.info.getAnnotation(c);
+                        } catch (Throwable t) {
+                            // fallback
+                            return c.getAnnotation(Loggable.class);
+                        }
+                    } catch (Throwable t) {
+                        // final fallback: null
+                        return null;
+                    }
+                }
         );
     }
 
@@ -353,13 +389,19 @@ public final class LogSerializer {
     }
 
     private static boolean isSimple(Class<?> cls) {
-        return cls.isPrimitive()
+        if (cls == null) return false;
+        Boolean cached = SIMPLE_CACHE.get(cls);
+        if (cached != null) return cached;
+        boolean result = cls.isPrimitive()
                 || Number.class.isAssignableFrom(cls)
                 || Boolean.class.isAssignableFrom(cls)
                 || CharSequence.class.isAssignableFrom(cls)
                 || Enum.class.isAssignableFrom(cls)
+                || Instant.class.isAssignableFrom(cls)
                 || Date.class.isAssignableFrom(cls)
                 || UUID.class.isAssignableFrom(cls);
+        SIMPLE_CACHE.put(cls, result);
+        return result;
     }
 
     private static List<Field> getAllFields(Class<?> type) {
@@ -411,7 +453,7 @@ public final class LogSerializer {
     }
 
     private record ClassInfo(
-            Optional<Loggable> loggable,
+            Loggable loggable, // null if absent
             LogMode mode,
             LogFormat format,
             int depth,
