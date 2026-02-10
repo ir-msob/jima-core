@@ -2,6 +2,8 @@ package ir.msob.jima.core.commons.element;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.logger.LogField;
+import ir.msob.jima.core.commons.logger.LogInclude;
 import lombok.*;
 
 import java.io.Serializable;
@@ -29,6 +31,8 @@ public abstract class BaseElementAbstract<ID extends Comparable<ID> & Serializab
     /**
      * The ID of the domain model.
      */
+    @LogInclude
+    @LogField
     private ID id;
 
     /**
