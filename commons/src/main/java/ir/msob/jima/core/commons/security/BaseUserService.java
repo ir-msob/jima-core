@@ -1,6 +1,6 @@
 package ir.msob.jima.core.commons.security;
 
-import ir.msob.jima.core.commons.childdomain.relatedobject.relatedparty.RelatedPartyAbstract;
+import ir.msob.jima.core.commons.embeddeddomain.relatedobject.relatedparty.RelatedPartyAbstract;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -95,10 +95,10 @@ public interface BaseUserService {
     <USER extends BaseUser> USER getSystemUser();
 
     /**
-     * Retrieves the childdomain party for a user.
+     * Retrieves the embeddeddomain party for a user.
      *
-     * @param user The user for whom the childdomain party is to be retrieved.
-     * @return the childdomain party
+     * @param user The user for whom the embeddeddomain party is to be retrieved.
+     * @return the embeddeddomain party
      */
     <ID extends Comparable<ID> & Serializable, USER extends BaseUser, RP extends RelatedPartyAbstract<ID>> RP getRelatedParty(USER user);
 }

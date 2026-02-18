@@ -1,6 +1,7 @@
 package ir.msob.jima.core.commons.scope;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.element.ElementType;
 import ir.msob.jima.core.commons.resource.Resource;
 import ir.msob.jima.core.commons.shared.BaseType;
 import ir.msob.jima.core.commons.shared.ResourceType;
@@ -26,6 +27,7 @@ import java.util.TreeSet;
 public class ResourceDto implements BaseType, Comparable<ResourceDto> {
     private String value;
     private ResourceType type;
+    private ElementType elementType;
     @Builder.Default
     private SortedSet<ScopeDto> scopes = new TreeSet<>();
 
@@ -39,6 +41,7 @@ public class ResourceDto implements BaseType, Comparable<ResourceDto> {
         return ResourceDto.builder()
                 .value(resource.value())
                 .type(resource.type())
+                .elementType(resource.elementType())
                 .build();
     }
 

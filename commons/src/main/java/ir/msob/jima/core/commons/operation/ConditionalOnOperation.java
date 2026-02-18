@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
  * <ul>
  *     <li>{@code operations}: An array of strings that specifies the types of operations
  *     that can be performed. This attribute is optional and defaults to an empty array.</li>
- *     <li>{@code childdomain}: An array of {@link Element} that defines childdomain elements
+ *     <li>{@code embedded domain}: An array of {@link Element} that defines embedded domain elements
  *     that may influence the conditional inclusion or exclusion of the component. This
  *     attribute is also optional and defaults to an empty array.</li>
  *     <li>{@code info}: A {@link ClassAnnotationInfo} object that provides metadata about
@@ -57,11 +57,4 @@ public @interface ConditionalOnOperation {
      */
     String[] operations() default {};
 
-    /**
-     * Specifies the childdomain elements that may influence the conditional inclusion or
-     * exclusion of the component. This attribute is an alias for the 'value' attribute.
-     *
-     * @return The childdomain elements.
-     */
-    Element[] children() default {};
 }

@@ -1,9 +1,9 @@
 package ir.msob.jima.core.test;
 
 import com.google.common.collect.Sets;
-import ir.msob.jima.core.commons.childdomain.auditdomain.AuditDomainActionType;
-import ir.msob.jima.core.commons.childdomain.relatedobject.relateddomain.RelatedDomainAbstract;
-import ir.msob.jima.core.commons.childdomain.relatedobject.relatedparty.RelatedPartyAbstract;
+import ir.msob.jima.core.commons.embeddeddomain.auditdomain.AuditDomainActionType;
+import ir.msob.jima.core.commons.embeddeddomain.relatedobject.relateddomain.RelatedDomainAbstract;
+import ir.msob.jima.core.commons.embeddeddomain.relatedobject.relatedparty.RelatedPartyAbstract;
 import ir.msob.jima.core.commons.shared.DataType;
 import ir.msob.jima.core.commons.shared.auditinfo.AuditInfo;
 import ir.msob.jima.core.commons.shared.keyvalue.KeyValue;
@@ -106,7 +106,7 @@ public class CoreTestData {
     }
 
     /**
-     * Initializes the default and updated IDs and childdomain entities.
+     * Initializes the default and updated IDs and embeddeddomain entities.
      *
      * @param defaultId the default ID
      * @param updatedId the updated ID

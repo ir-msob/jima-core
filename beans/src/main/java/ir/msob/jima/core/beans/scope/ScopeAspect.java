@@ -73,9 +73,11 @@ public class ScopeAspect {
         if (isValidResourceType(resource.type(), ResourceType.RESTFUL, ResourceType.GRPC, ResourceType.RSOCKET)) {
             // Check if the operation specified in the @Scope annotation is present for the resource class
             // If the operation is not present, throw a ResourceNotFoundException
+            /* FIXME
             if (!ConditionalOnOperationUtil.hasOperation(scope, jimaProperties.getCrud(), resourceClass)) {
                 throw new ResourceNotFoundException("Unable to find resource", scope.element() + "/" + scope.operation());
             }
+             */
             return joinPoint.proceed();
         } else if (isValidResourceType(resource.type(), ResourceType.KAFKA)) {
             // Check if the operation specified in the @Scope annotation is present for the resource class

@@ -1,7 +1,5 @@
 package ir.msob.jima.core.commons.scope;
 
-import ir.msob.jima.core.commons.element.Elements;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -18,8 +16,6 @@ import java.lang.annotation.Target;
  *
  * <p>Properties:</p>
  * <ul>
- *     <li>{@code element}: Specifies the type of scope, such as "domain", "relatedParty",
- *     or "relatedAction". This property defaults to {@link Elements#DOMAIN}.</li>
  *     <li>{@code operation}: Specifies the type of operation that can be performed within
  *     the defined scope, such as "count", "count-all", "save", or "save-many". This
  *     property is mandatory.</li>
@@ -38,14 +34,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Scope {
-    /**
-     * Specifies the type of scope.
-     * This value can represent various scope types, such as "domain", "relatedParty",
-     * or "relatedAction". The default value is {@link Elements#DOMAIN}.
-     *
-     * @return the type of scope
-     */
-    String element() default Elements.DOMAIN;
 
     /**
      * Specifies the type of operation that can be performed within the defined scope.

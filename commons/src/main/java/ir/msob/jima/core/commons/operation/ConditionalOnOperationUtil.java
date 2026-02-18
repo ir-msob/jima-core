@@ -1,7 +1,5 @@
 package ir.msob.jima.core.commons.operation;
 
-import ir.msob.jima.core.commons.element.Element;
-import ir.msob.jima.core.commons.element.Elements;
 import ir.msob.jima.core.commons.properties.CrudProperties;
 import ir.msob.jima.core.commons.resource.Resource;
 import ir.msob.jima.core.commons.scope.Scope;
@@ -9,7 +7,6 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -63,11 +60,14 @@ public class ConditionalOnOperationUtil {
         }
 
         // Check based on the scope element
+        /* FIXME
         if (scope.element().equalsIgnoreCase(Elements.DOMAIN)) {
             return checkDomainOperations(scope, domain, conditionalOnOperation);
         } else {
             return checkRelatedOperations(scope, domain, conditionalOnOperation);
         }
+         */
+        return true;
     }
 
     /**
@@ -94,7 +94,7 @@ public class ConditionalOnOperationUtil {
     }
 
     /**
-     * Validates childdomain operations based on the provided scope and
+     * Validates embeddeddomain operations based on the provided scope and
      * conditional operation annotations.
      *
      * @param scope                  The scope to evaluate.
@@ -104,6 +104,7 @@ public class ConditionalOnOperationUtil {
      */
     private static boolean checkRelatedOperations(Scope scope, CrudProperties.Domain domain,
                                                   ConditionalOnOperation conditionalOnOperation) {
+       /* FIXME
         Optional<Element> element = Arrays.stream(conditionalOnOperation.children())
                 .filter(e -> e.element().equalsIgnoreCase(scope.element()))
                 .findFirst();
@@ -124,6 +125,7 @@ public class ConditionalOnOperationUtil {
                     .flatMap(ConditionalOnOperationUtil::mapOperations)
                     .anyMatch(operationType -> operationType.equalsIgnoreCase(scope.operation()));
         }
+        */
         return true;
     }
 

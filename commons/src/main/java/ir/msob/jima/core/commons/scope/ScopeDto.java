@@ -43,7 +43,6 @@ import java.util.Objects;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ScopeDto implements BaseType, Comparable<ScopeDto> {
-    private String element;
     private String operation;
 
     /**
@@ -54,7 +53,6 @@ public class ScopeDto implements BaseType, Comparable<ScopeDto> {
      */
     public static ScopeDto clone(Scope scope) {
         return ScopeDto.builder()
-                .element(scope.element())
                 .operation(scope.operation())
                 .build();
     }
@@ -73,13 +71,8 @@ public class ScopeDto implements BaseType, Comparable<ScopeDto> {
             return 0;
         }
 
-        // Compare by element
-        int elementComparison = Comparator.nullsFirst(String::compareTo)
-                .compare(this.element, o.element);
-
         // If elements are equal, compare by operation
-        return (elementComparison != 0) ? elementComparison :
-                Comparator.nullsFirst(String::compareTo).compare(this.operation, o.operation);
+        return Comparator.nullsFirst(String::compareTo).compare(this.operation, o.operation);
     }
 
     /**
@@ -95,8 +88,7 @@ public class ScopeDto implements BaseType, Comparable<ScopeDto> {
         if (o == null || getClass() != o.getClass()) return false;
 
         ScopeDto scopeDto = (ScopeDto) o;
-        return Objects.equals(element, scopeDto.element) &&
-                Objects.equals(operation, scopeDto.operation);
+        return Objects.equals(operation, scopeDto.operation);
     }
 
     /**
@@ -108,6 +100,6 @@ public class ScopeDto implements BaseType, Comparable<ScopeDto> {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(element, operation);
+        return Objects.hash(operation);
     }
 }

@@ -7,7 +7,7 @@ import lombok.ToString;
 
 /**
  * Configuration properties for search settings.
- * This class holds configuration for search-childdomain settings, including the channel name.
+ * This class holds configuration for search-embeddeddomain settings, including the channel name.
  */
 @Setter
 @Getter

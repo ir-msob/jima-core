@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * This class holds the properties childdomain to method statistics logging.
+ * This class holds the properties embeddeddomain to method statistics logging.
  * It includes properties for warning time threshold, and enabling/disabling info and warning logs.
  * It is marked with the `@ToString` annotation to include all fields in the `toString` method.
  */

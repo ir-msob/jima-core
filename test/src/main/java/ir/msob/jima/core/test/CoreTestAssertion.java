@@ -1,9 +1,9 @@
 package ir.msob.jima.core.test;
 
-import ir.msob.jima.core.commons.childdomain.auditdomain.AuditDomainAbstract;
-import ir.msob.jima.core.commons.childdomain.characteristic.Characteristic;
-import ir.msob.jima.core.commons.childdomain.relatedobject.relateddomain.RelatedDomainAbstract;
-import ir.msob.jima.core.commons.childdomain.relatedobject.relatedparty.RelatedPartyAbstract;
+import ir.msob.jima.core.commons.embeddeddomain.auditdomain.AuditDomainAbstract;
+import ir.msob.jima.core.commons.embeddeddomain.characteristic.Characteristic;
+import ir.msob.jima.core.commons.embeddeddomain.relatedobject.relateddomain.RelatedDomainAbstract;
+import ir.msob.jima.core.commons.embeddeddomain.relatedobject.relatedparty.RelatedPartyAbstract;
 import ir.msob.jima.core.commons.shared.keyvalue.KeyValue;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import org.assertj.core.api.Assertions;

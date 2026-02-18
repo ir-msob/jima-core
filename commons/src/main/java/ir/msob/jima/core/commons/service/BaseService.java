@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * The 'BaseService' interface defines a set of default methods for retrieving class types childdomain to data access, domain objects, users, and repositories within a service in a Spring-based application.
+ * The 'BaseService' interface defines a set of default methods for retrieving class types embeddeddomain to data access, domain objects, users, and repositories within a service in a Spring-based application.
  * It serves as a common foundation for various services, particularly those involved in data manipulation and interaction with repositories.
  *
  * @param <ID>   The type of the identifier (e.g., entity primary key) which should be both comparable and serializable.

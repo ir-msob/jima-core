@@ -1,7 +1,7 @@
 import {NullableT} from "../../constants";
 
 /**
- * Namespace for Domain childdomain interfaces and classes.
+ * Namespace for Domain embeddeddomain interfaces and classes.
  */
 export namespace Domain {
   /**

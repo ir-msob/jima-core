@@ -6,7 +6,6 @@ import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.domain.BaseDomain;
 import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.domain.BaseDtoTypeReference;
-import ir.msob.jima.core.commons.element.Elements;
 import ir.msob.jima.core.commons.logger.Logger;
 import ir.msob.jima.core.commons.logger.LoggerFactory;
 import ir.msob.jima.core.commons.operation.ConditionalOnOperationUtil;
@@ -115,9 +114,11 @@ public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
      */
     default boolean ignoreTest(Scope scope) {
         boolean result = !ConditionalOnOperationUtil.hasOperation(scope, getJimaProperties().getCrud(), getResourceClass());
+        /* FIXME
         if (result) {
             logger.info("Perform {}/{} test for {} is ignored.", scope.element(), scope.operation(), getResourceClass().getSimpleName());
         }
+        */
         return result;
     }
 
@@ -125,11 +126,6 @@ public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
         Scope scope = new Scope() {
 
             @Override
-            public String element() {
-                return Elements.DOMAIN;
-            }
-
-            @Override
             public String operation() {
                 return operation;
             }
@@ -142,26 +138,6 @@ public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
         return ignoreTest(scope);
     }
 
-    default boolean ignoreTest(String element, String operation) {
-        Scope scope = new Scope() {
-
-            @Override
-            public String element() {
-                return element;
-            }
-
-            @Override
-            public String operation() {
-                return operation;
-            }
-
-            @Override
-            public Class<? extends Annotation> annotationType() {
-                return Scope.class;
-            }
-        };
-        return ignoreTest(scope);
-    }
 
     JimaProperties getJimaProperties();
 

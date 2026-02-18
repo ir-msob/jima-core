@@ -27,7 +27,7 @@ public class Operations {
     public static final String UPDATE_BY_ID = "update-by-id";
     public static final String UPDATE_BY_KEY = "update-by-key";
     public static final String UPDATE_BY_NAME = "update-by-name";
-    public static final String UPDATE_BY_RELATED_ID = "update-by-childdomain-id";
+    public static final String UPDATE_BY_RELATED_ID = "update-by-embeddeddomain-id";
     public static final String UPDATE = "update";
     public static final String UPDATE_MANY = "update-many";
     public static final String EDIT_BY_ID = "edit-by-id";
@@ -36,7 +36,7 @@ public class Operations {
     public static final String DELETE_BY_ID = "delete-by-id";
     public static final String DELETE_BY_KEY = "delete-by-key";
     public static final String DELETE_BY_NAME = "delete-by-name";
-    public static final String DELETE_BY_RELATED_ID = "delete-by-childdomain-id";
+    public static final String DELETE_BY_RELATED_ID = "delete-by-embeddeddomain-id";
     public static final String DELETE = "delete";
     public static final String DELETE_MANY = "delete-many";
     public static final String DELETE_ALL = "delete-all";

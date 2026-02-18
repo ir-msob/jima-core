@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
- * Configuration class for Redis properties childdomain to locking operations.
+ * Configuration class for Redis properties embeddeddomain to locking operations.
  * <p>
  * This class is used to configure the Redis server host, port, and URL for
  * locking operations, such as distributed locks using Redisson.

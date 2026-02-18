@@ -7,7 +7,7 @@ import ir.msob.jima.core.commons.util.GenericTypeUtil;
 import java.io.Serializable;
 
 /**
- * The 'BaseRepository' interface defines a set of default methods for retrieving class types childdomain to data access and domain objects in the context of a Spring Data repository.
+ * The 'BaseRepository' interface defines a set of default methods for retrieving class types embeddeddomain to data access and domain objects in the context of a Spring Data repository.
  * It serves as a generic interface for repositories that work with domain entities and are typically used for data access in Spring-based applications.
  *
  * @param <ID> The type of the identifier (usually an entity's primary key) which is both comparable and serializable.

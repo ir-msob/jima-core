@@ -11,7 +11,7 @@ import ir.msob.jima.core.commons.security.BaseUser;
 import lombok.RequiredArgsConstructor;
 
 /**
- * The ScopeSenderService class is responsible for sending scope-childdomain messages
+ * The ScopeSenderService class is responsible for sending scope-embeddeddomain messages
  * using an asynchronous client. It prepares a channel message containing service
  * details and sends it to a specified channel.
  */

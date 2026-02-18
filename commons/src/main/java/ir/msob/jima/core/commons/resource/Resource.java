@@ -1,9 +1,9 @@
 package ir.msob.jima.core.commons.resource;
 
+import ir.msob.jima.core.commons.element.ElementType;
 import ir.msob.jima.core.commons.shared.ResourceType;
 import ir.msob.jima.core.commons.util.ClassAnnotationInfo;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -35,7 +35,7 @@ import java.lang.annotation.Target;
  * </pre>
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target(java.lang.annotation.ElementType.TYPE)
 public @interface Resource {
     /**
      * The 'ClassAnnotationInfo' object for the 'Resource' annotation.
@@ -58,4 +58,11 @@ public @interface Resource {
      * @return The type of the Resource, as defined by the {@link ResourceType} enumeration.
      */
     ResourceType type();
+
+    /**
+     * Specifies the type of element.
+     *
+     * @return the type of element
+     */
+    ElementType elementType() default ElementType.DOMAIN;
 }

@@ -8,7 +8,7 @@ import lombok.ToString;
 import java.util.Map;
 
 /**
- * The `SecurityProperties` class is a simple POJO (Plain Old Java Object) that holds security-childdomain properties.
+ * The `SecurityProperties` class is a simple POJO (Plain Old Java Object) that holds security-embeddeddomain properties.
  * It uses Lombok annotations for automatic generation of getters, setters, a no-argument constructor, and a toString method.
  * The `defaultClientRegistrationId` field is used to store the default client registration ID for the security configuration.
  */

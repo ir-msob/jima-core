@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  * constructor, streamlining the management of application properties.
  * </p>
  * <p>
- * The properties defined in this class include various configurations childdomain to
+ * The properties defined in this class include various configurations embeddeddomain to
  * method statistics, security, client settings, test containers, locking mechanisms,
  * search functionalities, href management, signature handling, messaging, scope,
  * and CRUD operations.
@@ -31,17 +31,17 @@ import org.springframework.context.annotation.Configuration;
 public class JimaProperties {
 
     /**
-     * Configuration properties childdomain to method statistics logging.
+     * Configuration properties embeddeddomain to method statistics logging.
      */
     private MethodStatsProperties methodStats = new MethodStatsProperties();
 
     /**
-     * Configuration properties childdomain to application security settings.
+     * Configuration properties embeddeddomain to application security settings.
      */
     private SecurityProperties security = new SecurityProperties();
 
     /**
-     * Configuration properties childdomain to client-specific settings.
+     * Configuration properties embeddeddomain to client-specific settings.
      */
     private ClientProperties client = new ClientProperties();
 
@@ -51,12 +51,12 @@ public class JimaProperties {
     private TestContainerProperties testContainer = new TestContainerProperties();
 
     /**
-     * Configuration properties childdomain to locking mechanisms.
+     * Configuration properties embeddeddomain to locking mechanisms.
      */
     private LockProperties lock = new LockProperties();
 
     /**
-     * Configuration properties childdomain to search functionalities.
+     * Configuration properties embeddeddomain to search functionalities.
      */
     private SearchProperties search = new SearchProperties();
 
@@ -66,7 +66,7 @@ public class JimaProperties {
     private HrefProperties href = new HrefProperties();
 
     /**
-     * Configuration properties childdomain to signature handling.
+     * Configuration properties embeddeddomain to signature handling.
      */
     private SignatureProperties signature = new SignatureProperties();
 
@@ -76,12 +76,12 @@ public class JimaProperties {
     private MessageProperties message = new MessageProperties();
 
     /**
-     * Configuration properties childdomain to scope management.
+     * Configuration properties embeddeddomain to scope management.
      */
     private ScopeProperties scope = new ScopeProperties();
 
     /**
-     * Configuration properties childdomain to CRUD operations.
+     * Configuration properties embeddeddomain to CRUD operations.
      */
     private CrudProperties crud = new CrudProperties();
 

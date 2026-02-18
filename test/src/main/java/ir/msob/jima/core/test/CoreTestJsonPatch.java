@@ -6,8 +6,8 @@ import com.github.fge.jackson.jsonpointer.JsonPointer;
 import com.github.fge.jackson.jsonpointer.JsonPointerException;
 import com.github.fge.jsonpatch.JsonPatchOperation;
 import com.github.fge.jsonpatch.ReplaceOperation;
-import ir.msob.jima.core.commons.childdomain.characteristic.Characteristic;
-import ir.msob.jima.core.commons.childdomain.relatedobject.BaseRelatedObjectAbstract;
+import ir.msob.jima.core.commons.embeddeddomain.characteristic.Characteristic;
+import ir.msob.jima.core.commons.embeddeddomain.relatedobject.BaseRelatedObjectAbstract;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import static ir.msob.jima.core.test.CoreTestData.*;
 
 /**
  * This class, CoreJsonPatch, provides methods for generating JSON Patch operations used in testing scenarios.
- * It includes methods for creating operations childdomain to characteristics, childdomain domains, and childdomain parties.
+ * It includes methods for creating operations embeddeddomain to characteristics, embeddeddomain domains, and embeddeddomain parties.
  */
 public class CoreTestJsonPatch {
 
@@ -43,9 +43,9 @@ public class CoreTestJsonPatch {
     }
 
     /**
-     * Generates a list of JSON Patch operations for updating childdomain domains.
+     * Generates a list of JSON Patch operations for updating embeddeddomain domains.
      *
-     * @param id   The identifier of the childdomain domain.
+     * @param id   The identifier of the embeddeddomain domain.
      * @param <ID> The type of the identifier.
      * @return A list of JSON Patch operations.
      * @throws JsonPointerException If there's an issue with JSON pointers.
@@ -60,9 +60,9 @@ public class CoreTestJsonPatch {
     }
 
     /**
-     * Generates a list of JSON Patch operations for updating childdomain parties.
+     * Generates a list of JSON Patch operations for updating embeddeddomain parties.
      *
-     * @param id   The identifier of the childdomain party.
+     * @param id   The identifier of the embeddeddomain party.
      * @param <ID> The type of the identifier.
      * @return A list of JSON Patch operations.
      * @throws JsonPointerException If there's an issue with JSON pointers.

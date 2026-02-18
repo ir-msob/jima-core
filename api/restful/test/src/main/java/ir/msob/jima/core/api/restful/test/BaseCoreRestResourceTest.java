@@ -23,7 +23,7 @@ import java.io.Serializable;
  * @param <ID>   The type representing unique identifiers for entities, typically extending Comparable and Serializable.
  * @param <USER> The type representing a user entity often used for testing purposes.
  * @param <D>    The type representing the domain or entity that is being tested.
- * @param <DTO>  The type representing a Data Transfer Object (DTO) childdomain to the domain being tested.
+ * @param <DTO>  The type representing a Data Transfer Object (DTO) embeddeddomain to the domain being tested.
  * @param <C>    The type representing criteria for queries, often associated with user and entity filtering.
  */
 public interface BaseCoreRestResourceTest<ID extends Comparable<ID> & Serializable,
