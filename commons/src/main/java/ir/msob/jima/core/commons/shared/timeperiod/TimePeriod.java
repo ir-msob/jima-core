@@ -1,5 +1,6 @@
 package ir.msob.jima.core.commons.shared.timeperiod;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.annotation.Nullable;
@@ -36,6 +37,7 @@ public class TimePeriod implements Serializable {
      * @return true if the TimePeriod is valid, false if it is not valid,
      * and null if the validity period is not set.
      */
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public @Nullable Boolean isValid() {
         if (startDate == null && endDate == null) return null;
         else if (startDate == null) return Instant.now().isBefore(endDate);

@@ -2,6 +2,7 @@ package ir.msob.jima.core.beans.objectmapper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import ir.msob.jima.core.commons.Constants;
 import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.methodstats.MethodStats;
@@ -71,5 +72,7 @@ public class ObjectMapperInitializer {
      */
     private void registerModules() {
         objectMapper.registerModule(new Jdk8Module());
+        objectMapper.registerModule(new JavaTimeModule());
+
     }
 }

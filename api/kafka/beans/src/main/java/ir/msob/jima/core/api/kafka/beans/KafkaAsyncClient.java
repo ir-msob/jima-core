@@ -13,6 +13,7 @@ import lombok.SneakyThrows;
 import org.jspecify.annotations.NonNull;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -34,6 +35,7 @@ public class KafkaAsyncClient implements BaseAsyncClient {
      */
     @MethodStats
     @SneakyThrows
+    @Transactional
     @Override
     public <USER extends BaseUser, DATA extends ModelType> void send(String channel, ChannelMessage<USER, DATA> channelMessage, USER user) {
         // Set the user information in the ChannelMessage.
@@ -43,6 +45,7 @@ public class KafkaAsyncClient implements BaseAsyncClient {
         sendMessage(channel, channelMessage.getKey(), channelMessage);
     }
 
+    @Transactional
     @Override
     public <USER extends BaseUser, DATA extends ModelType> void send(String channel, ChannelMessage<USER, DATA> channelMessage) throws JsonProcessingException {
         sendMessage(channel, channelMessage.getKey(), channelMessage);
@@ -57,6 +60,7 @@ public class KafkaAsyncClient implements BaseAsyncClient {
      */
     @MethodStats
     @SneakyThrows
+    @Transactional
     @Override
     public <USER extends BaseUser> void send(String channel, Map<String, Object> channelMessage, USER user) {
         // Set the user information in the ChannelMessage.

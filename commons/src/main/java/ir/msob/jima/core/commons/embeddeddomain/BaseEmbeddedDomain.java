@@ -1,5 +1,6 @@
 package ir.msob.jima.core.commons.embeddeddomain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ir.msob.jima.core.commons.element.BaseElement;
 import ir.msob.jima.core.commons.util.GenericTypeUtil;
 
@@ -32,6 +33,7 @@ public interface BaseEmbeddedDomain<ID extends Comparable<ID> & Serializable> ex
      * @return The class type for the identifier.
      */
     @SuppressWarnings("unchecked")
+    @JsonIgnore
     default Class<ID> getIdClass() {
         return (Class<ID>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseEmbeddedDomain.class, 0);
     }
