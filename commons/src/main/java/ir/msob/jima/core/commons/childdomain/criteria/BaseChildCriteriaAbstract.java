@@ -1,4 +1,4 @@
-package ir.msob.jima.core.commons.embeddeddomain.criteria;
+package ir.msob.jima.core.commons.childdomain.criteria;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.domain.BaseCriteriaAbstract;
@@ -33,7 +33,7 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BaseEmbeddedCriteriaAbstract<ID extends Comparable<ID> & Serializable, RM extends BaseEmbeddedDomain<ID>> extends BaseCriteriaAbstract<ID> implements BaseEmbeddedCriteria<ID, RM> {
+public class BaseChildCriteriaAbstract<ID extends Comparable<ID> & Serializable> extends BaseCriteriaAbstract<ID> implements BaseChildCriteria<ID> {
 
 
     /**
@@ -46,15 +46,4 @@ public class BaseEmbeddedCriteriaAbstract<ID extends Comparable<ID> & Serializab
      * The parent criteria ID of the model.
      */
     private Filter<ID> parentId;
-
-    @Override
-    public boolean isMatching(RM relatedModel) {
-        if (relatedModel == null) {
-            throw new BadRequestException("RelatedModel is null");
-        }
-        if (Filter.isMatching(this.getId(), relatedModel.getId())) {
-            return false;
-        }
-        return !Filter.isMatching(this.getParentId(), relatedModel.getParentId());
-    }
 }

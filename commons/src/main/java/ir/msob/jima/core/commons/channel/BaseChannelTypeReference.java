@@ -19,7 +19,7 @@ import java.io.Serializable;
  * <ul>
  *   <li>{@code ID} - the type of identifier, must be Comparable and Serializable</li>
  *   <li>{@code USER} - the type of user, must extend BaseUser</li>
- *   <li>{@code DTO} - the type of data transfer object, must extend BaseDto</li>
+ *   <li>{@code DTO} - the type of data transfer object, must extend BaseChildDto</li>
  *   <li>{@code C} - the type of criteria, must extend BaseCriteria</li>
  * </ul>
  *

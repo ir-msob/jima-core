@@ -1,6 +1,6 @@
-package ir.msob.jima.core.commons.domain;
+package ir.msob.jima.core.commons.childdomain;
 
-import ir.msob.jima.core.commons.shared.BaseType;
+import ir.msob.jima.core.commons.domain.BaseDto;
 
 import java.io.Serializable;
 
@@ -14,6 +14,6 @@ import java.io.Serializable;
  *
  * @param <ID> The type of the ID of the DTO.
  */
-public interface BaseDto<ID extends Comparable<ID> & Serializable> extends BaseDomain<ID>, BaseType {
+public interface BaseChildDto<ID extends Comparable<ID> & Serializable> extends BaseChildDomain<ID>, BaseDto<ID> {
 
 }

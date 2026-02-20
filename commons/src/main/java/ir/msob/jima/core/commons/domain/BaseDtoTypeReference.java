@@ -8,14 +8,14 @@ import java.io.Serializable;
 import java.util.Collection;
 
 /**
- * The {@code BaseDtoTypeReference} interface extends {@link BaseTypeReference} and provides
+ * The {@code BaseChildDtoTypeReference} interface extends {@link BaseTypeReference} and provides
  * type references specific to DTO (Data Transfer Object) operations.
  * <p>
  * This interface is parameterized with:
  * </p>
  * <ul>
  *   <li>{@code ID} - the type of identifier, must be Comparable and Serializable</li>
- *   <li>{@code DTO} - the type of DTO, must extend BaseDto</li>
+ *   <li>{@code DTO} - the type of DTO, must extend BaseChildDto</li>
  *   <li>{@code C} - the type of criteria, must extend BaseCriteria</li>
  * </ul>
  *

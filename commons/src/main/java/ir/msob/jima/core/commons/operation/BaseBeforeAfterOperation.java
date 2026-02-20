@@ -72,7 +72,7 @@ public interface BaseBeforeAfterOperation {
      * @param user     the current user
      * @param <ID>     the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
      * @param <USER>   the type of the user, which extends {@code BaseUser}
-     * @param <DTO>    the type of the DTO, which extends {@code BaseDto<ID>}
+     * @param <DTO>    the type of the DTO, which extends {@code BaseChildDto<ID>}
      * @param <C>      the type of the criteria, which extends {@code BaseCriteria<ID>}
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
@@ -91,7 +91,7 @@ public interface BaseBeforeAfterOperation {
      * @param user   the current user
      * @param <ID>   the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
      * @param <USER> the type of the user, which extends {@code BaseUser}
-     * @param <DTO>  the type of the DTO, which extends {@code BaseDto<ID>}
+     * @param <DTO>  the type of the DTO, which extends {@code BaseChildDto<ID>}
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
@@ -108,7 +108,7 @@ public interface BaseBeforeAfterOperation {
      * @param user     the current user
      * @param <ID>     the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
      * @param <USER>   the type of the user, which extends {@code BaseUser}
-     * @param <DTO>    the type of the DTO, which extends {@code BaseDto<ID>}
+     * @param <DTO>    the type of the DTO, which extends {@code BaseChildDto<ID>}
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
@@ -126,7 +126,7 @@ public interface BaseBeforeAfterOperation {
      * @param user        the current user
      * @param <ID>        the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
      * @param <USER>      the type of the user, which extends {@code BaseUser}
-     * @param <DTO>       the type of the DTO, which extends {@code BaseDto<ID>}
+     * @param <DTO>       the type of the DTO, which extends {@code BaseChildDto<ID>}
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
@@ -143,7 +143,7 @@ public interface BaseBeforeAfterOperation {
      * @param user        the current user
      * @param <ID>        the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
      * @param <USER>      the type of the user, which extends {@code BaseUser}
-     * @param <DTO>       the type of the DTO, which extends {@code BaseDto<ID>}
+     * @param <DTO>       the type of the DTO, which extends {@code BaseChildDto<ID>}
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
@@ -178,7 +178,7 @@ public interface BaseBeforeAfterOperation {
      * @param user     the current user
      * @param <ID>     the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
      * @param <USER>   the type of the user, which extends {@code BaseUser}
-     * @param <DTO>    the type of the DTO, which extends {@code BaseDto<ID>}
+     * @param <DTO>    the type of the DTO, which extends {@code BaseChildDto<ID>}
      * @param <C>      the type of the criteria, which extends {@code BaseCriteria<ID>}
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad

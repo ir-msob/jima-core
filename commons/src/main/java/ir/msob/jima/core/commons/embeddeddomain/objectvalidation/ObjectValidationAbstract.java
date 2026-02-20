@@ -1,10 +1,8 @@
 package ir.msob.jima.core.commons.embeddeddomain.objectvalidation;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomainAbstract;
 import ir.msob.jima.core.commons.element.BaseElementAbstract;
-import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomainKey;
-import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomainName;
+import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomainAbstract;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -38,7 +36,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ObjectValidationAbstract<ID extends Comparable<ID> & Serializable> extends BaseEmbeddedDomainAbstract<ID> implements Comparable<ObjectValidationAbstract<ID>>, BaseEmbeddedDomainName<ID> {
+public class ObjectValidationAbstract<ID extends Comparable<ID> & Serializable> extends BaseEmbeddedDomainAbstract<ID> implements Comparable<ObjectValidationAbstract<ID>> {
 
     @NotBlank
     private String name;

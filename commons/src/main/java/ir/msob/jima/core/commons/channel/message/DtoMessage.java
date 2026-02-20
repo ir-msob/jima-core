@@ -10,7 +10,7 @@ import java.io.Serializable;
 /**
  * The 'DtoMessage' class is a specialized form of 'IdMessage' that includes a DTO (Data Transfer Object).
  * This class is used when a message needs to carry a DTO along with the ID.
- * It is parameterized with two types 'ID' that extends 'Comparable' and 'Serializable', and 'DTO' that extends 'BaseDto'.
+ * It is parameterized with two types 'ID' that extends 'Comparable' and 'Serializable', and 'DTO' that extends 'BaseChildDto'.
  *
  * @param <ID>  The type of ID.
  * @param <DTO> The type of DTO.

@@ -2,7 +2,6 @@ package ir.msob.jima.core.commons.embeddeddomain.relatedobject;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.embeddeddomain.criteria.BaseEmbeddedCriteriaAbstract;
-import ir.msob.jima.core.commons.embeddeddomain.criteria.BaseEmbeddedCriteriaRelatedId;
 import ir.msob.jima.core.commons.filter.BaseFilters;
 import ir.msob.jima.core.commons.filter.Filter;
 import ir.msob.jima.core.commons.shared.auditinfo.AuditInfoFilters;
@@ -27,7 +26,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class BaseRelatedObjectCriteriaAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable, CD extends BaseRelatedObject<ID, RID>> extends BaseEmbeddedCriteriaAbstract<ID, CD> implements BaseEmbeddedCriteriaRelatedId<ID, RID, CD>, BaseFilters {
+public abstract class BaseRelatedObjectCriteriaAbstract<ID extends Comparable<ID> & Serializable, RID extends Comparable<RID> & Serializable, CD extends BaseRelatedObject<ID, RID>> extends BaseEmbeddedCriteriaAbstract<ID, CD> implements BaseFilters {
 
     /**
      * Filter for the name of the related object.

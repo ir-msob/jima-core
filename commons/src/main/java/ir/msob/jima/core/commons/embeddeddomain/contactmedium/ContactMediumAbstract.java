@@ -2,8 +2,6 @@ package ir.msob.jima.core.commons.embeddeddomain.contactmedium;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomainAbstract;
-import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomainKey;
-import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomainName;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -33,7 +31,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ContactMediumAbstract<ID extends Comparable<ID> & Serializable> extends BaseEmbeddedDomainAbstract<ID> implements Comparable<ContactMediumAbstract<ID>>, BaseEmbeddedDomainName<ID> {
+public class ContactMediumAbstract<ID extends Comparable<ID> & Serializable> extends BaseEmbeddedDomainAbstract<ID> implements Comparable<ContactMediumAbstract<ID>> {
 
     @NotBlank
     private String name;

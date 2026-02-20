@@ -1,8 +1,8 @@
 package ir.msob.jima.core.commons.embeddeddomain.characteristic;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomain;
 import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomainAbstract;
-import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomainKey;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -36,7 +36,7 @@ import java.util.Objects;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Characteristic<ID extends Comparable<ID> & Serializable> extends BaseEmbeddedDomainAbstract<ID> implements Comparable<Characteristic<ID>>, BaseEmbeddedDomainKey<ID> {
+public class Characteristic<ID extends Comparable<ID> & Serializable> extends BaseEmbeddedDomainAbstract<ID> implements Comparable<Characteristic<ID>>, BaseEmbeddedDomain<ID> {
 
     /**
      * A non-blank string representing the key of the characteristic.

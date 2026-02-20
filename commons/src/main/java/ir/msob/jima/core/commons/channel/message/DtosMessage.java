@@ -14,7 +14,7 @@ import java.util.Collection;
  * It extends the 'ModelType' class and includes a field for the collection of DTOs and getter and setter methods for this field.
  * The class uses the 'JsonInclude' annotation to specify that null fields should not be included in the JSON representation of an instance.
  * It also includes a no-argument constructor and a constructor that accepts a collection of DTOs as a parameter.
- * The class is parameterized with two types 'ID' that extends 'Comparable' and 'Serializable', and 'DTO' that extends 'BaseDto'.
+ * The class is parameterized with two types 'ID' that extends 'Comparable' and 'Serializable', and 'DTO' that extends 'BaseChildDto'.
  * The 'dtos' field is initialized with an empty 'ArrayList'.
  *
  * @param <ID>  The type of ID.

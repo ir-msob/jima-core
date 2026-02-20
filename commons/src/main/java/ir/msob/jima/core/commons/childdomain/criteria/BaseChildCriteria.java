@@ -1,9 +1,7 @@
-package ir.msob.jima.core.commons.embeddeddomain.criteria;
+package ir.msob.jima.core.commons.childdomain.criteria;
 
 import ir.msob.jima.core.commons.domain.BaseCriteria;
-import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomain;
 import ir.msob.jima.core.commons.filter.Filter;
-import ir.msob.jima.core.commons.util.GenericTypeUtil;
 
 import java.io.Serializable;
 
@@ -20,17 +18,7 @@ import java.io.Serializable;
  * @param <ID> the type of the identifier for the criteria model. It must be comparable and serializable.
  */
 
-public interface BaseEmbeddedCriteria<ID extends Comparable<ID> & Serializable, RM extends BaseEmbeddedDomain<ID>> extends BaseCriteria<ID> {
-
-    /**
-     * Get the class type for the identifier (e.g., entity primary key) used in domain entities.
-     *
-     * @return The class type for the identifier.
-     */
-    @SuppressWarnings("unchecked")
-    default Class<ID> getIdClass() {
-        return (Class<ID>) GenericTypeUtil.resolveTypeArguments(getClass(), BaseEmbeddedCriteria.class, 0);
-    }
+public interface BaseChildCriteria<ID extends Comparable<ID> & Serializable> extends BaseCriteria<ID> {
 
     /**
      * Returns the parent criteria ID of the model.
@@ -46,6 +34,5 @@ public interface BaseEmbeddedCriteria<ID extends Comparable<ID> & Serializable, 
      */
     void setParentId(Filter<ID> id);
 
-    boolean isMatching(RM relatedModel);
 
 }

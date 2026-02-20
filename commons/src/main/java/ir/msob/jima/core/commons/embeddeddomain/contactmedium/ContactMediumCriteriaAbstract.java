@@ -2,8 +2,6 @@ package ir.msob.jima.core.commons.embeddeddomain.contactmedium;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.embeddeddomain.criteria.BaseEmbeddedCriteriaAbstract;
-import ir.msob.jima.core.commons.embeddeddomain.criteria.BaseEmbeddedCriteriaName;
-import ir.msob.jima.core.commons.embeddeddomain.criteria.BaseEmbeddedCriteriaType;
 import ir.msob.jima.core.commons.filter.BaseFilters;
 import ir.msob.jima.core.commons.filter.Filter;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriodFilters;
@@ -30,7 +28,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ContactMediumCriteriaAbstract<ID extends Comparable<ID> & Serializable, CD extends ContactMediumAbstract<ID>> extends BaseEmbeddedCriteriaAbstract<ID, CD> implements BaseEmbeddedCriteriaName<ID, CD>, BaseEmbeddedCriteriaType<ID, CD>, BaseFilters {
+public class ContactMediumCriteriaAbstract<ID extends Comparable<ID> & Serializable, CD extends ContactMediumAbstract<ID>> extends BaseEmbeddedCriteriaAbstract<ID, CD> implements BaseFilters {
     private Filter<String> name;
     private Filter<String> type;
     private Filter<String> value;

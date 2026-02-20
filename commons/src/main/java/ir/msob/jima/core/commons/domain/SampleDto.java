@@ -8,7 +8,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 /**
- * The 'SampleDto' class is a concrete implementation of the 'SampleDomain' class and the 'BaseDto' interface.
+ * The 'SampleDto' class is a concrete implementation of the 'SampleDomain' class and the 'BaseChildDto' interface.
  * It extends 'SampleDomain' with a generic type 'ID' that extends 'Comparable' and 'Serializable'.
  * This means that the ID of the DTO can be of any type that is comparable and serializable.
  * The class includes getter and setter methods.

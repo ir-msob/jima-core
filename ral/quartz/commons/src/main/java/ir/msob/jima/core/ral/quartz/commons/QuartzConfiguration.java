@@ -20,8 +20,8 @@ import java.util.Properties;
 @RequiredArgsConstructor
 public class QuartzConfiguration {
 
-    private final DataSource dataSource;
     private static final Logger logger = LoggerFactory.getLogger(QuartzConfiguration.class);
+    private final DataSource dataSource;
 
     /**
      * Create and configure the SchedulerFactoryBean.

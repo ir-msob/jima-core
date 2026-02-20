@@ -1,9 +1,8 @@
 package ir.msob.jima.core.commons.embeddeddomain.relatedaction;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomainAbstract;
 import ir.msob.jima.core.commons.element.BaseElementAbstract;
-import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomainName;
+import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomainAbstract;
 import ir.msob.jima.core.commons.shared.auditinfo.AuditInfo;
 import ir.msob.jima.core.commons.shared.timeperiod.TimePeriod;
 import jakarta.validation.constraints.NotBlank;
@@ -43,7 +42,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedActionAbstract<ID extends Comparable<ID> & Serializable> extends BaseEmbeddedDomainAbstract<ID> implements BaseEmbeddedDomainName<ID>, Comparable<RelatedActionAbstract<ID>> {
+public abstract class RelatedActionAbstract<ID extends Comparable<ID> & Serializable> extends BaseEmbeddedDomainAbstract<ID> implements Comparable<RelatedActionAbstract<ID>> {
 
     @NotBlank
     private String name;

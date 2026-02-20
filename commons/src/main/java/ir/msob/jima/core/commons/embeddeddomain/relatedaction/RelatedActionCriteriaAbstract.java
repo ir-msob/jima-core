@@ -2,7 +2,6 @@ package ir.msob.jima.core.commons.embeddeddomain.relatedaction;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.embeddeddomain.criteria.BaseEmbeddedCriteriaAbstract;
-import ir.msob.jima.core.commons.embeddeddomain.criteria.BaseEmbeddedCriteriaName;
 import ir.msob.jima.core.commons.filter.BaseFilters;
 import ir.msob.jima.core.commons.filter.Filter;
 import ir.msob.jima.core.commons.shared.auditinfo.AuditInfoFilters;
@@ -48,7 +47,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class RelatedActionCriteriaAbstract<ID extends Comparable<ID> & Serializable, CD extends RelatedActionAbstract<ID>> extends BaseEmbeddedCriteriaAbstract<ID, CD> implements BaseEmbeddedCriteriaName<ID, CD>, BaseFilters {
+public abstract class RelatedActionCriteriaAbstract<ID extends Comparable<ID> & Serializable, CD extends RelatedActionAbstract<ID>> extends BaseEmbeddedCriteriaAbstract<ID, CD> implements BaseFilters {
     private Filter<String> name;
     private Filter<String> status;
     private Filter<Boolean> mandatory;

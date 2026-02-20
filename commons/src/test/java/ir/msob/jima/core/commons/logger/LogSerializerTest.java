@@ -3,7 +3,9 @@ package ir.msob.jima.core.commons.logger;
 import ir.msob.jima.core.commons.logger.loggable.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,117 +13,6 @@ class LogSerializerTest {
 
     // =========================
     // Test Models (expanded)
-    // =========================
-
-    static class PlainObject {
-        String name = "plain";
-    }
-
-    @Loggable
-    static class SimpleLoggable {
-        String a = "hello";
-        int b = 10;
-    }
-
-    @Loggable(format = LogFormat.JSON)
-    static class JsonLoggable {
-        String name = "json";
-        int value = 5;
-    }
-
-    @Loggable(mode = LogMode.EXCLUDE)
-    static class ExcludeLoggable {
-        String visible = "ok";
-        @LogExclude
-        String hidden = "secret";
-    }
-
-    @Loggable(mode = LogMode.INCLUDE)
-    static class IncludeLoggable {
-        @LogInclude
-        String only = "yes";
-        String ignored = "no";
-    }
-
-    @Loggable
-    static class FieldConfigLoggable {
-
-        @LogField(name = "alias")
-        String renamed = "value";
-
-        @LogField(mask = true, maskVisibleChars = 2)
-        String password = "123456";
-
-        @LogField(logSize = true)
-        List<String> items = List.of("a", "b", "c");
-
-        @LogField(maxLength = 3)
-        String longText = "abcdef";
-
-        @LogField(logNull = true)
-        String nullable = null;
-    }
-
-    @Loggable(depth = 0)
-    static class Parent {
-        Child child = new Child();
-    }
-
-    @Loggable
-    static class Child {
-        String name = "child";
-    }
-
-    @Loggable
-    static class Circular {
-        Circular self;
-    }
-
-    // Complex models for new tests:
-
-    @Loggable
-    static class ParentWithList {
-        List<Child> children = List.of(new Child(), new Child());
-    }
-
-    @Loggable(depth = 0)
-    static class ParentWithListDepth0 {
-        List<Child> children = List.of(new Child(), new Child());
-    }
-
-    @Loggable
-    static class ParentWithArray {
-        Child[] arr = new Child[]{new Child(), new Child()};
-    }
-
-    @Loggable
-    static class ParentWithNestedCollections {
-        List<List<Child>> nested = List.of(List.of(new Child()));
-    }
-
-    @Loggable
-    static class ArraySizeLoggable {
-        @LogField(logSize = true)
-        int[] nums = new int[]{1, 2, 3, 4};
-    }
-
-    @Loggable
-    static class MapFieldLoggable {
-        Map<String, String> mapping = Map.of("k", "v");
-    }
-
-    @Loggable
-    static class CollectionWithNulls {
-        List<Child> list = Arrays.asList(new Child(), null, new Child());
-    }
-
-    @Loggable
-    static class CircularInCollection {
-        List<CircularInCollection> list;
-    }
-
-    // =========================
-    // Tests (existing + new)
     // =========================
 
     @Test
@@ -216,6 +107,8 @@ class LogSerializerTest {
         assertTrue(json.contains("b=10"));
     }
 
+    // Complex models for new tests:
+
     @Test
     void collectionOfNonLoggable_shouldReturnOriginal() {
         List<PlainObject> list = List.of(new PlainObject());
@@ -231,10 +124,6 @@ class LogSerializerTest {
 
         assertSame(list, out);
     }
-
-    // -------------------------
-    // NEW: complex scenarios
-    // -------------------------
 
     @Test
     void objectWithListField_ofLoggableElements_shouldSerializeElements() {
@@ -293,6 +182,10 @@ class LogSerializerTest {
         assertTrue(out.contains("null"), () -> "Expected 'null' for null element, got: " + out);
     }
 
+    // =========================
+    // Tests (existing + new)
+    // =========================
+
     @Test
     void circularInstance_insideCollection_shouldMarkCircular() {
         CircularInCollection c = new CircularInCollection();
@@ -302,10 +195,6 @@ class LogSerializerTest {
         assertTrue(out.contains("[CIRCULAR]") || out.contains("CIRCULAR"),
                 () -> "Expected circular marker in collection serialization: " + out);
     }
-
-    // -------------------------
-    // Tests that reflect 'desired' semantics but may be disabled until fixes
-    // -------------------------
 
     @Test
     void ownerDepth_shouldPrevent_entering_collection_elements() {
@@ -321,12 +210,128 @@ class LogSerializerTest {
     void mapContainingLoggableObjects_shouldProcessValues_whenFixed() {
         class WithMap {
             @Loggable
-            class V { String x = "x"; }
+            class V {
+                String x = "x";
+            }
+
             @Loggable
             class Owner {
                 Map<String, V> m = Map.of("k", new V());
             }
         }
         // this test is a placeholder for when Map processing is implemented
+    }
+
+    static class PlainObject {
+        String name = "plain";
+    }
+
+    @Loggable
+    static class SimpleLoggable {
+        String a = "hello";
+        int b = 10;
+    }
+
+    @Loggable(format = LogFormat.JSON)
+    static class JsonLoggable {
+        String name = "json";
+        int value = 5;
+    }
+
+    @Loggable(mode = LogMode.EXCLUDE)
+    static class ExcludeLoggable {
+        String visible = "ok";
+        @LogExclude
+        String hidden = "secret";
+    }
+
+    @Loggable(mode = LogMode.INCLUDE)
+    static class IncludeLoggable {
+        @LogInclude
+        String only = "yes";
+        String ignored = "no";
+    }
+
+    @Loggable
+    static class FieldConfigLoggable {
+
+        @LogField(name = "alias")
+        String renamed = "value";
+
+        @LogField(mask = true, maskVisibleChars = 2)
+        String password = "123456";
+
+        @LogField(logSize = true)
+        List<String> items = List.of("a", "b", "c");
+
+        @LogField(maxLength = 3)
+        String longText = "abcdef";
+
+        @LogField(logNull = true)
+        String nullable = null;
+    }
+
+    @Loggable(depth = 0)
+    static class Parent {
+        Child child = new Child();
+    }
+
+    @Loggable
+    static class Child {
+        String name = "child";
+    }
+
+    // -------------------------
+    // NEW: complex scenarios
+    // -------------------------
+
+    @Loggable
+    static class Circular {
+        Circular self;
+    }
+
+    @Loggable
+    static class ParentWithList {
+        List<Child> children = List.of(new Child(), new Child());
+    }
+
+    @Loggable(depth = 0)
+    static class ParentWithListDepth0 {
+        List<Child> children = List.of(new Child(), new Child());
+    }
+
+    @Loggable
+    static class ParentWithArray {
+        Child[] arr = new Child[]{new Child(), new Child()};
+    }
+
+    @Loggable
+    static class ParentWithNestedCollections {
+        List<List<Child>> nested = List.of(List.of(new Child()));
+    }
+
+    @Loggable
+    static class ArraySizeLoggable {
+        @LogField(logSize = true)
+        int[] nums = new int[]{1, 2, 3, 4};
+    }
+
+    @Loggable
+    static class MapFieldLoggable {
+        Map<String, String> mapping = Map.of("k", "v");
+    }
+
+    // -------------------------
+    // Tests that reflect 'desired' semantics but may be disabled until fixes
+    // -------------------------
+
+    @Loggable
+    static class CollectionWithNulls {
+        List<Child> list = Arrays.asList(new Child(), null, new Child());
+    }
+
+    @Loggable
+    static class CircularInCollection {
+        List<CircularInCollection> list;
     }
 }

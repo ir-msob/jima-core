@@ -2,7 +2,6 @@ package ir.msob.jima.core.commons.embeddeddomain.characteristic;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.embeddeddomain.criteria.BaseEmbeddedCriteriaAbstract;
-import ir.msob.jima.core.commons.embeddeddomain.criteria.BaseEmbeddedCriteriaKey;
 import ir.msob.jima.core.commons.filter.BaseFilters;
 import ir.msob.jima.core.commons.filter.Filter;
 import lombok.Getter;
@@ -28,7 +27,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CharacteristicCriteria<ID extends Comparable<ID> & Serializable, CD extends Characteristic<ID>> extends BaseEmbeddedCriteriaAbstract<ID, CD> implements BaseEmbeddedCriteriaKey<ID, CD>, BaseFilters {
+public class CharacteristicCriteria<ID extends Comparable<ID> & Serializable, CD extends Characteristic<ID>> extends BaseEmbeddedCriteriaAbstract<ID, CD> implements BaseFilters {
     /**
      * The key filter of the characteristic filters.
      */

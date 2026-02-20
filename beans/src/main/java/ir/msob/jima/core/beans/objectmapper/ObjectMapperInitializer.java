@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import ir.msob.jima.core.commons.Constants;
+import ir.msob.jima.core.commons.childdomain.BaseChildDto;
+import ir.msob.jima.core.commons.childdomain.criteria.BaseChildCriteria;
+import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.methodstats.MethodStats;
 import ir.msob.jima.core.commons.shared.BaseType;
@@ -15,7 +18,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * The 'ObjectMapperInitializer' class is a component responsible for initializing an instance of the Jackson ObjectMapper with custom settings in a Spring-based application.
@@ -43,7 +45,7 @@ public class ObjectMapperInitializer {
     }
 
     /**
-     * Register subtypes for various DTO and model classes. This method scans and registers subtypes of 'BaseType', 'BaseDto', and 'ModelType' within specific package prefixes.
+     * Register subtypes for various DTO and model classes. This method scans and registers subtypes of 'BaseType', 'BaseChildDto', and 'ModelType' within specific package prefixes.
      */
 
     private void registerSubTypes() {
@@ -52,18 +54,22 @@ public class ObjectMapperInitializer {
         prefixes.forEach(prefix -> {
             Reflections reflections = new Reflections(prefix);
 
-            Set<Class<? extends BaseType>> baseTypeClasses = reflections.getSubTypesOf(BaseType.class);
-            baseTypeClasses.forEach(objectMapper::registerSubtypes);
+            reflections.getSubTypesOf(BaseType.class)
+                    .forEach(objectMapper::registerSubtypes);
 
-            @SuppressWarnings("unchecked")
-            Set<Class<? extends BaseDto<?>>> baseDtoClasses = reflections.getSubTypesOf(BaseDto.class)
+            reflections.getSubTypesOf(BaseDto.class)
                     .stream()
                     .map(clazz -> (Class<? extends BaseDto<?>>) clazz)
-                    .collect(Collectors.toSet());
-            baseDtoClasses.forEach(objectMapper::registerSubtypes);
+                    .forEach(objectMapper::registerSubtypes);
 
-            Set<Class<? extends ModelType>> modelTypeClasses = reflections.getSubTypesOf(ModelType.class);
-            modelTypeClasses.forEach(objectMapper::registerSubtypes);
+
+            reflections.getSubTypesOf(BaseChildDto.class)
+                    .stream()
+                    .map(clazz -> (Class<? extends BaseChildDto<?>>) clazz)
+                    .forEach(objectMapper::registerSubtypes);
+
+            reflections.getSubTypesOf(ModelType.class)
+                    .forEach(objectMapper::registerSubtypes);
         });
     }
 

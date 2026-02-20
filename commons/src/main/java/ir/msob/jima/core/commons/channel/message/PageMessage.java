@@ -13,7 +13,7 @@ import java.io.Serializable;
  * It extends the 'ModelType' class and includes a field for the 'Page' object and getter and setter methods for this field.
  * The class uses the 'JsonInclude' annotation to specify that null fields should not be included in the JSON representation of an instance.
  * It also includes a no-argument constructor and a constructor that accepts a 'Page' object as a parameter.
- * The class is parameterized with two types 'ID' that extends 'Comparable' and 'Serializable', and 'DTO' that extends 'BaseDto'.
+ * The class is parameterized with two types 'ID' that extends 'Comparable' and 'Serializable', and 'DTO' that extends 'BaseChildDto'.
  *
  * @param <ID>  The type of ID.
  * @param <DTO> The type of DTO.
