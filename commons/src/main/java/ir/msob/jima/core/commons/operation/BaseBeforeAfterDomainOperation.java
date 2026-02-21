@@ -5,6 +5,8 @@ import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.exception.badrequest.BadRequestException;
 import ir.msob.jima.core.commons.exception.domainnotfound.DomainNotFoundException;
 import ir.msob.jima.core.commons.security.BaseUser;
+import org.jspecify.annotations.NonNull;
+import reactor.core.publisher.Mono;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -32,7 +34,8 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void beforeCount(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+    default Mono<@NonNull Void> beforeCount(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -43,7 +46,8 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void afterCount(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+    default Mono<@NonNull Void> afterCount(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -54,7 +58,8 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void beforeGet(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+    default Mono<@NonNull Void> beforeGet(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -67,7 +72,8 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void afterGet(Collection<ID> ids, Collection<DTO> dtos, C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+    default Mono<@NonNull Void> afterGet(Collection<ID> ids, Collection<DTO> dtos, C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -78,7 +84,8 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void beforeSave(DTO dto, USER user) throws DomainNotFoundException, BadRequestException {
+    default Mono<@NonNull Void> beforeSave(DTO dto, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -90,8 +97,9 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void afterSave(DTO dto, DTO savedDto, USER user)
+    default Mono<@NonNull Void> afterSave(DTO dto, DTO savedDto, USER user)
             throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -103,7 +111,8 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void beforeUpdate(DTO previousDto, DTO dto, USER user) throws DomainNotFoundException, BadRequestException {
+    default Mono<@NonNull Void> beforeUpdate(DTO previousDto, DTO dto, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -115,8 +124,9 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void afterUpdate(DTO previousDto, DTO updatedDto, USER user)
+    default Mono<@NonNull Void> afterUpdate(DTO previousDto, DTO updatedDto, USER user)
             throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -127,7 +137,8 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void beforeDelete(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+    default Mono<@NonNull Void> beforeDelete(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -139,7 +150,8 @@ public interface BaseBeforeAfterDomainOperation<
      * @throws DomainNotFoundException if the domain is not found
      * @throws BadRequestException     if the request is bad
      */
-    default void afterDelete(DTO dto, C criteria, USER user)
+    default Mono<@NonNull Void> afterDelete(DTO dto, C criteria, USER user)
             throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 }

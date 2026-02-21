@@ -5,6 +5,8 @@ import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.exception.badrequest.BadRequestException;
 import ir.msob.jima.core.commons.exception.domainnotfound.DomainNotFoundException;
 import ir.msob.jima.core.commons.security.BaseUser;
+import org.jspecify.annotations.NonNull;
+import reactor.core.publisher.Mono;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -28,7 +30,8 @@ public interface BaseBeforeAfterOperation {
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser,
-            C extends BaseCriteria<ID>> void beforeCount(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+            C extends BaseCriteria<ID>> Mono<@NonNull Void> beforeCount(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -44,7 +47,8 @@ public interface BaseBeforeAfterOperation {
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser,
-            C extends BaseCriteria<ID>> void afterCount(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+            C extends BaseCriteria<ID>> Mono<@NonNull Void> afterCount(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -60,7 +64,8 @@ public interface BaseBeforeAfterOperation {
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser,
-            C extends BaseCriteria<ID>> void beforeGet(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+            C extends BaseCriteria<ID>> Mono<@NonNull Void> beforeGet(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -80,7 +85,8 @@ public interface BaseBeforeAfterOperation {
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser,
             DTO extends BaseDto<ID>,
-            C extends BaseCriteria<ID>> void afterGet(Collection<ID> ids, Collection<DTO> dtos, C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+            C extends BaseCriteria<ID>> Mono<@NonNull Void> afterGet(Collection<ID> ids, Collection<DTO> dtos, C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
 
@@ -97,7 +103,8 @@ public interface BaseBeforeAfterOperation {
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser,
-            DTO extends BaseDto<ID>> void beforeSave(DTO dto, USER user) throws DomainNotFoundException, BadRequestException {
+            DTO extends BaseDto<ID>> Mono<@NonNull Void> beforeSave(DTO dto, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -114,8 +121,9 @@ public interface BaseBeforeAfterOperation {
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser,
-            DTO extends BaseDto<ID>> void afterSave(DTO dto, DTO savedDto, USER user)
+            DTO extends BaseDto<ID>> Mono<@NonNull Void> afterSave(DTO dto, DTO savedDto, USER user)
             throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -132,7 +140,8 @@ public interface BaseBeforeAfterOperation {
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser,
-            DTO extends BaseDto<ID>> void beforeUpdate(DTO previousDto, DTO dto, USER user) throws DomainNotFoundException, BadRequestException {
+            DTO extends BaseDto<ID>> Mono<@NonNull Void> beforeUpdate(DTO previousDto, DTO dto, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -149,8 +158,9 @@ public interface BaseBeforeAfterOperation {
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser,
-            DTO extends BaseDto<ID>> void afterUpdate(DTO previousDto, DTO updatedDto, USER user)
+            DTO extends BaseDto<ID>> Mono<@NonNull Void> afterUpdate(DTO previousDto, DTO updatedDto, USER user)
             throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -166,7 +176,8 @@ public interface BaseBeforeAfterOperation {
      */
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser,
-            C extends BaseCriteria<ID>> void beforeDelete(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+            C extends BaseCriteria<ID>> Mono<@NonNull Void> beforeDelete(C criteria, USER user) throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 
     /**
@@ -174,7 +185,6 @@ public interface BaseBeforeAfterOperation {
      *
      * @param dto      the DTO of deleted entity
      * @param criteria the criteria used for deleting
-     * @param dtoClass the class of the DTO
      * @param user     the current user
      * @param <ID>     the type of the ID of the DTO, which extends {@code Comparable} and {@code Serializable}
      * @param <USER>   the type of the user, which extends {@code BaseUser}
@@ -186,7 +196,8 @@ public interface BaseBeforeAfterOperation {
     default <ID extends Comparable<ID> & Serializable,
             USER extends BaseUser,
             DTO extends BaseDto<ID>,
-            C extends BaseCriteria<ID>> void afterDelete(DTO dto, C criteria, Class<DTO> dtoClass, USER user)
+            C extends BaseCriteria<ID>> Mono<@NonNull Void> afterDelete(DTO dto, C criteria, USER user)
             throws DomainNotFoundException, BadRequestException {
+        return Mono.empty();
     }
 }
