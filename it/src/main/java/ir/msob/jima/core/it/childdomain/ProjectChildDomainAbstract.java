@@ -1,7 +1,6 @@
 package ir.msob.jima.core.it.childdomain;
 
 import ir.msob.jima.core.commons.childdomain.BaseChildDomainAbstract;
-import ir.msob.jima.core.commons.domain.BaseDomainAbstract;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

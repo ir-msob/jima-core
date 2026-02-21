@@ -5,8 +5,6 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import ir.msob.jima.core.commons.Constants;
 import ir.msob.jima.core.commons.childdomain.BaseChildDto;
-import ir.msob.jima.core.commons.childdomain.criteria.BaseChildCriteria;
-import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.domain.BaseDto;
 import ir.msob.jima.core.commons.methodstats.MethodStats;
 import ir.msob.jima.core.commons.shared.BaseType;

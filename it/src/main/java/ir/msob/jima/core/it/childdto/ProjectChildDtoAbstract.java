@@ -1,7 +1,6 @@
 package ir.msob.jima.core.it.childdto;
 
 import ir.msob.jima.core.it.childdomain.ProjectChildDomainAbstract;
-import ir.msob.jima.core.it.domain.ProjectDomainAbstract;
 
 /**
  * @author Yaqub Abdi

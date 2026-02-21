@@ -1,7 +1,6 @@
 package ir.msob.jima.core.it.childcriteria;
 
 import ir.msob.jima.core.commons.childdomain.criteria.BaseChildCriteriaAbstract;
-import ir.msob.jima.core.commons.domain.BaseCriteriaAbstract;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

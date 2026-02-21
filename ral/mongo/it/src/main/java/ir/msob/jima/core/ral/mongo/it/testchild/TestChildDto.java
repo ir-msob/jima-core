@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.domain.DtoInfo;
 import ir.msob.jima.core.it.Microservices;
 import ir.msob.jima.core.it.childdto.ProjectChildDto;
-import ir.msob.jima.core.it.dto.ProjectDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

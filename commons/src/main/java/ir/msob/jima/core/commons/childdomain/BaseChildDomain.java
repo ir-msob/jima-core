@@ -2,7 +2,6 @@ package ir.msob.jima.core.commons.childdomain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ir.msob.jima.core.commons.domain.BaseDomain;
-import ir.msob.jima.core.commons.element.BaseElement;
 import ir.msob.jima.core.commons.util.GenericTypeUtil;
 
 import java.io.Serializable;

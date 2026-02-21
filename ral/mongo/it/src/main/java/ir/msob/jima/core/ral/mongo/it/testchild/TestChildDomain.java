@@ -3,7 +3,6 @@ package ir.msob.jima.core.ral.mongo.it.testchild;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.domain.DomainInfo;
 import ir.msob.jima.core.it.childdomain.ProjectChildDomainAbstract;
-import ir.msob.jima.core.it.domain.ProjectDomainAbstract;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -2,7 +2,6 @@ package ir.msob.jima.core.ral.mongo.it.testchild;
 
 import ir.msob.jima.core.commons.filter.Filter;
 import ir.msob.jima.core.it.childcriteria.ProjectChildCriteriaAbstract;
-import ir.msob.jima.core.it.criteria.ProjectCriteriaAbstract;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

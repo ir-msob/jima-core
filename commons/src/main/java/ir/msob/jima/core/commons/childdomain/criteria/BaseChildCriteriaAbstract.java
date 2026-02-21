@@ -2,8 +2,6 @@ package ir.msob.jima.core.commons.childdomain.criteria;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import ir.msob.jima.core.commons.domain.BaseCriteriaAbstract;
-import ir.msob.jima.core.commons.embeddeddomain.BaseEmbeddedDomain;
-import ir.msob.jima.core.commons.exception.badrequest.BadRequestException;
 import ir.msob.jima.core.commons.filter.Filter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
