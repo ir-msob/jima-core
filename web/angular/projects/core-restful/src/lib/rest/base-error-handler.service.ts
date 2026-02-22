@@ -21,7 +21,7 @@ export abstract class BaseErrorHandlerService extends BaseRestfulService {
   /**
    * Make a POST request with error handling.
    * @param suffixPath The optional suffix path for the request.
-   * @param body The request body.
+   * @param requestBody The request body.
    * @param options Additional REST options.
    * @returns An observable that emits the response or error.
    */
@@ -32,7 +32,7 @@ export abstract class BaseErrorHandlerService extends BaseRestfulService {
   /**
    * Make a PUT request with error handling.
    * @param suffixPath The optional suffix path for the request.
-   * @param body The request body.
+   * @param requestBody The request body.
    * @param options Additional REST options.
    * @returns An observable that emits the response or error.
    */
@@ -43,7 +43,7 @@ export abstract class BaseErrorHandlerService extends BaseRestfulService {
   /**
    * Make a PATCH request with error handling.
    * @param suffixPath The optional suffix path for the request.
-   * @param body The request body.
+   * @param requestBody The request body.
    * @param options Additional REST options.
    * @returns An observable that emits the response or error.
    */

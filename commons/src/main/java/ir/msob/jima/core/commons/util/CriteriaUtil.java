@@ -4,7 +4,7 @@ import com.google.common.collect.Sets;
 import ir.msob.jima.core.commons.domain.BaseCriteria;
 import ir.msob.jima.core.commons.domain.BaseCriteriaAbstract;
 import ir.msob.jima.core.commons.filter.Filter;
-import ir.msob.jima.core.commons.safemodify.UniqueField;
+import ir.msob.jima.core.commons.safemodify.IdempotencyKey;
 import lombok.SneakyThrows;
 import org.springframework.util.Assert;
 
@@ -106,7 +106,7 @@ public class CriteriaUtil {
     @SneakyThrows
     public static <ID extends Comparable<ID> & Serializable, C extends BaseCriteria<ID>> C uniqueCriteria(Class<C> criteriaClass, String uniqueField) {
         C criteria = criteriaClass.getDeclaredConstructor().newInstance();
-        Field field = UniqueField.info.getFirstFieldHasAnnotation(criteria.getClass());
+        Field field = IdempotencyKey.info.getFirstFieldHasAnnotation(criteria.getClass());
         Assert.notNull(field, "Unique Field Not Found in Criteria");
         criteria.getClass().getDeclaredField(field.getName()).set(criteria, Filter.eq(uniqueField));
         return criteria;

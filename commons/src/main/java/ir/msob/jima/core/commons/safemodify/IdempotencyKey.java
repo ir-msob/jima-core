@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface UniqueField {
+public @interface IdempotencyKey {
     /**
      * Information about the field annotation.
      */
-    FieldAnnotationInfo<UniqueField> info = new FieldAnnotationInfo<>(UniqueField.class);
+    FieldAnnotationInfo<IdempotencyKey> info = new FieldAnnotationInfo<>(IdempotencyKey.class);
 }
