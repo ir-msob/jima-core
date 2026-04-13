@@ -14,6 +14,7 @@ import org.jspecify.annotations.NonNull;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
@@ -37,18 +38,18 @@ public class KafkaAsyncClient implements BaseAsyncClient {
     @SneakyThrows
     @Transactional
     @Override
-    public <USER extends BaseUser, DATA extends ModelType> void send(String channel, ChannelMessage<USER, DATA> channelMessage, USER user) {
+    public <USER extends BaseUser, DATA extends ModelType> Mono<@NonNull Void> send(String channel, ChannelMessage<USER, DATA> channelMessage, USER user) {
         // Set the user information in the ChannelMessage.
         if (channelMessage.getUser() == null)
             channelMessage.setUser(user);
 
-        sendMessage(channel, channelMessage.getKey(), channelMessage);
+        return sendMessage(channel, channelMessage.getKey(), channelMessage);
     }
 
     @Transactional
     @Override
-    public <USER extends BaseUser, DATA extends ModelType> void send(String channel, ChannelMessage<USER, DATA> channelMessage) throws JsonProcessingException {
-        sendMessage(channel, channelMessage.getKey(), channelMessage);
+    public <USER extends BaseUser, DATA extends ModelType> Mono<@NonNull Void> send(String channel, ChannelMessage<USER, DATA> channelMessage) throws JsonProcessingException {
+        return sendMessage(channel, channelMessage.getKey(), channelMessage);
     }
 
     /**
@@ -62,20 +63,26 @@ public class KafkaAsyncClient implements BaseAsyncClient {
     @SneakyThrows
     @Transactional
     @Override
-    public <USER extends BaseUser> void send(String channel, Map<String, Object> channelMessage, USER user) {
+    public <USER extends BaseUser> Mono<@NonNull Void> send(String channel, Map<String, Object> channelMessage, USER user) {
         // Set the user information in the ChannelMessage.
         channelMessage.putIfAbsent(ChannelMessage.FN.user.name(), user);
         String key = channelMessage.get("key") == null ? null : String.valueOf(channelMessage.get("key"));
-        sendMessage(channel, key, channelMessage);
+        return sendMessage(channel, key, channelMessage);
     }
 
-    private void sendMessage(String channel, String key, Object message) throws JsonProcessingException {
+    private Mono<@NonNull Void> sendMessage(String channel, String key, Object message) throws JsonProcessingException {
         // Serialize the Map to JSON and send it to the Kafka channel.
         String msg = objectMapper.writeValueAsString(message);
         if (Strings.isNotBlank(key)) {
-            kafkaTemplate.send(channel, key, msg);
+            return Mono.defer(() -> {
+                kafkaTemplate.send(channel, key, msg);
+                return Mono.empty();
+            });
         } else {
-            kafkaTemplate.send(channel, msg);
+            return Mono.defer(() -> {
+                kafkaTemplate.send(channel, msg);
+                return Mono.empty();
+            });
         }
     }
 

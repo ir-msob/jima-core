@@ -5,6 +5,8 @@ import ir.msob.jima.core.commons.channel.ChannelMessage;
 import ir.msob.jima.core.commons.methodstats.MethodStats;
 import ir.msob.jima.core.commons.security.BaseUser;
 import ir.msob.jima.core.commons.shared.ModelType;
+import org.jspecify.annotations.NonNull;
+import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
@@ -26,7 +28,7 @@ public interface BaseAsyncClient {
      * @param user           Optional: the destination user
      */
     @MethodStats
-    <USER extends BaseUser, DATA extends ModelType> void send(String channel, ChannelMessage<USER, DATA> channelMessage, USER user);
+    <USER extends BaseUser, DATA extends ModelType> Mono<@NonNull Void> send(String channel, ChannelMessage<USER, DATA> channelMessage, USER user);
 
     /**
      * This method sends a generic channel message.
@@ -38,7 +40,7 @@ public interface BaseAsyncClient {
      * @param channelMessage The channel message
      */
     @MethodStats
-    <USER extends BaseUser, DATA extends ModelType> void send(String channel, ChannelMessage<USER, DATA> channelMessage) throws JsonProcessingException;
+    <USER extends BaseUser, DATA extends ModelType> Mono<@NonNull Void> send(String channel, ChannelMessage<USER, DATA> channelMessage) throws JsonProcessingException;
 
     /**
      * This method sends a channel message of type Map.
@@ -50,6 +52,6 @@ public interface BaseAsyncClient {
      * @param user           Optional: the destination user
      */
     @MethodStats
-    <USER extends BaseUser> void send(String channel, Map<String, Object> channelMessage, USER user);
+    <USER extends BaseUser> Mono<@NonNull Void> send(String channel, Map<String, Object> channelMessage, USER user);
 
 }

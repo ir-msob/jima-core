@@ -17,7 +17,7 @@ class BaseListenerTest {
     @Test
     void testPrepareChannelMessage() {
         // Arrange
-        BaseListener<String, BaseUser> baseKafkaParentListener = new BaseListener<>() {
+        BaseListener<String, BaseUser, ?, ?> baseKafkaParentListener = new BaseListener<>() {
             @Override
             public ObjectMapper getObjectMapper() {
                 return null;

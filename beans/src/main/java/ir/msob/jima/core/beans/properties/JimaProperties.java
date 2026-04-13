@@ -104,4 +104,14 @@ public class JimaProperties {
      * Configuration properties for tests.
      */
     private TestProperties test = new TestProperties();
+
+    /**
+     * Configuration properties for cache.
+     */
+    private CacheProperties cache = new CacheProperties();
+
+    /**
+     * Configuration properties for AuditLog.
+     */
+    private AuditLogProperties auditLog = new AuditLogProperties();
 }
