@@ -155,6 +155,7 @@ public class ApplicationPatternEnvironmentPostProcessor implements EnvironmentPo
             String filename = resource.getFilename();
             return filename != null ? filename : resource.getDescription();
         } catch (Exception e) {
+            logger.error(e.getMessage(), e);
             return resource.toString();
         }
     }
@@ -172,7 +173,8 @@ public class ApplicationPatternEnvironmentPostProcessor implements EnvironmentPo
             if (isValidPattern(envPattern)) {
                 return envPattern;
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
             // Environment might not yet contain all properties — ignore safely
         }
 

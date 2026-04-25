@@ -71,6 +71,7 @@ public interface BaseCoreKafkaListenerTest<ID extends Comparable<ID> & Serializa
         try {
             Thread.sleep(getJimaProperties().getTest().getKafka().getMessageWaitDuration());
         } catch (InterruptedException e) {
+            logger.error(e.getMessage(), e);
             Thread.currentThread().interrupt();
         } finally {
             container.stop();

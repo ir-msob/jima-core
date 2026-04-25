@@ -15,7 +15,7 @@ import java.io.Serializable;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class BaseChildDtoAbstract<ID extends Comparable<ID> & Serializable> extends BaseChildDomainAbstract<ID> implements BaseChildDto<ID> {
 
-    public BaseChildDtoAbstract(ID id, ID parentId) {
+    protected BaseChildDtoAbstract(ID id, ID parentId) {
         super(id, parentId);
     }
 }

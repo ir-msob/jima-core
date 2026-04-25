@@ -114,11 +114,9 @@ public interface BaseCoreResourceTest<ID extends Comparable<ID> & Serializable,
      */
     default boolean ignoreTest(Scope scope) {
         boolean result = !ConditionalOnOperationUtil.hasOperation(scope, getJimaProperties().getCrud(), getResourceClass());
-        /* FIXME
         if (result) {
-            logger.info("Perform {}/{} test for {} is ignored.", scope.element(), scope.operation(), getResourceClass().getSimpleName());
+            logger.info("Perform {} test for {} is ignored.", scope.operation(), getResourceClass().getSimpleName());
         }
-        */
         return result;
     }
 
