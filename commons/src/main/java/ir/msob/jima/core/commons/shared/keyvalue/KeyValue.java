@@ -62,7 +62,6 @@ public class KeyValue<K extends Comparable<K> & Serializable, V extends Serializ
 
         if (this.getKey() != null && o.getKey() != null) {
             return this.getKey().compareTo(o.getKey());
-
         }
 
         return Comparator

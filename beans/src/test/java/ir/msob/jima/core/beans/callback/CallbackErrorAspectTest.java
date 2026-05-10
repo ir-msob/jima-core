@@ -1,4 +1,4 @@
-package ir.msob.jima.core.api.kafka.beans;
+package ir.msob.jima.core.beans.callback;
 
 import ir.msob.jima.core.commons.channel.ChannelMessage;
 import ir.msob.jima.core.commons.exception.BaseExceptionMapper;

@@ -29,7 +29,7 @@ public final class MessageUtil {
             // quoteReplacement prevents IllegalArgumentException
             // when value contains '$' or '\'
             message = message.replaceFirst(
-                    "\\{\\}",
+                    "\\{}",
                     Matcher.quoteReplacement(value)
             );
         }

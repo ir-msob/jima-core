@@ -1,4 +1,4 @@
-package ir.msob.jima.core.api.kafka.beans;
+package ir.msob.jima.core.beans.callback;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
